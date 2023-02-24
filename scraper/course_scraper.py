@@ -11,11 +11,6 @@ from typing import List
 """
 Incorrect
 
-MATH 4BI
-104A
-119A
-181A, 181B
-
 ED HSS, ED, Education, History & Social Science, GGSE
 """
 
@@ -153,16 +148,18 @@ def get_prereqs(prereq_description: str) -> List[List[str]]:
 
 
 def dept_to_url(dept: Department) -> str:
+    base_url = 'https://my.sa.ucsb.edu/catalog/Current/CollegesDepartments'
+
     if dept.college == 'L&S':
-        url = f'https://my.sa.ucsb.edu/catalog/Current/CollegesDepartments/ls-intro/{dept.url_abbreviation}.aspx?DeptTab=Courses'
+        url = f'{base_url}/ls-intro/{dept.url_abbreviation}.aspx?DeptTab=Courses'
     elif dept.college == 'COE':
-        url = f'https://my.sa.ucsb.edu/catalog/Current/CollegesDepartments/coe/{dept.url_abbreviation}.aspx?DeptTab=Courses'
+        url = f'{base_url}/coe/{dept.url_abbreviation}.aspx?DeptTab=Courses'
     elif dept.college == 'CCS':
-        url = f'https://my.sa.ucsb.edu/catalog/Current/CollegesDepartments/{dept.url_abbreviation}/Courses.aspx'
+        url = f'{base_url}/{dept.url_abbreviation}/Courses.aspx'
     elif dept.college == 'GGSE':
-        url = f'https://my.sa.ucsb.edu/catalog/Current/CollegesDepartments/ggse/{dept.url_abbreviation}.aspx?DeptTab=Courses'
+        url = f'{base_url}/ggse/{dept.url_abbreviation}.aspx?DeptTab=Courses'
     elif dept.college == 'BREN':
-        url = f'https://my.sa.ucsb.edu/catalog/Current/CollegesDepartments/{dept.url_abbreviation}/?DeptTab=Courses'
+        url = f'{base_url}/{dept.url_abbreviation}/?DeptTab=Courses'
 
     return url
 

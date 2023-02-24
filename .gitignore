@@ -1,3 +1,5 @@
 scraper/raw.txt
 data/*
 venv/*
+scraper/__pycache__/*
+.pytest_cache/*
