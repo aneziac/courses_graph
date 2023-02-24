@@ -41,13 +41,14 @@ class Course:
     college: str
 
 
-def compile_data(url: str, dept: Department):
+def compile_data(url: str, dept: Department) -> List[Course]:
     r = requests.get(url)
 
     try:
         assert 200 == r.status_code
     except AssertionError:
         print(f'Failed to retrieve data at {url}')
+        return []
 
     soup = bs(r.text, features='html.parser')
 

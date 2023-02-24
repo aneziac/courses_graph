@@ -63,14 +63,8 @@ def test_get_prereqs():
         [['MATH 2A', 'MATH 3A', 'MATH 34A']]
 
     assert course_scraper.get_prereqs(
-        'Mathematics 4B or 4BI, 6A or 6AI, and 6B; or 5A or 5AI, 5B or 5BI and 5C; and Math 117; and, '
-        'Computer Science 5AA-ZZ or 10 or 8 or 16 or Engineering 3. A grade of C or above is required in all prerequisite courses.'
-    ) == [[['MATH 4B', 'MATH 4BI'], ['MATH 6A', 'MATH 6AI'], ['MATH 6B']], [['MATH 5A', 'MATH 5AI'], ['MATH 5B', 'MATH 5BI'], 'MATH 5C'], \
-            ['MATH 117'], ['CMPSC 5AA-ZZ', 'CMPSC 10', 'CMPSC 8', 'CMPSC 16', 'ENGR 3']]
-
-    assert course_scraper.get_prereqs(
         'Mathematics 3C or 3CI or 4A or 4AI, 4B or 4BI or 5A or 5AI; and Math 8 with a grade of "C" or better.'
-    ) == [['MATH 3C', 'MATH 3CI', 'MATH 4A', 'MATH 4AI'], ['MATH 4B', 'MATH 4BI', 'MATH 4A', 'MATH 5AI'], ['MATH 8']]
+    ) == [['MATH 3C', 'MATH 3CI', 'MATH 4A', 'MATH 4AI'], ['MATH 4B', 'MATH 4BI', 'MATH 5A', 'MATH 5AI'], ['MATH 8']]
 
     assert course_scraper.get_prereqs('Math 6B, Math 8, and Math 108A or Math 117 each with a letter grade of "C" or higher.') == \
         [['MATH 6B'], ['MATH 8'], ['MATH 108A', 'MATH 117']]
@@ -81,6 +75,9 @@ def test_get_prereqs():
 
     assert course_scraper.get_prereqs('PSTAT 120A-B and 160A, all completed with a minimum grade of C or better.') == \
         [['PSTAT 120A'], ['PSTAT 120B'], ['PSTAT 160A']]
+
+    assert course_scraper.get_prereqs('Mathematics 3C, 3CI, 4A, or 4AI with a minimum grade of C.') == \
+        [['MATH 3C', 'MATH 3CI', 'MATH 4A', 'MATH 4AI']]
 
     assert course_scraper.get_prereqs('Chemical Engineering 120A-B-C, 140A.') == \
         [['CH E 120A'], ['CH E 120B'], ['CH E 120C'], ['CH E 140A']]
@@ -99,8 +96,20 @@ def test_get_prereqs():
             'grade of C; and Math 8 with a minimum grade of C.') == \
                 [[['MATH 5A', 'MATH 5AI'], ['MATH 5B', 'MATH 5BI']], [['MATH 4B', 'MATH 4BI'], ['MATH 6A', 'MATH 6AI']], 'MATH 8']
 
+    assert course_scraper.get_prereqs(
+        'Upper-division standing; completion of 2 upper-division courses in math; consent of instructor and department.'
+    ) == []
+
+    assert course_scraper.get_prereqs(
+        'Mathematics 4B or 4BI, 6A or 6AI, and 6B; or 5A or 5AI, 5B or 5BI and 5C; and Math 117; and, '
+        'Computer Science 5AA-ZZ or 10 or 8 or 16 or Engineering 3. A grade of C or above is required in all prerequisite courses.'
+    ) == [[['MATH 4B', 'MATH 4BI'], ['MATH 6A', 'MATH 6AI'], ['MATH 6B']], [['MATH 5A', 'MATH 5AI'], ['MATH 5B', 'MATH 5BI'], 'MATH 5C'], \
+            ['MATH 117'], ['CMPSC 5AA-ZZ', 'CMPSC 10', 'CMPSC 8', 'CMPSC 16', 'ENGR 3']]
+
 
 def test_compile_data():
+    assert course_scraper.compile_data('https://my.sa.ucsb.edu/catalog/Current/CollegesDepartments/math.aspx?DeptTab=Courses', math_dept) == []
+
     math_data = course_scraper.compile_data(course_scraper.dept_to_url(math_dept), math_dept)
 
     first_course = math_data[0]
@@ -110,7 +119,6 @@ def test_compile_data():
     assert first_course.number == '2A'
     assert first_course.professor == 'STAFF'
     assert first_course.units == '5'
-    assert first_course.prereqs == []
     assert first_course.college == 'L&S'
     assert first_course.description == 'Math 3A with precalculus: A function approach integrating algebra, trigonometry, and ' \
         'differential calculus. Topics include: one-on-one and onto functions; inverse functions; properties and graphs of polynomial, ' \
@@ -128,13 +136,13 @@ def test_compile_data():
     assert twentieth_course.units == '4'
     assert twentieth_course.dept == 'MATH'
     assert twentieth_course.professor == 'STAFF'
-    assert twentieth_course.prereqs == [['MATH 102A']]
 
     ind_studies = [course for course in math_data if course.number == '199'][0]
 
     assert ind_studies.title == 'Independent Studies in Mathematics'
     assert ind_studies.units == '1-5'
-    assert ind_studies.prereqs == []
-    assert ind_studies.comments == ''
+    assert ind_studies.comments == 'Students must have a cumulative 3.0 for the proceeding 3 quarter(s). Limit of 5 units per quarter and ' \
+        '30 units total in all independent studies courses (98/99/99RA/198/199/199AA-ZZ) combined.  Only 8 units in Math 197/199AA-ZZ courses ' \
+        'may apply to the major.'
     assert ind_studies.description == 'Coursework consists of academic research supervised by a faculty member on a topic not available ' \
         'in established course offerings.'
