@@ -1,19 +1,13 @@
 import Graph from 'graphology';
+import * as fs from 'fs';
 
 const graph = new Graph();
 
-// Adding some nodes
-graph.addNode('John');
-graph.addNode('Martha');
+var json = JSON.parse(fs.readFileSync('/Users/ashwin/Documents/courses_graph/greek.json', 'utf8'));
 
-// Adding an edge
-graph.addEdge('John', 'Martha');
-
-// Displaying useful information about your graph
-console.log('Number of nodes', graph.order);
-console.log('Number of edges', graph.size);
-
-// Iterating over nodes
-graph.forEachNode(node => {
-  console.log(node);
-});
+for (var key in json.jsonData) {
+    graph.addNode(key);
+    for (var prereqs in json.jsonData[key][5]) {
+        graph.addEdge(key, prereqs);
+    }
+}
