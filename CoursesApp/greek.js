@@ -12,6 +12,9 @@ function createGraph(path) {
         for (var i = 0; i < json[key].prereqs.length; i++) {
             for (var j = 0; j < json[key].prereqs[i].length; j++) {
                 if (json[key].prereqs[i][j] != 0) {
+                    if (!graph.hasNode(json[key].prereqs[i][j])) {
+                        graph.addNode(json[key].prereqs[i][j]);
+                    }
                     graph.addEdge(key, json[key].prereqs[i][j]);
                 }
             }
