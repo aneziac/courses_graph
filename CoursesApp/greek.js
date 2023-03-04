@@ -15,7 +15,6 @@ function generatePaths() {
     return paths;
 }
 
-// returns Graph with nodes with course names (keys from the json file)
 function createGraph(path) {
     const graph = new Graph();
 
@@ -23,26 +22,57 @@ function createGraph(path) {
 
     for (var key in json) {
         graph.addNode(key);
+    }
+
+    for (var obj in graph) {
         for (var i = 0; i < json[key].prereqs.length; i++) {
             for (var j = 0; j < json[key].prereqs[i].length; j++) {
                 if (json[key].prereqs[i][j] != 0) {
                     if (!graph.hasNode(json[key].prereqs[i][j])) {
-                        graph.addNode(json[key].prereqs[i][j]);
+                        if (!(json[key].prereqs[i][j].sub_dept == json[key].sub_dept)) {
+                            graph.addNode(json[key].prereqs[i][j]);
+                            graph.addEdge(key, json[key].prereqs[i][j]);
+                        }
                     }
-                    graph.addEdge(key, json[key].prereqs[i][j]);
+                    else if (graph.hasNode(json[key].prereqs[i][j])) {
+                        graph.addEdge(key, json[key].prereqs[i][j]);
+                    }
                 }
             }
         }
     }
+
     return graph;
 }
+
+var graph = createGraph(../)
+
+// returns Graph with nodes with course names (keys from the json file)
+// function createGraph(path) {
+//     const graph = new Graph();
+
+//     var json = JSON.parse(fs.readFileSync(path, 'utf8'));
+
+//     for (var key in json) {
+//         graph.addNode(key);
+//         for (var i = 0; i < json[key].prereqs.length; i++) {
+//             for (var j = 0; j < json[key].prereqs[i].length; j++) {
+//                 if (json[key].prereqs[i][j] != 0) {
+//                     if (!graph.hasNode(json[key].prereqs[i][j])) {
+//                         graph.addNode(json[key].prereqs[i][j]);
+//                     }
+//                     graph.addEdge(key, json[key].prereqs[i][j]);
+//                 }
+//             }
+//         }
+//     }
+//     return graph;
+// }
 
 // returns map with info associated with a particular course
 function grabInfo(path, course) {
 
     var json = JSON.parse(fs.readFileSync(path, 'utf8'));
-
-    console.log(json[course].title);
 
     const courseInfo = new Map();
     courseInfo.set("title", json[course].title);
