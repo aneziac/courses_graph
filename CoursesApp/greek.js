@@ -73,36 +73,3 @@ const modulePath = path.resolve(fileURLToPath(import.meta.url))
 if (nodePath === modulePath) {
     main();
 }
-
-
-//
-
-// This version creates a graph using the course number instead... bad!
-
-// function createGraph(path) {
-//     const graph = new Graph();
-
-//     var json = JSON.parse(fs.readFileSync(path, 'utf8'));
-
-//     for (var key in json) {
-//         graph.addNode(json[key].number);
-//             for (var i = 0; i < json[key].prereqs.length; i++) {
-//                 for (var j = 0; j < json[key].prereqs[i].length; j++) {
-//                     if (json[key].prereqs[i][j] != 0) {
-//                         var prereqName = json[key].prereqs[i][j];
-//                         var prereqNum = prereqName.substring(6);
-//                         graph.addEdge(json[key].number, prereqNum);
-
-//                     }
-//                 }
-//             }
-//     }
-
-//     console.log(graph.nodes());
-//     console.log(graph.edges());
-
-//     return graph;
-// }
-
-// createGraph('../data/greek.json');
-
