@@ -1,7 +1,7 @@
 import Graph from 'graphology';
 import * as fs from 'fs';
 
-
+// returns Graph with nodes with course names (keys from the json file)
 function createGraph(path) {
     const graph = new Graph();
 
@@ -20,8 +20,7 @@ function createGraph(path) {
     return graph;
 }
 
-var graph = createGraph('../data/greek.json');
-
+// returns map with info associated with a particular course
 function grabInfo(path, course) {
 
     var json = JSON.parse(fs.readFileSync(path, 'utf8'));
@@ -44,9 +43,6 @@ function grabInfo(path, course) {
     return courseInfo;
 }
 
-var courseInfoGreek102 = grabInfo('../data/greek.json', 'GREEK 102');
-
-console.log(courseInfoGreek102.get('title'));
  
 
 // This version creates a graph using the course number instead... bad!
