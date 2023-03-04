@@ -4,7 +4,7 @@ import re
 import csv
 import requests
 from dataclasses import dataclass, asdict
-from datalite import datalite
+# from datalite import datalite
 from typing import List
 
 
@@ -208,4 +208,5 @@ def main():
         f.write('}')
 
 
-main()
+if __name__ == '__main__':
+    main()
