@@ -1,5 +1,19 @@
 import Graph from 'graphology';
 import * as fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url'
+
+
+function generatePaths() {
+    var paths = [];
+    var files = fs.readdirSync('data/');
+    for (const file of files) {
+        if (file.split('.')[1] == 'json') {
+            paths.push('./data/' + file);
+        }
+    }
+    return paths;
+}
 
 // returns Graph with nodes with course names (keys from the json file)
 function createGraph(path) {
@@ -46,11 +60,26 @@ function grabInfo(path, course) {
     return courseInfo;
 }
 
- 
+function main() {
+    for (const file of generatePaths()) {
+        console.log(file);
+        createGraph(file);
+        break;
+    }
+}
+
+const nodePath = path.resolve(process.argv[1]);
+const modulePath = path.resolve(fileURLToPath(import.meta.url))
+if (nodePath === modulePath) {
+    main();
+}
+
+
+//
 
 // This version creates a graph using the course number instead... bad!
 
-// function createGraph(path) { 
+// function createGraph(path) {
 //     const graph = new Graph();
 
 //     var json = JSON.parse(fs.readFileSync(path, 'utf8'));
