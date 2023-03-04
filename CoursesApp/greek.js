@@ -1,5 +1,19 @@
 import Graph from 'graphology';
 import * as fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url'
+
+
+function generatePaths() {
+    var paths = [];
+    var files = fs.readdirSync('data/');
+    for (const file of files) {
+        if (file.split('.')[1] == 'json') {
+            paths.push('./data/' + file);
+        }
+    }
+    return paths;
+}
 
 function createGraph(path) {
     const graph = new Graph();
@@ -26,7 +40,22 @@ function createGraph(path) {
     console.log(graph.edges());
 }
 
-createGraph('../data/greek.json');
+function main() {
+    for (const file of generatePaths()) {
+        console.log(file);
+        createGraph(file);
+        break;
+    }
+}
+
+const nodePath = path.resolve(process.argv[1]);
+const modulePath = path.resolve(fileURLToPath(import.meta.url))
+if (nodePath === modulePath) {
+    main();
+}
+
+
+// createGraph('../data/greek.json');
 
 // function createGraphTwo(path) {
 //     const graph = new Graph();

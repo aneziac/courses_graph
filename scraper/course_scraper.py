@@ -187,7 +187,7 @@ def main():
                 vals = asdict(line).values()
                 g.write(', '.join(vals) + '\n')
 
-    MATH = Department(
+    GREEK = Department(
         abbreviation='GREEK',
         super_dept='CLASS',
         url_abbreviation='class',
@@ -195,9 +195,9 @@ def main():
         college='L&S'
     )
 
-    with open('data/courses.json', 'w') as f:
+    with open('CoursesApp/data/greek.json', 'w') as f:
         f.write('{')
-        for dept in [MATH]: # DEPTS[:15]:
+        for dept in [GREEK]: # DEPTS[:15]:
             url = dept_to_url(dept)
 
             for course in compile_data(url, dept):
