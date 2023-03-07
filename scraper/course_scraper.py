@@ -23,8 +23,6 @@ class Department:
     college: str
 
 
-DEPTS: List[Department] = []
-
 # @datalite(db_path="data/courses.db")
 @dataclass
 class Course:
@@ -39,6 +37,32 @@ class Course:
     recommended_prep: str
     professor: str
     college: str
+
+
+DEPTS: List[Department] = []
+
+def build_depts_list():
+    with open('scraper/depts.csv') as f:
+        reader = csv.reader(f)
+        for line in reader:
+            line = [x.strip() for x in line]
+
+            DEPTS.append(
+                Department(
+                    abbreviation=line[0],
+                    super_dept=line[1],
+                    url_abbreviation=line[2],
+                    full_name=line[3],
+                    college=line[4],
+                )
+            )
+
+    # sort departments when new ones are added (no longer needed)
+    if False:
+        with open('scraper/sorted_depts.csv', 'w') as g:
+            for line in sorted(DEPTS, key=lambda x: x.abbreviation):
+                vals = asdict(line).values()
+                g.write(', '.join(vals) + '\n')
 
 
 def compile_data(url: str, dept: Department) -> List[Course]:
@@ -123,27 +147,48 @@ def get_prereqs(prereq_description: str) -> List[List[str]]:
     current_dept = ''
     and_together = []
     or_together = []
+    seen_and = False
 
-    for term in re.split(r'(\d+[A-Z]*)', prereq_description):
+    for term in re.split(r'(\d+[A-Z\-]*)', prereq_description):
         if not term:
             return []
 
-        # not a course
-        if not (ord('0') <= ord(term[0]) and ord('9') >= ord(term[0])):
+        # not a course number
+        if not ('0' <= term[0] and '9' >= term[0]):
+            # traverse depts in backwards order to avoid naming conflicts
             for dept in DEPTS[::-1]:
-                if dept.abbreviation in term.upper() or dept.full_name in term:
+                if dept.abbreviation in term.upper() or dept.full_name in term:  # all capital, everything lowercase except first letter
                     current_dept = dept.abbreviation
                     break
 
         else:
-            or_together.append(f'{current_dept} {term}')
+            if '-' in term:
+                first_req_letter = ord(term[term.index('-') - 1])
+                last_req_letter = ord(term[term.index('-') + 1])
 
-        if ',' in term or 'and' in term:
-            and_together.append(or_together.copy())
+                for sequence_letter in range(first_req_letter, last_req_letter + 1):
+                    and_together.append([f'{current_dept} {term[:-3]}{chr(sequence_letter)}'])
+
+            else:
+                or_together.append(f'{current_dept} {term}')
+
+        if 'and ' in term:
+            seen_and = True
+
+        if (',' in term and ', or' not in term) or 'and' in term and not '-' in term:
+            if or_together:
+                and_together.append(or_together.copy())
             or_together.clear()
 
     if or_together:
         and_together.append(or_together)
+
+    if not seen_and and len(and_together) > 1:
+        courses = []
+        for course_singleton in and_together:
+            for course in course_singleton:
+                courses.append(course)
+        return [courses]
 
     return and_together
 
@@ -166,27 +211,6 @@ def dept_to_url(dept: Department) -> str:
 
 
 def main():
-    with open('scraper/depts.csv') as f:
-        reader = csv.reader(f)
-        for line in reader:
-            line = [x.strip() for x in line]
-
-            DEPTS.append(
-                Department(
-                    abbreviation=line[0],
-                    super_dept=line[1],
-                    url_abbreviation=line[2],
-                    full_name=line[3],
-                    college=line[4],
-                )
-            )
-
-    if False:
-        with open('scraper/sorted_depts.csv', 'w') as g:
-            for line in sorted(DEPTS, key=lambda x: x.abbreviation):
-                vals = asdict(line).values()
-                g.write(', '.join(vals) + '\n')
-
     GREEK = Department(
         abbreviation='GREEK',
         super_dept='CLASS',
@@ -207,6 +231,8 @@ def main():
 
         f.write('}')
 
+
+build_depts_list()
 
 if __name__ == '__main__':
     main()
