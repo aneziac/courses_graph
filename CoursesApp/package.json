@@ -17,11 +17,11 @@
     "react-dom": "18.2.0",
     "react-native": "0.71.3",
     "react-native-web": "~0.18.10",
+    "react-sigma": "^1.2.35",
     "sigma": "^2.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
   },
-  "private": true,
-  "type": "module"
+  "private": true
 }
