@@ -27,39 +27,43 @@ function createGraph(path) {
 
     var prereqset = 0;
     var prereqwithinset = 0;
+    var prereqkey;
     for (var key in json) {
         for (var i = 0; i < json[key].prereqs.length; i++) {
-            prereqwithinset = 0;
-            for (var j = 0, prereqwithinset = 0; j < json[key].prereqs[i].length; j++) {
+            for (var j = 0; j < json[key].prereqs[i].length; j++) {
                 if (json[key].prereqs[i][j] != 0) {
-                    if (!graph.hasNode(json[key].prereqs[i][j]) && !(json[key].prereqs[i][j].sub_dept == json[key].sub_dept)) {
+                    // conditions here are wonky
+                    if (!graph.hasNode(json[key].prereqs[i][j]) && !(json[key].prereqs[i][j].substring(0, json[key].sub_dept.length) == json[key].sub_dept)) {
                         graph.addNode(json[key].prereqs[i][j]);
-                        if (json[key].prereqs[i].length == 1) {
-                            var prereqkey = prereqset.toString();
+                        prereqkey =  prereqset.toString() + '.' + prereqwithinset.toString();
+                        if (j + 1 != json[key].prereqs[i].length) {
+                            prereqwithinset++;
+                        }
+                        else if (j + 1 == json[key].prereqs[i].length && i + 1 != json[key].prereqs.length) {
+                            prereqset++;
+                            prereqwithinset = 0;
                         }
                         else {
-                            var prereqkey = prereqset.toString() + '.' + prereqwithinset.toString();
-                            prereqwithinset++;
-                            
+                            prereqset = 10 * Math.floor(prereqset / 10) + 10;
+                            prereqwithinset = 0;
                         }
-                        if (j + 1 == json[key].prereqs[i].length) {
-                            prereqset++;
-                        }
-                        graph.addEdgeWithKey(prereqkey, key, json[key].prereqs[i][j], {type: 'prereq'});
+                        graph.addEdgeWithKey(prereqkey, key, json[key].prereqs[i][j]);
                         graph.addEdgeWithKey('-' + prereqkey, json[key].prereqs[i][j], key);
                     }
-                    else {
-                        if (json[key].prereqs[i].length == 1) {
-                            var prereqkey = prereqset.toString();
-                        }
-                        else {
-                            var prereqkey = prereqset.toString() + '.' + prereqwithinset.toString();
+                    else if (graph.hasNode(json[key].prereqs[i][j])) {
+                        prereqkey =  prereqset.toString() + '.' + prereqwithinset.toString();
+                        if (j + 1 != json[key].prereqs[i].length) {
                             prereqwithinset++;
                         }
-                        if (j + 1 == json[key].prereqs[i].length) {
+                        else if (j + 1 == json[key].prereqs[i].length && i + 1 != json[key].prereqs.length) {
                             prereqset++;
+                            prereqwithinset = 0;
                         }
-                        graph.addEdgeWithKey(prereqkey, key, json[key].prereqs[i][j], {type: 'prereq'});
+                        else {
+                            prereqset = 10 * Math.floor(prereqset / 10) + 10;
+                            prereqwithinset = 0;
+                        }
+                        graph.addEdgeWithKey(prereqkey, key, json[key].prereqs[i][j]);
                         graph.addEdgeWithKey('-' + prereqkey, json[key].prereqs[i][j], key);
                     }
                 }
