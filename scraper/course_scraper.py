@@ -226,7 +226,10 @@ def dept_to_url(dept: Department) -> str:
     if dept.college == 'L&S':
         url = f'{base_url}/ls-intro/{dept.url_abbreviation}.aspx?DeptTab=Courses'
     elif dept.college == 'COE':
-        url = f'{base_url}/coe/{dept.url_abbreviation}.aspx?DeptTab=Courses'
+        if dept.abbreviation == 'BIOE':
+            url = f'{base_url}/bioe.aspx'
+        else:
+            url = f'{base_url}/coe/{dept.url_abbreviation}.aspx?DeptTab=Courses'
     elif dept.college == 'CCS':
         url = f'{base_url}/{dept.url_abbreviation}/Courses.aspx'
     elif dept.college == 'GGSE':
@@ -246,10 +249,14 @@ def main():
         college='L&S'
     )
 
-    with open('CoursesApp/data/math.json', 'w') as f:
-        f.write('{')
-        for dept in [MATH]: # DEPTS[:15]:
+    for dept in DEPTS[:15]:
+        url = dept_to_url(dept)
+        filename = f"CoursesApp/data/{''.join(dept.abbreviation.lower().split(' '))}.json"
+
+        with open(filename, 'w') as f:
             url = dept_to_url(dept)
+
+            f.write('{')
             courses = compile_data(url, dept)
 
             for i, course in enumerate(courses):
@@ -261,7 +268,7 @@ def main():
                     f.write(',')
                 f.write('\n')
 
-        f.write('}')
+            f.write('}')
 
 
 build_depts_list()
