@@ -1,3 +1,6 @@
+REMINDER: look into AA-ZZ course prereqs (MAth 104a requires CMPSC 5AA-ZZ)
+
+
 okay, so here is what the data that you're going to be given looks like for math.
 
 the nodes (below) are self explanatory -- these are just the names of each of the classes. this is the only data actually stored in the node.

@@ -34,6 +34,9 @@ function createGraph(path) {
                 if (json[key].prereqs[i][j] != 0) {
                     // conditions here are wonky
                     if (!graph.hasNode(json[key].prereqs[i][j]) && !(json[key].prereqs[i][j].substring(0, json[key].sub_dept.length) == json[key].sub_dept)) {
+                        // if (json[key].prereqs[i][j].substring(json[key].prereqs[i][j].length - 5) != "AA-ZZ") {
+                        //     graph.addNode(json[key].prereqs[i][j]);
+                        // }
                         graph.addNode(json[key].prereqs[i][j]);
                         prereqkey =  prereqset.toString() + '.' + prereqwithinset.toString();
                         if (j + 1 != json[key].prereqs[i].length) {
