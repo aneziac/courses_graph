@@ -83,22 +83,22 @@ def test_get_prereqs():
         [['CH E 120A'], ['CH E 120B'], ['CH E 120C'], ['CH E 140A']]
 
     assert course_scraper.get_prereqs('Chemical Engineering 170 or Chemical Engineering 107 or MCDB 1A.') == \
-        [['CH E 170'], ['CH E 107'], ['MCDB 1A']]
+        [['CH E 170', 'CH E 107', 'MCDB 1A']]
 
     assert course_scraper.get_prereqs('Physics CS 34 and 35; consent of instructor; creative studies majors only.') == \
         [['PHYS CS 34'], ['PHYS CS 35']]
 
     assert course_scraper.get_prereqs('Math 181A or ED 134 with a minimum grade of C.') == \
-        [['MATH 181A'], ['ED 134']]
+        [['MATH 181A', 'ED 134']]
+
+    assert course_scraper.get_prereqs(
+        'Upper-division standing; completion of 2 upper-division courses in math; consent of instructor and department.'
+    ) == []
 
     assert course_scraper.get_prereqs(
         'Mathematics 5A or 5AI and 5B or 5BI with a minimum grade of C; or 4B or 4BI and 6A or 6AI with a minimum' \
             'grade of C; and Math 8 with a minimum grade of C.') == \
                 [[['MATH 5A', 'MATH 5AI'], ['MATH 5B', 'MATH 5BI']], [['MATH 4B', 'MATH 4BI'], ['MATH 6A', 'MATH 6AI']], 'MATH 8']
-
-    assert course_scraper.get_prereqs(
-        'Upper-division standing; completion of 2 upper-division courses in math; consent of instructor and department.'
-    ) == []
 
     assert course_scraper.get_prereqs(
         'Mathematics 4B or 4BI, 6A or 6AI, and 6B; or 5A or 5AI, 5B or 5BI and 5C; and Math 117; and, '
