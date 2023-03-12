@@ -5,3 +5,5 @@ scraper/__pycache__/*
 .pytest_cache/*
 .expo
 .vscode/*
+*.log
+scraper/*.log
