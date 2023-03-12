@@ -6,13 +6,9 @@ import requests
 from dataclasses import dataclass, asdict
 # from datalite import datalite
 from typing import List
+import os
+import logging
 
-
-"""
-Incorrect
-
-ED HSS, ED, Education, History & Social Science, GGSE
-"""
 
 @dataclass
 class Department:
@@ -39,15 +35,15 @@ class Course:
     college: str
 
 
-DEPTS: List[Department] = []
-
 def build_depts_list():
+    depts_list: List[Department] = []
+
     with open('scraper/depts.csv') as f:
         reader = csv.reader(f)
         for line in reader:
             line = [x.strip() for x in line]
 
-            DEPTS.append(
+            depts_list.append(
                 Department(
                     abbreviation=line[0],
                     super_dept=line[1],
@@ -56,6 +52,8 @@ def build_depts_list():
                     college=line[4],
                 )
             )
+
+    return depts_list
 
     # sort departments when new ones are added (no longer needed)
     if False:
@@ -71,7 +69,7 @@ def compile_data(url: str, dept: Department) -> List[Course]:
     try:
         assert 200 == r.status_code
     except AssertionError:
-        print(f'Failed to retrieve data at {url}')
+        logging.warning(f'[F] Failed to retrieve data for {dept.full_name} at {url}')
         return []
 
     soup = bs(r.text, features='html.parser')
@@ -79,6 +77,7 @@ def compile_data(url: str, dept: Department) -> List[Course]:
     result: List[Course] = []
 
     r_abbrev = '\s+'.join(dept.abbreviation.split())
+    r_abbrev = r_abbrev.replace('&', '\&amp;')
 
     r_dept = re.compile(rf'(<b>|AndTitle">)\s+({r_abbrev})\s+.*\.')
 
@@ -96,12 +95,11 @@ def compile_data(url: str, dept: Department) -> List[Course]:
 
     for all_course_info in soup.find_all('div', class_='CourseDisplay'):
         all_course_info = str(all_course_info)
+        f.write(all_course_info)
 
         course_dept = re.findall(r_dept, all_course_info)
         if not course_dept or len(course_dept[0]) < 2:
             continue
-
-        f.write(all_course_info)
 
         description = re.findall(r_description, all_course_info)
         number = re.findall(r_number, all_course_info)
@@ -206,8 +204,6 @@ def get_dept(prereq_substr: str) -> str:
         for dept in DEPTS:
             if dept.college == 'CCS' and dept.super_dept in prereq_substr.upper():
                 return dept.abbreviation
-        else:
-            raise Exception('Could not find CCS Dept')
 
     # traverse depts in backwards order to avoid naming conflicts
     for dept in DEPTS:
@@ -222,14 +218,20 @@ def get_dept(prereq_substr: str) -> str:
 
 def dept_to_url(dept: Department) -> str:
     base_url = 'https://my.sa.ucsb.edu/catalog/Current/CollegesDepartments'
+    url = ''
 
     if dept.college == 'L&S':
-        url = f'{base_url}/ls-intro/{dept.url_abbreviation}.aspx?DeptTab=Courses'
+        if dept.abbreviation == 'DYNS':
+            url = f'{base_url}/{dept.url_abbreviation}.aspx?DeptTab=Courses'
+        else:
+            url = f'{base_url}/ls-intro/{dept.url_abbreviation}.aspx?DeptTab=Courses'
+
     elif dept.college == 'COE':
         if dept.abbreviation == 'BIOE':
-            url = f'{base_url}/bioe.aspx'
+            url = f'{base_url}/{dept.url_abbreviation}.aspx?DeptTab=Courses'
         else:
             url = f'{base_url}/coe/{dept.url_abbreviation}.aspx?DeptTab=Courses'
+
     elif dept.college == 'CCS':
         url = f'{base_url}/{dept.url_abbreviation}/Courses.aspx'
     elif dept.college == 'GGSE':
@@ -237,41 +239,71 @@ def dept_to_url(dept: Department) -> str:
     elif dept.college == 'BREN':
         url = f'{base_url}/{dept.url_abbreviation}/?DeptTab=Courses'
 
+    if not url:
+        raise Exception(f'Could not get url for {dept.full_name}')
+
     return url
 
 
+def write_json(dept: Department, overwrite=False):
+    file_dept_abbrev = ''.join(dept.abbreviation.lower().split(' '))
+
+    if not overwrite and file_dept_abbrev in EXISTING_JSONS:
+        return
+
+    url = dept_to_url(dept)
+    filename = f"CoursesApp/data/{file_dept_abbrev}.json"
+
+    courses = compile_data(url, dept)
+    if not courses:
+        logging.warning(f'[F] Failed to retrieve data for {dept.full_name}')
+        return
+
+    with open(filename, 'w') as f:
+        f.write('{')
+        courses = compile_data(url, dept)
+
+        for i, course in enumerate(courses):
+            # course.create_entry()
+            f.write(f'"{course.sub_dept} {course.number}": ')
+            f.write(json.dumps(asdict(course)))
+
+            if i != len(courses) - 1:
+                f.write(',')
+            f.write('\n')
+
+        f.write('}')
+
+    logging.info(f'[S] Wrote data for {dept.full_name} department in {filename}')
+
+
+def get_existing_jsons() -> List[str]:
+    base_path = './CoursesApp/data'
+    try:
+        ls = os.listdir(base_path)
+    except FileNotFoundError:
+        ls = os.listdir('.' + base_path)
+
+    return [item[:-5] for item in ls]
+
+
+DEPTS: List[Department] = build_depts_list()
+EXISTING_JSONS: List[str] = get_existing_jsons()
+
+
 def main():
-    MATH = Department(
-        abbreviation='MATH',
-        super_dept='MATH',
-        url_abbreviation='math',
-        full_name='Mathematics',
-        college='L&S'
+    logging.basicConfig(
+        format='[%(asctime)s] %(message)s',
+        level=logging.INFO,
+        datefmt='%Y-%m-%d %H:%M:%S',
+        handlers=[
+            logging.FileHandler('scraper.log'),
+            logging.StreamHandler()
+        ]
     )
 
-    for dept in DEPTS[:15]:
-        url = dept_to_url(dept)
-        filename = f"CoursesApp/data/{''.join(dept.abbreviation.lower().split(' '))}.json"
-
-        with open(filename, 'w') as f:
-            url = dept_to_url(dept)
-
-            f.write('{')
-            courses = compile_data(url, dept)
-
-            for i, course in enumerate(courses):
-                # course.create_entry()
-                f.write(f'"{course.sub_dept} {course.number}": ')
-                f.write(json.dumps(asdict(course)))
-
-                if i != len(courses) - 1:
-                    f.write(',')
-                f.write('\n')
-
-            f.write('}')
-
-
-build_depts_list()
+    for dept in DEPTS:
+        write_json(dept)
 
 if __name__ == '__main__':
     main()
