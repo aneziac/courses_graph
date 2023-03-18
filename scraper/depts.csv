@@ -37,7 +37,7 @@ ED R, ED, Education, Education: Reading, GGSE
 ED S, ED, Education,  Education: Science, GGSE
 ED ST, ED, Education, Education: Secondary: Science, GGSE
 ED WL, ED, Education, Education: World Language, GGSE
-EDM, ESM, bren, Environmental Data Science, BREN
+EDS, ESM, bren, Environmental Data Science, BREN
 EEMB, EEMB, eemb,"Ecology, Evolution, and Marine Biology", L&S
 ENGL, ENGL, engl, English, L&S
 ENGR, ENGR, engrsci, Engineering, COE
