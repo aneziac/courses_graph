@@ -1,9 +1,3 @@
-# To do for scraper
-- Chem 112B, 146 is failing because online is also a possible prereq
-- AS AM 8H
-- ED M vs EDM naming conflict
-- look into AA-ZZ course prereqs (MAth 104a requires CMPSC 5AA-ZZ)
-
 # Ashwin's Edge Label Naming Convention
 
 okay, so here is what the data that you're going to be given looks like for math.
