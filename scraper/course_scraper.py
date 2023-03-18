@@ -8,6 +8,7 @@ from dataclasses import dataclass, asdict
 from typing import List
 import os
 import logging
+import sys
 
 
 @dataclass
@@ -291,7 +292,10 @@ DEPTS: List[Department] = build_depts_list()
 EXISTING_JSONS: List[str] = get_existing_jsons()
 
 
-def main():
+def main(argv: List[str]):
+    overwrite = ('-o' in argv)
+    print(f'Performing scraping with overwrite={overwrite}')
+
     logging.basicConfig(
         format='[%(asctime)s] %(message)s',
         level=logging.INFO,
@@ -303,7 +307,8 @@ def main():
     )
 
     for dept in DEPTS:
-        write_json(dept)
+        write_json(dept, overwrite=overwrite)
+
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv)

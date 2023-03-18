@@ -5,7 +5,7 @@ if [[ "$answer" =~ ^[Yy]$ ]]; then
     if ! (which python); then
         source install_project.sh
     fi
-    python scraper/course_scraper.py
+    python scraper/course_scraper.py -o
 fi
 
 read "answer?Build app? (y/n) ";
@@ -17,4 +17,5 @@ if [[ "$answer" =~ ^[Yy]$ ]]; then
         source install_project.sh
     fi
     npx expo start
+    cd ..
 fi
