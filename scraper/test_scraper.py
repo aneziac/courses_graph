@@ -101,6 +101,10 @@ def test_get_prereqs():
     ) == []
 
     assert course_scraper.get_prereqs(
+        'PSTAT 207A or PSTAT 220A (may be taken concurrently).'
+    )
+
+    assert course_scraper.get_prereqs(
         'Mathematics 5A or 5AI and 5B or 5BI with a minimum grade of C; or 4B or 4BI and 6A or 6AI with a minimum' \
             'grade of C; and Math 8 with a minimum grade of C.') == \
                 [[['MATH 5A', 'MATH 5AI'], ['MATH 5B', 'MATH 5BI']], [['MATH 4B', 'MATH 4BI'], ['MATH 6A', 'MATH 6AI']], 'MATH 8']

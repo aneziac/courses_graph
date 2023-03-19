@@ -9,6 +9,7 @@ from typing import List
 import os
 import logging
 import sys
+import shutil
 
 
 @dataclass
@@ -252,7 +253,11 @@ def dept_to_url(dept: Department) -> str:
 
 
 def write_json(dept: Department, overwrite=False):
-    file_dept_abbrev = ''.join(dept.abbreviation.lower().split(' '))
+    dept_words = dept.abbreviation.lower().split(' ')
+    if dept.super_dept == 'ED':
+        file_dept_abbrev = '_'.join(dept_words)
+    else:
+        file_dept_abbrev = ''.join(dept_words)
 
     if not overwrite and file_dept_abbrev in EXISTING_JSONS:
         return
@@ -299,7 +304,7 @@ EXISTING_JSONS: List[str] = get_existing_jsons()
 
 
 def main(argv: List[str]):
-    overwrite = ('-o' in argv)
+    overwrite = ('o' in argv[1])
     print(f'Performing scraping with overwrite={overwrite}')
 
     logging.basicConfig(
@@ -311,6 +316,10 @@ def main(argv: List[str]):
             logging.StreamHandler()
         ]
     )
+
+    if overwrite and 'c' in argv[1]:
+        shutil.rmtree('CoursesApp/data')
+        os.mkdir('CoursesApp/data')
 
     for dept in DEPTS:
         write_json(dept, overwrite=overwrite)

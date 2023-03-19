@@ -21,18 +21,11 @@ General
 Courses
 **Chem 112B, 146** failing because online is also a possible prereq
 **AS AM 8H** not picking up missing period - representative example of larger problem of periods being included in capture
-**eacs 199** erroneously lists itself along with eacs 3 + 5 as prereqs (due to 3.5 gpa requirement plus mention of eacs 199 in prereq description)
 **earth 155/155L** -- list each other as prereqs [due to requirement for concurrent enrollment]
 **ece 227a** -- your code is parsing this line incorrectly in terms of the logic
 **ed 191D** -- double edges w/ 191A/B/C/W, edge to itself; also, parsing logic incorrectly, it says A, B, C or W and you are reading this as (A) and (B) and (C or W)
 **ed 257a** -- lists 257b as a prereq when it's the other way around
 **env s 15bl** -- lists itself as a prereq, also it's concurrent w/ 15
-**FEMST 195HA** -- lists itself as a prereq
-**FR 10B** -- lists itself as a prereq
-**JAP 199** -- lists itself as a prereq
-**KOR 199** -- lists itself as a prereq
-**LING 3B/C, LING 12** -- list themselves as prereqs
-**MCDB 1B** -- triple edge w/ MCDB 1A, lists itself as a prereq
 **POLS 155L** -- double edge w/ POLS 155 (due to concurrent enrollment, each is listed as the other's prereq)
 **PSTAT 109** -- math 34b/2b/3b all listed as prereqs twice (can be taken simultaneously)
 **PSTAT 207A/B/C** -- each of them list the others as prereqs due to phrasing in the thing lol
@@ -43,6 +36,14 @@ Courses
 
 ## Fixed
 
+**MCDB 1B** -- triple edge w/ MCDB 1A, lists itself as a prereq
+**LING 3B/C, LING 12** -- list themselves as prereqs
+**FEMST 195HA** -- lists itself as a prereq
+**FR 10B** -- lists itself as a prereq
+**JAP 199** -- lists itself as a prereq
+**KOR 199** -- lists itself as a prereq
+**env s 15bl** -- lists itself as a prereq, also it's concurrent w/ 15
+**eacs 199** erroneously lists itself along with eacs 3 + 5 as prereqs (due to 3.5 gpa requirement plus mention of eacs 199 in prereq description)
 **chem 142a** -- chem 142b [double edge]
 **chem 142a** -- chem 146 [double edge]
 **earth 133** -- math 3a/3b [double edge]
