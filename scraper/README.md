@@ -20,7 +20,7 @@ General
 
 Courses
 **Chem 112B, 146** failing because online is also a possible prereq
-**AS AM 8H** not picking up missing period
+**AS AM 8H** not picking up missing period - representative example of larger problem of periods being included in capture
 **eacs 199** erroneously lists itself along with eacs 3 + 5 as prereqs (due to 3.5 gpa requirement plus mention of eacs 199 in prereq description)
 **earth 155/155L** -- list each other as prereqs [due to requirement for concurrent enrollment]
 **ece 227a** -- your code is parsing this line incorrectly in terms of the logic

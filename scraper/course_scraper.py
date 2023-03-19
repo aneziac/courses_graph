@@ -28,6 +28,7 @@ class Course:
     sub_dept: str
     number: str
     prereqs: List[List[str]]
+    prereq_description: str
     comments: str
     units: str
     description: str
@@ -77,21 +78,22 @@ def compile_data(url: str, dept: Department) -> List[Course]:
 
     result: List[Course] = []
 
+    # Regex generation
+
     r_abbrev = '\s+'.join(dept.abbreviation.split())
     r_abbrev = r_abbrev.replace('&', '\&amp;')
 
     r_dept = re.compile(rf'(<b>|AndTitle">)\s+({r_abbrev})\s+.*\.')
-
     r_description = re.compile(r'(div>|2px;">)\s+(.*\.)\s+<\/div>')
     r_number = re.compile(rf'{r_abbrev}\s+(.*)\.')
     r_prereqs = re.compile(r'Prerequisite:<\/strong> (.*\.)')
     r_units = re.compile(r'\((\d\-*\d*)\)')
     r_comments = re.compile(r'Enrollment Comments:<\/strong> (.*\.)')
-
     r_title = re.compile(r'(CourseDisplay">\s+|\d{1,3}[A-Z]*\.\s+)([A-Z][^<]*[a-z\)I])\s+(<\/s|<\/b)')
     r_professor = re.compile(r'\(\d\-*\d*\)\s+(.*)\s*<\/')
     r_recommended_prep = re.compile(r'Preparation:<\/strong> (.*\.)<div')
 
+    # Open a file used for debugging
     f = open('scraper/raw.txt', 'w+')
 
     for all_course_info in soup.find_all('div', class_='CourseDisplay'):
@@ -102,6 +104,7 @@ def compile_data(url: str, dept: Department) -> List[Course]:
         if not course_dept or len(course_dept[0]) < 2:
             continue
 
+        # Apply our compiled regex to a specific course div
         description = re.findall(r_description, all_course_info)
         number = re.findall(r_number, all_course_info)
         prereq_description = re.findall(r_prereqs, all_course_info)
@@ -112,7 +115,8 @@ def compile_data(url: str, dept: Department) -> List[Course]:
         recommended_prep = re.findall(r_recommended_prep, all_course_info)
 
         if prereq_description:
-            prereqs = get_prereqs(prereq_description[0])
+            prereqs = get_prereqs(prereq_description[0],
+                                  f'{dept.abbreviation} {number[0] if number else ""}')
         else:
             prereqs = list()
 
@@ -128,6 +132,7 @@ def compile_data(url: str, dept: Department) -> List[Course]:
                 sub_dept=dept.abbreviation,
                 number=(number[0] if number else ''),
                 prereqs=prereqs,
+                prereq_description=(prereq_description[0] if prereq_description else ''),
                 comments=comments_str,
                 units=(units[0] if units else ''),
                 description=description_str,
@@ -142,14 +147,14 @@ def compile_data(url: str, dept: Department) -> List[Course]:
     return result
 
 
-def get_prereqs(prereq_description: str) -> List[List[str]]:
+def get_prereqs(prereq_description: str, course_name: str = '') -> List[List[str]]:
     current_dept = ''
     and_together = []
     or_together = []
     seen_and = False
     seen_or = False
 
-    for term in re.split(r'(\d+[A-Z\-]*)', prereq_description):
+    for term in re.split(r'(?<=\s)(\d+[A-Z\-]*)(?!u)(?!\.\d)', prereq_description):
         if not term:
             return []
 
@@ -176,8 +181,8 @@ def get_prereqs(prereq_description: str) -> List[List[str]]:
                 for sequence_letter in range(first_req_letter, last_req_letter + 1):
                     and_together.append([f'{current_dept} {term[:end_of_number_i]}{chr(sequence_letter)}'])
 
-            else:
-                or_together.append(f'{current_dept} {term}')
+            elif (name := f'{current_dept} {term}') != course_name:
+                or_together.append(name)
 
         if (',' in term and ', or' not in term) or 'and' in term and not '-' in term:
             if or_together:
@@ -211,7 +216,7 @@ def get_dept(prereq_substr: str) -> str:
         name_variations = [dept.abbreviation.lower().capitalize(), dept.abbreviation, dept.full_name]
 
         for name_variation in name_variations:
-            if name_variation + ' ' in prereq_substr:
+            if name_variation + ' ' in prereq_substr + ' ':
                 return dept.abbreviation
 
     return ''
@@ -262,6 +267,7 @@ def write_json(dept: Department, overwrite=False):
 
     with open(filename, 'w') as f:
         f.write('{')
+
         courses = compile_data(url, dept)
 
         for i, course in enumerate(courses):
