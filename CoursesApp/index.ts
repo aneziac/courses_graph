@@ -1,5 +1,5 @@
 import Sigma from "sigma";
-import createGraph from "./creategraph.js";
+import createGraph from "./creategraph";
 
 var local_json = require('./data/math.json');
 const container = document.getElementById("sigma-container") as HTMLElement;

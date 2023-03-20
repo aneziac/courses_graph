@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-  },
-  "extends": "expo/tsconfig.base",
-  // tsconfig.json
+    "target": "es2020",
+    "module": "es2020",
+    "noImplicitAny": false,
+    "strict": false,
+    "moduleResolution": "node",
+    "esModuleInterop": true
+  }
 }
