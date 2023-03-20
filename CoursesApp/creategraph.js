@@ -20,9 +20,16 @@ function createGraph(path) {
     const graph = new DirectedGraph();
 
     var json = JSON.parse(fs.readFileSync(path, 'utf8'));
+    var x = 0;
+    var y = 0;
 
     for (var key in json) {
-        graph.addNode(key);
+        graph.addNode(key, { x: x, y: y, size: 5, label: key, color: "blue" });
+        x += 1;
+        if (x == 10) {
+            x = 0;
+            y++;
+        }
     }
 
     var prereqset = 0;
@@ -37,7 +44,12 @@ function createGraph(path) {
                         // if (json[key].prereqs[i][j].substring(json[key].prereqs[i][j].length - 5) != "AA-ZZ") {
                         //     graph.addNode(json[key].prereqs[i][j]);
                         // }
-                        graph.addNode(json[key].prereqs[i][j]);
+                        graph.addNode(json[key].prereqs[i][j], { x: x, y: y, size: 5, label: json[key].prereqs[i][j], color: "blue" });
+                        x++;
+                        if (x == 10) {
+                            x = 0;
+                            y++;
+                        }
                         prereqkey =  prereqset.toString() + '.' + prereqwithinset.toString();
                         if (j + 1 != json[key].prereqs[i].length) {
                             prereqwithinset++;
@@ -50,8 +62,7 @@ function createGraph(path) {
                             prereqset = 10 * Math.floor(prereqset / 10) + 10;
                             prereqwithinset = 0;
                         }
-                        graph.addEdgeWithKey(prereqkey, key, json[key].prereqs[i][j]);
-                        graph.addEdgeWithKey('-' + prereqkey, json[key].prereqs[i][j], key);
+                        graph.mergeEdgeWithKey(prereqkey, key, json[key].prereqs[i][j]);
                     }
                     else if (graph.hasNode(json[key].prereqs[i][j])) {
                         prereqkey =  prereqset.toString() + '.' + prereqwithinset.toString();
@@ -66,8 +77,7 @@ function createGraph(path) {
                             prereqset = 10 * Math.floor(prereqset / 10) + 10;
                             prereqwithinset = 0;
                         }
-                        graph.addEdgeWithKey(prereqkey, key, json[key].prereqs[i][j]);
-                        graph.addEdgeWithKey('-' + prereqkey, json[key].prereqs[i][j], key);
+                        graph.mergeEdgeWithKey(prereqkey, key, json[key].prereqs[i][j]);
                     }
                 }
             }
@@ -99,12 +109,15 @@ function grabInfo(path, course) {
 }
 
 function main() {
+    var count = 0; 
     for (const file of generatePaths()) {
         console.log(file);
         var graph = createGraph(file);
         console.log(graph.edges());
         console.log(graph.nodes());
+        count += graph.edges().length;
     }
+    console.log(count);
 }
 
 const nodePath = path.resolve(process.argv[1]);
