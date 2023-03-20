@@ -4,22 +4,14 @@ import path from 'path';
 import { fileURLToPath } from 'url'
 
 
-function generatePaths() {
-    var paths = [];
-    var files = fs.readdirSync('data/');
-    for (const file of files) {
-        if (file.split('.')[1] == 'json') {
-            paths.push('./data/' + file);
-        }
-    }
-    return paths;
+function getJSON(path: string) {
+    return JSON.parse(fs.readFileSync(path, 'utf8'));
 }
 
 // creates graph w/ negative edge keys for postreq direction and w/ positive edge keys for prereq direction
-function createGraph(path) {
+export default function createGraph(json: JSON) : DirectedGraph {
     const graph = new DirectedGraph();
 
-    var json = JSON.parse(fs.readFileSync(path, 'utf8'));
     var x = 0;
     var y = 0;
 
@@ -83,16 +75,17 @@ function createGraph(path) {
             }
         }
     }
+
     return graph;
 }
 
 
 // returns map with info associated with a particular course
-function grabInfo(path, course) {
+function grabInfo(path: string, course: string) : Map<string, string> {
 
     var json = JSON.parse(fs.readFileSync(path, 'utf8'));
 
-    const courseInfo = new Map();
+    const courseInfo: Map<string, string> = new Map();
     courseInfo.set("title", json[course].title);
     courseInfo.set("dept", json[course].dept);
     courseInfo.set("sub_dept", json[course].sub_dept);
@@ -108,11 +101,24 @@ function grabInfo(path, course) {
     return courseInfo;
 }
 
+function generatePaths() : Array<string> {
+    var paths: Array<string> = [];
+    var files = fs.readdirSync('data/');
+    for (const file of files) {
+        if (file.split('.')[1] == 'json') {
+            paths.push('./data/' + file);
+        }
+    }
+    return paths;
+}
+
+// below is only called if we run directly with node
+
 function main() {
-    var count = 0; 
+    var count = 0;
     for (const file of generatePaths()) {
         console.log(file);
-        var graph = createGraph(file);
+        var graph = createGraph(getJSON(file));
         console.log(graph.edges());
         console.log(graph.nodes());
         count += graph.edges().length;
