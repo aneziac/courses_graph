@@ -102,7 +102,19 @@ def test_get_prereqs():
 
     assert course_scraper.get_prereqs(
         'PSTAT 207A or PSTAT 220A (may be taken concurrently).'
-    )
+    ) == [['PSTAT 207A [O]', 'PSTAT 220A [O]']]
+
+    assert course_scraper.get_prereqs(
+        'SPAN 16B or SPAN 25 (may be taken concurrently).'
+    ) == [['SPAN 16B [O]', 'SPAN 25 [O]']]
+
+    assert course_scraper.get_prereqs(
+        'Theater 10C; concurrent enrollment in Theater 151A. Consent of instructor.'
+    ) == [['THTR 10C'], ['THTR 151A [M]']]
+
+    assert course_scraper.get_prereqs(
+        'PSTAT 160A-B, PSTAT 170; PSTAT 160B may be taken concurrently. PSTAT 160A   and PSTAT 170 must be completed with a B- or higher.'
+    ) == [['PSTAT 160A'], ['PSTAT 160B [O]'], ['PSTAT 170']]
 
     assert course_scraper.get_prereqs(
         'Mathematics 5A or 5AI and 5B or 5BI with a minimum grade of C; or 4B or 4BI and 6A or 6AI with a minimum' \
