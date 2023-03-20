@@ -7,3 +7,5 @@ scraper/__pycache__/*
 .vscode/*
 *.log
 scraper/*.log
+server.cjs
+.DS_Store

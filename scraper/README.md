@@ -14,7 +14,6 @@ $ source build_project.sh
 ## To do
 
 General
-- ED M vs EDM naming conflict
 - look into AA-ZZ course prereqs (MAth 104a requires CMPSC 5AA-ZZ)
 - handle concurrent prereqs
 
@@ -35,7 +34,7 @@ Courses
 
 
 ## Fixed
-
+- ED M vs EDM naming conflict
 **MCDB 1B** -- triple edge w/ MCDB 1A, lists itself as a prereq
 **LING 3B/C, LING 12** -- list themselves as prereqs
 **FEMST 195HA** -- lists itself as a prereq

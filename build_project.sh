@@ -5,7 +5,7 @@ if [[ "$answer" =~ ^[Yy]$ ]]; then
     if ! (which python); then
         source install_project.sh
     fi
-    python scraper/course_scraper.py -o
+    python scraper/course_scraper.py -oc
 fi
 
 read "answer?Build app? (y/n) ";

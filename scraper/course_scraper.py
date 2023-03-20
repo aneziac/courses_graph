@@ -318,7 +318,10 @@ def main(argv: List[str]):
     )
 
     if overwrite and 'c' in argv[1]:
-        shutil.rmtree('CoursesApp/data')
+        try:
+            shutil.rmtree('CoursesApp/data')
+        except FileNotFoundError:
+            pass
         os.mkdir('CoursesApp/data')
 
     for dept in DEPTS:
