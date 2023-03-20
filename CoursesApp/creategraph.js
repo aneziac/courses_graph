@@ -25,7 +25,11 @@ function createGraph(path) {
 
     for (var key in json) {
         graph.addNode(key, { x: x, y: y, size: 5, label: key, color: "blue" });
-        y += 1;
+        x += 1;
+        if (x == 10) {
+            x = 0;
+            y++;
+        }
     }
 
     var prereqset = 0;
@@ -41,7 +45,11 @@ function createGraph(path) {
                         //     graph.addNode(json[key].prereqs[i][j]);
                         // }
                         graph.addNode(json[key].prereqs[i][j], { x: x, y: y, size: 5, label: json[key].prereqs[i][j], color: "blue" });
-                        y += 1;
+                        x++;
+                        if (x == 10) {
+                            x = 0;
+                            y++;
+                        }
                         prereqkey =  prereqset.toString() + '.' + prereqwithinset.toString();
                         if (j + 1 != json[key].prereqs[i].length) {
                             prereqwithinset++;
