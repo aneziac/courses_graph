@@ -15,3 +15,19 @@ web-build/
 
 # Temporary files created by Metro to check the health of the file watcher
 .metro-health-check*
+
+
+
+scraper/raw.txt
+CoursesApp/data/*
+venv/*
+scraper/__pycache__/*
+.pytest_cache/*
+.expo
+.vscode/*
+*.log
+scraper/*.log
+server.cjs
+.DS_Store
+env
+scraper/*.env
