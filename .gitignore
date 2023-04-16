@@ -5,6 +5,7 @@ scraper/__pycache__/*
 .pytest_cache/*
 .expo
 .vscode/*
+scraper/.env
 *.log
 scraper/*.log
 server.cjs

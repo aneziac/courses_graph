@@ -29,4 +29,5 @@ scraper/__pycache__/*
 scraper/*.log
 server.cjs
 .DS_Store
+env
 scraper/*.env
