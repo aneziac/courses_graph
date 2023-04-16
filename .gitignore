@@ -9,3 +9,4 @@ scraper/__pycache__/*
 scraper/*.log
 server.cjs
 .DS_Store
+scraper/*.env

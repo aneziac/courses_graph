@@ -10,6 +10,7 @@ import os
 import logging
 import sys
 import shutil
+from dotenv import load_dotenv
 
 
 @dataclass
@@ -36,6 +37,7 @@ class Course:
     recommended_prep: str
     professor: str
     college: str
+    offered: List[str]
 
 
 def build_depts_list():
@@ -97,6 +99,8 @@ def compile_data(url: str, dept: Department) -> List[Course]:
     # Open a file used for debugging
     f = open('scraper/raw.txt', 'w+')
 
+    offered_courses = parse_courses_json(get_courses_json("20232", dept.abbreviation))
+
     for all_course_info in soup.find_all('div', class_='CourseDisplay'):
         all_course_info = str(all_course_info)
         f.write(all_course_info)
@@ -127,11 +131,13 @@ def compile_data(url: str, dept: Department) -> List[Course]:
         comments_str = comments[0] if comments else ''
         comments_str = comments_str.replace('   ', ' ')
 
+        number_str = number[0] if number else ''
+
         result.append(
             Course(
                 dept=dept.super_dept,
                 sub_dept=dept.abbreviation,
-                number=(number[0] if number else ''),
+                number=number_str,
                 prereqs=prereqs,
                 prereq_description=(prereq_description[0] if prereq_description else ''),
                 comments=comments_str,
@@ -140,7 +146,8 @@ def compile_data(url: str, dept: Department) -> List[Course]:
                 title=(title[0][1] if title else ''),
                 professor=(professor[0].strip() if professor else ''),
                 recommended_prep=(recommended_prep[0] if recommended_prep else ''),
-                college=dept.college
+                college=dept.college,
+                offered=(['Spring 2023'] if number_str in offered_courses else [])
             )
         )
 
@@ -299,12 +306,48 @@ def get_existing_jsons() -> List[str]:
     return [item[:-5] for item in ls]
 
 
+def get_courses_json(quarter: str, dept: str) -> str:
+    load_dotenv()
+
+    try:
+        ucsb_api_key = os.environ['UCSB_API_KEY']
+    except KeyError:
+        print("Ensure you have access to the API key")
+        quit()
+
+    headers = {
+        'accept': 'application/json',
+        'ucsb-api-version': '3.0',
+        'ucsb-api-key': ucsb_api_key,
+    }
+    params = {
+        'quarter': quarter,
+        'deptCode': dept,
+        'pageNumber': '1',
+        'pageSize': '500'
+    }
+
+    response = requests.get('https://api.ucsb.edu/academics/curriculums/v3/classes/search', params=params, headers=headers)
+    return response.json()
+
+
+def parse_courses_json(courses: dict) -> List[str]:
+    offered_courses = []
+
+    classes = courses['classes']
+    for cls in classes:
+        offered_courses.append(cls['courseId'].split()[1])
+        # offered_courses.append(' '.join(cls['courseId'].split()))
+
+    return offered_courses
+
+
 DEPTS: List[Department] = build_depts_list()
 EXISTING_JSONS: List[str] = get_existing_jsons()
 
 
 def main(argv: List[str]):
-    overwrite = ('o' in argv[1])
+    overwrite = (len(argv) > 1 and 'o' in argv[1])
     print(f'Performing scraping with overwrite={overwrite}')
 
     logging.basicConfig(
@@ -329,4 +372,9 @@ def main(argv: List[str]):
 
 
 if __name__ == '__main__':
+    # keep math up to date with latest version
+    for dept in DEPTS:
+        if dept.abbreviation == 'MATH':
+            write_json(dept, overwrite=True)
+
     main(sys.argv)
