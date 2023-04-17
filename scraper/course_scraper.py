@@ -5,7 +5,7 @@ import csv
 import requests
 from dataclasses import dataclass, asdict
 # from datalite import datalite
-from typing import List
+from typing import List, Dict
 import os
 import logging
 import sys
@@ -99,7 +99,18 @@ def compile_data(url: str, dept: Department) -> List[Course]:
     # Open a file used for debugging
     f = open('scraper/raw.txt', 'w+')
 
-    offered_courses = parse_courses_json(get_courses_json("20232", dept.abbreviation))
+    offered_courses: Dict[str, List[str]] = {}
+    quarters = ['Winter', 'Spring', 'Summer', 'Fall']
+
+    for year in range(2020, 2024):
+        for quarter_i in range(4):
+            if year >= 2023 and quarter_i >= 3:
+                break
+
+            quarter = f'{quarters[quarter_i]} {year}'
+            quarter_code = str(year) + str(quarter_i + 1)
+
+            offered_courses[quarter] = parse_courses_json(get_courses_json(quarter_code, dept.abbreviation))
 
     for all_course_info in soup.find_all('div', class_='CourseDisplay'):
         all_course_info = str(all_course_info)
@@ -133,6 +144,12 @@ def compile_data(url: str, dept: Department) -> List[Course]:
 
         number_str = number[0] if number else ''
 
+        # come back to this algorithm - gotta be a better way
+        quarters_offered = []
+        for quarter in offered_courses.keys():
+            if number_str in offered_courses[quarter]:
+                quarters_offered.append(quarter)
+
         result.append(
             Course(
                 dept=dept.super_dept,
@@ -147,7 +164,7 @@ def compile_data(url: str, dept: Department) -> List[Course]:
                 professor=(professor[0].strip() if professor else ''),
                 recommended_prep=(recommended_prep[0] if recommended_prep else ''),
                 college=dept.college,
-                offered=(['Spring 2023'] if number_str in offered_courses else [])
+                offered=quarters_offered
             )
         )
 
@@ -311,8 +328,9 @@ def get_courses_json(quarter: str, dept: str) -> str:
 
     try:
         ucsb_api_key = os.environ['UCSB_API_KEY']
+
     except KeyError:
-        print("Ensure you have access to the API key")
+        print('Ensure you have access to the API key')
         quit()
 
     headers = {
@@ -348,7 +366,7 @@ EXISTING_JSONS: List[str] = get_existing_jsons()
 
 def main(argv: List[str]):
     overwrite = (len(argv) > 1 and 'o' in argv[1])
-    print(f'Performing scraping with overwrite={overwrite}')
+    print(f'Scraping with overwrite={overwrite}')
 
     logging.basicConfig(
         format='[%(asctime)s] %(message)s',
