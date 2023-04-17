@@ -11,6 +11,8 @@ import logging
 import sys
 import shutil
 from dotenv import load_dotenv
+from pypdf import PdfReader
+from io import BytesIO
 
 
 @dataclass
@@ -71,9 +73,7 @@ def build_depts_list():
 def compile_data(url: str, dept: Department) -> List[Course]:
     r = requests.get(url)
 
-    try:
-        assert 200 == r.status_code
-    except AssertionError:
+    if 200 != r.status_code:
         logging.warning(f'[F] Failed to retrieve data for {dept.full_name} at {url}')
         return []
 
@@ -360,6 +360,17 @@ def parse_courses_json(courses: dict) -> List[str]:
     return offered_courses
 
 
+def get_major_requirements():
+    response = requests.get('https://my.sa.ucsb.edu/catalog/Current/Documents/2022_Majors/LS/Math/Mathematics%20BS%20Major-2022.pdf')
+    reader = PdfReader(BytesIO(response.content))
+    text = reader.pages[0].extract_text()
+    r_requirements = re.compile('(.*?)\s*\.{2,}')
+
+    without_footer = text.split('MAJOR REGULATIONS')[0]
+    requirements = re.findall(r_requirements, without_footer)
+    print(requirements)
+
+
 DEPTS: List[Department] = build_depts_list()
 EXISTING_JSONS: List[str] = get_existing_jsons()
 
@@ -391,8 +402,9 @@ def main(argv: List[str]):
 
 if __name__ == '__main__':
     # keep math up to date with latest version
-    for dept in DEPTS:
-        if dept.abbreviation == 'MATH':
-            write_json(dept, overwrite=True)
+    # for dept in DEPTS:
+    #     if dept.abbreviation == 'MATH':
+    #         write_json(dept, overwrite=True)
 
-    main(sys.argv)
+    get_major_requirements()
+    # main(sys.argv)
