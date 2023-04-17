@@ -89,7 +89,7 @@ def compile_data(url: str, dept: Department) -> List[Course]:
     r_dept = re.compile(rf'(<b>|AndTitle">)\s+({r_abbrev})\s+.*\.')
     r_description = re.compile(r'(div>|2px;">)\s+(.*\.)\s+<\/div>')
     r_number = re.compile(rf'{r_abbrev}\s+(.*)\.')
-    r_prereqs = re.compile(r'Prerequisite:<\/strong> (.*\.)')
+    r_prereqs = re.compile(r'Prerequisite:<\/strong> (.*?)\s{2}')
     r_units = re.compile(r'\((\d\-*\d*)\)')
     r_comments = re.compile(r'Enrollment Comments:<\/strong> (.*\.)')
     r_title = re.compile(r'(CourseDisplay">\s+|\d{1,3}[A-Z]*\.\s+)([A-Z][^<]*[a-z\)I])\s+(<\/s|<\/b)')
