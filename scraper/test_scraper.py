@@ -1,4 +1,5 @@
 import scraper.course_scraper as course_scraper
+from typing import List
 
 
 math_dept = course_scraper.Department(
@@ -39,6 +40,14 @@ env_ds_dept = course_scraper.Department(
     url_abbreviation='bren',
     full_name='Environmental Data Science',
     college='BREN'
+)
+
+pstat_dept = course_scraper.Department(
+    abbreviation='PSTAT',
+    super_dept='PSTAT',
+    url_abbreviation='stats',
+    full_name='Statistics & Applied Probability',
+    college='L&S'
 )
 
 def test_dept_url():
@@ -167,3 +176,9 @@ def test_compile_data():
         'may apply to the major.'
     assert ind_studies.description == 'Coursework consists of academic research supervised by a faculty member on a topic not available ' \
         'in established course offerings.'
+
+    pstat_dept: List[course_scraper.Course] = course_scraper.compile_data(course_scraper.dept_to_url(pstat_dept))
+    titles = [course.title for course in pstat_dept]
+
+    assert 'Principles of Data Science with R' in titles
+    assert 'STOCHASTIC CALCULUS AND APPLICATIONS' in titles
