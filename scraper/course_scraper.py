@@ -100,26 +100,19 @@ def compile_data(url: str, dept: Department) -> List[Course]:
     r_recommended_prep = re.compile(r'Preparation:<\/strong> (.*\.)<div')
 
     # Open a file used for debugging
-    f = open('scraper/raw.txt', 'w+')
+    raw = open('scraper/raw.txt', 'w+')
 
-    offered_courses: Dict[str, List[str]] = {}
-    quarters = ['Winter', 'Spring', 'Summer', 'Fall']
+    # with open('scraper/majors.csv') as major_file:
+    #     reader = csv.reader(major_file)
+    #     for line in reader:
+    #         get_major_requirements(line[0], line[1].strip())
 
-    # Look up when courses are offered
+    offered_courses: Dict[str, List[str]] = get_offered_courses(dept.abbreviation)
 
-    for year in range(2020, 2024):
-        for quarter_i in range(4):
-            if year >= 2023 and quarter_i >= 3:
-                break
-
-            quarter = f'{quarters[quarter_i]} {year}'
-            quarter_code = str(year) + str(quarter_i + 1)
-
-            offered_courses[quarter] = parse_courses_json(get_courses_json(quarter_code, dept.abbreviation))
-
+    # find our courses using the CSS class found by manually inspecting the ucsb webpage
     for all_course_info in soup.find_all('div', class_='CourseDisplay'):
         all_course_info = str(all_course_info)
-        f.write(all_course_info)
+        raw.write(all_course_info)
 
         course_dept = re.findall(r_dept, all_course_info)
         if not course_dept or len(course_dept[0]) < 2:
@@ -135,12 +128,14 @@ def compile_data(url: str, dept: Department) -> List[Course]:
         professor = re.findall(r_professor, all_course_info)
         recommended_prep = re.findall(r_recommended_prep, all_course_info)
 
+        # determine prerequisties
         if prereq_description:
             prereqs = get_prereqs(prereq_description[0],
                                   f'{dept.abbreviation} {number[0] if number else ""}')
         else:
             prereqs = list()
 
+        # hacky mess here to manipulate regex data structures / weird whitespace in source html
         description_str = description[0][1] if description else ''
         description_str = description_str.replace('   ', ' ')
 
@@ -155,6 +150,7 @@ def compile_data(url: str, dept: Department) -> List[Course]:
             if number_str in offered_courses[quarter]:
                 quarters_offered.append(quarter)
 
+        # add the course to our list with all relevant metadata
         result.append(
             Course(
                 dept=dept.super_dept,
@@ -169,11 +165,13 @@ def compile_data(url: str, dept: Department) -> List[Course]:
                 professor=(professor[0].strip() if professor else ''),
                 recommended_prep=(recommended_prep[0] if recommended_prep else ''),
                 college=dept.college,
-                offered=quarters_offered
+                offered=quarters_offered,
+                majors_required_for=[],
+                majors_optional_for=[]
             )
         )
 
-    f.close()
+    raw.close()
     return result
 
 
@@ -232,6 +230,27 @@ def get_prereqs(prereq_description: str, course_name: str = '') -> List[List[str
     return and_together
 
 
+def get_offered_courses(dept: str, start_year=2020, end_year=2023) -> Dict[str, List[str]]:
+    offered_courses: Dict[str, List[str]] = {}
+    quarters = ['Winter', 'Spring', 'Summer', 'Fall']
+
+    # Look up when courses are offered
+
+    for year in range(start_year, end_year + 1):
+        for quarter_i in range(4):
+            if year >= 2023 and quarter_i >= 3:  # can't see into the future
+                break
+
+            quarter = f'{quarters[quarter_i]} {year}'
+            quarter_code = str(year) + str(quarter_i + 1)
+
+            offered_courses[quarter] = parse_courses_json(
+                get_courses_json(quarter_code, dept)
+            )
+
+    return offered_courses
+
+
 def get_dept(prereq_substr: str) -> str:
     # returns empty string if dept cannot be found
 
@@ -254,24 +273,28 @@ def get_dept(prereq_substr: str) -> str:
 
 def dept_to_url(dept: Department) -> str:
     base_url = 'https://my.sa.ucsb.edu/catalog/Current/CollegesDepartments'
+    base_suffix = 'aspx?DeptTab=Courses'
     url = ''
+
+    # weirdly the dynamical neuroscience and biological engineering depts have special urls
 
     if dept.college == 'L&S':
         if dept.abbreviation == 'DYNS':
-            url = f'{base_url}/{dept.url_abbreviation}.aspx?DeptTab=Courses'
+            url = f'{base_url}/{dept.url_abbreviation}.{base_suffix}'
         else:
-            url = f'{base_url}/ls-intro/{dept.url_abbreviation}.aspx?DeptTab=Courses'
+            url = f'{base_url}/ls-intro/{dept.url_abbreviation}.{base_suffix}'
 
     elif dept.college == 'COE':
         if dept.abbreviation == 'BIOE':
-            url = f'{base_url}/{dept.url_abbreviation}.aspx?DeptTab=Courses'
+            url = f'{base_url}/{dept.url_abbreviation}.{base_suffix}'
         else:
-            url = f'{base_url}/coe/{dept.url_abbreviation}.aspx?DeptTab=Courses'
+            url = f'{base_url}/coe/{dept.url_abbreviation}.{base_suffix}'
 
+    # the other colleges have their own patterns
     elif dept.college == 'CCS':
         url = f'{base_url}/{dept.url_abbreviation}/Courses.aspx'
     elif dept.college == 'GGSE':
-        url = f'{base_url}/ggse/{dept.url_abbreviation}.aspx?DeptTab=Courses'
+        url = f'{base_url}/ggse/{dept.url_abbreviation}.{base_suffix}'
     elif dept.college == 'BREN':
         url = f'{base_url}/{dept.url_abbreviation}/?DeptTab=Courses'
 
@@ -283,6 +306,8 @@ def dept_to_url(dept: Department) -> str:
 
 def write_json(dept: Department, overwrite=False):
     dept_words = dept.abbreviation.lower().split(' ')
+
+    # fix naming conflict caused by the education department
     if dept.super_dept == 'ED':
         file_dept_abbrev = '_'.join(dept_words)
     else:
@@ -328,14 +353,14 @@ def get_existing_jsons() -> List[str]:
     return [item[:-5] for item in ls]
 
 
-def get_courses_json(quarter: str, dept: str) -> str:
+def get_courses_json(quarter: str, dept: str) -> Dict:
     load_dotenv()
 
     try:
         ucsb_api_key = os.environ['UCSB_API_KEY']
 
     except KeyError:
-        print('Ensure you have access to the API key')
+        logging.error('Ensure you have access to the API key')
         quit()
 
     headers = {
@@ -366,10 +391,10 @@ def parse_courses_json(courses: dict) -> List[str]:
 
 
 def get_major_requirements(dept_name: str, major_name: str) -> List[str]:
-    if '-' in major_name:
+    if 'Emphasis' in major_name:
         base_name, emphasis = major_name.split('-')
         url_major_name = '%20'.join(base_name.split()) + '%20Major-' + '%20'.join(emphasis.split())
-        print(url_major_name)
+
     else:
         url_major_name = '%20'.join(major_name.split()) + '%20Major'
 
@@ -391,23 +416,24 @@ def get_major_requirements(dept_name: str, major_name: str) -> List[str]:
     return requirements
 
 
+# these are globals cause I'm lazy
 DEPTS: List[Department] = build_depts_list()
 EXISTING_JSONS: List[str] = get_existing_jsons()
 
 
 def main(argv: List[str]):
-    overwrite = (len(argv) > 1 and 'o' in argv[1])
-    print(f'Scraping with overwrite={overwrite}')
-
     logging.basicConfig(
         format='[%(asctime)s] %(message)s',
         level=logging.INFO,
         datefmt='%Y-%m-%d %H:%M:%S',
         handlers=[
-            logging.FileHandler('scraper.log'),
+            logging.FileHandler('test.log'),
             logging.StreamHandler()
         ]
     )
+
+    overwrite = (len(argv) > 1 and 'o' in argv[1])
+    logging.info(f'Scraping with overwrite={overwrite}')
 
     if overwrite and 'c' in argv[1]:
         try:
@@ -417,18 +443,13 @@ def main(argv: List[str]):
         os.mkdir('CoursesApp/data')
 
     for dept in DEPTS:
+        # keep math up to date with latest version as it's used for testing
+        if dept.abbreviation == 'MATH':
+            write_json(dept, overwrite=True)
+            break
+
         write_json(dept, overwrite=overwrite)
 
 
 if __name__ == '__main__':
-    # keep math up to date with latest version
-    # for dept in DEPTS:
-    #     if dept.abbreviation == 'MATH':
-    #         write_json(dept, overwrite=True)
-
-    with open('scraper/majors.csv') as f:
-        reader = csv.reader(f)
-        for line in reader:
-            print(get_major_requirements(line[0], line[1].strip()))
-
-    # main(sys.argv)
+    main(sys.argv)
