@@ -4,7 +4,7 @@ import re
 import csv
 import requests
 from dataclasses import dataclass, asdict
-# from datalite import datalite
+# from datalite import datalite # used for SQL integration but for now we're using JSON
 from typing import List, Dict
 import os
 import logging
@@ -101,11 +101,6 @@ def compile_data(url: str, dept: Department) -> List[Course]:
 
     # Open a file used for debugging
     raw = open('scraper/raw.txt', 'w+')
-
-    # with open('scraper/majors.csv') as major_file:
-    #     reader = csv.reader(major_file)
-    #     for line in reader:
-    #         get_major_requirements(line[0], line[1].strip())
 
     offered_courses: Dict[str, List[str]] = get_offered_courses(dept.abbreviation)
 
@@ -416,6 +411,28 @@ def get_major_requirements(dept_name: str, major_name: str) -> List[str]:
     return requirements
 
 
+def write_major_requirements():
+    major_dict = {}
+    with open('scraper/majors.csv') as major_file:
+        reader = csv.reader(major_file)
+        for line in reader:
+            course_names = [[], []]
+            requirements = get_major_requirements(line[0], line[1].strip())
+
+            for req in requirements:
+                for and_list in get_prereqs(req.replace(' -', '-') + '.'):
+                    if len(and_list) == 1:
+                        course_names[0].append(and_list[0])
+                    else:
+                        for course in and_list:
+                            course_names[1].append(course)
+
+            major_dict[line[1].strip()] = course_names.copy()
+
+    with open('scraper/major_courses.json', 'w+') as major_courses:
+        major_courses.write(json.dumps(major_dict))
+
+
 # these are globals cause I'm lazy
 DEPTS: List[Department] = build_depts_list()
 EXISTING_JSONS: List[str] = get_existing_jsons()
@@ -427,7 +444,7 @@ def main(argv: List[str]):
         level=logging.INFO,
         datefmt='%Y-%m-%d %H:%M:%S',
         handlers=[
-            logging.FileHandler('test.log'),
+            logging.FileHandler('scraper.log'),
             logging.StreamHandler()
         ]
     )
@@ -452,4 +469,5 @@ def main(argv: List[str]):
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    write_major_requirements()
+    # main(sys.argv)
