@@ -5,7 +5,7 @@ import csv
 import requests
 from dataclasses import dataclass, asdict
 # from datalite import datalite # used for SQL integration but for now we're using JSON
-from typing import List, Dict
+from typing import List, Dict, Tuple
 import os
 import logging
 import sys
@@ -145,6 +145,8 @@ def compile_data(url: str, dept: Department) -> List[Course]:
             if number_str in offered_courses[quarter]:
                 quarters_offered.append(quarter)
 
+        required_for, optional_for = majors_required(f'{dept.abbreviation} {number_str}')
+
         # add the course to our list with all relevant metadata
         result.append(
             Course(
@@ -161,8 +163,8 @@ def compile_data(url: str, dept: Department) -> List[Course]:
                 recommended_prep=(recommended_prep[0] if recommended_prep else ''),
                 college=dept.college,
                 offered=quarters_offered,
-                majors_required_for=[],
-                majors_optional_for=[]
+                majors_required_for=required_for,
+                majors_optional_for=optional_for
             )
         )
 
@@ -413,7 +415,7 @@ def get_major_requirements(dept_name: str, major_name: str) -> List[str]:
 
 def write_major_requirements():
     major_dict = {}
-    with open('scraper/majors.csv') as major_file:
+    with open('scraper/majors.csv', 'r') as major_file:
         reader = csv.reader(major_file)
         for line in reader:
             course_names = [[], []]
@@ -432,6 +434,17 @@ def write_major_requirements():
     with open('scraper/major_courses.json', 'w+') as major_courses:
         major_courses.write(json.dumps(major_dict))
 
+
+def majors_required(course: str) -> Tuple[List[str], List[str]]:
+    required, optional = [], []
+    major_courses: dict = json.load(open('scraper/major_courses.json'))
+    for major in major_courses.keys():
+        if course in major_courses[major][0]:
+            required.append(major)
+        elif course in major_courses[major][1]:
+            optional.append(major)
+
+    return (required, optional)
 
 # these are globals cause I'm lazy
 DEPTS: List[Department] = build_depts_list()
@@ -469,5 +482,4 @@ def main(argv: List[str]):
 
 
 if __name__ == '__main__':
-    write_major_requirements()
-    # main(sys.argv)
+    main(sys.argv)
