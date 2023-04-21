@@ -465,6 +465,10 @@ def main(argv: List[str]):
     overwrite = (len(argv) > 1 and 'o' in argv[1])
     logging.info(f'Scraping with overwrite={overwrite}')
 
+    if overwrite or 'major_courses.json' not in os.listdir('./scraper'):
+        logging.info('Writing major requirements')
+        write_major_requirements()
+
     if overwrite and 'c' in argv[1]:
         try:
             shutil.rmtree('CoursesApp/data')
