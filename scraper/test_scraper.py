@@ -177,8 +177,10 @@ def test_compile_data():
     assert ind_studies.description == 'Coursework consists of academic research supervised by a faculty member on a topic not available ' \
         'in established course offerings.'
 
-    pstat_dept: List[course_scraper.Course] = course_scraper.compile_data(course_scraper.dept_to_url(pstat_dept))
-    titles = [course.title for course in pstat_dept]
+    pstat_dept_courses: List[course_scraper.Course] = course_scraper.compile_data(
+        course_scraper.dept_to_url(pstat_dept), pstat_dept
+    )
+    titles = [course.title for course in pstat_dept_courses]
 
     assert 'Principles of Data Science with R' in titles
     assert 'STOCHASTIC CALCULUS AND APPLICATIONS' in titles
