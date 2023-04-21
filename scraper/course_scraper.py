@@ -40,6 +40,8 @@ class Course:
     professor: str
     college: str
     offered: List[str]
+    majors_required_for: List[str]
+    majors_optional_for: List[str]
 
 
 def build_depts_list():
@@ -63,6 +65,7 @@ def build_depts_list():
     return depts_list
 
     # sort departments when new ones are added (no longer needed)
+    # but may come in handy at some point
     if False:
         with open('scraper/sorted_depts.csv', 'w') as g:
             for line in sorted(DEPTS, key=lambda x: x.abbreviation):
@@ -101,6 +104,8 @@ def compile_data(url: str, dept: Department) -> List[Course]:
 
     offered_courses: Dict[str, List[str]] = {}
     quarters = ['Winter', 'Spring', 'Summer', 'Fall']
+
+    # Look up when courses are offered
 
     for year in range(2020, 2024):
         for quarter_i in range(4):
@@ -236,11 +241,11 @@ def get_dept(prereq_substr: str) -> str:
             if dept.college == 'CCS' and dept.super_dept in prereq_substr.upper():
                 return dept.abbreviation
 
-    # traverse depts in backwards order to avoid naming conflicts
     for dept in DEPTS:
         name_variations = [dept.abbreviation.lower().capitalize(), dept.abbreviation, dept.full_name]
 
         for name_variation in name_variations:
+            # avoid naming conflicts caused by substrings
             if name_variation + ' ' in prereq_substr + ' ':
                 return dept.abbreviation
 
@@ -360,15 +365,30 @@ def parse_courses_json(courses: dict) -> List[str]:
     return offered_courses
 
 
-def get_major_requirements():
-    response = requests.get('https://my.sa.ucsb.edu/catalog/Current/Documents/2022_Majors/LS/Math/Mathematics%20BS%20Major-2022.pdf')
+def get_major_requirements(dept_name: str, major_name: str) -> List[str]:
+    if '-' in major_name:
+        base_name, emphasis = major_name.split('-')
+        url_major_name = '%20'.join(base_name.split()) + '%20Major-' + '%20'.join(emphasis.split())
+        print(url_major_name)
+    else:
+        url_major_name = '%20'.join(major_name.split()) + '%20Major'
+
+    response = requests.get(
+        f'https://my.sa.ucsb.edu/catalog/Current/Documents/2022_Majors/LS/{dept_name}/{url_major_name}-2022.pdf'
+    )
+
+    if 200 != response.status_code:
+        logging.warning(f'Could not find major requirements sheet for {major_name} in the {dept_name} department')
+        return []
+
     reader = PdfReader(BytesIO(response.content))
     text = reader.pages[0].extract_text()
     r_requirements = re.compile('(.*?)\s*\.{2,}')
 
     without_footer = text.split('MAJOR REGULATIONS')[0]
     requirements = re.findall(r_requirements, without_footer)
-    print(requirements)
+
+    return requirements
 
 
 DEPTS: List[Department] = build_depts_list()
@@ -406,5 +426,9 @@ if __name__ == '__main__':
     #     if dept.abbreviation == 'MATH':
     #         write_json(dept, overwrite=True)
 
-    get_major_requirements()
+    with open('scraper/majors.csv') as f:
+        reader = csv.reader(f)
+        for line in reader:
+            print(get_major_requirements(line[0], line[1].strip()))
+
     # main(sys.argv)
