@@ -3,15 +3,17 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "start": "kotatsu serve --typescript index.ts"
+    "serve": "kotatsu serve --typescript index.ts"
   },
   "dependencies": {
     "@types/react": "~18.0.27",
+    "css-loader": "^6.7.3",
     "graphology": "^0.25.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-sigma": "^1.2.35",
     "sigma": "^2.4.0",
+    "style-loader": "^3.3.2",
     "typescript": "^4.9.4"
   },
   "devDependencies": {
