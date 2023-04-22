@@ -479,6 +479,9 @@ EXISTING_JSONS: List[str] = get_existing_jsons()
 
 
 def main(argv: List[str]):
+    overwrite = (len(argv) > 1 and 'o' in argv[1])
+    print(f'Performing scraping with overwrite={overwrite}')
+
     logging.basicConfig(
         format='[%(asctime)s] %(message)s',
         level=logging.INFO,
@@ -513,4 +516,9 @@ def main(argv: List[str]):
 
 
 if __name__ == '__main__':
+    # keep math up to date with latest version
+    for dept in DEPTS:
+        if dept.abbreviation == 'MATH':
+            write_json(dept, overwrite=True)
+
     main(sys.argv)
