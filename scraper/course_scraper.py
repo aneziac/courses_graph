@@ -185,10 +185,25 @@ def get_prereqs(prereq_description: str, course_name: str = '') -> List[List[str
     or_together = []
     seen_and = False
     seen_or = False
+    suffixes = {}
+    suffix = ''
+
+    for block in re.split(r'(\.|;)\s', prereq_description):
+        if 'may be taken concurrently' in block:
+            suffixes[block] = ' [O]'
+        elif 'concurrent enrollment in' in block:
+            suffixes[block] = ' [M]'
+        else:
+            suffixes[block] = ''
 
     for term in re.split(r'(?<=\s)(\d+[A-Z\-]*)(?!u)(?!\.\d)', prereq_description):
         if not term:
             return []
+
+        for block in suffixes.keys():
+            if term in block:
+                suffix = suffixes[block]
+                break
 
         # check for text in between that
         if not ('0' <= term[0] and '9' >= term[0]):
@@ -211,10 +226,13 @@ def get_prereqs(prereq_description: str, course_name: str = '') -> List[List[str
                 last_req_letter = ord(term[-1])
 
                 for sequence_letter in range(first_req_letter, last_req_letter + 1):
-                    and_together.append([f'{current_dept} {term[:end_of_number_i]}{chr(sequence_letter)}'])
+                    and_together.append([f'{current_dept} {term[:end_of_number_i]}{chr(sequence_letter)}{suffix}'])
+
+            elif suffix == ' [M]':
+                and_together.append([f'{current_dept} {term}{suffix}'])
 
             elif (name := f'{current_dept} {term}') != course_name:
-                or_together.append(name)
+                or_together.append(name + suffix)
 
         if (',' in term and ', or' not in term) or 'and' in term and not '-' in term:
             if or_together:
@@ -334,7 +352,6 @@ def write_json(dept: Department, overwrite=False):
         courses = compile_data(url, dept)
 
         for i, course in enumerate(courses):
-            # course.create_entry()
             f.write(f'"{course.sub_dept} {course.number}": ')
             f.write(json.dumps(asdict(course)))
 

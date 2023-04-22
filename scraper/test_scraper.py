@@ -119,7 +119,7 @@ def test_get_prereqs():
 
     assert course_scraper.get_prereqs(
         'Theater 10C; concurrent enrollment in Theater 151A. Consent of instructor.'
-    ) == [['THTR 10C'], ['THTR 151A [M]']]
+    ) == [['THTR 151A [M]'], ['THTR 10C']]
 
     assert course_scraper.get_prereqs(
         'PSTAT 160A-B, PSTAT 170; PSTAT 160B may be taken concurrently. PSTAT 160A   and PSTAT 170 must be completed with a B- or higher.'
