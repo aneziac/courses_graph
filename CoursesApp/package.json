@@ -9,19 +9,19 @@
     "@types/react": "~18.0.27",
     "css-loader": "^6.7.3",
     "graphology": "^0.25.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-sigma": "^1.2.35",
     "sigma": "^2.4.0",
     "style-loader": "^3.3.2",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "vue": "^3.2.47"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "kotatsu": "^0.22.3",
     "ts-loader": "^9.4.2",
+    "ts-node": "^10.9.1",
     "typescript": "^4.9.5",
     "webpack-cli": "^5.0.1"
   },
-  "private": true
+  "private": true,
+  "type": "module"
 }
