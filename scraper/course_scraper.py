@@ -13,6 +13,7 @@ import shutil
 from dotenv import load_dotenv
 from pypdf import PdfReader
 from io import BytesIO
+from collections import defaultdict
 
 
 @dataclass
@@ -139,6 +140,8 @@ def compile_data(url: str, dept: Department) -> List[Course]:
 
         number_str = number[0] if number else ''
 
+        # ges = []
+
         # come back to this algorithm - gotta be a better way
         quarters_offered = []
         for quarter in offered_courses.keys():
@@ -146,6 +149,8 @@ def compile_data(url: str, dept: Department) -> List[Course]:
                 quarters_offered.append(quarter)
 
         required_for, optional_for = majors_required(f'{dept.abbreviation} {number_str}')
+
+        # list(set([x['geCode'].strip() for x in cls['generalEducation']]))
 
         # add the course to our list with all relevant metadata
         result.append(
@@ -387,6 +392,11 @@ def parse_courses_json(courses: dict) -> List[str]:
     return offered_courses
 
 
+# def get_ges(courses: dict) -> List[str]:
+#     for cls in classes:
+#         return list(set([x['geCode'].strip() for x in cls['generalEducation']]))
+
+
 def get_major_requirements(dept_name: str, major_name: str) -> List[str]:
     if 'Emphasis' in major_name:
         base_name, emphasis = major_name.split('-')
@@ -414,12 +424,16 @@ def get_major_requirements(dept_name: str, major_name: str) -> List[str]:
 
 
 def write_major_requirements():
-    major_dict = {}
+    def pair_of_lists():
+        return [[], []]
+
+    major_dict = defaultdict(pair_of_lists)
     with open('scraper/majors.csv', 'r') as major_file:
         reader = csv.reader(major_file)
         for line in reader:
-            course_names = [[], []]
-            requirements = get_major_requirements(line[0], line[1].strip())
+            dept, major = line[0], line[1].strip()
+            course_names = pair_of_lists()
+            requirements = get_major_requirements(dept, major)
 
             for req in requirements:
                 for and_list in get_prereqs(req.replace(' -', '-') + '.'):
@@ -429,22 +443,21 @@ def write_major_requirements():
                         for course in and_list:
                             course_names[1].append(course)
 
-            major_dict[line[1].strip()] = course_names.copy()
+            for i in range(2):
+                for course in course_names[i]:
+                    major_dict[course][i].append(major)
 
     with open('scraper/major_courses.json', 'w+') as major_courses:
         major_courses.write(json.dumps(major_dict))
 
 
 def majors_required(course: str) -> Tuple[List[str], List[str]]:
-    required, optional = [], []
     major_courses: dict = json.load(open('scraper/major_courses.json'))
-    for major in major_courses.keys():
-        if course in major_courses[major][0]:
-            required.append(major)
-        elif course in major_courses[major][1]:
-            optional.append(major)
+    try:
+        return major_courses[course]
+    except KeyError:
+        return ([], [])
 
-    return (required, optional)
 
 # these are globals cause I'm lazy
 DEPTS: List[Department] = build_depts_list()
