@@ -43,6 +43,7 @@ class Course:
     offered: List[str]
     majors_required_for: List[str]
     majors_optional_for: List[str]
+    general_education_fields: List[str]
 
 
 def build_depts_list():
@@ -103,7 +104,7 @@ def compile_data(url: str, dept: Department) -> List[Course]:
     # Open a file used for debugging
     raw = open('scraper/raw.txt', 'w+')
 
-    offered_courses: Dict[str, List[str]] = get_offered_courses(dept.abbreviation)
+    offered_courses: Dict[str, Dict[str, List[str]]] = get_offered_courses(dept.abbreviation)
 
     # find our courses using the CSS class found by manually inspecting the ucsb webpage
     for all_course_info in soup.find_all('div', class_='CourseDisplay'):
@@ -140,17 +141,17 @@ def compile_data(url: str, dept: Department) -> List[Course]:
 
         number_str = number[0] if number else ''
 
-        # ges = []
+        ges: List[str] = []
 
         # come back to this algorithm - gotta be a better way
         quarters_offered = []
-        for quarter in offered_courses.keys():
+        for i, quarter in enumerate(offered_courses.keys()):
             if number_str in offered_courses[quarter]:
                 quarters_offered.append(quarter)
+                if i == 0:
+                    ges = offered_courses[quarter][number_str]
 
         required_for, optional_for = majors_required(f'{dept.abbreviation} {number_str}')
-
-        # list(set([x['geCode'].strip() for x in cls['generalEducation']]))
 
         # add the course to our list with all relevant metadata
         result.append(
@@ -169,7 +170,8 @@ def compile_data(url: str, dept: Department) -> List[Course]:
                 college=dept.college,
                 offered=quarters_offered,
                 majors_required_for=required_for,
-                majors_optional_for=optional_for
+                majors_optional_for=optional_for,
+                general_education_fields=ges
             )
         )
 
@@ -232,8 +234,8 @@ def get_prereqs(prereq_description: str, course_name: str = '') -> List[List[str
     return and_together
 
 
-def get_offered_courses(dept: str, start_year=2020, end_year=2023) -> Dict[str, List[str]]:
-    offered_courses: Dict[str, List[str]] = {}
+def get_offered_courses(dept: str, start_year=2020, end_year=2023) -> Dict[str, Dict[str, List[str]]]:
+    offered_courses: Dict[str, Dict[str, List[str]]] = {}
     quarters = ['Winter', 'Spring', 'Summer', 'Fall']
 
     # Look up when courses are offered
@@ -381,20 +383,15 @@ def get_courses_json(quarter: str, dept: str) -> Dict:
     return response.json()
 
 
-def parse_courses_json(courses: dict) -> List[str]:
-    offered_courses = []
+def parse_courses_json(courses: dict) -> Dict[str, List[str]]:
+    offered_courses = {}
 
     classes = courses['classes']
     for cls in classes:
-        offered_courses.append(cls['courseId'].split()[1])
-        # offered_courses.append(' '.join(cls['courseId'].split()))
+        offered_courses[cls['courseId'].split()[1]] = \
+            list(set([x['geCode'].strip() for x in cls['generalEducation']]))
 
     return offered_courses
-
-
-# def get_ges(courses: dict) -> List[str]:
-#     for cls in classes:
-#         return list(set([x['geCode'].strip() for x in cls['generalEducation']]))
 
 
 def get_major_requirements(dept_name: str, major_name: str) -> List[str]:
