@@ -208,14 +208,14 @@ import DirectedGraph from 'graphology';
 
 
 
-export default function createGraph(json: JSON) : DirectedGraph {
+export default function createGraph(json: JSON, major: string = "all", division: string = "both", otherDepartments: boolean = true, quarters: Array<string> = ["Winter 2020", "Spring 2020", "Summer 2020", "Fall 2020", "Winter 2021", "Spring 2021", "Summer 2021", "Fall 2021", "Winter 2022", "Spring 2022", "Summer 2022", "Fall 2022", "Winter 2023", "Spring 2023", "Summer 2023"]) : DirectedGraph {
     const graph = new DirectedGraph();
 
     var x = 0;
     var i = 0;
     var y = 0;
 
-    var colors = ["red", "orange", "yellow", "green", "blue", "purple"];
+    var colors = ["red", "orange", "green", "blue", "purple"];
     var currColor = 0;
 
     for (var key in json) { // add in all the nodes first, no edges
@@ -281,7 +281,7 @@ export default function createGraph(json: JSON) : DirectedGraph {
     }
     var count = 0;
     const map = new Map();
-    // for (var node in graph) {
+
     graph.forEachNode((node) => {
         if (graph.outDegree(node) == 0) {
             map.set(node, 0);
@@ -290,32 +290,37 @@ export default function createGraph(json: JSON) : DirectedGraph {
         else {
             map.set(node, -1);
         }
-    // }
-    console.log(map);});
+    });
+
+    
 
     var sent;
     var max = 1;
 
-    while (count < Object.keys(json).length) {
+    while (count < graph.order) {
         graph.forEachNode((node) => {
             max = 1;
             if (map.get(node) == -1) {
-                sent = false;
-            }
-            else {
                 sent = true;
             }
-            console.log(node + " has neighbors " +  graph.outNeighbors(node));
+            else {
+                sent = false;
+            }
             graph.outNeighbors(node).forEach(prereq => {
-                console.log(prereq + " " + map.get(prereq));
-                if (map.get(prereq) != -1 && !sent) {
-                    if (max < map.get(prereq)) {
-                        max = map.get(prereq);
+                if (map.get(prereq) == -1) {
+                    sent = false;
+                }
+            });
+            if (sent) {
+                graph.outNeighbors(node).forEach(prereq => {
+                    if (map.get(prereq) + 1 > max) {
+                        max = map.get(prereq) + 1;
                     }
-                    sent = true;
-                    count++;
-                }});
-            map.set(node, max + 1);
+                }); 
+                
+                map.set(node, max);
+                count++;
+            }
             // for (var prereq in graph.inNeighbors(key)) {
             //     if (map.get(prereq) != -1) {
             //         // map.set(key, map.get(prereq) + 1);
@@ -329,64 +334,182 @@ export default function createGraph(json: JSON) : DirectedGraph {
     }
 
 
-    var i = 0;
-    for (var key in json) {
-        graph.updateNode(key, attr => {
-            return {
-              ...attr,
-              x: 5 * i,
-              y: 10 * map.get(key)
-            };
-        });
-        i++;
-    }
+
+    // var i = 0;
+    // for (var key in json) {
+    //     graph.updateNode(key, attr => {
+    //         return {
+    //           ...attr,
+    //           x: 7 * i,
+    //           y: 10 * map.get(key)
+    //         };
+    //     });
+    //     i++;
+    // }
     
 
+    for (var key2 in json) {
+        if (graph.hasNode(key2)) {
+            if (parseInt(json[key2].number) > 200) {
+                graph.dropNode(key2);
+                map.delete(key2);
+            }
+        }
+    }
+
+
+    // remove based on quarters
+    var toInclude = false;
+    for (var key2 in json) {
+        toInclude = false;
+        if (graph.hasNode(key2)) {
+            for (var str in quarters) {
+                if ((json[key2].offered && major == "all" || json[key2].majors_required_for.includes(major)) &&
+                    (division == "both" || (division == "ld" && parseInt(json[key2].number) < 100) || (division == "ud" && parseInt(json[key2].number) >= 100))) {
+                    for (var str2 in json[key2].offered) {
+                        if (str2 == str) {
+                            toInclude = true;
+                        }
+                    }
+                }
+            }
+            if (!toInclude) {
+                graph.dropNode(key2);
+                map.delete(key);
+            }
+        }
+    }
+
+
+    // remove nodes w/ no neighbors
     graph.forEachNode((node) => {
-        var x = node.indexOf(" ");
-        if (parseInt(node.substr(x+1)) > 200 || node.substr(node.length - 1) == 'I' || node.substr(node.length - 1) == 'H') {
+        if (graph.degree(node) == 0) {
             graph.dropNode(node);
             map.delete(node);
         }
     });
-    console.log(map);
 
+    graph.forEachNode((node) => {
+        if (graph.outDegree(node) == 0) {
+            graph.updateNode(node, attr => {
+                return {
+                    ...attr,
+                    color: "red"
+                };
+            });
+        }
+    });
+
+    graph.forEachNode((node) => {
+        if (!json[node] && otherDepartments) {
+            graph.updateNode(node, attr => {
+                return {
+                    ...attr,
+                    color: "green"
+                };
+            });
+        }
+        else if (!json[node]) {
+            graph.dropNode(node);
+        }
+    });
+    
+
+
+
+    // toInclude = false;
+    // for (var key2 in json) {
+    //     toInclude = false;
+    //     if (graph.hasNode(key2)) {
+    //         for (var str in quarters) {
+    //             if (json[key2].offered) {
+    //                 for (var str2 in json[key2].offered) {
+    //                     if (str2 == str) {
+    //                         toInclude = true;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //         if (!toInclude) {
+    //             graph.dropNode(key2);
+    //             map.delete(key);
+    //         }
+    //     }
+    // }
+
+
+
+
+
+    // calculate number of nodes at each height
     const numaty = new Map();
     for (var i = 0; i < 10; i++) {
         numaty.set(i, 0);
         graph.forEachNode((node) => {
-            console.log(graph.getNodeAttribute(node, y));
             if (map.get(node) == i) {
                 numaty.set(i, numaty.get(i) + 1);
             }
         });
     }
-    console.log(numaty);
 
+
+    // assign x-coordinates
     var counter;
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 15; i++) {
+        var random = Math.random();
         counter = 1;
         graph.forEachNode((node) => {
-            if (map.get(node) == i) {
+            if (map.get(node) == i && numaty.get(i) > 1) {
                 graph.updateNode(node, attr => {
                     return {
-                      ...attr,
-                      x: counter / numaty.get(i) * 30,
-                      y: 3 * map.get(node)
+                        ...attr,
+                        x: (counter / (numaty.get(i) + 1)) * 50 + random,
+                        y: 3 * map.get(node)
                     };
                 });
                 counter++;
             }
+            else if (map.get(node) == i && numaty.get(i) == 1) {
+                graph.updateNode(node, attr => {
+                    return {
+                        ...attr,
+                        x: 24.5 + random,
+                        y: 3 * map.get(node)
+                    };
+                });
+            }
         });
     }
 
-    graph.forEachNode((node) => {
-        var x = node.indexOf(" ");
-        if (parseInt(node.substr(x+1)) > 200 || node.substr(node.length - 1) == 'I' || node.substr(node.length - 1) == 'H') {
-            graph.dropNode(node);
-            map.delete(node);
-        }
-    });
+    // graph.forEachNode((node) => {
+    //     var x = node.indexOf(" ");
+    //     if (parseInt(node.substr(x+1)) > 200) {
+    //         graph.dropNode(node);
+    //         map.delete(node);
+    //     }
+    // });
+
+
+
+    
+
+
+
+    // graph.forEachNode((key2) => {
+    //     console.log("MATH 2A");
+    //     for (var str in quarters) {
+    //         if (json["MATH 7H"].offered) {
+    //             for (var str2 in json["MATH 7H"].offered) {
+    //                 if (str2 == str) {
+    //                     toInclude = true;
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     if (!toInclude) {
+    //         graph.dropNode(key2);
+    //     }
+    // });
 
 
     // graph.dropNode("MATH 8");
@@ -400,8 +523,6 @@ export default function createGraph(json: JSON) : DirectedGraph {
     // graph.dropNode("MATH 3A");
     // graph.dropNode("MATH 34B");
     // graph.dropNode("MATH 34A");
-    
-    
 
 
     return graph;
