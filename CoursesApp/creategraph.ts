@@ -350,43 +350,43 @@ export default function createGraph(json: JSON) : DirectedGraph {
     }
     
 
-    // graph.forEachNode((node) => {
-    //     var x = node.indexOf(" ");
-    //     if (parseInt(node.substr(x+1)) > 200 || node.substr(node.length - 1) == 'I' || node.substr(node.length - 1) == 'H') {
-    //         graph.dropNode(node);
-    //         map.delete(node);
-    //     }
-    // });
-    // console.log(map);
+    graph.forEachNode((node) => {
+        var x = node.indexOf(" ");
+        if (parseInt(node.substr(x+1)) > 200 || node.substr(node.length - 1) == 'I' || node.substr(node.length - 1) == 'H') {
+            graph.dropNode(node);
+            map.delete(node);
+        }
+    });
+    console.log(map);
 
-    // const numaty = new Map();
-    // for (var i = 0; i < 10; i++) {
-    //     numaty.set(i, 0);
-    //     graph.forEachNode((node) => {
-    //         console.log(graph.getNodeAttribute(node, y));
-    //         if (map.get(node) == i) {
-    //             numaty.set(i, numaty.get(i) + 1);
-    //         }
-    //     });
-    // }
-    // console.log(numaty);
+    const numaty = new Map();
+    for (var i = 0; i < 10; i++) {
+        numaty.set(i, 0);
+        graph.forEachNode((node) => {
+            console.log(graph.getNodeAttribute(node, y));
+            if (map.get(node) == i) {
+                numaty.set(i, numaty.get(i) + 1);
+            }
+        });
+    }
+    console.log(numaty);
 
-    // var counter;
-    // for (var i = 0; i < 10; i++) {
-    //     counter = - numaty.get(i) / 2;
-    //     graph.forEachNode((node) => {
-    //         if (map.get(node) == i) {
-    //             graph.updateNode(node, attr => {
-    //                 return {
-    //                   ...attr,
-    //                   x: counter,
-    //                   y: 3 * map.get(node)
-    //                 };
-    //             });
-    //             counter++;
-    //         }
-    //     });
-    // }
+    var counter;
+    for (var i = 0; i < 10; i++) {
+        counter = 1;
+        graph.forEachNode((node) => {
+            if (map.get(node) == i) {
+                graph.updateNode(node, attr => {
+                    return {
+                      ...attr,
+                      x: counter / numaty.get(i) * 30,
+                      y: 3 * map.get(node)
+                    };
+                });
+                counter++;
+            }
+        });
+    }
 
     graph.forEachNode((node) => {
         var x = node.indexOf(" ");
@@ -395,6 +395,19 @@ export default function createGraph(json: JSON) : DirectedGraph {
             map.delete(node);
         }
     });
+
+
+    // graph.dropNode("MATH 8");
+    // graph.dropNode("MATH 6A");
+    // graph.dropNode("MATH 4B");
+    // graph.dropNode("MATH 6B");
+    // graph.dropNode("MATH 4A");
+    // graph.dropNode("MATH 2B");
+    // graph.dropNode("MATH 2A");
+    // graph.dropNode("MATH 3B");
+    // graph.dropNode("MATH 3A");
+    // graph.dropNode("MATH 34B");
+    // graph.dropNode("MATH 34A");
     
     
 
