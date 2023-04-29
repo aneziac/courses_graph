@@ -1,10 +1,16 @@
 {
-  "compilerOptions": {
-    "target": "es2020",
-    "module": "es2020",
-    "noImplicitAny": false,
-    "strict": false,
-    "moduleResolution": "node",
-    "esModuleInterop": true
-  },
-}
+    "compilerOptions": {
+      "target": "esnext",
+      "useDefineForClassFields": true,
+      "module": "esnext",
+      "moduleResolution": "node",
+      "strict": false,
+      "jsx": "preserve",
+      "sourceMap": true,
+      "resolveJsonModule": true,
+      "esModuleInterop": true,
+      "lib": ["esnext", "dom"],
+    },
+    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+    "references": [{ "path": "./tsconfig.node.json" }]
+  }

@@ -1,27 +1,22 @@
 {
-  "name": "coursesapp",
-  "version": "1.0.0",
-  "main": "index.ts",
-  "scripts": {
-    "serve": "kotatsu serve --typescript index.ts"
-  },
-  "dependencies": {
-    "@types/react": "~18.0.27",
-    "css-loader": "^6.7.3",
-    "graphology": "^0.25.1",
-    "sigma": "^2.4.0",
-    "style-loader": "^3.3.2",
-    "typescript": "^4.9.4",
-    "vue": "^3.2.47"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.20.0",
-    "kotatsu": "^0.22.3",
-    "ts-loader": "^9.4.2",
-    "ts-node": "^10.9.1",
-    "typescript": "^4.9.5",
-    "webpack-cli": "^5.0.1"
-  },
-  "private": true,
-  "type": "module"
+    "name": "courses-app",
+    "private": true,
+    "version": "1.0.0",
+    "scripts": {
+      "dev": "vite",
+      "build": "vue-tsc --noEmit && vite build",
+      "preview": "vite preview"
+    },
+    "devDependencies": {
+      "@types/node": "^17.0.17",
+      "css-loader": "^6.7.3",
+      "graphology": "^0.23.2",
+      "graphology-types": "^0.23.0",
+      "sigma": "^2.2.0",
+      "vue": "^3.2.30",
+      "@vitejs/plugin-vue": "^2.2.0",
+      "typescript": "^4.5.5",
+      "vite": "^2.8.0",
+      "vue-tsc": "^0.31.2"
+    }
 }
