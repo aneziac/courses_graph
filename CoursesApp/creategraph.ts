@@ -290,7 +290,7 @@ export default function createGraph(json: JSON) : DirectedGraph {
     var count = 0;
     const map = new Map();
     // for (var node in graph) {
-    graph.forEachNode((node, attributes) => {
+    graph.forEachNode((node) => {
         if (graph.outDegree(node) == 0) {
             map.set(node, 0);
             count++;
@@ -302,9 +302,11 @@ export default function createGraph(json: JSON) : DirectedGraph {
     console.log(map);});
 
     var sent;
+    var max = 1;
 
     while (count < Object.keys(json).length) {
-        graph.forEachNode((node, attributes) => {
+        graph.forEachNode((node) => {
+            max = 1;
             if (map.get(node) == -1) {
                 sent = false;
             }
@@ -315,11 +317,13 @@ export default function createGraph(json: JSON) : DirectedGraph {
             graph.outNeighbors(node).forEach(prereq => {
                 console.log(prereq + " " + map.get(prereq));
                 if (map.get(prereq) != -1 && !sent) {
-                    console.log(map.get(prereq) + 1);
-                    map.set(node, map.get(prereq) + 1);
+                    if (max < map.get(prereq)) {
+                        max = map.get(prereq);
+                    }
                     sent = true;
                     count++;
                 }});
+            map.set(node, max + 1);
             // for (var prereq in graph.inNeighbors(key)) {
             //     if (map.get(prereq) != -1) {
             //         // map.set(key, map.get(prereq) + 1);
@@ -330,8 +334,6 @@ export default function createGraph(json: JSON) : DirectedGraph {
             //     }
             // }
         });
-        console.log(map);
-
     }
 
 
@@ -340,12 +342,62 @@ export default function createGraph(json: JSON) : DirectedGraph {
         graph.updateNode(key, attr => {
             return {
               ...attr,
-              x: i,
-              y: 5 * map.get(key)
+              x: 5 * i,
+              y: 39 * map.get(key)
             };
         });
         i++;
     }
+    
+
+    graph.forEachNode((node) => {
+        var x = node.indexOf(" ");
+        if (parseInt(node.substr(x+1)) > 200 || node.substr(node.length - 1) == 'I' || node.substr(node.length - 1) == 'H') {
+            graph.dropNode(node);
+            map.delete(node);
+        }
+    });
+    console.log(map);
+
+    const numaty = new Map();
+    for (var i = 0; i < 10; i++) {
+        numaty.set(i, 0);
+        graph.forEachNode((node) => {
+            console.log(graph.getNodeAttribute(node, y));
+            if (map.get(node) == i) {
+                numaty.set(i, numaty.get(i) + 1);
+            }
+        });
+    }
+    console.log(numaty);
+
+    var counter;
+    for (var i = 0; i < 10; i++) {
+        counter = - numaty.get(i) / 2;
+        graph.forEachNode((node) => {
+            if (map.get(node) == i) {
+                graph.updateNode(node, attr => {
+                    return {
+                      ...attr,
+                      x: counter,
+                      y: 3 * map.get(node)
+                    };
+                });
+                counter++;
+            }
+        });
+    }
+
+    graph.forEachNode((node) => {
+        var x = node.indexOf(" ");
+        if (parseInt(node.substr(x+1)) > 200 || node.substr(node.length - 1) == 'I' || node.substr(node.length - 1) == 'H') {
+            graph.dropNode(node);
+            map.delete(node);
+        }
+    });
+    
+    
+
 
     return graph;
 }
