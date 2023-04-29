@@ -343,50 +343,50 @@ export default function createGraph(json: JSON) : DirectedGraph {
             return {
               ...attr,
               x: 5 * i,
-              y: 39 * map.get(key)
+              y: 10 * map.get(key)
             };
         });
         i++;
     }
     
 
-    graph.forEachNode((node) => {
-        var x = node.indexOf(" ");
-        if (parseInt(node.substr(x+1)) > 200 || node.substr(node.length - 1) == 'I' || node.substr(node.length - 1) == 'H') {
-            graph.dropNode(node);
-            map.delete(node);
-        }
-    });
-    console.log(map);
+    // graph.forEachNode((node) => {
+    //     var x = node.indexOf(" ");
+    //     if (parseInt(node.substr(x+1)) > 200 || node.substr(node.length - 1) == 'I' || node.substr(node.length - 1) == 'H') {
+    //         graph.dropNode(node);
+    //         map.delete(node);
+    //     }
+    // });
+    // console.log(map);
 
-    const numaty = new Map();
-    for (var i = 0; i < 10; i++) {
-        numaty.set(i, 0);
-        graph.forEachNode((node) => {
-            console.log(graph.getNodeAttribute(node, y));
-            if (map.get(node) == i) {
-                numaty.set(i, numaty.get(i) + 1);
-            }
-        });
-    }
-    console.log(numaty);
+    // const numaty = new Map();
+    // for (var i = 0; i < 10; i++) {
+    //     numaty.set(i, 0);
+    //     graph.forEachNode((node) => {
+    //         console.log(graph.getNodeAttribute(node, y));
+    //         if (map.get(node) == i) {
+    //             numaty.set(i, numaty.get(i) + 1);
+    //         }
+    //     });
+    // }
+    // console.log(numaty);
 
-    var counter;
-    for (var i = 0; i < 10; i++) {
-        counter = - numaty.get(i) / 2;
-        graph.forEachNode((node) => {
-            if (map.get(node) == i) {
-                graph.updateNode(node, attr => {
-                    return {
-                      ...attr,
-                      x: counter,
-                      y: 3 * map.get(node)
-                    };
-                });
-                counter++;
-            }
-        });
-    }
+    // var counter;
+    // for (var i = 0; i < 10; i++) {
+    //     counter = - numaty.get(i) / 2;
+    //     graph.forEachNode((node) => {
+    //         if (map.get(node) == i) {
+    //             graph.updateNode(node, attr => {
+    //                 return {
+    //                   ...attr,
+    //                   x: counter,
+    //                   y: 3 * map.get(node)
+    //                 };
+    //             });
+    //             counter++;
+    //         }
+    //     });
+    // }
 
     graph.forEachNode((node) => {
         var x = node.indexOf(" ");
