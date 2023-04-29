@@ -1,4 +1,5 @@
 import scraper.course_scraper as course_scraper
+from typing import List
 
 
 math_dept = course_scraper.Department(
@@ -39,6 +40,14 @@ env_ds_dept = course_scraper.Department(
     url_abbreviation='bren',
     full_name='Environmental Data Science',
     college='BREN'
+)
+
+pstat_dept = course_scraper.Department(
+    abbreviation='PSTAT',
+    super_dept='PSTAT',
+    url_abbreviation='stats',
+    full_name='Statistics & Applied Probability',
+    college='L&S'
 )
 
 def test_dept_url():
@@ -110,7 +119,7 @@ def test_get_prereqs():
 
     assert course_scraper.get_prereqs(
         'Theater 10C; concurrent enrollment in Theater 151A. Consent of instructor.'
-    ) == [['THTR 10C'], ['THTR 151A [M]']]
+    ) == [['THTR 151A [M]'], ['THTR 10C']]
 
     assert course_scraper.get_prereqs(
         'PSTAT 160A-B, PSTAT 170; PSTAT 160B may be taken concurrently. PSTAT 160A   and PSTAT 170 must be completed with a B- or higher.'
@@ -167,3 +176,11 @@ def test_compile_data():
         'may apply to the major.'
     assert ind_studies.description == 'Coursework consists of academic research supervised by a faculty member on a topic not available ' \
         'in established course offerings.'
+
+    pstat_dept_courses: List[course_scraper.Course] = course_scraper.compile_data(
+        course_scraper.dept_to_url(pstat_dept), pstat_dept
+    )
+    titles = [course.title for course in pstat_dept_courses]
+
+    assert 'Principles of Data Science with R' in titles
+    assert 'STOCHASTIC CALCULUS AND APPLICATIONS' in titles

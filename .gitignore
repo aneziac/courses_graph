@@ -10,3 +10,5 @@ scraper/.env
 scraper/*.log
 server.cjs
 .DS_Store
+scraper/*.env
+scraper/major_courses.json
