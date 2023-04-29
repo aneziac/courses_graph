@@ -12,3 +12,6 @@ server.cjs
 .DS_Store
 scraper/*.env
 scraper/major_courses.json
+CoursesApp/node_modules
+CoursesApp/dist
+CoursesApp/server.cjs

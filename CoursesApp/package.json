@@ -1,34 +1,22 @@
 {
-  "name": "coursesapp",
-  "version": "1.0.0",
-  "main": "index.ts",
-  "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
-    "serve": "kotatsu serve --typescript index.ts"
-  },
-  "dependencies": {
-    "@expo/webpack-config": "^18.0.1",
-    "@types/react": "~18.0.27",
-    "expo": "~48.0.4",
-    "expo-status-bar": "~1.4.4",
-    "graphology": "^0.25.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-native": "0.71.3",
-    "react-native-web": "~0.18.10",
-    "react-sigma": "^1.2.35",
-    "sigma": "^2.4.0",
-    "typescript": "^4.9.4"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.20.0",
-    "kotatsu": "^0.22.3",
-    "ts-loader": "^9.4.2",
-    "typescript": "^4.9.5",
-    "webpack-cli": "^5.0.1"
-  },
-  "private": true
+    "name": "courses-app",
+    "private": true,
+    "version": "1.0.0",
+    "scripts": {
+      "dev": "vite",
+      "build": "vue-tsc --noEmit && vite build",
+      "preview": "vite preview"
+    },
+    "devDependencies": {
+      "@types/node": "^17.0.17",
+      "css-loader": "^6.7.3",
+      "graphology": "^0.23.2",
+      "graphology-types": "^0.23.0",
+      "sigma": "^2.2.0",
+      "vue": "^3.2.30",
+      "@vitejs/plugin-vue": "^2.2.0",
+      "typescript": "^4.5.5",
+      "vite": "^2.8.0",
+      "vue-tsc": "^0.31.2"
+    }
 }
