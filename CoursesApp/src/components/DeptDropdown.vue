@@ -114,7 +114,7 @@ export default {
 
 <template>
     <div>
-        <select v-model="selected">
+        <select class="form-control form-control-sm" v-model="selected">
             <option v-for="option in options" :value="option[0]" :text="option[1]">
             </option>
         </select>
