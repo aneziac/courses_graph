@@ -13,9 +13,9 @@ if [[ "$answer" =~ ^[Yy]$ ]]; then
     if ls | grep CoursesApp; then
         cd CoursesApp
     fi
-    if ! (which npx); then
+    if ! (which npm); then
         source install_project.sh
     fi
-    npx expo start
+    npm build
     cd ..
 fi
