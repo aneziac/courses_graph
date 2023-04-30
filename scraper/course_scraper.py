@@ -510,15 +510,10 @@ def main(argv: List[str]):
         # keep math up to date with latest version as it's used for testing
         if dept.abbreviation == 'MATH':
             write_json(dept, overwrite=True)
-            break
+            continue
 
         write_json(dept, overwrite=overwrite)
 
 
 if __name__ == '__main__':
-    # keep math up to date with latest version
-    for dept in DEPTS:
-        if dept.abbreviation == 'MATH':
-            write_json(dept, overwrite=True)
-
     main(sys.argv)
