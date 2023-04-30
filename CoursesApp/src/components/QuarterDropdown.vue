@@ -5,9 +5,9 @@ const selected = ref('A')
 export default {
     data() {
       return {
-        selected: null,
+        selected: ["All", "All"],
         options: [
-            ["", "All"],
+            ["All", "All"],
             [["Summer 2020", "Fall 2020", "Winter 2021", "Spring 2021"], "2020-21 school year"],
             [["Summer 2021", "Fall 2021", "Winter 2022", "Spring 2022"], "2021-22 school year"],
             [["Summer 2022", "Fall 2022", "Winter 2023", "Spring 2023"], "2022-23 school year"],

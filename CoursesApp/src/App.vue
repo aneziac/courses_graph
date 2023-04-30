@@ -2,23 +2,31 @@
 import { nextTick, ref } from 'vue'
 import Sigma from 'sigma'
 import createGraph from "../creategraph";
-import local_json from "../data/math.json";
+import loadJSON from "./load_json";
 import DeptDropdown from './components/DeptDropdown.vue'
 import DivisionDropdown from './components/DivisionDropdown.vue';
 import MajorDropdown from './components/MajorDropdown.vue';
 import QuarterDropdown from './components/QuarterDropdown.vue';
 
 const container = ref()
-const graph = createGraph(local_json)
 let sigma: Sigma
+
+let dept = DeptDropdown.data().selected[0];
+let division = DivisionDropdown.data().selected[0];
+let major = MajorDropdown.data().selected[0];
+let quarter = QuarterDropdown.data().selected[0];
+
+let json = loadJSON(dept);
+console.log(dept, division, major, quarter);
+let graph = createGraph(json, major, division, true, quarter);
+
 nextTick(() => {
   sigma = new Sigma(graph, container.value as HTMLElement)
 })
-
 </script>
 
 <template>
-  <h1>UCSB Course Graph</h1>
+  <h1>UCSB Course Prerequisite Graph</h1>
   <div ref="container" class="container" ></div>
   <div class="ui-bar">
     <DeptDropdown />

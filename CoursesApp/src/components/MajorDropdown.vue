@@ -5,8 +5,9 @@ const selected = ref('A')
 export default {
     data() {
       return {
-        selected: null,
+        selected: ["All"],
         options: [
+            "All",
             "Anthropology",
             "Anthropology-Archaeology Emphasis",
             "Anthropology-Biological Emphasis",

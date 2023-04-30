@@ -208,7 +208,7 @@ import DirectedGraph from 'graphology';
 
 
 
-export default function createGraph(json: JSON, major: string = "all", division: string = "both", otherDepartments: boolean = true, quarters: Array<string> = ["Winter 2020", "Spring 2020", "Summer 2020", "Fall 2020", "Winter 2021", "Spring 2021", "Summer 2021", "Fall 2021", "Winter 2022", "Spring 2022", "Summer 2022", "Fall 2022", "Winter 2023", "Spring 2023", "Summer 2023"]) : DirectedGraph {
+export default function createGraph(json: JSON, major: string = "All", division: string = "both", otherDepartments: boolean = true, quarters: Array<string> = ["Winter 2020", "Spring 2020", "Summer 2020", "Fall 2020", "Winter 2021", "Spring 2021", "Summer 2021", "Fall 2021", "Winter 2022", "Spring 2022", "Summer 2022", "Fall 2022", "Winter 2023", "Spring 2023", "Summer 2023"]) : DirectedGraph {
     const graph = new DirectedGraph();
 
     var x = 0;
@@ -292,7 +292,7 @@ export default function createGraph(json: JSON, major: string = "all", division:
         }
     });
 
-    
+
 
     var sent;
     var max = 1;
@@ -316,8 +316,8 @@ export default function createGraph(json: JSON, major: string = "all", division:
                     if (map.get(prereq) + 1 > max) {
                         max = map.get(prereq) + 1;
                     }
-                }); 
-                
+                });
+
                 map.set(node, max);
                 count++;
             }
@@ -346,7 +346,7 @@ export default function createGraph(json: JSON, major: string = "all", division:
     //     });
     //     i++;
     // }
-    
+
 
     for (var key2 in json) {
         if (graph.hasNode(key2)) {
@@ -413,7 +413,7 @@ export default function createGraph(json: JSON, major: string = "all", division:
             graph.dropNode(node);
         }
     });
-    
+
 
 
 
@@ -491,7 +491,7 @@ export default function createGraph(json: JSON, major: string = "all", division:
 
 
 
-    
+
 
 
 

@@ -5,7 +5,7 @@ const selected = ref('A')
 export default {
     data() {
       return {
-        selected: null,
+        selected: ["anth", "Anthropology"],
         options: [
             ["anth", "Anthropology"],
             ["art", "Art"],

@@ -13,7 +13,14 @@ with open('scraper/depts.csv') as f:
         else:
             file_dept_abbrev = ''.join(dept_words)
 
-        print(f'["{file_dept_abbrev}", "{line[3]}"],')
+        # print(f'["{file_dept_abbrev}", "{line[3]}"],')
+        # print(f'import {file_dept_abbrev}_json from "../data/{file_dept_abbrev}.json";')
+        print('} else if (dept == "' + file_dept_abbrev + '") {\t\nreturn ' + file_dept_abbrev + '_json;')
+        # if (dept == 'anth') {
+        #     return anth_json;
+        # } else if (dept == 'art') {
+        #     return art_json;
+        # }
 
 
 with open('scraper/majors.csv', 'r') as major_file:
