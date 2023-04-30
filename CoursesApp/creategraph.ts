@@ -217,7 +217,6 @@ export default function createGraph(json: JSON, major: string = "All", division:
         }
     }
 
-
     // remove nodes w/ no neighbors
     graph.forEachNode((node) => {
         if (graph.degree(node) == 0) {

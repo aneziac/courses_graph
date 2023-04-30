@@ -7,6 +7,7 @@ import DeptDropdown from './components/DeptDropdown.vue'
 import DivisionDropdown from './components/DivisionDropdown.vue';
 import MajorDropdown from './components/MajorDropdown.vue';
 import QuarterDropdown from './components/QuarterDropdown.vue';
+import DeptToggle from './components/DeptToggle.vue';
 
 const container = ref()
 
@@ -18,6 +19,7 @@ let dept: string;
 let division: string;
 let major: string;
 let quarter: Array<string>;
+let showAll: boolean;
 
 nextTick(() => {
     sigma = new Sigma(graph, container.value as HTMLElement);
@@ -25,7 +27,7 @@ nextTick(() => {
 
 function update() {
     json = loadJSON(dept);
-    graph = createGraph(json, major, division, true, quarter);
+    graph = createGraph(json, major, division, showAll, quarter);
     sigma.setGraph(graph);
 }
 
@@ -48,6 +50,11 @@ function setQuarter(value) {
     quarter = value;
     update();
 }
+
+function setShowAll() {
+    showAll = !showAll;
+    update();
+}
 </script>
 
 <template>
@@ -58,6 +65,7 @@ function setQuarter(value) {
     <QuarterDropdown @update="setQuarter" />
     <MajorDropdown @update="setMajor" />
     <DivisionDropdown @update="setDivision" />
+    <DeptToggle @update="setShowAll"/>
   </div>
 </template>
 
