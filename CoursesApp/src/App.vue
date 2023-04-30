@@ -4,6 +4,9 @@ import Sigma from 'sigma'
 import createGraph from "../creategraph";
 import local_json from "../data/math.json";
 import DeptDropdown from './components/DeptDropdown.vue'
+import DivisionDropdown from './components/DivisionDropdown.vue';
+import MajorDropdown from './components/MajorDropdown.vue';
+import QuarterDropdown from './components/QuarterDropdown.vue';
 
 const container = ref()
 const graph = createGraph(local_json)
@@ -15,10 +18,13 @@ nextTick(() => {
 </script>
 
 <template>
-  <h1>Course graph</h1>
+  <h1>UCSB Course Graph</h1>
   <div ref="container" class="container" ></div>
   <div class="ui-bar">
     <DeptDropdown />
+    <QuarterDropdown />
+    <MajorDropdown />
+    <DivisionDropdown />
   </div>
 </template>
 
@@ -27,6 +33,7 @@ nextTick(() => {
   position: fixed;
   width: 100vw;
   height: 80vh;
+  overflow: hidden;
   /* background-color: seashell; */
 }
 .ui-bar {
