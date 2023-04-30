@@ -1,13 +1,13 @@
 <script lang="ts">
 import { ref } from 'vue'
-const selected = ref('A')
+const selected = ref([""]);
 
 export default {
     data() {
       return {
-        selected: ["All", "All"],
+        selected: [""],
         options: [
-            ["All", "All"],
+            [[""], "All"],
             [["Summer 2020", "Fall 2020", "Winter 2021", "Spring 2021"], "2020-21 school year"],
             [["Summer 2021", "Fall 2021", "Winter 2022", "Spring 2022"], "2021-22 school year"],
             [["Summer 2022", "Fall 2022", "Winter 2023", "Spring 2023"], "2022-23 school year"],
@@ -24,6 +24,6 @@ export default {
             <option v-for="option in options" :value="option[0]" :text="option[1]">
             </option>
         </select>
-        <!-- <span>Selected: {{ selected }}</span> -->
+        <span>Selected: {{ selected }}</span>
     </div>
 </template>

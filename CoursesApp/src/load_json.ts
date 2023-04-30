@@ -94,7 +94,7 @@ import tmp_json from "../data/tmp.json";
 import wlcs_json from "../data/w&lcs.json";
 import writ_json from "../data/writ.json";
 
-export default function loadJSON(dept: string) {
+export default function loadJSON(dept: string = 'anth') {
     // let json = eval(dept + '_json');
     // return json;
 

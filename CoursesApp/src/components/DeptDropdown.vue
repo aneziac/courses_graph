@@ -1,11 +1,11 @@
 <script lang="ts">
 import { ref } from 'vue'
-const selected = ref('A')
+const selected = ref('anth')
 
 export default {
     data() {
       return {
-        selected: ["anth", "Anthropology"],
+        selected: "anth",
         options: [
             ["anth", "Anthropology"],
             ["art", "Art"],
@@ -103,6 +103,12 @@ export default {
             ["writ", "Writing"],
         ]
       }
+    },
+    watch: {
+        selected: function (value) {
+            this.$emit('')
+            console.log(value);
+        }
     }
 }
 </script>
@@ -113,6 +119,6 @@ export default {
             <option v-for="option in options" :value="option[0]" :text="option[1]">
             </option>
         </select>
-        <!-- <span>Selected: {{ selected }}</span> -->
+        <span>Selected: {{ selected }}</span>
     </div>
 </template>

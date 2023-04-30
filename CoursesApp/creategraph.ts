@@ -4,8 +4,12 @@ import DirectedGraph from 'graphology';
 
 
 
-export default function createGraph(json: JSON, major: string = "All", division: string = "both", otherDepartments: boolean = true, quarters: Array<string> = ["Winter 2020", "Spring 2020", "Summer 2020", "Fall 2020", "Winter 2021", "Spring 2021", "Summer 2021", "Fall 2021", "Winter 2022", "Spring 2022", "Summer 2022", "Fall 2022", "Winter 2023", "Spring 2023", "Summer 2023"]) : DirectedGraph {
+export default function createGraph(json: JSON, major: string = "All", division: string = "Both", otherDepartments: boolean = true, quarters: Array<string> = [""]) : DirectedGraph {
     const graph = new DirectedGraph();
+
+    if (quarters[0] == "") {
+        quarters = ["Winter 2020", "Spring 2020", "Summer 2020", "Fall 2020", "Winter 2021", "Spring 2021", "Summer 2021", "Fall 2021", "Winter 2022", "Spring 2022", "Summer 2022", "Fall 2022", "Winter 2023", "Spring 2023", "Summer 2023"];
+    }
 
     var x = 0;
     var i = 0;
@@ -197,7 +201,7 @@ export default function createGraph(json: JSON, major: string = "All", division:
         toInclude = false;
         if (graph.hasNode(key2)) {
             for (var str in quarters) {
-                if ((json[key2].offered && major == "all" || json[key2].majors_required_for.includes(major)) &&
+                if ((json[key2].offered && major == "All" || json[key2].majors_required_for.includes(major)) &&
                     (division == "Both" || (division == "LD" && parseInt(json[key2].number) < 100) || (division == "UD" && parseInt(json[key2].number) >= 100))) {
                     for (var str2 in json[key2].offered) {
                         if (str2 == str) {

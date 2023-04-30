@@ -1,11 +1,11 @@
 <script lang="ts">
 import { ref } from 'vue'
-const selected = ref('A')
+const selected = ref('All')
 
 export default {
     data() {
       return {
-        selected: ["All"],
+        selected: "All",
         options: [
             "All",
             "Anthropology",
@@ -47,6 +47,6 @@ export default {
             <option v-for="option in options" :value="option" :text="option">
             </option>
         </select>
-        <!-- <span>Selected: {{ selected }}</span> -->
+        <span>Selected: {{ selected }}</span>
     </div>
 </template>
