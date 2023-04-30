@@ -37,6 +37,11 @@ export default {
             "Physics BA",
         ]
       }
+    },
+    watch: {
+        selected: function (value) {
+            this.$emit('update', value);
+        }
     }
 }
 </script>
@@ -47,6 +52,6 @@ export default {
             <option v-for="option in options" :value="option" :text="option">
             </option>
         </select>
-        <span>Selected: {{ selected }}</span>
+        <!-- <span>Selected: {{ selected }}</span> -->
     </div>
 </template>

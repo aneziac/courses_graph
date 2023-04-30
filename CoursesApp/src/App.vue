@@ -9,30 +9,55 @@ import MajorDropdown from './components/MajorDropdown.vue';
 import QuarterDropdown from './components/QuarterDropdown.vue';
 
 const container = ref()
-let sigma: Sigma
 
-let dept = DeptDropdown.data().selected[0];
-let division = DivisionDropdown.data().selected[0];
-let major = MajorDropdown.data().selected[0];
-let quarter = QuarterDropdown.data().selected[0];
+let json = loadJSON();
+let graph = createGraph(json);
+let sigma: Sigma;
 
-let json = loadJSON(dept);
-console.log(dept, division, major, quarter);
-let graph = createGraph(json, major, division, true, quarter);
+let dept: string;
+let division: string;
+let major: string;
+let quarter: Array<string>;
 
 nextTick(() => {
-  sigma = new Sigma(graph, container.value as HTMLElement)
+    sigma = new Sigma(graph, container.value as HTMLElement);
 })
+
+function update() {
+    json = loadJSON(dept);
+    graph = createGraph(json, major, division, true, quarter);
+    sigma.setGraph(graph);
+}
+
+function setDept(value) {
+    dept = value;
+    update();
+}
+
+function setDivision(value) {
+    division = value;
+    update();
+}
+
+function setMajor(value) {
+    major = value;
+    update();
+}
+
+function setQuarter(value) {
+    quarter = value;
+    update();
+}
 </script>
 
 <template>
   <h1>UCSB Course Prerequisite Graph</h1>
   <div ref="container" class="container" ></div>
   <div class="ui-bar">
-    <DeptDropdown />
-    <QuarterDropdown />
-    <MajorDropdown />
-    <DivisionDropdown />
+    <DeptDropdown @update="setDept" />
+    <QuarterDropdown @update="setQuarter" />
+    <MajorDropdown @update="setMajor" />
+    <DivisionDropdown @update="setDivision" />
   </div>
 </template>
 

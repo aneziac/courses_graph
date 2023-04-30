@@ -14,6 +14,11 @@ export default {
             ["Summer 2023"]
         ]
       }
+    },
+    watch: {
+        selected: function (value) {
+            this.$emit('update', value);
+        }
     }
 }
 </script>
@@ -24,6 +29,6 @@ export default {
             <option v-for="option in options" :value="option[0]" :text="option[1]">
             </option>
         </select>
-        <span>Selected: {{ selected }}</span>
+        <!-- <span>Selected: {{ selected }}</span> -->
     </div>
 </template>

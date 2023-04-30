@@ -106,8 +106,7 @@ export default {
     },
     watch: {
         selected: function (value) {
-            this.$emit('')
-            console.log(value);
+            this.$emit('update', value);
         }
     }
 }
@@ -119,6 +118,6 @@ export default {
             <option v-for="option in options" :value="option[0]" :text="option[1]">
             </option>
         </select>
-        <span>Selected: {{ selected }}</span>
+        <!-- <span>Selected: {{ selected }}</span> -->
     </div>
 </template>
