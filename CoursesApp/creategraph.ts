@@ -4,7 +4,7 @@ import DirectedGraph from 'graphology';
 
 
 
-export default function createGraph(json: JSON, major: string = "all", division: string = "Both", otherDepartments: boolean = true, requiredOnly: bool = false, quarters: Array<string> = ["Winter 2020", "Spring 2020", "Summer 2020", "Fall 2020", "Winter 2021", "Spring 2021", "Summer 2021", "Fall 2021", "Winter 2022", "Spring 2022", "Summer 2022", "Fall 2022", "Winter 2023", "Spring 2023", "Summer 2023"]) : DirectedGraph {    
+export default function createGraph(json: JSON, major: string = "all", division: string = "Both", otherDepartments: boolean = true, requiredOnly: boolean = false, quarters: Array<string> = ["Winter 2020", "Spring 2020", "Summer 2020", "Fall 2020", "Winter 2021", "Spring 2021", "Summer 2021", "Fall 2021", "Winter 2022", "Spring 2022", "Summer 2022", "Fall 2022", "Winter 2023", "Spring 2023", "Summer 2023"]) : DirectedGraph {    
     const graph = new DirectedGraph();
 
     var x = 0;
@@ -143,6 +143,9 @@ export default function createGraph(json: JSON, major: string = "all", division:
                 if ((json[key2].offered && 
                     (major == "all" || json[key2].majors_required_for.includes(major) || (!requiredOnly && json[key2].majors_optional_for.includes(major)))) &&
                     (division == "Both" || (division == "LD" && parseInt(json[key2].number) < 100) || (division == "UD" && parseInt(json[key2].number) >= 100))) {
+                    if (json[key2].subdept != json[key2].dept) {
+                        toInclude = true;
+                    }
                     for (var str2 in json[key2].offered) {
                         if (str2 == str) {
                             toInclude = true;
