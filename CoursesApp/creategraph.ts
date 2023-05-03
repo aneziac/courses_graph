@@ -4,7 +4,7 @@ import DirectedGraph from 'graphology';
 
 
 
-export default function createGraph(json: JSON, major: string = "All", division: string = "Both", otherDepartments: boolean = true, quarters: Array<string> = [""]) : DirectedGraph {
+export default function createGraph(json: JSON, major: string = "all", division: string = "Both", otherDepartments: boolean = true, requiredOnly: boolean = false, quarters: Array<string> = [""]) : DirectedGraph {
     const graph = new DirectedGraph();
 
     if (quarters[0] == "") {
@@ -125,7 +125,7 @@ export default function createGraph(json: JSON, major: string = "All", division:
             }
         }
     }
-    
+
 
 
     // removes all grad courses
@@ -144,12 +144,9 @@ export default function createGraph(json: JSON, major: string = "All", division:
         toInclude = false;
         if (graph.hasNode(key2)) {
             for (var str in quarters) {
-                if ((json[key2].offered && 
+                if ((json[key2].offered &&
                     (major == "all" || json[key2].majors_required_for.includes(major) || (!requiredOnly && json[key2].majors_optional_for.includes(major)))) &&
                     (division == "Both" || (division == "LD" && parseInt(json[key2].number) < 100) || (division == "UD" && parseInt(json[key2].number) >= 100))) {
-                    if (json[key2].subdept != json[key2].dept) {
-                        toInclude = true;
-                    }
                     for (var str2 in json[key2].offered) {
                         if (str2 == str) {
                             toInclude = true;
@@ -210,38 +207,13 @@ export default function createGraph(json: JSON, major: string = "All", division:
         });
     }
 
-
-
-    // remove based on quarters, divisions
-    var toInclude = false;
-    for (var key2 in json) {
-        toInclude = false;
-        if (graph.hasNode(key2)) {
-            for (var str in quarters) {
-                if ((json[key2].offered && major == "All" || json[key2].majors_required_for.includes(major)) &&
-                    (division == "Both" || (division == "LD" && parseInt(json[key2].number) < 100) || (division == "UD" && parseInt(json[key2].number) >= 100))) {
-                    for (var str2 in json[key2].offered) {
-                        if (str2 == str) {
-                            toInclude = true;
-                        }
-                    }
-                }
-            }
-            if (!toInclude) {
-                graph.dropNode(key2);
-                map.delete(key);
-            }
-        }
-    }
-
-
-    // remove nodes w/ no neighbors
-    graph.forEachNode((node) => {
-        if (graph.degree(node) == 0) {
-            // graph.dropNode(node);
-            // map.delete(node);
-        }
-    });
+    // // remove nodes w/ no neighbors
+    // graph.forEachNode((node) => {
+    //     if (graph.degree(node) == 0) {
+    //         // graph.dropNode(node);
+    //         // map.delete(node);
+    //     }
+    // });
 
     // root nodes are red
     graph.forEachNode((node) => {
@@ -277,32 +249,6 @@ export default function createGraph(json: JSON, major: string = "All", division:
     }
 
 
-
-
-    // toInclude = false;
-    // for (var key2 in json) {
-    //     toInclude = false;
-    //     if (graph.hasNode(key2)) {
-    //         for (var str in quarters) {
-    //             if (json[key2].offered) {
-    //                 for (var str2 in json[key2].offered) {
-    //                     if (str2 == str) {
-    //                         toInclude = true;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //         if (!toInclude) {
-    //             graph.dropNode(key2);
-    //             map.delete(key);
-    //         }
-    //     }
-    // }
-
-
-
-
-
     // calculate number of nodes at each height
     const numaty = new Map();
     for (var i = 0; i < 10; i++) {
@@ -313,7 +259,6 @@ export default function createGraph(json: JSON, major: string = "All", division:
             }
         });
     }
-
 
     // assign x-coordinates
     var counter;
@@ -342,37 +287,6 @@ export default function createGraph(json: JSON, major: string = "All", division:
             }
         });
     }
-
-    // graph.forEachNode((node) => {
-    //     var x = node.indexOf(" ");
-    //     if (parseInt(node.substr(x+1)) > 200) {
-    //         graph.dropNode(node);
-    //         map.delete(node);
-    //     }
-    // });
-
-
-
-
-
-
-
-    // graph.forEachNode((key2) => {
-    //     console.log("MATH 2A");
-    //     for (var str in quarters) {
-    //         if (json["MATH 7H"].offered) {
-    //             for (var str2 in json["MATH 7H"].offered) {
-    //                 if (str2 == str) {
-    //                     toInclude = true;
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     if (!toInclude) {
-    //         graph.dropNode(key2);
-    //     }
-    // });
-
 
     return graph;
 }
