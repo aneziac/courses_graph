@@ -4,7 +4,7 @@ import DirectedGraph from 'graphology';
 
 
 
-export default function createGraph(json: JSON, major: string = "All", division: string = "Both", otherDepartments: boolean = true, quarters: Array<string> = [""]) : DirectedGraph {
+export default function createGraph(json: JSON, major: string = "all", division: string = "Both", otherDepartments: boolean = true, requiredOnly: boolean = false, quarters: Array<string> = [""]) : DirectedGraph {
     const graph = new DirectedGraph();
 
     if (quarters[0] == "") {
@@ -207,7 +207,6 @@ export default function createGraph(json: JSON, major: string = "All", division:
         });
     }
 
-
     // // remove nodes w/ no neighbors
     // graph.forEachNode((node) => {
     //     if (graph.degree(node) == 0) {
@@ -260,7 +259,6 @@ export default function createGraph(json: JSON, major: string = "All", division:
             }
         });
     }
-
 
     // assign x-coordinates
     var counter;
