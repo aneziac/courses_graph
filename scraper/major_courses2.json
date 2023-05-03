@@ -1,0 +1,2272 @@
+{
+    "ANTH 2": [
+        [
+            "Anthropology",
+            "Anthropology-Archaeology Emphasis",
+            "Anthropology-Biological Emphasis",
+            "Anthropology-Cultural Emphasis"
+        ],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "ANTH 5": [
+        [
+            "Anthropology",
+            "Anthropology-Archaeology Emphasis",
+            "Anthropology-Biological Emphasis",
+            "Anthropology-Cultural Emphasis"
+        ],
+        []
+    ],
+    "ANTH 3": [
+        [],
+        [
+            "Anthropology",
+            "Anthropology-Archaeology Emphasis",
+            "Anthropology-Biological Emphasis",
+            "Anthropology-Cultural Emphasis"
+        ]
+    ],
+    "ANTH 3SS": [
+        [],
+        [
+            "Anthropology",
+            "Anthropology-Archaeology Emphasis",
+            "Anthropology-Biological Emphasis",
+            "Anthropology-Cultural Emphasis"
+        ]
+    ],
+    "ANTH 9": [
+        [],
+        [
+            "Anthropology",
+            "Anthropology-Archaeology Emphasis",
+            "Anthropology-Biological Emphasis",
+            "Anthropology-Cultural Emphasis"
+        ]
+    ],
+    "ANTH 129": [
+        [],
+        [
+            "Anthropology",
+            "Anthropology-Cultural Emphasis"
+        ]
+    ],
+    "ANTH 182": [
+        [],
+        [
+            "Anthropology",
+            "Anthropology-Archaeology Emphasis"
+        ]
+    ],
+    "EACS 152": [
+        [],
+        [
+            "Anthropology",
+            "Anthropology-Cultural Emphasis"
+        ]
+    ],
+    "PSTAT 5A": [
+        [
+            "Environmental Studies BA"
+        ],
+        [
+            "Anthropology",
+            "Anthropology-Archaeology Emphasis",
+            "Anthropology-Biological Emphasis",
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Biological Sciences BS",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology"
+        ]
+    ],
+    "PSTAT 5LS": [
+        [],
+        [
+            "Anthropology",
+            "Anthropology-Archaeology Emphasis",
+            "Anthropology-Biological Emphasis",
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Biological Sciences BS",
+            "Ecology and Evolution",
+            "Physiology",
+            "Environmental Studies BA"
+        ]
+    ],
+    "ART 1A": [
+        [
+            "Art"
+        ],
+        []
+    ],
+    "ART 1C": [
+        [
+            "Art"
+        ],
+        []
+    ],
+    "ART 125": [
+        [],
+        [
+            "Art"
+        ]
+    ],
+    "ART 126": [
+        [],
+        [
+            "Art"
+        ]
+    ],
+    "ART 130": [
+        [],
+        [
+            "Art"
+        ]
+    ],
+    "RG ST 71": [
+        [],
+        [
+            "Asian American Studies"
+        ]
+    ],
+    "RG ST 79": [
+        [],
+        [
+            "Asian American Studies"
+        ]
+    ],
+    "WRIT 109HU": [
+        [],
+        [
+            "Asian American Studies"
+        ]
+    ],
+    "WRIT 109": [
+        [],
+        [
+            "Asian American Studies"
+        ]
+    ],
+    "AS AM 109HU": [
+        [],
+        [
+            "Asian American Studies"
+        ]
+    ],
+    "AS AM 109SS": [
+        [],
+        [
+            "Asian American Studies"
+        ]
+    ],
+    "MATH 4A": [
+        [
+            "Chemistry BS",
+            "Mathematics BS",
+            "Applied Mathematics",
+            "Mathematics BA",
+            "Computer Science"
+        ],
+        [
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Biological Sciences BS",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology",
+            "Financial Mathematics-Statistics",
+            "Physics BS",
+            "Physics BA"
+        ]
+    ],
+    "MATH 4B": [
+        [
+            "Chemistry BS",
+            "Mathematics BS",
+            "Applied Mathematics",
+            "Mathematics BA",
+            "Computer Science"
+        ],
+        [
+            "Financial Mathematics-Statistics",
+            "Physics BS",
+            "Physics BA"
+        ]
+    ],
+    "MATH 6A": [
+        [
+            "Chemistry BS",
+            "Mathematics BS",
+            "Applied Mathematics",
+            "Computer Science"
+        ],
+        [
+            "Financial Mathematics-Statistics",
+            "Physics BS",
+            "Physics BA"
+        ]
+    ],
+    "PHYS 4L.": [
+        [
+            "Chemistry BS"
+        ],
+        []
+    ],
+    "MATH 2A": [
+        [],
+        [
+            "Chemistry BS",
+            "Economics",
+            "Environmental Studies BA",
+            "Mathematics BS",
+            "Applied Mathematics",
+            "Mathematics BA",
+            "Financial Mathematics-Statistics",
+            "Physics BS",
+            "Physics BA"
+        ]
+    ],
+    "MATH 3A": [
+        ["Computer Science"],
+        [
+            "Chemistry BS",
+            "Economics",
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology",
+            "Environmental Studies BA",
+            "Mathematics BS",
+            "Applied Mathematics",
+            "Mathematics BA",
+            "Financial Mathematics-Statistics",
+            "Physics BS",
+            "Physics BA"
+        ]
+    ],
+    "MATH 2B": [
+        [],
+        [
+            "Chemistry BS",
+            "Economics",
+            "Environmental Studies BA",
+            "Mathematics BS",
+            "Applied Mathematics",
+            "Mathematics BA",
+            "Financial Mathematics-Statistics",
+            "Physics BS",
+            "Physics BA"
+        ]
+    ],
+    "MATH 3B": [
+        ["Computer Science"],
+        [
+            "Chemistry BS",
+            "Economics",
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology",
+            "Environmental Studies BA",
+            "Mathematics BS",
+            "Applied Mathematics",
+            "Mathematics BA",
+            "Financial Mathematics-Statistics",
+            "Physics BS",
+            "Physics BA"
+        ]
+    ],
+    "ECON 1": [
+        [
+            "Economics",
+            "Environmental Studies BA",
+            "Financial Mathematics-Statistics"
+        ],
+        []
+    ],
+    "ECON 2": [
+        [
+            "Economics",
+            "Environmental Studies BA",
+            "Financial Mathematics-Statistics"
+        ],
+        []
+    ],
+    "ECON 10A": [
+        [
+            "Economics",
+            "Financial Mathematics-Statistics"
+        ],
+        []
+    ],
+    "ECON 100B": [
+        [
+            "Economics"
+        ],
+        []
+    ],
+    "ECON 101": [
+        [
+            "Economics"
+        ],
+        []
+    ],
+    "ECON 140A": [
+        [
+            "Economics"
+        ],
+        []
+    ],
+    "ECON 118": [
+        [
+            "Economics"
+        ],
+        []
+    ],
+    "ECON 136A": [
+        [
+            "Economics"
+        ],
+        []
+    ],
+    "ECON 136B": [
+        [
+            "Economics"
+        ],
+        []
+    ],
+    "ECON 136C": [
+        [
+            "Economics"
+        ],
+        []
+    ],
+    "ECON 137A": [
+        [
+            "Economics"
+        ],
+        []
+    ],
+    "ECON 137B": [
+        [
+            "Economics"
+        ],
+        []
+    ],
+    "ECON 138A": [
+        [
+            "Economics"
+        ],
+        []
+    ],
+    "ECON 138B": [
+        [
+            "Economics"
+        ],
+        []
+    ],
+    "ECON 5": [
+        [],
+        [
+            "Economics",
+            "Environmental Studies BA"
+        ]
+    ],
+    "PSTAT 120A": [
+        [
+            "Mathematics BA",
+            "Financial Mathematics-Statistics",
+            "Computer Science"
+        ],
+        [
+            "Economics"
+        ]
+    ],
+    "MATH 34A": [
+        [],
+        [
+            "Economics",
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology",
+            "Environmental Studies BA"
+        ]
+    ],
+    "MATH 34B": [
+        [],
+        [
+            "Economics",
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology",
+            "Environmental Studies BA"
+        ]
+    ],
+    "MCDB 1AL": [
+        [
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Biological Sciences BS",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology"
+        ],
+        []
+    ],
+    "EEMB 3L": [
+        [
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Biological Sciences BS",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology"
+        ],
+        []
+    ],
+    "PHYS 6A": [
+        [
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Biological Sciences BS",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology"
+        ],
+        [
+            "Mathematics BS",
+            "Applied Mathematics",
+            "Mathematics BA"
+        ]
+    ],
+    "PHYS 6B": [
+        [
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Biological Sciences BS",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology"
+        ],
+        []
+    ],
+    "PHYS 6C": [
+        [
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Biological Sciences BS",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology"
+        ],
+        []
+    ],
+    "PHYS 6D": [
+        [
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Biological Sciences BS",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology"
+        ],
+        []
+    ],
+    "PHYS 6E": [
+        [
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Biological Sciences BS",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology"
+        ],
+        []
+    ],
+    "PHYS 6F": [
+        [
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Biological Sciences BS",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology"
+        ],
+        []
+    ],
+    "PHYS 6G": [
+        [
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Biological Sciences BS",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology"
+        ],
+        []
+    ],
+    "PHYS 6H": [
+        [
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Biological Sciences BS",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology"
+        ],
+        []
+    ],
+    "PHYS 6I": [
+        [
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Biological Sciences BS",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology"
+        ],
+        []
+    ],
+    "PHYS 6J": [
+        [
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Biological Sciences BS",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology"
+        ],
+        []
+    ],
+    "PHYS 6K": [
+        [
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Biological Sciences BS",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology"
+        ],
+        []
+    ],
+    "PHYS 6L": [
+        [
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Biological Sciences BS",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology"
+        ],
+        []
+    ],
+    "MCDB 111": [
+        [
+            "Biological Sciences BA"
+        ],
+        [
+            "Physiology"
+        ]
+    ],
+    "EEMB 156": [
+        [
+            "Biological Sciences BA",
+            "Biological Sciences BS",
+            "Physiology",
+            "Zoology"
+        ],
+        []
+    ],
+    "EEMB 157": [
+        [
+            "Biological Sciences BA",
+            "Zoology"
+        ],
+        []
+    ],
+    "EEMB 157B": [
+        [
+            "Biological Sciences BA",
+            "Biological Sciences BS",
+            "Zoology"
+        ],
+        []
+    ],
+    "EEMB 157C": [
+        [
+            "Biological Sciences BA",
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "EEMB 165": [
+        [
+            "Biological Sciences BA",
+            "Biological Sciences BS",
+            "Zoology"
+        ],
+        [
+            "Physiology"
+        ]
+    ],
+    "MCDB 131": [
+        [
+            "Biological Sciences BA",
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "MCDB 139": [
+        [
+            "Biological Sciences BA",
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "EEMB 36": [
+        [
+            "Biological Sciences BA"
+        ],
+        []
+    ],
+    "MCDB 1BL": [
+        [],
+        [
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Biological Sciences BS",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology"
+        ]
+    ],
+    "EEMB 2L": [
+        [],
+        [
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Biological Sciences BS",
+            "Ecology and Evolution",
+            "Physiology",
+            "Zoology"
+        ]
+    ],
+    "MCDB 101A": [
+        [
+            "Ecology and Evolution"
+        ],
+        [
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Zoology"
+        ]
+    ],
+    "MCDB 101B": [
+        [],
+        [
+            "Biological Sciences BA"
+        ]
+    ],
+    "EEMB 129": [
+        [
+            "Physiology"
+        ],
+        [
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Zoology"
+        ]
+    ],
+    "MCDB 151": [
+        [
+            "Biological Sciences BS"
+        ],
+        [
+            "Biological Sciences BA",
+            "Physiology"
+        ]
+    ],
+    "EEMB 143": [
+        [
+            "Biological Sciences BS",
+            "Zoology"
+        ],
+        [
+            "Biological Sciences BA",
+            "Aquatic Biology",
+            "Physiology"
+        ]
+    ],
+    "EEMB 120": [
+        [
+            "Aquatic Biology",
+            "Physiology",
+            "Zoology"
+        ],
+        []
+    ],
+    "EEMB 146": [
+        [
+            "Aquatic Biology",
+            "Physiology",
+            "Zoology"
+        ],
+        []
+    ],
+    "EEMB 142A": [
+        [
+            "Aquatic Biology"
+        ],
+        []
+    ],
+    "EEMB 142B": [
+        [
+            "Aquatic Biology"
+        ],
+        []
+    ],
+    "EEMB 142C": [
+        [
+            "Aquatic Biology"
+        ],
+        []
+    ],
+    "EEMB 131": [
+        [],
+        [
+            "Aquatic Biology",
+            "Physiology",
+            "Zoology"
+        ]
+    ],
+    "EEMB 121": [
+        [],
+        [
+            "Aquatic Biology",
+            "Physiology",
+            "Zoology"
+        ]
+    ],
+    "EEMB 153": [
+        [],
+        [
+            "Aquatic Biology"
+        ]
+    ],
+    "EEMB 158": [
+        [],
+        [
+            "Aquatic Biology"
+        ]
+    ],
+    "EARTH 164B": [
+        [],
+        [
+            "Aquatic Biology"
+        ]
+    ],
+    "EARTH 168": [
+        [],
+        [
+            "Aquatic Biology",
+            "Aquatic Biology"
+        ]
+    ],
+    "GEOG 104": [
+        [],
+        [
+            "Aquatic Biology"
+        ]
+    ],
+    "GEOG 112": [
+        [],
+        [
+            "Aquatic Biology"
+        ]
+    ],
+    "GEOG 116": [
+        [],
+        [
+            "Aquatic Biology"
+        ]
+    ],
+    "GEOG 144": [
+        [],
+        [
+            "Aquatic Biology"
+        ]
+    ],
+    "GEOG 162": [
+        [],
+        [
+            "Aquatic Biology"
+        ]
+    ],
+    "GEOG 163": [
+        [],
+        [
+            "Aquatic Biology"
+        ]
+    ],
+    "GEOG 165": [
+        [],
+        [
+            "Aquatic Biology"
+        ]
+    ],
+    "EEMB 179": [
+        [
+            "Ecology and Evolution"
+        ],
+        [
+            "Aquatic Biology"
+        ]
+    ],
+    "EEMB 130* (EEMB concentration).": [
+        [
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "EEMB 157A": [
+        [
+            "Biological Sciences BS",
+            "Physiology"
+        ],
+        []
+    ],
+    "MCDB 103": [
+        [
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "MCDB 112": [
+        [
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "MCDB 118": [
+        [
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "MCDB 133": [
+        [
+            "Biological Sciences BS",
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "MCDB 135": [
+        [
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "MCDB 146": [
+        [
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "MCDB 152": [
+        [
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "MCDB 153": [
+        [
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "MCDB 110": [
+        [
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "MCDB 126B": [
+        [
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "MCDB 126C": [
+        [
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "MCDB 134": [
+        [
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "EEMB 107L": [
+        [
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "EEMB 127L": [
+        [
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "EEMB 142AL": [
+        [
+            "Biological Sciences BS",
+            "Ecology and Evolution"
+        ],
+        []
+    ],
+    "EEMB 142BL": [
+        [
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "EEMB 142CL": [
+        [
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "EEMB 170": [
+        [
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "EEMB 48": [
+        [
+            "Biological Sciences BS"
+        ],
+        []
+    ],
+    "MCDB 108A": [
+        [],
+        [
+            "Biological Sciences BS",
+            "Biological Sciences BS"
+        ]
+    ],
+    "EARTH 141": [
+        [],
+        [
+            "Biological Sciences BS",
+            "Ecology and Evolution"
+        ]
+    ],
+    "EARTH 138": [
+        [],
+        [
+            "Biological Sciences BS",
+            "Ecology and Evolution"
+        ]
+    ],
+    "EARTH 180": [
+        [],
+        [
+            "Biological Sciences BS",
+            "Ecology and Evolution"
+        ]
+    ],
+    "EEMB 174": [
+        [
+            "Ecology and Evolution"
+        ],
+        []
+    ],
+    "EEMB 180": [
+        [
+            "Ecology and Evolution"
+        ],
+        []
+    ],
+    "MCDB 170": [
+        [
+            "Ecology and Evolution"
+        ],
+        []
+    ],
+    "EARTH 111": [
+        [],
+        [
+            "Ecology and Evolution"
+        ]
+    ],
+    "EARTH 137": [
+        [],
+        [
+            "Ecology and Evolution"
+        ]
+    ],
+    "EARTH 111L": [
+        [],
+        [
+            "Ecology and Evolution"
+        ]
+    ],
+    "EARTH 140": [
+        [],
+        [
+            "Ecology and Evolution"
+        ]
+    ],
+    "EARTH 144": [
+        [],
+        [
+            "Ecology and Evolution"
+        ]
+    ],
+    "EARTH 144L": [
+        [],
+        [
+            "Ecology and Evolution"
+        ]
+    ],
+    "EARTH 150A": [
+        [],
+        [
+            "Ecology and Evolution"
+        ]
+    ],
+    "EARTH 163": [
+        [],
+        [
+            "Ecology and Evolution"
+        ]
+    ],
+    "EEMB 154": [
+        [],
+        [
+            "Physiology"
+        ]
+    ],
+    "CHEM 142A": [
+        [],
+        [
+            "Physiology"
+        ]
+    ],
+    "CHEM 142B": [
+        [],
+        [
+            "Physiology"
+        ]
+    ],
+    "EEMB 163": [
+        [],
+        [
+            "Physiology"
+        ]
+    ],
+    "EEMB 112": [
+        [
+            "Zoology"
+        ],
+        []
+    ],
+    "EEMB 113L": [
+        [
+            "Zoology"
+        ],
+        []
+    ],
+    "EEMB 116": [
+        [
+            "Zoology"
+        ],
+        []
+    ],
+    "EEMB 138": [
+        [
+            "Zoology"
+        ],
+        []
+    ],
+    "EEMB 102": [
+        [
+            "Zoology"
+        ],
+        []
+    ],
+    "ENGL 10": [
+        [
+            "English"
+        ],
+        []
+    ],
+    "ENGL 15": [
+        [
+            "English"
+        ],
+        []
+    ],
+    "ENGL 18": [
+        [
+            "English"
+        ],
+        []
+    ],
+    "ENGL 101": [
+        [
+            "English"
+        ],
+        []
+    ],
+    "ENGL 102": [
+        [
+            "English"
+        ],
+        []
+    ],
+    "ENGL 197": [
+        [
+            "English"
+        ],
+        []
+    ],
+    "ENGL 103A": [
+        [],
+        [
+            "English"
+        ]
+    ],
+    "ENGL 103B": [
+        [],
+        [
+            "English"
+        ]
+    ],
+    "ENGL 104A": [
+        [],
+        [
+            "English"
+        ]
+    ],
+    "ENGL 104B": [
+        [],
+        [
+            "English"
+        ]
+    ],
+    "ENV S 40": [
+        [
+            "Environmental Studies BA"
+        ],
+        []
+    ],
+    "EARTH 2": [
+        [
+            "Environmental Studies BA"
+        ],
+        []
+    ],
+    "EARTH 4": [
+        [
+            "Environmental Studies BA"
+        ],
+        []
+    ],
+    "GEOG 4": [
+        [
+            "Environmental Studies BA"
+        ],
+        []
+    ],
+    "HIST 5": [
+        [
+            "Environmental Studies BA"
+        ],
+        [
+            "History of Public Policy-Law"
+        ]
+    ],
+    "POL S 7": [
+        [
+            "Environmental Studies BA"
+        ],
+        []
+    ],
+    "POL S 12": [
+        [
+            "Environmental Studies BA"
+        ],
+        []
+    ],
+    "ENV S 190": [
+        [
+            "Environmental Studies BA"
+        ],
+        []
+    ],
+    "POL S 175": [
+        [
+            "Environmental Studies BA"
+        ],
+        []
+    ],
+    "POL S 176": [
+        [
+            "Environmental Studies BA"
+        ],
+        []
+    ],
+    "SOC 134CJ": [
+        [
+            "Environmental Studies BA"
+        ],
+        []
+    ],
+    "SOC 134EC": [
+        [
+            "Environmental Studies BA"
+        ],
+        []
+    ],
+    "ENV S 60": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "MCDB 1LL plus EEMB ": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "MCDB 2": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "ECON 9": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "ENV S 30": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "EARTH 20": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "GEOG 3": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "BL ST 4": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "FEMST 50": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "LING 5": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "LING 0": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "PHIL 4": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "POL S 1": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "GEOG 5": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "GLOBL 1": [
+        [],
+        [
+            "Environmental Studies BA",
+            "Environmental Studies BA"
+        ]
+    ],
+    "GLOBL 2": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "RG ST 1": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "RG ST 14": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "SOC 1": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "HIST 7": [
+        [],
+        [
+            "Environmental Studies BA",
+            "History of Public Policy-Law"
+        ]
+    ],
+    "POL S 6": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "ENV S 25": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "ENV S 115": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "ENV S 117": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "ENV S 163A": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "ENV S 116": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "ENV S 135A": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "ENV S 155": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "POL S 177": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "RG ST 193": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "SOC 130SD": [
+        [],
+        [
+            "Environmental Studies BA"
+        ]
+    ],
+    "FR 100": [
+        [
+            "French"
+        ],
+        []
+    ],
+    "FR 101A": [
+        [
+            "French"
+        ],
+        []
+    ],
+    "FR 101B": [
+        [
+            "French"
+        ],
+        []
+    ],
+    "FR 101C": [
+        [
+            "French"
+        ],
+        []
+    ],
+    "FR 1": [
+        [],
+        [
+            "French"
+        ]
+    ],
+    "FR 2": [
+        [],
+        [
+            "French"
+        ]
+    ],
+    "FR 3": [
+        [],
+        [
+            "French"
+        ]
+    ],
+    "FR 4": [
+        [],
+        [
+            "French"
+        ]
+    ],
+    "FR 5": [
+        [],
+        [
+            "French"
+        ]
+    ],
+    "FR 6": [
+        [],
+        [
+            "French"
+        ]
+    ],
+    "FR 197": [
+        [],
+        [
+            "French"
+        ]
+    ],
+    "FR 198": [
+        [],
+        [
+            "French"
+        ]
+    ],
+    "ITAL 20X": [
+        [
+            "Italian Studies"
+        ],
+        []
+    ],
+    "ITAL 109": [
+        [
+            "Italian Studies"
+        ],
+        []
+    ],
+    "ITAL 1": [
+        [],
+        [
+            "Italian Studies"
+        ]
+    ],
+    "ITAL 2": [
+        [],
+        [
+            "Italian Studies"
+        ]
+    ],
+    "ITAL 3": [
+        [],
+        [
+            "Italian Studies"
+        ]
+    ],
+    "ITAL 4": [
+        [],
+        [
+            "Italian Studies"
+        ]
+    ],
+    "ITAL 5": [
+        [],
+        [
+            "Italian Studies"
+        ]
+    ],
+    "ITAL 6": [
+        [],
+        [
+            "Italian Studies"
+        ]
+    ],
+    "ITAL 101": [
+        [],
+        [
+            "Italian Studies"
+        ]
+    ],
+    "ITAL 102": [
+        [],
+        [
+            "Italian Studies"
+        ]
+    ],
+    "ITAL 103": [
+        [],
+        [
+            "Italian Studies"
+        ]
+    ],
+    "ITAL 119A": [
+        [],
+        [
+            "Italian Studies"
+        ]
+    ],
+    "ITAL 119B": [
+        [],
+        [
+            "Italian Studies"
+        ]
+    ],
+    "HIST 9": [
+        [
+            "History",
+            "History of Public Policy-Law"
+        ],
+        []
+    ],
+    "HIST 2A": [
+        [],
+        [
+            "History",
+            "History",
+            "History of Public Policy-Law",
+            "History of Public Policy-Law"
+        ]
+    ],
+    "HIST 4A": [
+        [],
+        [
+            "History",
+            "History",
+            "History of Public Policy-Law",
+            "History of Public Policy-Law"
+        ]
+    ],
+    "HIST 2B": [
+        [],
+        [
+            "History",
+            "History of Public Policy-Law"
+        ]
+    ],
+    "HIST 2C": [
+        [],
+        [
+            "History",
+            "History of Public Policy-Law"
+        ]
+    ],
+    "HIST 4B": [
+        [],
+        [
+            "History",
+            "History of Public Policy-Law"
+        ]
+    ],
+    "HIST 4C": [
+        [],
+        [
+            "History",
+            "History of Public Policy-Law"
+        ]
+    ],
+    "HIST 17A": [
+        [],
+        [
+            "History",
+            "History of Public Policy-Law"
+        ]
+    ],
+    "HIST 17B": [
+        [],
+        [
+            "History",
+            "History of Public Policy-Law"
+        ]
+    ],
+    "HIST 17": [
+        [],
+        [
+            "History"
+        ]
+    ],
+    "HIST 17C": [
+        [],
+        [
+            "History of Public Policy-Law"
+        ]
+    ],
+    "HIST 195IA": [
+        [],
+        [
+            "History of Public Policy-Law"
+        ]
+    ],
+    "HIST 195IB": [
+        [],
+        [
+            "History of Public Policy-Law"
+        ]
+    ],
+    "HIST 8": [
+        [],
+        [
+            "History of Public Policy-Law"
+        ]
+    ],
+    "MATH 6B": [
+        [
+            "Mathematics BS",
+            "Applied Mathematics"
+        ],
+        [
+            "Financial Mathematics-Statistics",
+            "Physics BS",
+            "Physics BA"
+        ]
+    ],
+    "MATH 8": [
+        [
+            "Mathematics BS",
+            "Applied Mathematics",
+            "Mathematics BA"
+        ],
+        [
+            "Financial Mathematics-Statistics"
+        ]
+    ],
+    "MATH 108A": [
+        [
+            "Mathematics BS",
+            "Applied Mathematics",
+            "Mathematics BA"
+        ],
+        []
+    ],
+    "MATH 108B": [
+        [
+            "Mathematics BS",
+            "Applied Mathematics"
+        ],
+        []
+    ],
+    "MATH 111A": [
+        [
+            "Mathematics BS"
+        ],
+        []
+    ],
+    "MATH 111B": [
+        [
+            "Mathematics BS"
+        ],
+        []
+    ],
+    "MATH 117": [
+        [
+            "Mathematics BS",
+            "Applied Mathematics",
+            "Financial Mathematics-Statistics"
+        ],
+        []
+    ],
+    "MATH 118A": [
+        [
+            "Mathematics BS"
+        ],
+        [
+            "Applied Mathematics"
+        ]
+    ],
+    "MATH 118B": [
+        [
+            "Mathematics BS"
+        ],
+        [
+            "Applied Mathematics"
+        ]
+    ],
+    "MATH 122A": [
+        [
+            "Mathematics BS"
+        ],
+        []
+    ],
+    "CMPSC 8": [
+        ["Computer Science"],
+        [
+            "Mathematics BS",
+            "Applied Mathematics",
+            "Mathematics BA",
+            "Financial Mathematics-Statistics"
+        ]
+    ],
+    "CMPSC 9": [
+        [],
+        [
+            "Mathematics BS",
+            "Applied Mathematics",
+            "Mathematics BA",
+            "Financial Mathematics-Statistics"
+        ]
+    ],
+    "CMPSC 16": [
+        ["Computer Science"],
+        [
+            "Mathematics BS",
+            "Applied Mathematics",
+            "Mathematics BA",
+            "Financial Mathematics-Statistics"
+        ]
+    ],
+    "CMPSC 24": [
+        ["Computer Science"],
+        [
+            
+        ]
+    ],
+    "CMPSC 32": [
+        ["Computer Science"],
+        [
+            
+        ]
+    ],
+    "CMPSC 40": [
+        ["Computer Science"],
+        [
+            
+        ]
+    ],
+    "CMPSC 64": [
+        ["Computer Science"],
+        [
+            
+        ]
+    ],
+    "CMPSC 111": [
+        [],
+        [
+            "Computer Science"
+        ]
+    ],
+    "CMPSC 140": [
+        [],
+        [
+            "Computer Science"
+        ]
+    ],
+    "CMPSC 130A": [
+        ["Computer Science"],
+        [
+            
+        ]
+    ],
+    "CMPSC 130B": [
+        ["Computer Science"],
+        [
+            
+        ]
+    ],
+    "CMPSC 138": [
+        ["Computer Science"],
+        [
+            
+        ]
+    ],
+    "CMPSC 148": [
+        [],
+        [
+            "Computer Science"
+        ]
+    ],
+    "CMPSC 156": [
+        [],
+        [
+            "Computer Science"
+        ]
+    ],
+    "CMPSC 172": [
+        [],
+        [
+            "Computer Science"
+        ]
+    ],
+    "CMPSC 154": [
+        ["Computer Science"],
+        [
+            
+        ]
+    ],
+    "CMPSC 160": [
+        [],
+        [
+            "Computer Science"
+        ]
+    ],
+    "CMPSC 162": [
+        [],
+        [
+            "Computer Science"
+        ]
+    ],
+    "CMPSC 170": [
+        ["Computer Science"],
+        [
+            
+        ]
+    ],
+    "ENGR 3": [
+        [],
+        [
+            "Mathematics BS",
+            "Applied Mathematics",
+            "Mathematics BA",
+            "Financial Mathematics-Statistics"
+        ]
+    ],
+    "ENGR 101": [
+        ["Computer Science"],
+        [
+            
+        ]
+    ],
+    "PHYS 1": [
+        ["Computer Science"],
+        [
+            "Mathematics BS",
+            "Applied Mathematics",
+            "Mathematics BA"
+        ]
+    ],
+    "PHYS 2": [
+        ["Computer Science"],
+        [
+            
+        ]
+    ],
+    "PHYS 3": [
+        ["Computer Science"],
+        [
+            
+        ]
+    ],
+    "PHYS 3L": [
+        ["Computer Science"],
+        [
+            
+        ]
+    ],
+    "PHYS 21": [
+        [],
+        [
+            "Mathematics BS",
+            "Applied Mathematics",
+            "Mathematics BA"
+        ]
+    ],
+    "MATH 111C": [
+        [],
+        [
+            "Mathematics BS"
+        ]
+    ],
+    "MATH 118C": [
+        [],
+        [
+            "Mathematics BS",
+            "Applied Mathematics"
+        ]
+    ],
+    "MATH 145": [
+        [],
+        [
+            "Mathematics BS"
+        ]
+    ],
+    "MATH 147A": [
+        [],
+        [
+            "Mathematics BS"
+        ]
+    ],
+    "MATH 104A": [
+        [
+            "Applied Mathematics",
+            "Mathematics BA",
+            "Financial Mathematics-Statistics"
+        ],
+        []
+    ],
+    "MATH 104B": [
+        [
+            "Applied Mathematics",
+            "Mathematics BA",
+            "Financial Mathematics-Statistics"
+        ],
+        []
+    ],
+    "MATH 119A": [
+        [],
+        [
+            "Applied Mathematics"
+        ]
+    ],
+    "MATH 119B": [
+        [],
+        [
+            "Applied Mathematics"
+        ]
+    ],
+    "MATH 124A": [
+        [],
+        [
+            "Applied Mathematics"
+        ]
+    ],
+    "MATH 124B": [
+        [],
+        [
+            "Applied Mathematics"
+        ]
+    ],
+    "MATH 104C": [
+        [
+            "Financial Mathematics-Statistics"
+        ],
+        [
+            "Applied Mathematics"
+        ]
+    ],
+    "MATH 108C": [
+        [],
+        [
+            "Applied Mathematics"
+        ]
+    ],
+    "MATH 132A": [
+        [],
+        [
+            "Applied Mathematics"
+        ]
+    ],
+    "MATH 137A": [
+        [],
+        [
+            "Applied Mathematics"
+        ]
+    ],
+    "MATH 101A": [
+        [
+            "Mathematics BA"
+        ],
+        []
+    ],
+    "MATH 101B": [
+        [
+            "Mathematics BA"
+        ],
+        []
+    ],
+    "MATH 102A": [
+        [
+            "Mathematics BA"
+        ],
+        []
+    ],
+    "MATH 102B": [
+        [
+            "Mathematics BA"
+        ],
+        []
+    ],
+    "PSTAT 120B": [
+        [
+            "Mathematics BA",
+            "Financial Mathematics-Statistics",
+            "Computer Science"
+        ],
+        []
+    ],
+    "MATH 1": [
+        [],
+        [
+            "Mathematics BA"
+        ]
+    ],
+    "MATH 82": [
+        [],
+        [
+            "Mathematics BA"
+        ]
+    ],
+    "PSTAT 10": [
+        [
+            "Financial Mathematics-Statistics"
+        ],
+        [
+            "Physics BS",
+            "Physics BA"
+        ]
+    ],
+    "PSTAT 126": [
+        [
+            "Financial Mathematics-Statistics"
+        ],
+        []
+    ],
+    "PSTAT 160A": [
+        [
+            "Financial Mathematics-Statistics"
+        ],
+        []
+    ],
+    "PSTAT 160B": [
+        [
+            "Financial Mathematics-Statistics"
+        ],
+        []
+    ],
+    "PSTAT 170": [
+        [
+            "Financial Mathematics-Statistics"
+        ],
+        []
+    ],
+    "PSTAT 120C": [
+        [
+            "Financial Mathematics-Statistics"
+        ],
+        []
+    ],
+    "PSTAT 130": [
+        [
+            "Financial Mathematics-Statistics"
+        ],
+        []
+    ],
+    "PSTAT 131": [
+        [
+            "Financial Mathematics-Statistics"
+        ],
+        []
+    ],
+    "PSTAT 132": [
+        [
+            "Financial Mathematics-Statistics"
+        ],
+        []
+    ],
+    "PSTAT 134": [
+        [
+            "Financial Mathematics-Statistics"
+        ],
+        []
+    ],
+    "PSTAT 135": [
+        [
+            "Financial Mathematics-Statistics"
+        ],
+        []
+    ],
+    "PSTAT 171": [
+        [
+            "Financial Mathematics-Statistics"
+        ],
+        []
+    ],
+    "PSTAT 173": [
+        [
+            "Financial Mathematics-Statistics"
+        ],
+        []
+    ],
+    "PSTAT 174": [
+        [
+            "Financial Mathematics-Statistics"
+        ],
+        []
+    ],
+    "PSTAT 176": [
+        [
+            "Financial Mathematics-Statistics"
+        ],
+        []
+    ],
+    "PSTAT 8": [
+        [],
+        [
+            "Financial Mathematics-Statistics"
+        ]
+    ],
+    "PHYS 29": [
+        [
+            "Physics BS",
+            "Physics BA"
+        ],
+        []
+    ],
+    "PHYS 100A": [
+        [
+            "Physics BS"
+        ],
+        []
+    ],
+    "PHYS 103": [
+        [
+            "Physics BS"
+        ],
+        []
+    ],
+    "PHYS 104": [
+        [
+            "Physics BS"
+        ],
+        []
+    ],
+    "PHYS 110A": [
+        [
+            "Physics BS"
+        ],
+        []
+    ],
+    "PHYS 110B": [
+        [
+            "Physics BS"
+        ],
+        []
+    ],
+    "PHYS 115A": [
+        [
+            "Physics BS"
+        ],
+        []
+    ],
+    "PHYS 119A": [
+        [
+            "Physics BS"
+        ],
+        []
+    ],
+    "PHYS 20AL": [
+        [],
+        [
+            "Physics BS",
+            "Physics BA"
+        ]
+    ],
+    "PHYS 13A": [
+        [],
+        [
+            "Physics BS",
+            "Physics BA"
+        ]
+    ],
+    "EEMB 22": [
+        [],
+        [
+            "Physics BS",
+            "Physics BA"
+        ]
+    ],
+    "MCDB 20": [
+        [],
+        [
+            "Physics BS",
+            "Physics BA"
+        ]
+    ],
+    "PHYS 127AL": [
+        [
+            "Physics BA"
+        ],
+        []
+    ],
+    "PHYS 127BL": [
+        [
+            "Physics BA"
+        ],
+        []
+    ],
+    "PHYS 128AL": [
+        [
+            "Physics BA"
+        ],
+        []
+    ],
+    "PHYS 129L": [
+        [
+            "Physics BA"
+        ],
+        []
+    ],
+    "PHYS 134L": [
+        [
+            "Physics BA"
+        ],
+        []
+    ]
+}
