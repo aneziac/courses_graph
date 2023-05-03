@@ -1,27 +1,84 @@
 <script setup lang="ts">
 import { nextTick, ref } from 'vue'
-import Graph from 'graphology'
 import Sigma from 'sigma'
 import createGraph from "../creategraph";
-import local_json from "../data/math.json";
+import loadJSON from "./load_json";
+import DeptDropdown from './components/DeptDropdown.vue'
+import DivisionDropdown from './components/DivisionDropdown.vue';
+import MajorDropdown from './components/MajorDropdown.vue';
+import QuarterDropdown from './components/QuarterDropdown.vue';
 
 const container = ref()
-const graph = createGraph(local_json)
-let sigma: Sigma
+
+let json = loadJSON();
+let graph = createGraph(json);
+let sigma: Sigma;
+
+let dept: string;
+let division: string;
+let major: string;
+let quarter: Array<string>;
+
 nextTick(() => {
-  sigma = new Sigma(graph, container.value as HTMLElement)
+    sigma = new Sigma(graph, container.value as HTMLElement);
 })
 
+function update() {
+    json = loadJSON(dept);
+    graph = createGraph(json, major, division, true, quarter);
+    sigma.setGraph(graph);
+}
+
+function setDept(value) {
+    dept = value;
+    update();
+}
+
+function setDivision(value) {
+    division = value;
+    update();
+}
+
+function setMajor(value) {
+    major = value;
+    update();
+}
+
+function setQuarter(value) {
+    quarter = value;
+    update();
+}
 </script>
 
 <template>
-  <div ref="container" class="container" />
+  <h1>UCSB Course Prerequisite Graph</h1>
+  <div ref="container" class="container" ></div>
+  <div class="ui-bar">
+    <DeptDropdown @update="setDept" />
+    <QuarterDropdown @update="setQuarter" />
+    <MajorDropdown @update="setMajor" />
+    <DivisionDropdown @update="setDivision" />
+  </div>
 </template>
 
 <style>
 .container {
   position: fixed;
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
+  overflow: hidden;
+  /* background-color: seashell; */
+}
+.ui-bar {
+    position: absolute;
+    margin: auto;
+    top: 80vh;
+    width: 95vw;
+    height: 20vh;
+}
+h1 {
+    color:brown;
+    font-family: Courier New;
+    padding-left:20px;
 }
 </style>

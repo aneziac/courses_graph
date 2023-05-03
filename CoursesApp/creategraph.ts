@@ -4,8 +4,12 @@ import DirectedGraph from 'graphology';
 
 
 
-export default function createGraph(json: JSON, major: string = "all", division: string = "Both", otherDepartments: boolean = true, requiredOnly: boolean = false, quarters: Array<string> = ["Winter 2020", "Spring 2020", "Summer 2020", "Fall 2020", "Winter 2021", "Spring 2021", "Summer 2021", "Fall 2021", "Winter 2022", "Spring 2022", "Summer 2022", "Fall 2022", "Winter 2023", "Spring 2023", "Summer 2023"]) : DirectedGraph {    
+export default function createGraph(json: JSON, major: string = "All", division: string = "Both", otherDepartments: boolean = true, quarters: Array<string> = [""]) : DirectedGraph {
     const graph = new DirectedGraph();
+
+    if (quarters[0] == "") {
+        quarters = ["Winter 2020", "Spring 2020", "Summer 2020", "Fall 2020", "Winter 2021", "Spring 2021", "Summer 2021", "Fall 2021", "Winter 2022", "Spring 2022", "Summer 2022", "Fall 2022", "Winter 2023", "Spring 2023", "Summer 2023"];
+    }
 
     var x = 0;
     var i = 0;
@@ -74,7 +78,7 @@ export default function createGraph(json: JSON, major: string = "all", division:
                             }
                             currColor = (currColor + 1) % colors.length;
                         }
-                        
+
                     }
                     else if (graph.hasNode(json[key].prereqs[i][j])) {
                         if (j + 1 != json[key].prereqs[i].length) {
@@ -115,7 +119,7 @@ export default function createGraph(json: JSON, major: string = "all", division:
                             }
                             currColor = (currColor + 1) % colors.length;
                         }
-                        
+
                     }
                 }
             }
@@ -198,8 +202,8 @@ export default function createGraph(json: JSON, major: string = "all", division:
                     if (map.get(prereq) + 1 > max) {
                         max = map.get(prereq) + 1;
                     }
-                }); 
-                
+                });
+
                 map.set(node, max);
                 count++;
             }
@@ -207,13 +211,37 @@ export default function createGraph(json: JSON, major: string = "all", division:
     }
 
 
-    // // remove nodes w/ no neighbors
-    // graph.forEachNode((node) => {
-    //     if (graph.degree(node) == 0) {
-    //         // graph.dropNode(node);
-    //         // map.delete(node);
-    //     }
-    // });
+
+    // remove based on quarters, divisions
+    var toInclude = false;
+    for (var key2 in json) {
+        toInclude = false;
+        if (graph.hasNode(key2)) {
+            for (var str in quarters) {
+                if ((json[key2].offered && major == "All" || json[key2].majors_required_for.includes(major)) &&
+                    (division == "Both" || (division == "LD" && parseInt(json[key2].number) < 100) || (division == "UD" && parseInt(json[key2].number) >= 100))) {
+                    for (var str2 in json[key2].offered) {
+                        if (str2 == str) {
+                            toInclude = true;
+                        }
+                    }
+                }
+            }
+            if (!toInclude) {
+                graph.dropNode(key2);
+                map.delete(key);
+            }
+        }
+    }
+
+
+    // remove nodes w/ no neighbors
+    graph.forEachNode((node) => {
+        if (graph.degree(node) == 0) {
+            // graph.dropNode(node);
+            // map.delete(node);
+        }
+    });
 
     // root nodes are red
     graph.forEachNode((node) => {
@@ -247,6 +275,32 @@ export default function createGraph(json: JSON, major: string = "all", division:
             graph.setNodeAttribute(key7, "color", "purple");
         }
     }
+
+
+
+
+    // toInclude = false;
+    // for (var key2 in json) {
+    //     toInclude = false;
+    //     if (graph.hasNode(key2)) {
+    //         for (var str in quarters) {
+    //             if (json[key2].offered) {
+    //                 for (var str2 in json[key2].offered) {
+    //                     if (str2 == str) {
+    //                         toInclude = true;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //         if (!toInclude) {
+    //             graph.dropNode(key2);
+    //             map.delete(key);
+    //         }
+    //     }
+    // }
+
+
+
 
 
     // calculate number of nodes at each height
@@ -288,6 +342,37 @@ export default function createGraph(json: JSON, major: string = "all", division:
             }
         });
     }
+
+    // graph.forEachNode((node) => {
+    //     var x = node.indexOf(" ");
+    //     if (parseInt(node.substr(x+1)) > 200) {
+    //         graph.dropNode(node);
+    //         map.delete(node);
+    //     }
+    // });
+
+
+
+
+
+
+
+    // graph.forEachNode((key2) => {
+    //     console.log("MATH 2A");
+    //     for (var str in quarters) {
+    //         if (json["MATH 7H"].offered) {
+    //             for (var str2 in json["MATH 7H"].offered) {
+    //                 if (str2 == str) {
+    //                     toInclude = true;
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     if (!toInclude) {
+    //         graph.dropNode(key2);
+    //     }
+    // });
+
 
     return graph;
 }
