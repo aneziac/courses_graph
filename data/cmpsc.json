@@ -1,0 +1,2946 @@
+{
+    "CMPSC 1": {
+        "title": "Seminar on the Field of Computer Science",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "1",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "",
+        "units": "1",
+        "description": "Overviews the potential of, and opportunities available from, the field of computer science. Topics include an overview of how computers work and the interesting ways in which computers can be applied to solve important and high-impact technological, social, and cutting-edge research problems.",
+        "recommended_prep": "",
+        "professor": "FRANKLIN",
+        "college": "COE",
+        "offered": [
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 2": {
+        "title": "Computational Thinking for Scientists",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "2",
+        "prereqs": [
+            [
+                "MATH 4A"
+            ]
+        ],
+        "prereq_description": "Math 4A with a grade of C or better.",
+        "comments": "",
+        "units": "4",
+        "description": "Introduction to the central concepts of computer science as they apply to a wide variety of human endeavors, including natural and physical sciences. Topics that interrelate central ideas from algorithms, performance and complexity, data structures, concurrency, languages and abstractions will be studied.",
+        "recommended_prep": "",
+        "professor": "EGECIOGLU",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 4": {
+        "title": "Computer Science Boot Camp",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "4",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "",
+        "units": "4",
+        "description": "An introduction to computational thinking, computing, data management, and problem solving using computers, for non-majors. Topics include coding basics, representing code and data using a computer, and applications of computing that are important to society.",
+        "recommended_prep": "",
+        "professor": "KOC",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 5A": {
+        "title": "",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "5A",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "Not open for credit to students who have completed Computer Science 8, Computer Science 16, Engineering 3, ECE 3, or equivalent (including AP CS A with a score of 4 or higher).",
+        "units": "4",
+        "description": "Introduction to data science methods and Python programming language for students with little to no experience in the subjects. Topics include foundational programming concepts, problem-solving strategies and code design, and data science concepts as table operations, exploratory data analysis, basic probability.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 5B": {
+        "title": "",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "5B",
+        "prereqs": [
+            [
+                "CMPSC 5A",
+                "CMPSC 8",
+                "ECE 3"
+            ]
+        ],
+        "prereq_description": "Computer Science 5A or Computer Science 8 or ECE 3 with a grade of C or better.",
+        "comments": "",
+        "units": "4",
+        "description": "Students explore the data science lifecycle, including question formulation, data collection and cleaning, exploratory data analysis and visualization, statistical inference and prediction, and decision-making. The course focus is on transforming and analyzing data; machine learning methods including regression, classification and clustering; principles behind data visualizations; concepts of measurement error and prediction; and techniques for scalable data processing.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 8": {
+        "title": "Introduction to Computer Science",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "8",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "Not open for credit to students who have completed Computer Science 16 or Engineering 3 or ECE 3.",
+        "units": "4",
+        "description": "Introduction to computer program development for students with little to no programming experience. Basic programming concepts, variables and expressions, data and control structures, algorithms, debugging, program design, and documentation.",
+        "recommended_prep": "",
+        "professor": "MIRZA",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Summer 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Summer 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Summer 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023",
+            "Summer 2023"
+        ],
+        "majors_required_for": [
+            "Computer Science"
+        ],
+        "majors_optional_for": [
+            "Mathematics BS",
+            "Applied Mathematics",
+            "Mathematics BA",
+            "Financial Mathematics-Statistics"
+        ],
+        "general_education_fields": [
+            "C",
+            "QNT"
+        ]
+    },
+    "CMPSC 9": {
+        "title": "Intermediate Python Programming",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "9",
+        "prereqs": [
+            [
+                "CMPSC 8",
+                "ENGR 3"
+            ]
+        ],
+        "prereq_description": "Computer Science 8 or Engineering 3 with a grade of C or better.",
+        "comments": "",
+        "units": "4",
+        "description": "Intermediate topics in Computer Science using the Python programming language. Topics include object oriented programming, runtime analysis, data structures, and software testing methodologies.",
+        "recommended_prep": "",
+        "professor": "R WANG",
+        "college": "COE",
+        "offered": [
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Summer 2022",
+            "Fall 2022",
+            "Spring 2023",
+            "Summer 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [
+            "Mathematics BS",
+            "Applied Mathematics",
+            "Mathematics BA",
+            "Financial Mathematics-Statistics"
+        ],
+        "general_education_fields": []
+    },
+    "CMPSC 11AAZZ": {
+        "title": "Programming Language Laboratory",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "11AAZZ",
+        "prereqs": [],
+        "prereq_description": "Knowledge of at least one programming language.",
+        "comments": "Different sections may be repeated. Sections not always offered.",
+        "units": "1",
+        "description": "A self-paced course to allow a student who already possesses a working knowledge of at least one programming language an opportunity to learn other languages of interest. Each section studies a different programming language.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 11AD": {
+        "title": "Programming Language Laboratory: ADA",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "11AD",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "",
+        "units": "",
+        "description": "",
+        "recommended_prep": "",
+        "professor": "",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 11AP": {
+        "title": "Programming Language Laboratory: APL",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "11AP",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "",
+        "units": "",
+        "description": "",
+        "recommended_prep": "",
+        "professor": "",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 11C": {
+        "title": "Programming Language Laboratory",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "11C",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "",
+        "units": "",
+        "description": "",
+        "recommended_prep": "",
+        "professor": "",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 11CO": {
+        "title": "Programming Language Laboratory: COBOL",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "11CO",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "",
+        "units": "",
+        "description": "",
+        "recommended_prep": "",
+        "professor": "",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 11FO": {
+        "title": "Programming Language Laboratory: Fortran",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "11FO",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "",
+        "units": "",
+        "description": "",
+        "recommended_prep": "",
+        "professor": "",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 11JA": {
+        "title": "Programming Language Laboratory",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "11JA",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "",
+        "units": "",
+        "description": "",
+        "recommended_prep": "",
+        "professor": "",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 11LI": {
+        "title": "Programming Language Laboratory: LISP",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "11LI",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "",
+        "units": "",
+        "description": "",
+        "recommended_prep": "",
+        "professor": "",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 11PA": {
+        "title": "Programming Language Laboratory: Pascal",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "11PA",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "",
+        "units": "",
+        "description": "",
+        "recommended_prep": "",
+        "professor": "",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 11PL": {
+        "title": "",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "11PL",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "",
+        "units": "",
+        "description": "",
+        "recommended_prep": "",
+        "professor": "",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 11SN": {
+        "title": "Programming Language Laboratory: SNOBOL",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "11SN",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "",
+        "units": "",
+        "description": "",
+        "recommended_prep": "",
+        "professor": "",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 16": {
+        "title": "Problem Solving with Computers I",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "16",
+        "prereqs": [["CMPSC 8"]],
+        "prereq_description": "Mathematics 3A or 2A with a grade of C or better (may be taken concurrently), CS 8",
+        "comments": "",
+        "units": "4",
+        "description": "Fundamental building blocks for solving problems using computers. Topics include basic computer organization and programming constructs:  memory CPU, binary arithmetic, variables, expressions, statements, conditionals, iteration, functions, parameters, recursion, primitive and composite data types, and basic operating system and debugging tools.",
+        "recommended_prep": "",
+        "professor": "MIRZA, KHARITONOVA",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Summer 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Summer 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Summer 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023",
+            "Summer 2023"
+        ],
+        "majors_required_for": [
+            "Computer Science"
+        ],
+        "majors_optional_for": [
+            "Mathematics BS",
+            "Applied Mathematics",
+            "Mathematics BA",
+            "Financial Mathematics-Statistics"
+        ],
+        "general_education_fields": []
+    },
+    "CMPSC 24": {
+        "title": "Problem Solving with Computers II",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "24",
+        "prereqs": [
+            [
+                "CMPSC 16"
+            ],
+            [
+                "MATH 3B [O]",
+                "MATH 2B [O]"
+            ]
+        ],
+        "prereq_description": "Computer Science 16 with a grade of C or better; and Mathematics 3B or 2B with a grade of C or better (may be taken concurrently).",
+        "comments": "Not open for credit to students who have completed Computer Science 20.</div><div><strong>Repeat Comments:</strong> This is a legal repeat of CMPSC 24A.",
+        "units": "4",
+        "description": "Intermediate building blocks for solving problems using computers. Topics include intermediate object-oriented programming, data structures, object-oriented design, algorithms for manipulating these data structures and their run-time analyses. Data structures introduced include stacks, queues, lists, trees, and sets.",
+        "recommended_prep": "",
+        "professor": "COSTANZO",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Summer 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Summer 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Summer 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023",
+            "Summer 2023"
+        ],
+        "majors_required_for": [
+            "Computer Science"
+        ],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 24A": {
+        "title": "Problem Solving with Computers II",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "24A",
+        "prereqs": [
+            [
+                "CMPSC 16"
+            ],
+            [
+                "MATH 3B [O]",
+                "MATH 2B [O]"
+            ]
+        ],
+        "prereq_description": "Computer Science 16 with a grade of C or better; and Mathematics 3B or 2B with a grade of C or better (may be taken concurrently).",
+        "comments": "Not open for credit to students who have completed Computer Science 20.</div><div><strong>Repeat Comments:</strong> This is a legal repeat of CS 24.",
+        "units": "4",
+        "description": "Intermediate building blocks for solving problems using computers. Topics include data structures, object-oriented design and development, algorithms for manipulating these data structures and their runtime analyses. Data structures introduced include stacks, queues, lists, trees, and sets.",
+        "recommended_prep": "",
+        "professor": "WANG, RICHERT",
+        "college": "COE",
+        "offered": [
+            "Fall 2020",
+            "Fall 2021",
+            "Fall 2022"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 32": {
+        "title": "Object Oriented Design and Implementation",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "32",
+        "prereqs": [
+            [
+                "CMPSC 24"
+            ]
+        ],
+        "prereq_description": "Computer Science 24 with a grade of C or better",
+        "comments": "",
+        "units": "4",
+        "description": "Advanced topics in object-oriented computing.  Topics include encapsulation, data hiding, inheritance, polymorphism, compilation, linking and loading, memory management, and debugging; recent advances in design and development tools, practices, libraries, and operating system support.",
+        "recommended_prep": "",
+        "professor": "HOLLERER",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Fall 2021",
+            "Spring 2022",
+            "Fall 2022",
+            "Spring 2023"
+        ],
+        "majors_required_for": [
+            "Computer Science"
+        ],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 40": {
+        "title": "Foundations of Computer Science",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "40",
+        "prereqs": [
+            [
+                "CMPSC 16"
+            ],
+            [
+                "MATH 4A"
+            ]
+        ],
+        "prereq_description": "Computer Science 16 with a grade of C or better and Mathematics 4A with a",
+        "comments": "",
+        "units": "5",
+        "description": "Introduction to the theoretical underpinnings of computer science. Topics include propositional predicate logic, set theory, functions and relations, counting, mathematical induction and recursion (generating functions).",
+        "recommended_prep": "",
+        "professor": "SU, VAN DAM",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Summer 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Summer 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Summer 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023",
+            "Summer 2023"
+        ],
+        "majors_required_for": [
+            "Computer Science"
+        ],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 64": {
+        "title": "Computer Organization and Logic Design",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "64",
+        "prereqs": [
+            [
+                "CMPSC 16"
+            ],
+            [
+                "MATH 3C",
+                "MATH 4A"
+            ]
+        ],
+        "prereq_description": "Computer Science 16 with a grade of C or better; and Mathematics 3C or 4A with a grade of C or better.",
+        "comments": "Not open for credit to students who have completed ECE 15 or ECE 15B or Computer Science 30.</div><div><strong>Repeat Comments:</strong> Course counts as a legal repeat of CMPSC 30.",
+        "units": "4",
+        "description": "Assembly language programming and advanced computer organization; Digital logic design topics including gates, combinational circuits, flip-flops, and the design and analysis of sequential circuits.",
+        "recommended_prep": "",
+        "professor": "ZHENG, FRANKLIN",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Summer 2023"
+        ],
+        "majors_required_for": [
+            "Computer Science"
+        ],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 90AAZZ": {
+        "title": "Special Topics in Computer Science",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "90AAZZ",
+        "prereqs": [],
+        "prereq_description": "Consent of instructor.",
+        "comments": "May be repeated for credit to a maximum of 32 units provided letter designations are different.",
+        "units": "4",
+        "description": "Provides for the study of topics of current interest in computer science: A. Foundations; B. Software Systems; C. Programming Languages and Software Engineering; D. Information Management; E. Architecture; F. Networking; G. Security; H. Scientific Computing; I. Intelligent and Interactive Systems; N. General.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 90DA": {
+        "title": "Special Topics in Computer Science",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "90DA",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "",
+        "units": "",
+        "description": "",
+        "recommended_prep": "",
+        "professor": "",
+        "college": "COE",
+        "offered": [
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Summer 2021",
+            "Fall 2021"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 90DB": {
+        "title": "Special Topics in Computer Science",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "90DB",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "",
+        "units": "",
+        "description": "",
+        "recommended_prep": "",
+        "professor": "",
+        "college": "COE",
+        "offered": [
+            "Winter 2021",
+            "Spring 2021",
+            "Fall 2021"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 96": {
+        "title": "Undergraduate Research",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "96",
+        "prereqs": [],
+        "prereq_description": "Consent of instructor.",
+        "comments": "May be repeated for up to 12 units total. Does not apply toward any CS major degree requirements.",
+        "units": "2-4",
+        "description": "Research opportunities for undergraduate students. Students will be expected to give regular oral presentations, actively participate in a weekly seminar, and prepare at least one written report on their research.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 99": {
+        "title": "Independent Studies in Computer Science",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "99",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "Must have a minimum 3.0 grade point average. May be repeated. Students are limited to 5 units per quarter and 30 units total in all 99/198/199 courses combined.",
+        "units": "1-4",
+        "description": "Independent studies in computer science for advanced students.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Summer 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Summer 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Summer 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023",
+            "Summer 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 100": {
+        "title": "Introduction to Teaching Methods in Computer Science",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "100",
+        "prereqs": [],
+        "prereq_description": "Consent of instructor.",
+        "comments": "May be repeated to a maximum of 12 units.",
+        "units": "4",
+        "description": "Designed to train outstanding undergraduates for learning assistant positions in CS courses. Lecture/discussion surveys current research and best practices in CS pedagogy including student development theories, different pedagogical techniques, and methods for assessing learning. Students gain experience working one-on-one with students, fostering positive learning environments, and providing feedback on student work. Students who successfully complete this course will earn units by serving as an apprentice undergraduate learning assistant.",
+        "recommended_prep": "",
+        "professor": "MIRZA",
+        "college": "COE",
+        "offered": [
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Fall 2022"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 110": {
+        "title": "Introduction to Research in Computer Science",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "110",
+        "prereqs": [
+            [
+                "CMPSC 40"
+            ],
+            [
+                "CMPSC 32"
+            ]
+        ],
+        "prereq_description": "Computer Science 40 and Computer Science 32; consent of instructor.",
+        "comments": "",
+        "units": "4",
+        "description": "Defining a CS research problem, finding and reading technical papers, oral communication, technical writing, and independent learning. Course participants work in teams as they apprentice with a CS research group to propose an original research problem and write a research proposal.",
+        "recommended_prep": "",
+        "professor": "MIRZA",
+        "college": "COE",
+        "offered": [
+            "Fall 2021",
+            "Fall 2022"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 111": {
+        "title": "Introduction to Computational Science",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "111",
+        "prereqs": [
+            [
+                "MATH 4B",
+                "MATH 6A",
+                "CMPSC 24"
+            ]
+        ],
+        "prereq_description": "Mathematics 4B with a grade of C or better; Mathematics 6A with a grade of C or better; Computer Science 24 with a grade of C or better.",
+        "comments": "Not open for credit to students who have completed Computer Science 110A.",
+        "units": "4",
+        "description": "Introduction to the numerical algorithms that form the foundations of data science, machine learning, and computational science and engineering. Matrix computation, linear equation systems, eigenvalue and singular value decompositions, numerical optimization. The informed use of mathematical software environments and libraries, such as python/numpy/scipy.",
+        "recommended_prep": "",
+        "professor": "GILBERT",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [
+            "Computer Science"
+        ],
+        "general_education_fields": []
+    },
+    "CMPSC 130A": {
+        "title": "Data Structures and Algorithms I",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "130A",
+        "prereqs": [
+            [
+                "CMPSC 40",
+                "CMPSC 32"
+            ]
+        ],
+        "prereq_description": "Computer Science 40 with a grade of C or better; Computer Science 32 with a grade of C",
+        "comments": "",
+        "units": "4",
+        "description": "Data structures and applications with proofs of correctness and analysis. Hash tables, priority queues (heaps); balanced search trees. Graph traversal techniques and their applications.",
+        "recommended_prep": "",
+        "professor": "EL ABBADI",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Summer 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023"
+        ],
+        "majors_required_for": [
+            "Computer Science"
+        ],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 130B": {
+        "title": "Data Structures and Algorithms II",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "130B",
+        "prereqs": [
+            [
+                "CMPSC 130A"
+            ]
+        ],
+        "prereq_description": "Computer Science 130A.",
+        "comments": "",
+        "units": "4",
+        "description": "Design and analysis of computer algorithms. Correctness proofs and solution of recurrence relations. Design techniques; divide and conquer, greedy strategies, dynamic programming. Applications of techniques to problems from several disciplines. NP - completeness.",
+        "recommended_prep": "",
+        "professor": "EGECIOGLU",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023"
+        ],
+        "majors_required_for": [
+            "Computer Science"
+        ],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 138": {
+        "title": "Automata and Formal Languages",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "138",
+        "prereqs": [
+            [
+                "CMPSC 40"
+            ]
+        ],
+        "prereq_description": "Computer Science 40 with a grade of C or better; open to Computer Science and",
+        "comments": "",
+        "units": "4",
+        "description": "Formal languages; finite automata and regular expressions; properties of regular languages; pushdown automata and context-free grammars; properties of context-free languages; introduction to Turing machines and computability.",
+        "recommended_prep": "",
+        "professor": "EGECIOGLU",
+        "college": "COE",
+        "offered": [
+            "Spring 2020",
+            "Summer 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Fall 2021",
+            "Spring 2022",
+            "Summer 2022",
+            "Fall 2022",
+            "Spring 2023",
+            "Summer 2023"
+        ],
+        "majors_required_for": [
+            "Computer Science"
+        ],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 140": {
+        "title": "Parallel Scientific Computing",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "140",
+        "prereqs": [
+            [
+                "MATH 4B",
+                "MATH 6A",
+                "CMPSC 130A"
+            ]
+        ],
+        "prereq_description": "Mathematics 4B with a grade of C or better; Mathematics 6A with a grade of C or better; Computer Science 130A.",
+        "comments": "Not open for credit to students who have completed Computer Science 110B.",
+        "units": "4",
+        "description": "Fundamentals of high performance computing and parallel algorithm design for numerical computation. Topics include parallel architectures and clusters, parallel programming with message-passing libraries and threads, program parallelization methodologies, parallel performance evaluation and optimization, parallel numerical algorithms and applications with different performance tradeoffs.",
+        "recommended_prep": "",
+        "professor": "YANG T",
+        "college": "COE",
+        "offered": [
+            "Winter 2021",
+            "Winter 2022",
+            "Summer 2022",
+            "Winter 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [
+            "Computer Science"
+        ],
+        "general_education_fields": []
+    },
+    "CMPSC 148": {
+        "title": "Computer Science Project",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "148",
+        "prereqs": [
+            [
+                "CMPSC 32"
+            ]
+        ],
+        "prereq_description": "Computer Science 32 with a grade of C or better; open to Computer Science majors only.",
+        "comments": "Not open for credit to students who have completed Computer Science 48 witha grade of C or better.</div><div><strong>Repeat Comments:</strong> CMPSC 148 is a legal repeat of CMPSC 48.",
+        "units": "4",
+        "description": "Team-based project development. Topics include software engineering and professional development practices, interface design, advanced library support; techniques for team oriented design and development, testing and test driven development, and software reliability and robustness. Students present and demonstrate final projects.",
+        "recommended_prep": "",
+        "professor": "CONRAD",
+        "college": "COE",
+        "offered": [
+            "Fall 2020",
+            "Spring 2021",
+            "Fall 2021",
+            "Winter 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [
+            "Computer Science"
+        ],
+        "general_education_fields": []
+    },
+    "CMPSC 153A": {
+        "title": "Hardware/Software Interface",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "153A",
+        "prereqs": [],
+        "prereq_description": "Upper division standing in Computer Science, Computer Engineering or Electrical Engineering.",
+        "comments": "Same course as ECE 153A.",
+        "units": "4",
+        "description": "Issues in interfacing computing systems and software to practical I/O interfaces. Rapid response, real-time events and management of tasks, threads, and scheduling required for efficient design of embedded software and systems is discussed. Techniques for highly constrained systems.",
+        "recommended_prep": "",
+        "professor": "BREWER, KRINTZ",
+        "college": "COE",
+        "offered": [
+            "Fall 2020",
+            "Fall 2021",
+            "Fall 2022"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 154": {
+        "title": "Computer Architecture",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "154",
+        "prereqs": [
+            [
+                "CMPSC 32",
+                "CMPSC 64"
+            ]
+        ],
+        "prereq_description": "Computer Science 32 with a grade of C or better; Computer Science 64 with a grade of C or better.",
+        "comments": "Not open for credit to students who have received credit for ECE 154 or ECE154A or ECE 154B.",
+        "units": "4",
+        "description": "Introduction to the architecture of computer systems. Topics include: central processing units, memory systems, channels and controllers, peripheral devices, interrupt systems, software versus hardware tradeoffs.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Summer 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Winter 2023",
+            "Spring 2023",
+            "Summer 2023"
+        ],
+        "majors_required_for": [
+            "Computer Science"
+        ],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 156": {
+        "title": "Advanced Applications Programming",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "156",
+        "prereqs": [
+            [
+                "CMPSC 24"
+            ],
+            [
+                "CMPSC 32"
+            ]
+        ],
+        "prereq_description": "Computer Science 24 and 32 with a grade of C or better; open to Computer Science and Computer Engineering majors only.",
+        "comments": "Not open for credit to students who have completed Computer Science 20. Notopen for credit to students who have completed Computer Science 56 with a grade of C or better.</div><div><strong>Repeat Comments:</strong> CMPSC 156 is a legal repeat of CMPSC 56.",
+        "units": "4",
+        "description": "Advanced application programming using a high-level, virtual-machine-based language. Topics include generic programming, exception handling, automatic memory management, and application development, management, and maintenance tools, third-party library use, version control, software testing, issue tracking, code review, and working with legacy code.",
+        "recommended_prep": "",
+        "professor": "CONRAD",
+        "college": "COE",
+        "offered": [
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Fall 2022",
+            "Spring 2023",
+            "Summer 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [
+            "Computer Science"
+        ],
+        "general_education_fields": []
+    },
+    "CMPSC 160": {
+        "title": "Translation of Programming Languages",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "160",
+        "prereqs": [
+            [
+                "CMPSC 64",
+                "ENGR 154"
+            ]
+        ],
+        "prereq_description": "Computer Science 64 or Electrical Engineering 154 or Electrical",
+        "comments": "",
+        "units": "4",
+        "description": "Study of the structure of compilers. Topics include: lexical analysis; syntax analysis including LL and LR parsers; type checking; run-time environments; intermediate code generation; and compiler-construction tools.",
+        "recommended_prep": "",
+        "professor": "SHERWOOD",
+        "college": "COE",
+        "offered": [
+            "Spring 2020",
+            "Fall 2020",
+            "Spring 2021",
+            "Fall 2021",
+            "Spring 2022",
+            "Fall 2022",
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [
+            "Computer Science"
+        ],
+        "general_education_fields": []
+    },
+    "CMPSC 162": {
+        "title": "Programming Languages",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "162",
+        "prereqs": [
+            [
+                "CMPSC 130A"
+            ],
+            [
+                "CMPSC 138"
+            ]
+        ],
+        "prereq_description": "Computer Science 130A and 138; open to computer science and computer",
+        "comments": "",
+        "units": "4",
+        "description": "Concepts of programming languages: scopes, parameter passing, storage management; control flow, exception handling; encapsulation and modularization mechanisms; reusability through genericity and inheritance; type systems; programming paradigms (imperative, object-oriented, functional, and others). Emerging programming languages and their development infrastructures.",
+        "recommended_prep": "",
+        "professor": "KRINTZ, HARDEKOPF",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Winter 2021",
+            "Winter 2022",
+            "Winter 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [
+            "Computer Science"
+        ],
+        "general_education_fields": []
+    },
+    "CMPSC 165A": {
+        "title": "Artificial Intelligence",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "165A",
+        "prereqs": [],
+        "prereq_description": "Computer Science 130A",
+        "comments": "",
+        "units": "4",
+        "description": "Introduction to the field of artificial intelligence, which seeks to understand and build intelligent computational systems. Topics include intelligent agents, problem solving and heuristic search, knowledge representation and reasoning, uncertainty and probabilistic reasoning, machine learning, reinforcement learning, and responsible AI.",
+        "recommended_prep": "",
+        "professor": "WANG YX",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Fall 2022",
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 165B": {
+        "title": "Machine Learning",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "165B",
+        "prereqs": [
+            [
+                "CMPSC 130A"
+            ]
+        ],
+        "prereq_description": "Computer Science 130A.",
+        "comments": "",
+        "units": "4",
+        "description": "Covers the most important techniques of machine learning (ML) and includes discussions of: well-posed learning problems; artificial neural networks; concept learning and general to specific ordering; decision tree learning; genetic algorithms; Bayesian learning; analytical learning; and others.",
+        "recommended_prep": "",
+        "professor": "WANG W",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Summer 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 170": {
+        "title": "Operating Systems",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "170",
+        "prereqs": [
+            [
+                "CMPSC 130A",
+                "CMPSC 154",
+                "ECE 154A"
+            ]
+        ],
+        "prereq_description": "Computer Science 130A; and, Computer Science 154 or ECE 154A (may be taken",
+        "comments": "",
+        "units": "4",
+        "description": "Basic concepts of operating systems. The notion of a process; interprocess communication and synchronization; input-output, file systems, memory management.",
+        "recommended_prep": "",
+        "professor": "KRUEGEL, ZHAO",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023"
+        ],
+        "majors_required_for": [
+            "Computer Science"
+        ],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 171": {
+        "title": "Distributed Systems",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "171",
+        "prereqs": [
+            [
+                "CMPSC 130A"
+            ]
+        ],
+        "prereq_description": "Computer Science 130A.",
+        "comments": "Not open for credit to students who have completed ECE 151.",
+        "units": "4",
+        "description": "Distributed systems architecture, distributed programming, network of computers, message passing, remote procedure calls, group communication, naming and membership problems, asynchrony, logical time, consistency, fault-tolerance, and recovery.",
+        "recommended_prep": "",
+        "professor": "EL ABBADI",
+        "college": "COE",
+        "offered": [
+            "Spring 2020",
+            "Winter 2021",
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 172": {
+        "title": "Software Engineering",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "172",
+        "prereqs": [
+            [
+                "CMPSC 130A"
+            ]
+        ],
+        "prereq_description": "Computer Science 130A. Open to Computer Science or Computer Engineering majors only, or by consent of department.",
+        "comments": "",
+        "units": "4",
+        "description": "Software engineering is concerned with long-term, large-scale programming projects. Software management, cost estimates, problem specification and analysis, system design techniques, system testing and performance evaluation, and system maintenance. Students will design, manage, and implement a medium-sized project.",
+        "recommended_prep": "",
+        "professor": "BULTAN",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [
+            "Computer Science"
+        ],
+        "general_education_fields": []
+    },
+    "CMPSC 174A": {
+        "title": "Fundamentals of Database Systems",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "174A",
+        "prereqs": [
+            [
+                "CMPSC 130A"
+            ]
+        ],
+        "prereq_description": "Computer Science 130A.",
+        "comments": "",
+        "units": "4",
+        "description": "Database system architectures, relational data model, relational algebra, relational calculus, SQL, QBE, query processing, integrity constraints (key constraints, referential integrity), database design, ER and object- oriented data model, functional dependence, lossless join and dependency preserving decompositions, Boyce-Codd and Third Normal Forms.",
+        "recommended_prep": "",
+        "professor": "SU",
+        "college": "COE",
+        "offered": [
+            "Winter 2021",
+            "Spring 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Fall 2022"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 174B": {
+        "title": "Design and Implementation Techniques of Database Systems",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "174B",
+        "prereqs": [
+            [
+                "CMPSC 130B"
+            ]
+        ],
+        "prereq_description": "Computer Science 130B.",
+        "comments": "",
+        "units": "4",
+        "description": "Queries and processing, optimizer, cost models, execution plans, rewriting rules, access methods, spatial indexing; transactions, ACID properties, concurrency control, serializability, two-phase locking, timestamping, logging,checkpointing, transaction abort and commit, crash recovery; distributed databases.",
+        "recommended_prep": "",
+        "professor": "SU, YAN",
+        "college": "COE",
+        "offered": [
+            "Spring 2020",
+            "Winter 2022",
+            "Fall 2022",
+            "Winter 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 174N": {
+        "title": "Introduction to Databases",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "174N",
+        "prereqs": [
+            [
+                "CMPSC 130A [O]"
+            ]
+        ],
+        "prereq_description": "Computer Science 130A (may be taken concurrently); or consent of instructor.",
+        "comments": "Open to non-majors.",
+        "units": "4",
+        "description": "ER/object-oriented data modeling, relational data model, database design, query languages (algebra, calculus, SQL, QBE), updates and views, query processing, integrity constraints (key constraints, referential integrity), functional dependence, Boyce--Codd and Third Normal Forms.",
+        "recommended_prep": "",
+        "professor": "SU, JIANWEN",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 176A": {
+        "title": "Introduction to Computer Communication Networks",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "176A",
+        "prereqs": [
+            [
+                "CMPSC 32",
+                "PSTAT 120A",
+                "ECE 139"
+            ]
+        ],
+        "prereq_description": "CMPSC 32 with a grade of C or better; PSTAT 120A or ECE 139; open to computer science, electrical",
+        "comments": "Not open for credit to students who have completed Computer Science 176 or ECE 155 or ECE 155A.",
+        "units": "4",
+        "description": "Basic concepts in networking, the OSI model, error detection codes, flow control, routing, medium access control, and high-speed networks.",
+        "recommended_prep": " PSTAT 120B.",
+        "professor": "ALMEROTH, BELDING",
+        "college": "COE",
+        "offered": [
+            "Spring 2020",
+            "Fall 2020",
+            "Spring 2021",
+            "Fall 2021",
+            "Spring 2022",
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 176B": {
+        "title": "Network Computing",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "176B",
+        "prereqs": [
+            [
+                "CMPSC 176A"
+            ]
+        ],
+        "prereq_description": "Computer Science 176A.",
+        "comments": "Not open for credit to students who have completed ECE 155B or 194W.",
+        "units": "4",
+        "description": "Focus on networking and web technologies used in the Internet. The class covers socket programming and web-based techniques that are used to build distributed applications.",
+        "recommended_prep": "",
+        "professor": "VIGNA, ZHAO",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Winter 2021",
+            "Winter 2022",
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 176C": {
+        "title": "Advanced Topics in Internet Computing",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "176C",
+        "prereqs": [
+            [
+                "CMPSC 176A"
+            ]
+        ],
+        "prereq_description": "Computer Science 176A.",
+        "comments": "",
+        "units": "4",
+        "description": "General overview of wireless and mobile networking, multimedia, security, multicast, quality of service, IPv6, and web caching. During the second half of the course, one or more of the above are studied in greater detail.",
+        "recommended_prep": "",
+        "professor": "BELDING",
+        "college": "COE",
+        "offered": [
+            "Spring 2020",
+            "Spring 2021",
+            "Spring 2022"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 177": {
+        "title": "Computer Security",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "177",
+        "prereqs": [
+            [
+                "CMPSC 170 [O]"
+            ]
+        ],
+        "prereq_description": "Computer Science 170 (may be taken concurrently).",
+        "comments": "",
+        "units": "4",
+        "description": "Introduction to the basics of computer security and privacy. Analysis of technical difficulties of producing secure computer information systems that provide guaranteed controlled sharing. Examination and critique of current systems, methods, certification.",
+        "recommended_prep": "",
+        "professor": "KEMMERER",
+        "college": "COE",
+        "offered": [
+            "Spring 2020",
+            "Spring 2022",
+            "Fall 2022",
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 178": {
+        "title": "Introduction to Cryptography",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "178",
+        "prereqs": [
+            [
+                "CMPSC 24",
+                "CMPSC 40"
+            ]
+        ],
+        "prereq_description": "Computer Science 24 with a grade of C or better; Computer Science 40 with a grade of C or better;",
+        "comments": "",
+        "units": "4",
+        "description": "An introduction to the basic concepts and techniques of cryptography and cryptanalysis. Topics include: The Shannon Theory, classical systems, the enigma machine, the data encryption standard, public key systems, digital signatures, file security.",
+        "recommended_prep": "",
+        "professor": "EGECIOGLU",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Fall 2021",
+            "Spring 2022",
+            "Fall 2022",
+            "Winter 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 180": {
+        "title": "Computer Graphics",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "180",
+        "prereqs": [
+            [
+                "CMPSC 130A"
+            ]
+        ],
+        "prereq_description": "Computer Science 130A or consent of instructor.",
+        "comments": "",
+        "units": "4",
+        "description": "",
+        "recommended_prep": "",
+        "professor": "WANG",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Fall 2021",
+            "Fall 2022"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 181": {
+        "title": "Introduction to Computer Vision",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "181",
+        "prereqs": [],
+        "prereq_description": "Upper-division standing in Electrical Engineering, Computer Engineering,  Computer Science, Chemical Engineering or Mechanical Engineering.",
+        "comments": "Same course as ECE 181.</div><div><strong>Repeat Comments:</strong> Not open for credit to students who have completed ECE/CMPSC 181B with a grade of C or better.  ECE/CMPSC 181 is a legal repeat of ECE/CMPSC 181B.",
+        "units": "4",
+        "description": "Overview of computer vision problems and techniques for analyzing the content of images and video. Topics include image formation, edge detection, image segmentation, pattern recognition, texture analysis, optical flow, stereo vision, shape representation and recovery techniques, issues in object recognition, and case studies of practical vision systems.",
+        "recommended_prep": "",
+        "professor": "TURK, WANG",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Winter 2021",
+            "Winter 2022",
+            "Fall 2022",
+            "Winter 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 182": {
+        "title": "Multimedia Computing",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "182",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "Not open for credit to students who have completed ECE 160.",
+        "units": "4",
+        "description": "",
+        "recommended_prep": "",
+        "professor": "ALMEROTH, ZHENG",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 184": {
+        "title": "Mobile Application Development",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "184",
+        "prereqs": [
+            [
+                "CMPSC 56",
+                "CMPSC 156"
+            ],
+            [
+                "CMPSC 130A"
+            ]
+        ],
+        "prereq_description": "Computer Science 56 or Computer Science 156; and Computer Science 130A.",
+        "comments": "",
+        "units": "4",
+        "description": "An introduction to programming mobile computing devices. Students will learn about and study the shift in software development from desktop to mobile device applications. Topics will include software engineering and design practices, advances in programming practice, and support tools for mobile application development and testing. Students will develop and deploy mobile applications as part of their course work.",
+        "recommended_prep": "",
+        "professor": "HOLLERER",
+        "college": "COE",
+        "offered": [
+            "Fall 2020",
+            "Spring 2022"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 185": {
+        "title": "Human-Computer Interaction",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "185",
+        "prereqs": [],
+        "prereq_description": "Upper division standing; Open to computer science, computer engineering, and electrical engineering majors.",
+        "comments": "",
+        "units": "4",
+        "description": "The study of human-computer interaction enables system architects to design useful, efficient, and enjoyable computer interfaces. This course teaches the theory, design guidelines, programming practices, and evaluation procedures behind effective human interaction with computers.",
+        "recommended_prep": "",
+        "professor": "HOLLERER",
+        "college": "COE",
+        "offered": [
+            "Spring 2020",
+            "Winter 2021",
+            "Winter 2022",
+            "Winter 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 189A": {
+        "title": "Senior Computer Systems Project",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "189A",
+        "prereqs": [
+            [
+                "CMPSC 48",
+                "CMPSC 56",
+                "CMPSC 148",
+                "CMPSC 156",
+                "CMPSC 172"
+            ]
+        ],
+        "prereq_description": "Computer Science 48 or 56 or 148 or 156 or 172; Senior standing in computer science or computer engineering.",
+        "comments": "Quarters usually offered: Fall. Not open for credit to students who have completed ECE 189A.",
+        "units": "4",
+        "description": "This course is the first in the 2-course Computer Science Capstone sequence. Student teams learn about modern software design and engineering techniques and work together to use them and their past educational experiences at UCSB to analyze, specify, design, and prototype innovative solutions to complex, real world problems using computers.",
+        "recommended_prep": "",
+        "professor": "BULTAN, KRINTZ",
+        "college": "COE",
+        "offered": [
+            "Fall 2020",
+            "Fall 2021",
+            "Fall 2022"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 189B": {
+        "title": "Senior Computer Systems Project",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "189B",
+        "prereqs": [
+            [
+                "CMPSC 189A"
+            ]
+        ],
+        "prereq_description": "CMPSC 189A; Senior standing in Computer Science or Computer Engineering.",
+        "comments": "Quarters usually offered: Winter. Not open for credit to students who have completed ECE 189A or ECE 189B.",
+        "units": "4",
+        "description": "This course is the second in the 2-course Computer Science Capstone sequence.  Student teams continue their CMPSC 189A effort by evolving their specifications, design, and prototypes of advanced computer science solutions and systems. The students learn about interfaces, software integration, and testing, and prepare advanced demonstrations for public presentation at the end of the sequence.",
+        "recommended_prep": "",
+        "professor": "BULTAN, KRINTZ, VIGNA",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Winter 2021",
+            "Winter 2022",
+            "Winter 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 190AAZZ": {
+        "title": "Special Topics in Computer Science",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "190AAZZ",
+        "prereqs": [],
+        "prereq_description": "Consent of instructor.",
+        "comments": "May be repeated with consent of department chair.",
+        "units": "4",
+        "description": "Provides for the study of topics of current interest in computer science: A. Foundations; B. Software Systems; C. Programming Languages and Software Engineering; D. Information Management; E. Architecture; F. Networking; G. Security; H. Scientific Computing; I. Intelligent and Interactive Systems; N. General.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 190I": {
+        "title": "Special Topics in Computer Science: Intelligent and   Interactive Systems",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "190I",
+        "prereqs": [],
+        "prereq_description": "Consent of instructor.",
+        "comments": "Sections may not be repeated without consent of department chair.",
+        "units": "4",
+        "description": "These variable unit courses provide for the study of topics of current interest in computer science.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [
+            "Fall 2020",
+            "Spring 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Winter 2023",
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 192": {
+        "title": "Projects in Computer Science",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "192",
+        "prereqs": [],
+        "prereq_description": "Consent of instructor.",
+        "comments": "May be repeated to a maximum of 8 units with consent of department chair.Students must have a minimum 3.0 GPA.",
+        "units": "1-5",
+        "description": "Projects in computer science for advanced undergraduate students.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Summer 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Summer 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Summer 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023",
+            "Summer 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 193": {
+        "title": "Internship in Industry",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "193",
+        "prereqs": [],
+        "prereq_description": "Consent of instructor and department chair.",
+        "comments": "Not more than 4 units per quarter; may not be applied to science electives.May be repeated with faculty/chair approval to a maximum of 4 units.",
+        "units": "1-4",
+        "description": "Special projects for selected students. Offered in conjunction with selected industrial and research firms and under direct faculty supervision. Written proposal and final report required.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Summer 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Summer 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Summer 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023",
+            "Summer 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 196": {
+        "title": "Undergraduate Research",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "196",
+        "prereqs": [],
+        "prereq_description": "Students must: (1) have attained upper-division standing (2) have a minimum3.0 grade-point average for preceding three quarters, (3) have consent of instructor.",
+        "comments": "May be repeated for up to 12 units. No more than 4 units may be applied to departmental electives.",
+        "units": "2-4",
+        "description": "Research opportunities for undergraduate students. Students will be expected to giveregular oral presentations, actively participate in a weekly seminar, and prepare at least one written report on their research.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Summer 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Summer 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Summer 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023",
+            "Summer 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 196B": {
+        "title": "Undergraduate Research",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "196B",
+        "prereqs": [
+            [
+                "CMPSC 196"
+            ]
+        ],
+        "prereq_description": "Students must: (1) have taken 4 letter graded units of CMPSC 196, (2) have consent of instructor",
+        "comments": "Designed for majors. May be repeated for up to 12 units. No more than 4 units may be applied to departmental electives.",
+        "units": "2-4",
+        "description": "Advanced research for undergraduate students, by petition after completing a minimum of 4 units of CMPSC 196 for a letter grade. The student will propose a specific research project and make a public presentation of final results. Evaluation and grade will be based on feedback from faculty advisor and one other faculty member.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [
+            "Spring 2020",
+            "Spring 2021",
+            "Spring 2022",
+            "Winter 2023",
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 199": {
+        "title": "Independent Studies in Computer Science",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "199",
+        "prereqs": [],
+        "prereq_description": "Upper-division standing; students must have completed at least two upper-  division courses in computer science. May be repeated with consent of chair.",
+        "comments": "Students are limited to five units per quarter and 30 units total in all 198/199 courses combined. Students must have a minimum 3.0 GPA for the preceding three quarters. May not be used for credit towards the major.",
+        "units": "1-5",
+        "description": "Independent studies in computer science for advanced students.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 209": {
+        "title": "Logic and Applications in Computer Science",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "209",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "",
+        "units": "4",
+        "description": "Propositional logic, first order logic, completeness, compactness, incompleteness, undecidability; selected topics from finite model theory, theorem proving, logic programming, program verification, databases, computational complexity.",
+        "recommended_prep": "",
+        "professor": "SU</span> <i>",
+        "college": "COE",
+        "offered": [
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 211A": {
+        "title": "Matrix Analysis and Computation",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "211A",
+        "prereqs": [],
+        "prereq_description": "Consent of instructor.",
+        "comments": "Students should be proficient in basic numerical methods, linear algebra, mathematically rigorous proofs, and some programming language. Same course as ECE 210A, ME 210A, Mathematics 206A, Chemical Engineering 211A, and Geology 251A.",
+        "units": "4",
+        "description": "Graduate level-matrix theory with introduction to matrix computations. SVD's, pseudoinverses, variational characterization of eigenvalues, perturbation theory, direct and iterative methods for matrix computations.",
+        "recommended_prep": "",
+        "professor": "STAFF,",
+        "college": "COE",
+        "offered": [
+            "Fall 2020",
+            "Fall 2021",
+            "Fall 2022"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 211B": {
+        "title": "Numerical Simulation",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "211B",
+        "prereqs": [],
+        "prereq_description": "Consent of instructor.",
+        "comments": "Students should be proficient in basic numerical methods, linear algebra, mathematically rigorous proofs, and some programming language. Same course as ECE 210B, ME 210B, Mathematics 206B, Chemical Engineering 211B, and Geology 251B.",
+        "units": "4",
+        "description": "Linear multistep methods and Runge-Kutta methods for ordinary differential equations: stability, order and convergence. Stiffness. Differential algebraic equations. Numerical solution of boundary value problems.",
+        "recommended_prep": "",
+        "professor": "PETZOLD",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Winter 2021",
+            "Winter 2022",
+            "Winter 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 211C": {
+        "title": "Numerical Solution of Partial Differential Equations--Finite Difference Methods",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "211C",
+        "prereqs": [],
+        "prereq_description": "Consent of instructor.",
+        "comments": "Students should be proficient in basic numerical methods, linear algebra, mathematically rigorous proofs, and some programming language. Same course as ECE 210C, ME 210C, Mathematics 206C, Chemical Engineering 211C, and Geology 251C.",
+        "units": "4",
+        "description": "Finite difference methods for hyperbolic, parabolic and elliptic PDE's, with application to problems in science and engineering. Convergence, consistency, order and stability offinite difference methods. Dissipation and dispersion. Finite volume methods. Software design and and adaptivity.",
+        "recommended_prep": "",
+        "professor": "STAFF,",
+        "college": "COE",
+        "offered": [
+            "Spring 2021",
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 211D": {
+        "title": "Numerical Solution of Partial Differential Equations--Finite Element Methods",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "211D",
+        "prereqs": [],
+        "prereq_description": "Consent of instructor.",
+        "comments": "Students should be proficient in basic numerical methods, linear algebra, mathematically rigorous proofs, and some programming language. Same course as ECE 210D, ME 210D, Mathematics 206D, Chemical Engineering 211D, and Geology 251D.",
+        "units": "4",
+        "description": "Weighted residual and finite element methods for the solution of hyperbolic, parabolic and elliptical partial differential equations, with application to problems in science and engineering. Error Estimates. Standard and discontinuous Galerkin methods.",
+        "recommended_prep": "",
+        "professor": "STAFF,",
+        "college": "COE",
+        "offered": [
+            "Fall 2020",
+            "Fall 2021"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 216": {
+        "title": "Level Set Methods",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "216",
+        "prereqs": [
+            [
+                "CMPSC 211C",
+                "CH E 211C",
+                "ECE 210C",
+                "ME 210C"
+            ]
+        ],
+        "prereq_description": "CMPSC 211C or CH E 211C or ECE 210C or ME 210C.",
+        "comments": "Same course as CH E 226, ECE 226, and ME 216.",
+        "units": "4",
+        "description": "Mathematical description of the level set method and design of the numerical methods used in its implementations (ENO-WENO, Godunov, Lax-Friedrich, etc.). Introduction to the Ghost Fluid Method. Applications in CFD, Materials Sciences, Computer Vision and Computer Graphics.",
+        "recommended_prep": "",
+        "professor": "GIBOU",
+        "college": "COE",
+        "offered": [
+            "Spring 2022",
+            "Fall 2022",
+            "Winter 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 219": {
+        "title": "Sparse Matrix Algorithms",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "219",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "",
+        "units": "4",
+        "description": "Theory, implementation, and applications of sparse matrix algorithms. Direct, iterative, preconditioned, and multilevel methods for solving large, sparse systems of linear equations. Tools include graph theory, linear algebra, and computer architecture; applications range from physical modeling to data mining.",
+        "recommended_prep": "",
+        "professor": "GILBERT</span> <i>",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 220": {
+        "title": "Theory of Computation and Complexity",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "220",
+        "prereqs": [
+            [
+                "CMPSC 186"
+            ]
+        ],
+        "prereq_description": "Computer Science 186.",
+        "comments": "",
+        "units": "4",
+        "description": "Topics include: models of computation; time and space complexity classes (e.g., P, NP, CO-NP, and Pspace), efficient reducibilities, complete problems lower bounds; the polynomial hierarchy.",
+        "recommended_prep": "",
+        "professor": "IBARRA",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 225": {
+        "title": "Information Theory",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "225",
+        "prereqs": [
+            [
+                "PSTAT 120A",
+                "PSTAT 120B",
+                "ECE 139"
+            ]
+        ],
+        "prereq_description": "ECE 139 or equivalent, or PSTAT 120A-B.",
+        "comments": "Same course as ECE 205.",
+        "units": "4",
+        "description": "Entropy, mutual information, and Shannon's coding theorems; lossless source coding, Huffman, Shannon-Fano-Elias, and arithmetic codes; Channel capacity; rate-distortion theory, and lossy source coding; source-channel coding; algorithmic complexity and information; applications of information theory in various fields.",
+        "recommended_prep": "",
+        "professor": "VAN DAM",
+        "college": "COE",
+        "offered": [
+            "Winter 2021",
+            "Winter 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 230": {
+        "title": "Approximations, NP-Completeness and Algorithms",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "230",
+        "prereqs": [
+            [
+                "CMPSC 130A"
+            ],
+            [
+                "CMPSC 130B"
+            ]
+        ],
+        "prereq_description": "Computer Science 130A-B.",
+        "comments": "",
+        "units": "4",
+        "description": "Epsilon approximations, PTAS and FPTAS. Techniques for the design of approximation algrorithms. P, NP, NP-complete problems, polynomial transformations, Turing reductions, strong NP-completeness, NP-hardness and inapproximability results. Topics in algorithms include: amortized analysis, advanced graph algorithms and data structures.",
+        "recommended_prep": "",
+        "professor": "GONZALEZ",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 231": {
+        "title": "Topics in Combinatorial Algorithms",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "231",
+        "prereqs": [
+            [
+                "CMPSC 130B"
+            ]
+        ],
+        "prereq_description": "Computer Science 130B.",
+        "comments": "",
+        "units": "4",
+        "description": "Advanced topics in algorithm design, including network flows, matchings in graphs, linear and integer programming.",
+        "recommended_prep": "",
+        "professor": "SURI",
+        "college": "COE",
+        "offered": [
+            "Winter 2021"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 235": {
+        "title": "Computational Geometry",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "235",
+        "prereqs": [
+            [
+                "CMPSC 130A"
+            ],
+            [
+                "CMPSC 130B"
+            ]
+        ],
+        "prereq_description": "Computer Science 130A-B.",
+        "comments": "",
+        "units": "4",
+        "description": "Algorithms and lower bound techniques in computational geometry; decision tree models of computation; geometric searching; point location and range search; convex hull and maxima of a point set; proximity algorithms; geometric intersections.",
+        "recommended_prep": "",
+        "professor": "SURI",
+        "college": "COE",
+        "offered": [
+            "Fall 2021"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 240A": {
+        "title": "Applied Parallel Computing",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "240A",
+        "prereqs": [
+            [
+                "CMPSC 154"
+            ],
+            [
+                "CMPSC 160"
+            ]
+        ],
+        "prereq_description": "Computer Science 154 and 160.",
+        "comments": "",
+        "units": "4",
+        "description": "Interdisciplinary introduction to applied parallel computing on modern supercomputers. Topics include applications-oriented architectural issues, MPI, parallel MATLAB, and parallel numerical algorithms. A course project emphasizes understanding the realities and myths of what is possible on the world's fastest machines.",
+        "recommended_prep": "",
+        "professor": "GILBERT",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 254": {
+        "title": "Advanced Computer Architecture",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "254",
+        "prereqs": [
+            [
+                "CMPSC 154",
+                "ECE 154"
+            ]
+        ],
+        "prereq_description": "CMPSC 154 or ECE 154.",
+        "comments": "",
+        "units": "4",
+        "description": "Advanced instruction set architectures, pipelining, dynamic scheduling, branch prediction, superscalar issue, out-of-order execution, memory-hierarchy design, advanced cache architectures and prefetching. Several real designs are dissected and simulators are developed for performing quantitative evaluations of design decisions.",
+        "recommended_prep": "",
+        "professor": "SHERWOOD",
+        "college": "COE",
+        "offered": [
+            "Winter 2021",
+            "Winter 2022",
+            "Fall 2022"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 260": {
+        "title": "Advanced Topics in Program Analysis",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "260",
+        "prereqs": [
+            [
+                "CMPSC 160"
+            ],
+            [
+                "CMPSC 162"
+            ]
+        ],
+        "prereq_description": "Computer Science 160 and 162.",
+        "comments": "",
+        "units": "4",
+        "description": "Theoretical aspects of translation. Topics include: data  flow analysis; control flow analysis; interprocedural analysis; optimization; type systems.",
+        "recommended_prep": "",
+        "professor": "HARDEKOPF",
+        "college": "COE",
+        "offered": [
+            "Winter 2021",
+            "Winter 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 263": {
+        "title": "Runtime Systems",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "263",
+        "prereqs": [
+            [
+                "CMPSC 154"
+            ],
+            [
+                "CMPSC 160"
+            ],
+            [
+                "CMPSC 162"
+            ]
+        ],
+        "prereq_description": "Computer Science 154, 160, and 162.",
+        "comments": "Computer Science 260 recommended.",
+        "units": "4",
+        "description": "Topics central to modern programming languages and their implementation: garbage collection; memory system performance; characteristics and optimization of object-oriented languages; type systems and type inference; run-time compilation.",
+        "recommended_prep": " Conmputer Science 260.",
+        "professor": "KRINTZ",
+        "college": "COE",
+        "offered": [
+            "Spring 2020",
+            "Spring 2021",
+            "Fall 2021",
+            "Fall 2022"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 266": {
+        "title": "Formal Specification and Verification",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "266",
+        "prereqs": [
+            [
+                "CMPSC 130A"
+            ],
+            [
+                "CMPSC 130B"
+            ],
+            [
+                "CMPSC 186"
+            ]
+        ],
+        "prereq_description": "Computer Science 130A-B; Computer Science 186.",
+        "comments": "",
+        "units": "4",
+        "description": "Introduction to existing specification and verification systems, and the underlying theory and techniques of verifying the correctness of algorithms with respect to specifications. This subject can be considered as the combination of specification and verification techniques, programming language semantics and formal logic.",
+        "recommended_prep": "",
+        "professor": "KEMMERER",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 267": {
+        "title": "Automated Verification",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "267",
+        "prereqs": [
+            [
+                "CMPSC 130A"
+            ],
+            [
+                "CMPSC 130B"
+            ],
+            [
+                "CMPSC 138"
+            ]
+        ],
+        "prereq_description": "Computer Science 130A-B and 138.",
+        "comments": "",
+        "units": "4",
+        "description": "Covers automated verification algorithms and tools. Topics include: temporal logics, fixpoint characterizations of temporal properties, model checking, symbolic verification, explicit-state verification, verification using automated theorem provers, automated abstraction.",
+        "recommended_prep": "",
+        "professor": "BULTAN",
+        "college": "COE",
+        "offered": [
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 270": {
+        "title": "Operating Systems",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "270",
+        "prereqs": [],
+        "prereq_description": "Computer Science 170",
+        "comments": "",
+        "units": "4",
+        "description": "Develops an understanding of operating systems and operating systems research at both a conceptual level and from an engineering perspective.  Fundamental design principles, culled primarily from the research literature, motivate an analysis of previous and current systems.  This analysis is further validated through empirical investigation.",
+        "recommended_prep": "",
+        "professor": "WOLSKI",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Fall 2020",
+            "Winter 2022",
+            "Winter 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 271": {
+        "title": "Advanced Topics in Distributed Systems",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "271",
+        "prereqs": [],
+        "prereq_description": "cmpsc 170.",
+        "comments": "",
+        "units": "4",
+        "description": "Covers the fundamental problems in distributed systems and the various tools used to solve them. Of primary interest is the issue of fault-tolerance. Topics include event ordering, clocks, global states, agreement, fault-tolerance, and peer-to-peer systems.",
+        "recommended_prep": "",
+        "professor": "EL ABBADI",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Fall 2020",
+            "Winter 2022",
+            "Winter 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 272": {
+        "title": "Software Engineering",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "272",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "",
+        "units": "4",
+        "description": "Principles of software engineering disciplines emphasizing requirements analysis, specification design, coding, testing and correctness proofs, maintenance, and management. Students use a number of software engineering tools.",
+        "recommended_prep": "",
+        "professor": "BULTAN</span> <i>",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 273": {
+        "title": "Data and Knowledge Bases",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "273",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "",
+        "units": "4",
+        "description": "The focus is on the study of relational and post-relational data models and their query languages of different styles (algebraic, calculus, and deductive): complexity, expressive power, optimization, and database design.",
+        "recommended_prep": "",
+        "professor": "SU</span> <i>",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 274": {
+        "title": "Advanced Topics in Database Systems",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "274",
+        "prereqs": [
+            [
+                "CMPSC 170"
+            ]
+        ],
+        "prereq_description": "Computer Science 170.",
+        "comments": "",
+        "units": "4",
+        "description": "Topics include: data models, semantics, data integrity, database design, serializability theory, concurrency control, recovery, distributed databases.",
+        "recommended_prep": "",
+        "professor": "AGRAWAL, EL ABBADI",
+        "college": "COE",
+        "offered": [
+            "Fall 2022"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 276": {
+        "title": "Advanced Topics in Networking",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "276",
+        "prereqs": [
+            [
+                "CMPSC 176A",
+                "CMPSC 176B"
+            ]
+        ],
+        "prereq_description": "Computer Science 176A or 176B.",
+        "comments": "",
+        "units": "4",
+        "description": "Focuses on advanced topics in networking. Topics may include, but are not limited to: Internet analysis, routing techniques, multimedia, approaches for network performance enhancements, and communication over new technologies.",
+        "recommended_prep": "",
+        "professor": "BELDING, ZHAO",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 279": {
+        "title": "Advanced Topics in Security",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "279",
+        "prereqs": [
+            [
+                "CMPSC 177"
+            ]
+        ],
+        "prereq_description": "Computer Science 177.",
+        "comments": "",
+        "units": "4",
+        "description": "Security analysis of networked systems. Analysis of techniques for network scanning, spoofing, hijacking, and denial-of-service attacks.  Vulnerability analysis of applications and web-based systems.  Intrusion detection and prevention techniques.",
+        "recommended_prep": "",
+        "professor": "VIGNA",
+        "college": "COE",
+        "offered": [
+            "Fall 2020",
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 280": {
+        "title": "Computer Graphics",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "280",
+        "prereqs": [
+            [
+                "CMPSC 180"
+            ]
+        ],
+        "prereq_description": "Computer Science 180.",
+        "comments": "",
+        "units": "4",
+        "description": "Special topics in computer graphics including: curves and curved surfaces; visual perception of colors and color models; shading models; shadow generation; texture mapping; solid textures; stereographics; helmet-mounteddisplay; graphics hardware/architecture; solid modeling; physically based modeling; fractals and graphtals; volume rendering; scientific visualization.",
+        "recommended_prep": "",
+        "professor": "HOLLERER",
+        "college": "COE",
+        "offered": [
+            "Winter 2021",
+            "Spring 2022",
+            "Fall 2022"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 281": {
+        "title": "Advanced Topics in Computer Vision",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "281",
+        "prereqs": [],
+        "prereq_description": "ECE OR CMPSC 181",
+        "comments": "Same course as ECE 281.",
+        "units": "4",
+        "description": "Topics in Computer Vision, including imaging and multi-view geometry; image and video segmentation; object detection, localization, and recognition; video activity recognition; machine learning models and methods applied to computer vision.",
+        "recommended_prep": "",
+        "professor": "WANG",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 281B": {
+        "title": "Advanced Topics in Computer Vision",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "281B",
+        "prereqs": [],
+        "prereq_description": "ECE OR CMPSC 181",
+        "comments": "Same course as ECE 281B.",
+        "units": "4",
+        "description": "Advanced topics in computer vision: image sequence analysis, spatio-temporal filtering, camera calibration and hand-eye coordination, robot navigation, shape representation, physically-based modeling, regularization theory, multi-sensory fusion, biological models, expert vision systems, and other topics selected from recent research papers.",
+        "recommended_prep": "",
+        "professor": "TURK, WANG",
+        "college": "COE",
+        "offered": [
+            "Winter 2021",
+            "Winter 2022",
+            "Winter 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 284": {
+        "title": "Mobile Computing",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "284",
+        "prereqs": [
+            [
+                "CMPSC 176A",
+                "CMPSC 176B"
+            ]
+        ],
+        "prereq_description": "Computer Science 176A or 176B.",
+        "comments": "",
+        "units": "4",
+        "description": "Focuses on mobile computing. Topics may include, but are not limited to: mobile network characteristics, types of mobile networks, challenges and sollutions in mobile computing, and power conservation techniques.",
+        "recommended_prep": "",
+        "professor": "BELDING",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 285": {
+        "title": "Advanced Image Synthesis",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "285",
+        "prereqs": [],
+        "prereq_description": "Computer Graphics desired but not necessary",
+        "comments": "",
+        "units": "4",
+        "description": "Theory and design of rendering systems for high-end image synthesis and modeling physically-based light transport. Topics include REYES-style architectures, Monte Carlo algorithms, variance reduction methods, path tracing, photon mapping, reflection and volumetric light transport. Students must have good software engineering skills.",
+        "recommended_prep": "",
+        "professor": "SEN",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Winter 2021",
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 291AAZZ": {
+        "title": "Special Topics in Computer Science, Applications",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "291AAZZ",
+        "prereqs": [],
+        "prereq_description": "None.",
+        "comments": "",
+        "units": "4",
+        "description": "These courses provide for the study of topics of current interest in computer science applications. Topics are coded as follows: A. Applications, General; D. Database and Information Systems; G. Security and Cryptography; H. Computational Science and Engineering; I. Visual Computing and Interaction; K. Machine Learning and Data Mining.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 292AAZZ": {
+        "title": "Special Topics in Computer Science, Foundations",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "292AAZZ",
+        "prereqs": [],
+        "prereq_description": "None.",
+        "comments": "",
+        "units": "4",
+        "description": "These courses provide for the study of topics of current interest in computer science foundations. Topics are coded as follows: C, Programming Languages and Software Engineering; F. Foundations, General; G. Security and Cryptography; H. Computational Science and Engineering.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 293AAZZ": {
+        "title": "Special Topics in Computer Science, Systems",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "293AAZZ",
+        "prereqs": [],
+        "prereq_description": "None.",
+        "comments": "",
+        "units": "4",
+        "description": "",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 501": {
+        "title": "Techniques of Computer Science Teaching",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "501",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "This course is required for new teaching assistants, and may be taken only once. No unit credit allowed toward advanced degree.",
+        "units": "1",
+        "description": "An initial 1-2 day workshop on teaching techniques followed by a weekly seminar. Course emphasizes teaching skills, practical experience, and communication skills.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [
+            "Fall 2020",
+            "Fall 2021",
+            "Fall 2022"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 502": {
+        "title": "Teaching of Computer Science",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "502",
+        "prereqs": [
+            [
+                "CMPSC 501"
+            ]
+        ],
+        "prereq_description": "Computer Science 501.",
+        "comments": "May be taken concurrently with Computer Science 501. No unit credit allowedtoward advanced degree.",
+        "units": "1-4",
+        "description": "Procedures and techniques for teaching computer science gained through actual teaching of lecture courses, leading discussion sections, and/or teaching laboratories. Meetings will be held as needed to discuss problems,methods, and procedures.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 592": {
+        "title": "Group Studies: Controls, Dynamical Systems, and Computation",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "592",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "Same course as Chemical Engineering 295, ECE 295, and ME 295.",
+        "units": "1",
+        "description": "A series of weekly lectures given by university staff and outside experts in the fields of control systems, dynamical systems, and computation.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [
+            "Fall 2020",
+            "Winter 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Fall 2022",
+            "Winter 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 593": {
+        "title": "Computer Science Graduate Tutorial",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "593",
+        "prereqs": [],
+        "prereq_description": "Consent of instructor or department chair.",
+        "comments": "",
+        "units": "1-12",
+        "description": "Individual studies exploring topics in computer science with a faculty advisor.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Fall 2020"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 594": {
+        "title": "Seminar in Computer Science",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "594",
+        "prereqs": [],
+        "prereq_description": "Consent of instructor and advisor.",
+        "comments": "",
+        "units": "1-5",
+        "description": "A seminar course offered on an irregular basis. Provides an in-depth discussion of advanced topics of general interest and broadens the scope ofknowledge in computer science.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 595AAZZ": {
+        "title": "Group Studies in Computer Science",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "595AAZZ",
+        "prereqs": [],
+        "prereq_description": "Consent of instructor.",
+        "comments": "",
+        "units": "2",
+        "description": "",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 596": {
+        "title": "Directed Research",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "596",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "",
+        "units": "2-12",
+        "description": "Research, either experimental or theoretical, may be undertaken by qualified graduate students under the direction of a faculty member.",
+        "recommended_prep": "",
+        "professor": "STAFF</span> <i>",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Summer 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Summer 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Summer 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023",
+            "Summer 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 597": {
+        "title": "Individual Studies for Master of Science Comprehensive Examinations and Ph.D Examinations",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "597",
+        "prereqs": [],
+        "prereq_description": "",
+        "comments": "No unit credit allowed toward advanced degree. Enrollment limited to 24 units per examination. Maximum of 12 units per quarter. S/U grading. Instructor is normally student's major professor or chair of doctoral committee.",
+        "units": "1-12",
+        "description": "Individual studies for M.S. comprehensive examination and Ph.D.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 598": {
+        "title": "Master's Thesis Research and Preparation",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "598",
+        "prereqs": [],
+        "prereq_description": "Consent of graduate advisor.",
+        "comments": "",
+        "units": "1-12",
+        "description": "For research underlying the thesis and writing of the thesis.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    },
+    "CMPSC 599": {
+        "title": "Ph.D. Dissertation Research and Preparation",
+        "dept": "CMPSC",
+        "sub_dept": "CMPSC",
+        "number": "599",
+        "prereqs": [],
+        "prereq_description": "Consent of chair of student's doctoral committee.",
+        "comments": "",
+        "units": "1-12",
+        "description": "Research and preparation of dissertation.",
+        "recommended_prep": "",
+        "professor": "STAFF",
+        "college": "COE",
+        "offered": [
+            "Winter 2020",
+            "Spring 2020",
+            "Summer 2020",
+            "Fall 2020",
+            "Winter 2021",
+            "Spring 2021",
+            "Summer 2021",
+            "Fall 2021",
+            "Winter 2022",
+            "Spring 2022",
+            "Summer 2022",
+            "Fall 2022",
+            "Winter 2023",
+            "Spring 2023",
+            "Summer 2023"
+        ],
+        "majors_required_for": [],
+        "majors_optional_for": [],
+        "general_education_fields": []
+    }
+}
