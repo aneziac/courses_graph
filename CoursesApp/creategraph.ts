@@ -4,7 +4,7 @@ import DirectedGraph from 'graphology';
 
 
 
-export default function createGraph(json: JSON, major: string = "all", division: string = "Both", otherDepartments: boolean = true, requiredOnly: boolean = false, quarters: Array<string> = [""]) : DirectedGraph {
+export default function createGraph(json: JSON, major: string = "All", division: string = "Both", otherDepartments: boolean = true, requiredOnly: boolean = false, quarters: Array<string> = [""]) : DirectedGraph {
     const graph = new DirectedGraph();
 
     if (quarters[0] == "") {
@@ -145,7 +145,7 @@ export default function createGraph(json: JSON, major: string = "all", division:
         if (graph.hasNode(key2)) {
             for (var str in quarters) {
                 if ((json[key2].offered &&
-                    (major == "all" || json[key2].majors_required_for.includes(major) || (!requiredOnly && json[key2].majors_optional_for.includes(major)))) &&
+                    (major == "All" || json[key2].majors_required_for.includes(major) || (!requiredOnly && json[key2].majors_optional_for.includes(major)))) &&
                     (division == "Both" || (division == "LD" && parseInt(json[key2].number) < 100) || (division == "UD" && parseInt(json[key2].number) >= 100))) {
                     for (var str2 in json[key2].offered) {
                         if (str2 == str) {
@@ -251,7 +251,7 @@ export default function createGraph(json: JSON, major: string = "all", division:
 
     // calculate number of nodes at each height
     const numaty = new Map();
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 15; i++) {
         numaty.set(i, 0);
         graph.forEachNode((node) => {
             if (map.get(node) == i) {

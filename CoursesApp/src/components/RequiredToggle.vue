@@ -15,6 +15,6 @@ export default {
 
 <template>
     <button :class="{active:isActive}" @click="isActive = !isActive;">
-    {{isActive ? 'ALL' : 'DEPT'}}
+    {{isActive ? 'ALL' : 'REQUIRED'}}
     </button>
 </template>

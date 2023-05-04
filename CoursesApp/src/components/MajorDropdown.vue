@@ -35,6 +35,7 @@ export default {
             "Financial Mathematics-Statistics",
             "Physics BS",
             "Physics BA",
+            "Computer Science"
         ]
       }
     },
