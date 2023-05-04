@@ -20,8 +20,8 @@ let dept: string;
 let division: string;
 let major: string;
 let quarter: Array<string>;
-let showAll: boolean;
-let showRequired: boolean;
+let showAll: boolean = true;
+let showRequired: boolean = false;
 
 nextTick(() => {
     sigma = new Sigma(graph, container.value as HTMLElement);
