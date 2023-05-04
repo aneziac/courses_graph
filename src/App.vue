@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { nextTick, ref } from 'vue'
 import Sigma from 'sigma'
-import createGraph from "../creategraph";
+import createGraph from "./creategraph";
 import loadJSON from "./load_json";
 import DeptDropdown from './components/DeptDropdown.vue'
 import DivisionDropdown from './components/DivisionDropdown.vue';

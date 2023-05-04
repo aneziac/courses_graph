@@ -1,5 +1,5 @@
 scraper/raw.txt
-CoursesApp/data/*
+data/*
 venv/*
 scraper/__pycache__/*
 .pytest_cache/*
@@ -12,6 +12,5 @@ server.cjs
 .DS_Store
 scraper/*.env
 scraper/major_courses.json
-CoursesApp/node_modules
-CoursesApp/dist
-CoursesApp/server.cjs
+node_modules
+dist
