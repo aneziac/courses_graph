@@ -339,7 +339,7 @@ def write_json(dept: Department, overwrite=False):
         return
 
     url = dept_to_url(dept)
-    filename = f"CoursesApp/data/{file_dept_abbrev}.json"
+    filename = f"data/{file_dept_abbrev}.json"
 
     courses = compile_data(url, dept)
     if not courses:
@@ -365,7 +365,7 @@ def write_json(dept: Department, overwrite=False):
 
 
 def get_existing_jsons() -> List[str]:
-    base_path = './CoursesApp/data'
+    base_path = './data'
     try:
         ls = os.listdir(base_path)
     except FileNotFoundError:
@@ -501,10 +501,10 @@ def main(argv: List[str]):
 
     if overwrite and 'c' in argv[1]:
         try:
-            shutil.rmtree('CoursesApp/data')
+            shutil.rmtree('data')
         except FileNotFoundError:
             pass
-        os.mkdir('CoursesApp/data')
+        os.mkdir('data')
 
     for dept in DEPTS:
         # keep math up to date with latest version as it's used for testing

@@ -2,8 +2,6 @@ import DirectedGraph from 'graphology';
 
 // creates graph w/ negative edge keys for postreq direction and w/ positive edge keys for prereq direction
 
-
-
 export default function createGraph(json: JSON, major: string = "All", division: string = "Both", otherDepartments: boolean = true, requiredOnly: boolean = false, quarters: Array<string> = [""]) : DirectedGraph {
     const graph = new DirectedGraph();
 
@@ -160,6 +158,20 @@ export default function createGraph(json: JSON, major: string = "All", division:
         }
     }
 
+    // other departments are green and/or are removed
+    graph.forEachNode((node) => {
+        if (!json[node] && otherDepartments) {
+            graph.updateNode(node, attr => {
+                return {
+                    ...attr,
+                    color: "green"
+                };
+            });
+        }
+        else if (!json[node]) {
+            graph.dropNode(node);
+        }
+    });
 
     var count = 0;
     const map = new Map();
@@ -227,7 +239,6 @@ export default function createGraph(json: JSON, major: string = "All", division:
         }
     });
 
-    // other departments are green and/or are removed
     graph.forEachNode((node) => {
         if (!json[node] && otherDepartments) {
             graph.updateNode(node, attr => {
@@ -241,6 +252,8 @@ export default function createGraph(json: JSON, major: string = "All", division:
             graph.dropNode(node);
         }
     });
+
+
 
     for (var key7 in json) {
         if (graph.hasNode(key7) && (json[key7].prereq_description.includes("Consent of instructor") || json[key7].prereq_description.includes("consent of instructor"))) {

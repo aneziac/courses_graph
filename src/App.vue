@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { nextTick, ref } from 'vue'
-import Sigma from 'sigma'
-import createGraph from "../creategraph";
+import { nextTick, ref } from 'vue';
+import Sigma from 'sigma';
+import createGraph from "./creategraph";
 import loadJSON from "./load_json";
 import DeptDropdown from './components/DeptDropdown.vue'
 import DivisionDropdown from './components/DivisionDropdown.vue';
@@ -20,8 +20,8 @@ let dept: string;
 let division: string;
 let major: string;
 let quarter: Array<string>;
-let showAll: boolean;
-let showRequired: boolean;
+let showAll: boolean = true;
+let showRequired: boolean = false;
 
 nextTick(() => {
     sigma = new Sigma(graph, container.value as HTMLElement);
