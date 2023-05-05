@@ -834,9 +834,10 @@
         "number": "130A",
         "prereqs": [
             [
-                "CMPSC 40",
-                "CMPSC 32"
-            ]
+                "CMPSC 40"
+            ],
+            ["CMPSC 32"],
+            ["PSTAT 120A", "ECE 139"]
         ],
         "prereq_description": "Computer Science 40 with a grade of C or better; Computer Science 32 with a grade of C",
         "comments": "",
