@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { nextTick, ref } from 'vue'
-import Sigma from 'sigma'
-import createGraph from "../creategraph";
+import { nextTick, ref } from 'vue';
+import Sigma from 'sigma';
+import createGraph from "./creategraph";
 import loadJSON from "./load_json";
 import DeptDropdown from './components/DeptDropdown.vue'
 import DivisionDropdown from './components/DivisionDropdown.vue';
 import MajorDropdown from './components/MajorDropdown.vue';
 import QuarterDropdown from './components/QuarterDropdown.vue';
+import DeptToggle from './components/DeptToggle.vue';
+import RequiredToggle from './components/RequiredToggle.vue';
 
 const container = ref()
 
@@ -18,6 +20,8 @@ let dept: string;
 let division: string;
 let major: string;
 let quarter: Array<string>;
+let showAll: boolean = true;
+let showRequired: boolean = false;
 
 nextTick(() => {
     sigma = new Sigma(graph, container.value as HTMLElement);
@@ -25,7 +29,7 @@ nextTick(() => {
 
 function update() {
     json = loadJSON(dept);
-    graph = createGraph(json, major, division, true, quarter);
+    graph = createGraph(json, major, division, showAll, showRequired, quarter);
     sigma.setGraph(graph);
 }
 
@@ -48,6 +52,15 @@ function setQuarter(value) {
     quarter = value;
     update();
 }
+
+function setShowAll() {
+    showAll = !showAll;
+    update();
+}
+function setShowRequired() {
+    showRequired = !showRequired;
+    update();
+}
 </script>
 
 <template>
@@ -58,23 +71,27 @@ function setQuarter(value) {
     <QuarterDropdown @update="setQuarter" />
     <MajorDropdown @update="setMajor" />
     <DivisionDropdown @update="setDivision" />
+    <DeptToggle @update="setShowAll"/>
+    <RequiredToggle @update="setShowRequired"/>
   </div>
 </template>
 
 <style>
 .container {
   position: fixed;
+  left: 3vw;
   width: 100vw;
-  height: 80vh;
-  overflow: hidden;
+  height: 100vh;
   /* background-color: seashell; */
 }
 .ui-bar {
     position: absolute;
     margin: auto;
-    top: 80vh;
-    width: 95vw;
-    height: 20vh;
+    top: 10vh;
+    width: 20vw;
+    height: 25vh;
+    text-align: center;
+    display: block;
 }
 h1 {
     color:brown;

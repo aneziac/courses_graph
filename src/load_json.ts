@@ -1,3 +1,4 @@
+/* This entire file is a hacky mess. Will need to fix. */
 
 import anth_json from "../data/anth.json";
 import art_json from "../data/art.json";
@@ -16,7 +17,7 @@ import chem_json from "../data/chem.json";
 import chemcs_json from "../data/chemcs.json";
 import chin_json from "../data/chin.json";
 import class_json from "../data/class.json";
-// import cmpsc_json from "../data/cmpsc.json";
+import cmpsc_json from "../data/cmpsc.json";
 import cmptgcs_json from "../data/cmptgcs.json";
 import cncsp_json from "../data/cncsp.json";
 import comm_json from "../data/comm.json";
@@ -162,8 +163,8 @@ export default function loadJSON(dept: string = 'anth') {
         return ed_a_json;
     } else if (dept == "ed_e") {
         return ed_e_json;
-    } else if (dept == "ed_hss") {
-        return ed_hss_json;
+    // } else if (dept == "ed_hss") {
+    //     return ed_hss_json;
     } else if (dept == "ed_ia") {
         return ed_ia_json;
     } else if (dept == "ed_l") {

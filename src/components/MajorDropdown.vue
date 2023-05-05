@@ -35,6 +35,7 @@ export default {
             "Financial Mathematics-Statistics",
             "Physics BS",
             "Physics BA",
+            "Computer Science"
         ]
       }
     },
@@ -48,7 +49,7 @@ export default {
 
 <template>
     <div>
-        <select v-model="selected">
+        <select class="form-control form-control-sm" v-model="selected">
             <option v-for="option in options" :value="option" :text="option">
             </option>
         </select>

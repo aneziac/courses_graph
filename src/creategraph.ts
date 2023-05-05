@@ -2,9 +2,7 @@ import DirectedGraph from 'graphology';
 
 // creates graph w/ negative edge keys for postreq direction and w/ positive edge keys for prereq direction
 
-
-
-export default function createGraph(json: JSON, major: string = "All", division: string = "Both", otherDepartments: boolean = true, quarters: Array<string> = [""]) : DirectedGraph {
+export default function createGraph(json: JSON, major: string = "All", division: string = "Both", otherDepartments: boolean = true, requiredOnly: boolean = false, quarters: Array<string> = [""]) : DirectedGraph {
     const graph = new DirectedGraph();
 
     if (quarters[0] == "") {
@@ -22,9 +20,7 @@ export default function createGraph(json: JSON, major: string = "All", division:
         graph.addNode(key, { x: 0, y: 0, size: 5, label: key.substring(key.lastIndexOf(" ")), color: "blue" });
     }
 
-    var prereqset = 0; // add in all the edges
-    var prereqwithinset = 0;
-    var prereqkey;
+    // add in all the edges
     for (var key in json) {
         for (var i = 0; i < json[key].prereqs.length; i++) {
             for (var j = 0; j < json[key].prereqs[i].length; j++) {
@@ -42,45 +38,39 @@ export default function createGraph(json: JSON, major: string = "All", division:
                             x = 0;
                             y++;
                         }
-                        prereqkey =  prereqset.toString() + '.' + prereqwithinset.toString();
                         if (j + 1 != json[key].prereqs[i].length) {
-                            prereqwithinset++;
                             if (!json[key].prereqs[i][j].includes("[O]")) {
-                                graph.mergeDirectedEdgeWithKey(prereqkey, key, json[key].prereqs[i][j], {
+                                graph.mergeDirectedEdge(key, json[key].prereqs[i][j], {
                                     color: colors[currColor]
                                 });
                             }
                             else {
-                                graph.mergeDirectedEdgeWithKey(prereqkey.substr(0, key.length - 4), key, json[key].prereqs[i][j].substring(0, json[key].prereqs[i][j].length - 4), {
+                                graph.mergeDirectedEdge(key, json[key].prereqs[i][j].substring(0, json[key].prereqs[i][j].length - 4), {
                                     color: "black"
                                 });
                             }
                         }
                         else if (j + 1 == json[key].prereqs[i].length && i + 1 != json[key].prereqs.length) {
-                            prereqset++;
-                            prereqwithinset = 0;
                             if (!json[key].prereqs[i][j].includes("[O]")) {
-                                graph.mergeDirectedEdgeWithKey(prereqkey, key, json[key].prereqs[i][j], {
+                                graph.mergeDirectedEdge(key, json[key].prereqs[i][j], {
                                     color: colors[currColor]
                                 });
                             }
                             else {
-                                graph.mergeDirectedEdgeWithKey(prereqkey.substr(0, key.length - 4), key, json[key].prereqs[i][j].substring(0, json[key].prereqs[i][j].length - 4), {
+                                graph.mergeDirectedEdge(key, json[key].prereqs[i][j].substring(0, json[key].prereqs[i][j].length - 4), {
                                     color: "black"
                                 });
                             }
                             currColor = (currColor + 1) % colors.length;
                         }
                         else {
-                            prereqset = 10 * Math.floor(prereqset / 10) + 10;
-                            prereqwithinset = 0;
                             if (!json[key].prereqs[i][j].includes("[O]")) {
-                                graph.mergeDirectedEdgeWithKey(prereqkey, key, json[key].prereqs[i][j], {
+                                graph.mergeDirectedEdge(key, json[key].prereqs[i][j], {
                                     color: colors[currColor]
                                 });
                             }
                             else {
-                                graph.mergeDirectedEdgeWithKey(prereqkey.substr(0, key.length - 4), key, json[key].prereqs[i][j].substring(0, json[key].prereqs[i][j].length - 4), {
+                                graph.mergeDirectedEdge(key, json[key].prereqs[i][j].substring(0, json[key].prereqs[i][j].length - 4), {
                                     color: "black"
                                 });
                             }
@@ -89,45 +79,39 @@ export default function createGraph(json: JSON, major: string = "All", division:
 
                     }
                     else if (graph.hasNode(json[key].prereqs[i][j])) {
-                        prereqkey =  prereqset.toString() + '.' + prereqwithinset.toString();
                         if (j + 1 != json[key].prereqs[i].length) {
-                            prereqwithinset++;
                             if (!json[key].prereqs[i][j].includes("[O]")) {
-                                graph.mergeDirectedEdgeWithKey(prereqkey, key, json[key].prereqs[i][j], {
+                                graph.mergeDirectedEdge(key, json[key].prereqs[i][j], {
                                     color: colors[currColor]
                                 });
                             }
                             else {
-                                graph.mergeDirectedEdgeWithKey(prereqkey.substr(0, key.length - 4), key.substr, json[key].prereqs[i][j].substring(0, json[key].prereqs[i][j].length - 4), {
+                                graph.mergeDirectedEdge(key, json[key].prereqs[i][j].substring(0, json[key].prereqs[i][j].length - 4), {
                                     color: "black"
                                 });
                             }
                         }
                         else if (j + 1 == json[key].prereqs[i].length && i + 1 != json[key].prereqs.length) {
-                            prereqset++;
-                            prereqwithinset = 0;
                             if (!json[key].prereqs[i][j].includes("[O]")) {
-                                graph.mergeDirectedEdgeWithKey(prereqkey, key, json[key].prereqs[i][j], {
+                                graph.mergeDirectedEdge(key, json[key].prereqs[i][j], {
                                     color: colors[currColor]
                                 });
                             }
                             else {
-                                graph.mergeDirectedEdgeWithKey(prereqkey.substr(0, key.length - 4), key.substr, json[key].prereqs[i][j].substring(0, json[key].prereqs[i][j].length - 4), {
+                                graph.mergeDirectedEdge(key, json[key].prereqs[i][j].substring(0, json[key].prereqs[i][j].length - 4), {
                                     color: "black"
                                 });
                             }
                             currColor = (currColor + 1) % colors.length;
                         }
                         else {
-                            prereqset = 10 * Math.floor(prereqset / 10) + 10;
-                            prereqwithinset = 0;
                             if (!json[key].prereqs[i][j].includes("[O]")) {
-                                graph.mergeDirectedEdgeWithKey(prereqkey, key, json[key].prereqs[i][j], {
+                                graph.mergeDirectedEdge(key, json[key].prereqs[i][j], {
                                     color: colors[currColor]
                                 });
                             }
                             else {
-                                graph.mergeDirectedEdgeWithKey(prereqkey.substr(0, key.length - 4), key.substr, json[key].prereqs[i][j].substring(0, json[key].prereqs[i][j].length - 4), {
+                                graph.mergeDirectedEdge(key, json[key].prereqs[i][j].substring(0, json[key].prereqs[i][j].length - 4), {
                                     color: "black"
                                 });
                             }
@@ -139,6 +123,56 @@ export default function createGraph(json: JSON, major: string = "All", division:
             }
         }
     }
+
+
+
+    // removes all grad courses
+    for (var key2 in json) {
+        if (graph.hasNode(key2)) {
+            if (parseInt(json[key2].number) > 200) {
+                graph.dropNode(key2);
+            }
+        }
+    }
+
+
+    // remove based on quarters, divisions
+    var toInclude = false;
+    for (var key2 in json) {
+        toInclude = false;
+        if (graph.hasNode(key2)) {
+            for (var str in quarters) {
+                if ((json[key2].offered &&
+                    (major == "All" || json[key2].majors_required_for.includes(major) || (!requiredOnly && json[key2].majors_optional_for.includes(major)))) &&
+                    (division == "Both" || (division == "LD" && parseInt(json[key2].number) < 100) || (division == "UD" && parseInt(json[key2].number) >= 100))) {
+                    for (var str2 in json[key2].offered) {
+                        if (str2 == str) {
+                            toInclude = true;
+                        }
+                    }
+                }
+            }
+            if (!toInclude) {
+                graph.dropNode(key2);
+            }
+        }
+    }
+
+    // other departments are green and/or are removed
+    graph.forEachNode((node) => {
+        if (!json[node] && otherDepartments) {
+            graph.updateNode(node, attr => {
+                return {
+                    ...attr,
+                    color: "green"
+                };
+            });
+        }
+        else if (!json[node]) {
+            graph.dropNode(node);
+        }
+    });
+
     var count = 0;
     const map = new Map();
 
@@ -153,9 +187,10 @@ export default function createGraph(json: JSON, major: string = "All", division:
     });
 
 
-
     var sent;
     var max = 1;
+
+    console.log(graph.order);
 
     while (count < graph.order) {
         graph.forEachNode((node) => {
@@ -184,47 +219,13 @@ export default function createGraph(json: JSON, major: string = "All", division:
         });
     }
 
-    // removes all grad courses
-    for (var key2 in json) {
-        if (graph.hasNode(key2)) {
-            if (parseInt(json[key2].number) > 200) {
-                graph.dropNode(key2);
-                map.delete(key2);
-            }
-        }
-    }
-
-
-    // remove based on quarters, divisions
-    var toInclude = false;
-    for (var key2 in json) {
-        toInclude = false;
-        if (graph.hasNode(key2)) {
-            for (var str in quarters) {
-                if ((json[key2].offered && major == "All" || json[key2].majors_required_for.includes(major)) &&
-                    (division == "Both" || (division == "LD" && parseInt(json[key2].number) < 100) || (division == "UD" && parseInt(json[key2].number) >= 100))) {
-                    for (var str2 in json[key2].offered) {
-                        if (str2 == str) {
-                            toInclude = true;
-                        }
-                    }
-                }
-            }
-            if (!toInclude) {
-                graph.dropNode(key2);
-                map.delete(key);
-            }
-        }
-    }
-
-
-    // remove nodes w/ no neighbors
-    graph.forEachNode((node) => {
-        if (graph.degree(node) == 0) {
-            // graph.dropNode(node);
-            // map.delete(node);
-        }
-    });
+    // // remove nodes w/ no neighbors
+    // graph.forEachNode((node) => {
+    //     if (graph.degree(node) == 0) {
+    //         // graph.dropNode(node);
+    //         // map.delete(node);
+    //     }
+    // });
 
     // root nodes are red
     graph.forEachNode((node) => {
@@ -238,7 +239,6 @@ export default function createGraph(json: JSON, major: string = "All", division:
         }
     });
 
-    // other departments are green and/or are removed
     graph.forEachNode((node) => {
         if (!json[node] && otherDepartments) {
             graph.updateNode(node, attr => {
@@ -253,47 +253,18 @@ export default function createGraph(json: JSON, major: string = "All", division:
         }
     });
 
+
+
     for (var key7 in json) {
         if (graph.hasNode(key7) && (json[key7].prereq_description.includes("Consent of instructor") || json[key7].prereq_description.includes("consent of instructor"))) {
             graph.setNodeAttribute(key7, "color", "purple");
-            // graph.updateNode(key7 => {
-            //     return {
-            //         color: "purple"
-            //     };
-            // });
         }
     }
 
 
-
-
-    // toInclude = false;
-    // for (var key2 in json) {
-    //     toInclude = false;
-    //     if (graph.hasNode(key2)) {
-    //         for (var str in quarters) {
-    //             if (json[key2].offered) {
-    //                 for (var str2 in json[key2].offered) {
-    //                     if (str2 == str) {
-    //                         toInclude = true;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //         if (!toInclude) {
-    //             graph.dropNode(key2);
-    //             map.delete(key);
-    //         }
-    //     }
-    // }
-
-
-
-
-
     // calculate number of nodes at each height
     const numaty = new Map();
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 15; i++) {
         numaty.set(i, 0);
         graph.forEachNode((node) => {
             if (map.get(node) == i) {
@@ -301,7 +272,6 @@ export default function createGraph(json: JSON, major: string = "All", division:
             }
         });
     }
-
 
     // assign x-coordinates
     var counter;
@@ -330,37 +300,6 @@ export default function createGraph(json: JSON, major: string = "All", division:
             }
         });
     }
-
-    // graph.forEachNode((node) => {
-    //     var x = node.indexOf(" ");
-    //     if (parseInt(node.substr(x+1)) > 200) {
-    //         graph.dropNode(node);
-    //         map.delete(node);
-    //     }
-    // });
-
-
-
-
-
-
-
-    // graph.forEachNode((key2) => {
-    //     console.log("MATH 2A");
-    //     for (var str in quarters) {
-    //         if (json["MATH 7H"].offered) {
-    //             for (var str2 in json["MATH 7H"].offered) {
-    //                 if (str2 == str) {
-    //                     toInclude = true;
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     if (!toInclude) {
-    //         graph.dropNode(key2);
-    //     }
-    // });
-
 
     return graph;
 }
