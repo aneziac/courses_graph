@@ -401,7 +401,10 @@
         "dept": "CMPSC",
         "sub_dept": "CMPSC",
         "number": "16",
-        "prereqs": [["CMPSC 8"]],
+        "prereqs": [
+            ["MATH 3A", "MATH 2A"],
+            ["CMPSC 8", "ENGR 3", "ECE 3"]
+        ],
         "prereq_description": "Mathematics 3A or 2A with a grade of C or better (may be taken concurrently), CS 8",
         "comments": "",
         "units": "4",
@@ -799,7 +802,7 @@
                 "MATH 4B"
             ],
             ["MATH 6A"],
-            ["CMPSC 24"] 
+            ["CMPSC 24"]
         ],
         "prereq_description": "Mathematics 4B with a grade of C or better; Mathematics 6A with a grade of C or better; Computer Science 24 with a grade of C or better.",
         "comments": "Not open for credit to students who have completed Computer Science 110A.",
@@ -1025,10 +1028,8 @@
         "sub_dept": "CMPSC",
         "number": "154",
         "prereqs": [
-            [
-                "CMPSC 32",
-                "CMPSC 64"
-            ]
+            ["CMPSC 32"],
+            ["CMPSC 64"]
         ],
         "prereq_description": "Computer Science 32 with a grade of C or better; Computer Science 64 with a grade of C or better.",
         "comments": "Not open for credit to students who have received credit for ECE 154 or ECE154A or ECE 154B.",
@@ -1099,7 +1100,14 @@
         "prereqs": [
             [
                 "CMPSC 64",
-                "ENGR 154"
+                "ECE 154",
+                "ECE 154A"
+            ],
+            [
+                "CMPSC 130A"
+            ],
+            [
+                "CMPSC 138"
             ]
         ],
         "prereq_description": "Computer Science 64 or Electrical Engineering 154 or Electrical",
@@ -1161,7 +1169,9 @@
         "dept": "CMPSC",
         "sub_dept": "CMPSC",
         "number": "165A",
-        "prereqs": [],
+        "prereqs": [
+            ["CMPSC 130A"]
+        ],
         "prereq_description": "Computer Science 130A",
         "comments": "",
         "units": "4",
@@ -1226,9 +1236,11 @@
         "number": "170",
         "prereqs": [
             [
-                "CMPSC 130A",
-                "CMPSC 154",
-                "ECE 154A"
+                "CMPSC 130A"
+            ],
+            [
+                "CMPSC 154 [O]",
+                "ECE 154A [O]"
             ]
         ],
         "prereq_description": "Computer Science 130A; and, Computer Science 154 or ECE 154A (may be taken",
@@ -1392,7 +1404,9 @@
         "number": "176A",
         "prereqs": [
             [
-                "CMPSC 32",
+                "CMPSC 32"
+            ],
+            [
                 "PSTAT 120A",
                 "ECE 139"
             ]
@@ -1503,8 +1517,13 @@
         "number": "178",
         "prereqs": [
             [
-                "CMPSC 24",
+                "CMPSC 24"
+            ],
+            [
                 "CMPSC 40"
+            ],
+            [
+                "PSTAT 120A", "PSTAT 121A", "ECE 139"
             ]
         ],
         "prereq_description": "Computer Science 24 with a grade of C or better; Computer Science 40 with a grade of C or better;",
