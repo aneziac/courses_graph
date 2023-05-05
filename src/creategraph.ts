@@ -242,6 +242,20 @@ graph.forEachNode((node) => {
         }
     });
 
+    graph.forEachNode((node) => {
+        if (!json[node] && otherDepartments) {
+            graph.updateNode(node, attr => {
+                return {
+                    ...attr,
+                    color: "green"
+                };
+            });
+        }
+        else if (!json[node]) {
+            graph.dropNode(node);
+        }
+    });
+
     
 
     for (var key7 in json) {

@@ -796,10 +796,10 @@
         "number": "111",
         "prereqs": [
             [
-                "MATH 4B",
-                "MATH 6A",
-                "CMPSC 24"
-            ]
+                "MATH 4B"
+            ],
+            ["MATH 6A"],
+            ["CMPSC 24"] 
         ],
         "prereq_description": "Mathematics 4B with a grade of C or better; Mathematics 6A with a grade of C or better; Computer Science 24 with a grade of C or better.",
         "comments": "Not open for credit to students who have completed Computer Science 110A.",
