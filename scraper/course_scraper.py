@@ -374,7 +374,7 @@ def get_existing_jsons() -> List[str]:
     return [item[:-5] for item in ls]
 
 
-def get_courses_json(quarter: str, dept: str) -> Dict:
+def get_courses_json(quarter: str, dept: str = '', page_number: int = 1) -> Dict:
     load_dotenv()
 
     try:
@@ -391,12 +391,16 @@ def get_courses_json(quarter: str, dept: str) -> Dict:
     }
     params = {
         'quarter': quarter,
-        'deptCode': dept,
-        'pageNumber': '1',
+        'pageNumber': str(page_number),
         'pageSize': '500'
     }
+    if dept:
+        params['deptCode'] = dept
 
     response = requests.get('https://api.ucsb.edu/academics/curriculums/v3/classes/search', params=params, headers=headers)
+    if response.status_code != 200:
+        raise RuntimeError('Could not get data for ', page_number)
+    
     return response.json()
 
 
@@ -516,4 +520,17 @@ def main(argv: List[str]):
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    # for dept in DEPTS:
+    #     print(get_courses_json('20232', dept.super_dept))
+    #     quit()
+        # print(dept.full_name, len(get_courses_json('20232', dept.super_dept)['classes']))
+    # main(sys.argv)
+    dept_codes = []
+    for x in range(1, 8):
+        for course in get_courses_json('20221', page_number=x)['classes']:
+            if (code := [course['deptCode'], course['courseId'][:5]]) not in dept_codes:
+                # print(code, course['courseId'])
+                dept_codes.append(code)
+
+    for x in sorted(dept_codes):
+        print(x)

@@ -1,27 +1,27 @@
-ANTH, ANTH, anth, Anthropology, L&S
-ART, ART, art, Art, L&S
-ART CS, ART, ccs, Art (Creative Studies), CCS
-ARTHI, ARTHI, arthi, Art History, L&S
-AS AM, AS AM, asam, Asian American Studies, L&S
-ASTRO, PHYS, phys, Astronomy, L&S
-BIOE, BIOE, bioe, Biological Engineering, COE
-BIOL CS, BIOL, ccs, Biology (Creative Studies), CCS
-BL ST, BL ST, blst, Black Studies, L&S
-BMSE, BMSE, bmse, Biomolecular Science and Engineering, L&S
-C LIT, C LIT, complit, Comparative Literature, L&S
-CH E, CH E, chemengr, Chemical Engineering, COE
-CH ST, CH ST, chst, Chicana and Chicano Studies, L&S
-CHEM, CHEM, chem, Chemistry and Biochemistry, L&S
-CHEM CS, CHEM, ccs, Chemistry (Creative Studies), CCS
-CHIN, EACS, ealcs, Chinese, L&S
-CLASS, CLASS, class, Classics, L&S
-CMPSC, CMPSC, compsci-engr, Computer Science, COE
-CMPTGCS, CMPSC, ccs, Computing (Creative Studies), CCS
-CNCSP, CNCSP, CCSP,"Counseling, Clinical, School Psychology", GGSE
-COMM, COMM, comm, Communications, L&S
+ANTH, ANTH, anth, Anthropology, L&S, ANTH
+ART, ART, art, Art, L&S, ART
+ART CS, ART, ccs, Art (Creative Studies), CCS, CRSTU
+ARTHI, ARTHI, arthi, Art History, L&S, ARTHI
+AS AM, AS AM, asam, Asian American Studies, L&S, ASAM
+ASTRO, PHYS, phys, Astronomy, L&S, PHYS
+BIOE, BIOE, bioe, Biological Engineering, COE, 
+BIOL CS, BIOL, ccs, Biology (Creative Studies), CCS, CRSTU
+BL ST, BL ST, blst, Black Studies, L&S, BLKST
+BMSE, BMSE, bmse, Biomolecular Science and Engineering, L&S, BMSE
+C LIT, C LIT, complit, Comparative Literature, L&S, CLIT
+CH E, CH E, chemengr, Chemical Engineering, COE, CNENG
+CH ST, CH ST, chst, Chicana and Chicano Studies, L&S, CHST
+CHEM, CHEM, chem, Chemistry and Biochemistry, L&S, CHEM
+CHEM CS, CHEM, ccs, Chemistry (Creative Studies), CCS, CRSTU
+CHIN, EACS, ealcs, Chinese, L&S, EALCS
+CLASS, CLASS, class, Classics, L&S, CLASS
+CMPSC, CMPSC, compsci-engr, Computer Science, COE, CMPSC
+CMPTGCS, CMPSC, ccs, Computing (Creative Studies), CCS, CRSTU
+CNCSP, CNCSP, CCSP,"Counseling, Clinical, School Psychology", GGSE, CNCSP
+COMM, COMM, comm, Communications, L&S, COMM
 DANCE, THTDA, thtda, Dance, L&S
 DYNS, DYNS, dyns, Dynamical Neuroscience, L&S
-EACS, EACS, ealcs, East Asian Cultural Studies, L&S
+EACS, EACS, ealcs, East Asian Cultural Studies, L&S, EALCS
 EARTH, EARTH, earthsci, Earth Science, L&S
 ECE, ECE, compengr, Electrical Computer Engineering, COE
 ECON, ECON, econ, Economics, L&S
@@ -52,22 +52,22 @@ GEOG, GEOG, geog, Geography, L&S
 GER, GSS, gersl, German, L&S
 GLOBL, GIS, gis, Global Studies, L&S
 GPS, GIS, gis, Global Peace and Security, L&S
-GREEK, CLASS, class, Greek, L&S
+GREEK, CLASS, class, Greek, L&S, CLASS
 HEB, RG ST, relst, Hebrew, L&S
 HIST, HIST, hist, History, L&S
 INT, INT, intdisc, Interdisciplinary, L&S
-INT CS, INT, ccs, Interdisciplinary (Creative Studies), CCS
+INT CS, INT, ccs, Interdisciplinary (Creative Studies), CCS, CRSTU
 ITAL, FRIT, frit, Italian, L&S
-JAPAN, EACS, ealcs, Japanese, L&S
-KOR, EACS, ealcs, Korean, L&S
+JAPAN, EACS, ealcs, Japanese, L&S, EALCS
+KOR, EACS, ealcs, Korean, L&S, EALCS
 LAIS, LAIS, lais, Latin American and Iberian Studies, L&S
-LATIN, CLASS, class, Latin, L&S
+LATIN, CLASS, class, Latin, L&S, CLASS
 LING, LING, ling, Linguistics, L&S
-MARINCS, MARSC, ccs, Marine Science (Creative Studies), CCS
+MARINCS, MARSC, ccs, Marine Science (Creative Studies), CCS, CRSTU
 MARSC, MARSC, marsc, Marine Science, L&S
 MAT, MAT, MAT, Media Arts and Technology, L&S
 MATH, MATH, math, Mathematics, L&S
-MATH CS, MATH, ccs, Mathematics (Creative Studies), CCS
+MATH CS, MATH, ccs, Mathematics (Creative Studies), CCS, CRSTU
 MATRL, MATRL, matrl, Materials, COE
 MCDB, MCDB, mcdb,"Molecular, Cellular, and Developmental Biology", L&S
 ME, ME, mechengr, Mechanical Engineering, COE
@@ -77,7 +77,7 @@ MS, MS, milsci, Military Science (Army ROTC), L&S
 MUS, MUS, music, Music, L&S
 PHIL, PHIL, phil, Philosophy, L&S
 PHYS, PHYS, phys, Physics, L&S
-PHYS CS, PHYS, ccs, Physics (Creative Studies), CCS
+PHYS CS, PHYS, ccs, Physics (Creative Studies), CCS, CRSTU
 POL S, POL S, polsci, Political Science, L&S
 PORT, SPANPORT, spanport, Portuguese, L&S
 PSTAT, PSTAT, stats, Statistics & Applied Probability, L&S
@@ -90,5 +90,5 @@ SOC, SOC, soc, Sociology, L&S
 SPAN, SPANPORT, spanport, Spanish, L&S
 THTR, THTDA, thtda, Theater, L&S
 TMP, TMP, tmp, Technology Management, COE
-W&L CS, ENGL, ccs, Writing & Literature (Creative Studies), CCS
+W&L CS, ENGL, ccs, Writing & Literature (Creative Studies), CCS, CRSTU
 WRIT, WRIT, writ, Writing, L&S
