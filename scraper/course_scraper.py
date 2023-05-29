@@ -182,3 +182,13 @@ if __name__ == '__main__':
             continue
 
         cs.write_json(dept, overwrite=cs.overwrite)
+
+    # dept_codes = []
+    # for x in range(1, 8):
+    #     for course in get_courses_json('20221', page_number=x)['classes']:
+    #         if (code := [course['deptCode'], course['courseId'][:5]]) not in dept_codes:
+    #             # print(code, course['courseId'])
+    #             dept_codes.append(code)
+
+    # for x in sorted(dept_codes):
+    #     print(x)

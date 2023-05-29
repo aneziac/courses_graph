@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 from typing import Dict, List
 import logging
 import os
+import requests
 
 
 def get_offered_courses(dept: str, start_year=2020, end_year=2023) -> Dict[str, Dict[str, List[str]]]:
@@ -25,7 +26,7 @@ def get_offered_courses(dept: str, start_year=2020, end_year=2023) -> Dict[str, 
     return offered_courses
 
 
-def get_courses_json(quarter: str, dept: str) -> Dict:
+def get_courses_json(quarter: str, dept: str = '', page_number: int = 1) -> Dict:
     load_dotenv()
 
     try:
@@ -43,11 +44,17 @@ def get_courses_json(quarter: str, dept: str) -> Dict:
     params = {
         'quarter': quarter,
         'deptCode': dept,
-        'pageNumber': '1',
+        'pageNumber': str(page_number),
         'pageSize': '500'
     }
+    if dept:
+        params['deptCode'] = dept
 
     response = requests.get('https://api.ucsb.edu/academics/curriculums/v3/classes/search', params=params, headers=headers)
+
+    if response.status_code != 200:
+        raise RuntimeError('Could not get data for ', page_number)
+
     return response.json()
 
 
