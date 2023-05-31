@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-from typing import List
+from typing import List, Dict
+from collections import defaultdict
 
 
 @dataclass
@@ -28,6 +29,7 @@ class Department:
 class Major:
     name: str
     dept: str
+
 
 @dataclass
 class Course:
@@ -59,3 +61,10 @@ class APICourse(Course):
 class MajorCourse(Course):
     majors_required_for: List[str]
     majors_optional_for: List[str]
+
+
+def pair_of_lists():
+    return [[], []]
+
+
+defaultdict_pair: Dict[List, List] = defaultdict(pair_of_lists)

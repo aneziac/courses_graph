@@ -1,6 +1,5 @@
 from typing import List
 from pypdf import PdfReader
-from collections import defaultdict
 from io import BytesIO
 import re
 import json
@@ -8,6 +7,7 @@ import json
 from base_scraper import Scraper
 from prereq_parser import get_prereqs
 from readers import build_majors_list
+from datatypes import defaultdict_pair
 
 
 class MajorScraper(Scraper):
@@ -40,13 +40,10 @@ class MajorScraper(Scraper):
         return requirements
 
     def write_major_requirements(self):
-        def pair_of_lists():
-            return [[], []]
-
-        major_dict = defaultdict(pair_of_lists)
+        major_dict = defaultdict_pair()
 
         for major in build_majors_list()[:3]:
-            course_names = pair_of_lists()
+            course_names = [[], []]
             requirements = self.get_major_requirements(major.dept, major.name)
 
             for req in requirements:

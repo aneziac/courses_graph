@@ -2,11 +2,10 @@ from dotenv import load_dotenv
 from typing import Dict, List
 import logging
 import os
-from collections import defaultdict
 
-from base_scraper import Scraper, ScraperException
+from base_scraper import Scraper
 from readers import build_depts_list
-from datatypes import Department
+from datatypes import Department, APICourse, defaultdict_pair
 
 
 class UCSB_API_Client(Scraper):
@@ -14,7 +13,7 @@ class UCSB_API_Client(Scraper):
         super().__init__('UCSB API')
         self._quarters = ['Winter', 'Spring', 'Summer', 'Fall']
 
-    def get_offered_courses(self, dept: str, start_year=2020, end_year=2023) -> Dict[str, Dict[str, List[str]]]:
+    def get_offered_courses(self, dept: Department, start_year=2020, end_year=2023) -> Dict[str, Dict[str, List[str]]]:
         offered_courses: Dict[str, Dict[str, List[str]]] = {}
 
         # Look up when courses are offered
@@ -28,7 +27,7 @@ class UCSB_API_Client(Scraper):
                 quarter_code = str(year) + str(quarter_i + 1)
 
                 offered_courses[quarter] = self.parse_courses_json(
-                    self.get_courses_json(quarter_code, dept)
+                    self.get_courses_json(quarter_code, dept.api_name)
                 )
 
         return offered_courses
@@ -80,18 +79,24 @@ class UCSB_API_Client(Scraper):
     def write_json(self, dept: Department, overwrite=False) -> None:
         filename = f'data/api/{dept.file_abbrev}.json'
 
-        offered_courses = self.get_offered_courses(dept.abbreviation)
-        print(offered_courses)
+        offered_courses = self.get_offered_courses(dept)
 
-        # come back to this algorithm - gotta be a better way
-        quarters_offered = []
-        ges: List[str] = []
+        # store courses in a dict first to take advantage of defaultdict
+        courses_dict: Dict[str, List[List[str]]] = defaultdict_pair
+        courses_list: List[APICourse] = []
 
         for i, quarter in enumerate(offered_courses.keys()):
             for number in offered_courses[quarter]:
-                quarters_offered.append(quarter)
+                courses_dict[number][0].append(quarter)
+
                 if i == 0:
-                    ges = offered_courses[quarter][number]
+                    courses_dict[number][1] = offered_courses[quarter][number]
+
+
+        for number in courses_dict:
+            courses_list.append(APICourse(number, dept.abbreviation, courses_dict[number][0], courses_dict[number][1]))
+
+        super().write_json(filename, courses_list)
 
 
 if __name__ == '__main__':
@@ -99,25 +104,6 @@ if __name__ == '__main__':
 
     for dept in build_depts_list():
         client.write_json(dept, overwrite=client.overwrite)
-        quit()
 
-
-    # dept_codes = []
-    # for x in range(1, 8):
-    #     for course in client.get_courses_json('20221', page_number=x)['classes']:
-    #         if (code := [course['deptCode'], course['courseId'][:5]]) not in dept_codes:
-    #             # print(code, course['courseId'])
-    #             dept_codes.append(code)
-
-    # for x in sorted(dept_codes):
-    #     print(x)
-
-    # ges: List[str] = []
-
-    # # come back to this algorithm - gotta be a better way
-    # quarters_offered = []
-    # for i, quarter in enumerate(offered_courses.keys()):
-    #     if number in offered_courses[quarter]:
-    #         quarters_offered.append(quarter)
-    #         if i == 0:
-    #             ges = offered_courses[quarter][number]
+    # use subjectArea field
+    # print(client.get_courses_json('20233', 'GERSL'))
