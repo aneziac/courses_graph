@@ -2,7 +2,7 @@ import json
 import requests
 from dataclasses import asdict
 import logging
-from typing import Optional, List
+from typing import Optional, List, Dict
 import sys
 import shutil
 import os
@@ -11,11 +11,11 @@ from datatypes import Course
 
 
 class Scraper:
-    def __init__(self):
+    def __init__(self, name):
         argv = sys.argv
 
         self.overwrite = (len(argv) > 1 and 'o' in argv[1])
-        print(f'Performing scraping with overwrite={self.overwrite}')
+        print(f'Scraping {name} with overwrite={self.overwrite}')
 
         logging.basicConfig(
             format='[%(asctime)s] %(message)s',
@@ -48,11 +48,20 @@ class Scraper:
 
             f.write('}')
 
-    def fetch(self, url, fail_message) -> Optional[requests.Response]:
-        r = requests.get(url)
+    def fetch(self,
+              url: str,
+              fail_message: str,
+              params: Dict[str, str]={},
+              headers: Dict[str, str] = {}) -> Optional[requests.Response]:
+        r = requests.get(url, params=params, headers=headers)
 
         if 200 != r.status_code:
             logging.warning(fail_message)
             return None
 
         return r
+
+    # generalized inverse mapping
+
+class ScraperException(Exception):
+    pass

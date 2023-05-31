@@ -5,8 +5,8 @@ from typing import List, Dict
 import logging
 
 
-from datatypes import Department, Course
-from base_scraper import Scraper
+from datatypes import Department, WebsiteCourse
+from base_scraper import Scraper, ScraperException
 from readers import build_depts_list, get_existing_jsons
 from prereq_parser import get_prereqs
 
@@ -17,7 +17,7 @@ class CourseScraper(Scraper):
         self._regexes: Dict[str, re.Pattern] = {}
 
         self._compile_static_regex()
-        super().__init__()
+        super().__init__('course website')
 
     # We separate regex into static which is only compiled once, and regex that changes based on the dept name
 
@@ -38,14 +38,14 @@ class CourseScraper(Scraper):
         self._regexes['NUMBER'] = re.compile(rf'{r_abbrev}\s+(.*)\.')
         self._regexes['DEPT'] = re.compile(rf'(<b>|AndTitle">)\s+({r_abbrev})\s+.*\.')
 
-    def compile_data(self, url: str, dept: Department, debug=False) -> List[Course]:
+    def compile_data(self, url: str, dept: Department, debug=False) -> List[WebsiteCourse]:
         if not (text := self.fetch(url, f'[F] Failed to retrieve data for {dept.full_name} at {url}').text):
             return []
 
         # parse the html with a beautiful soup instance
         soup = bs(text, features='html.parser')
 
-        result: List[Course] = []
+        result: List[WebsiteCourse] = []
 
         if debug:
             # Open a file used for debugging
@@ -94,7 +94,7 @@ class CourseScraper(Scraper):
 
             # add the course to our list with all relevant metadata
             result.append(
-                Course(
+                WebsiteCourse(
                     dept=dept.super_dept,
                     sub_dept=dept.abbreviation,
                     number=number,
@@ -143,25 +143,14 @@ class CourseScraper(Scraper):
             url = f'{base_url}/{dept.url_abbreviation}/?DeptTab=Courses'
 
         if not url:
-            raise Exception(f'Could not get url for {dept.full_name}')
+            raise ScraperException(f'Could not get url for {dept.full_name}')
 
         return url
 
 
     def write_json(self, dept: Department, overwrite=False) -> None:
-        dept_words = dept.abbreviation.lower().split(' ')
-
-        # fix naming conflict caused by the education department
-        if dept.super_dept == 'ED':
-            file_dept_abbrev = '_'.join(dept_words)
-        else:
-            file_dept_abbrev = ''.join(dept_words)
-
-        if not overwrite and file_dept_abbrev in self._EXISTING_JSONS:
-            return
-
+        filename = f'data/website/{dept.file_abbrev}.json'
         url = self.dept_to_url(dept)
-        filename = f'data/{file_dept_abbrev}.json'
 
         courses = self.compile_data(url, dept)
         if not courses:
@@ -182,13 +171,3 @@ if __name__ == '__main__':
             continue
 
         cs.write_json(dept, overwrite=cs.overwrite)
-
-    # dept_codes = []
-    # for x in range(1, 8):
-    #     for course in get_courses_json('20221', page_number=x)['classes']:
-    #         if (code := [course['deptCode'], course['courseId'][:5]]) not in dept_codes:
-    #             # print(code, course['courseId'])
-    #             dept_codes.append(code)
-
-    # for x in sorted(dept_codes):
-    #     print(x)
