@@ -2,32 +2,33 @@ from dotenv import load_dotenv
 from typing import Dict, List
 import logging
 import os
+from collections import defaultdict
 
 from base_scraper import Scraper
 from readers import build_depts_list
-from datatypes import Department, APICourse, defaultdict_pair
+from datatypes import Department, APICourse
 
 
 class UCSB_API_Client(Scraper):
     def __init__(self):
-        super().__init__('UCSB API')
+        super().__init__('UCSB API', 'api')
         self._quarters = ['Winter', 'Spring', 'Summer', 'Fall']
 
-    def get_offered_courses(self, dept: Department, start_year=2020, end_year=2023) -> Dict[str, Dict[str, List[str]]]:
+    def get_offered_courses(self, dept: Department, start_year=2018, end_year=2023) -> Dict[str, Dict[str, List[str]]]:
         offered_courses: Dict[str, Dict[str, List[str]]] = {}
 
         # Look up when courses are offered
 
         for year in range(start_year, end_year + 1):
             for quarter_i in range(4):
-                if year >= 2023 and quarter_i >= 3:  # can't see into the future
+                if year >= 2024: # and quarter_i >= 3:  # can't see into the future
                     break
 
                 quarter = f'{self._quarters[quarter_i]} {year}'
                 quarter_code = str(year) + str(quarter_i + 1)
 
                 offered_courses[quarter] = self.parse_courses_json(
-                    self.get_courses_json(quarter_code, dept.api_name)
+                    self.get_courses_json(quarter_code, dept.api_name), dept.abbreviation
                 )
 
         return offered_courses
@@ -66,23 +67,32 @@ class UCSB_API_Client(Scraper):
 
         return response.json()
 
-    def parse_courses_json(self, courses: dict) -> Dict[str, List[str]]:
+    def parse_courses_json(self, courses: dict, dept: str) -> Dict[str, List[str]]:
         offered_courses = {}
 
         classes = courses['classes']
         for cls in classes:
-            offered_courses[cls['courseId'].split()[1]] = \
-                list(set([x['geCode'].strip() for x in cls['generalEducation']]))
+            split_course =  cls['courseId'].rstrip().split()
+            dept_name, number = ' '.join(split_course[:-1]), split_course[-1]
+
+            if dept_name != dept:
+                # print(f'[{dept_name}] [{dept}]')
+                continue
+            offered_courses[number] = list(set([x['geCode'].strip() for x in cls['generalEducation']]))
 
         return offered_courses
 
-    def write_json(self, dept: Department, overwrite=False) -> None:
-        filename = f'data/api/{dept.file_abbrev}.json'
+    def write_json(self, dept: Department) -> None:
+        def pair_of_lists():
+            return [[], []]
+
+        if not self.write(dept):
+            return
 
         offered_courses = self.get_offered_courses(dept)
 
         # store courses in a dict first to take advantage of defaultdict
-        courses_dict: Dict[str, List[List[str]]] = defaultdict_pair
+        courses_dict: Dict[str, List[List[str]]] = defaultdict(pair_of_lists)
         courses_list: List[APICourse] = []
 
         for i, quarter in enumerate(offered_courses.keys()):
@@ -96,14 +106,15 @@ class UCSB_API_Client(Scraper):
         for number in courses_dict:
             courses_list.append(APICourse(number, dept.abbreviation, courses_dict[number][0], courses_dict[number][1]))
 
-        super().write_json(filename, courses_list)
+        super().write_json(dept, courses_list)
 
 
 if __name__ == '__main__':
     client = UCSB_API_Client()
 
     for dept in build_depts_list():
-        client.write_json(dept, overwrite=client.overwrite)
+        # if dept.abbreviation == 'ART CS':
+        client.write_json(dept)
 
     # use subjectArea field
     # print(client.get_courses_json('20233', 'GERSL'))

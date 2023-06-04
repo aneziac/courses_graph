@@ -57,8 +57,8 @@ def build_majors_list() -> List[Major]:
     return majors
 
 
-def get_existing_jsons() -> List[str]:
-    base_path = './data'
+def get_existing_jsons(extra_path) -> List[str]:
+    base_path = f'./data/{extra_path}/'
     try:
         ls = os.listdir(base_path)
     except FileNotFoundError:

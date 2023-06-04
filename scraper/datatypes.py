@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from typing import List, Dict
-from collections import defaultdict
+import re
 
 
-@dataclass
+@dataclass(frozen=True)
 class Department:
     abbreviation: str
     super_dept: str
@@ -25,19 +25,35 @@ class Department:
         return file_dept_abbrev
 
 
-@dataclass
+@dataclass(frozen=True)
 class Major:
     name: str
     dept: str
 
 
-@dataclass
+@dataclass(frozen=True)
 class Course:
     number: str
     sub_dept: str
 
+    # define a logical well-ordering on this set
+    @property
+    def order(self) -> int:
+        digits = re.sub('\D', '', self.number)
+        letters = re.sub('\d', '', self.number)
 
-@dataclass
+        letter_contribution = 0
+        if letters:
+            for i, letter in enumerate(letters):
+                letter_contribution += (26 ** (len(letters) - i)) * (ord(letter) - ord('A'))
+
+
+        if not digits:
+            return -1
+        return int(digits) * (26 ** 4) + letter_contribution
+
+
+@dataclass(frozen=True)
 class WebsiteCourse(Course):
     title: str
     dept: str
@@ -51,20 +67,13 @@ class WebsiteCourse(Course):
     college: str
 
 
-@dataclass
+@dataclass(frozen=True)
 class APICourse(Course):
     offered: List[str]
     general_education_fields: List[str]
 
 
-@dataclass
+@dataclass(frozen=True)
 class MajorCourse(Course):
     majors_required_for: List[str]
     majors_optional_for: List[str]
-
-
-def pair_of_lists():
-    return [[], []]
-
-
-defaultdict_pair: Dict[List, List] = defaultdict(pair_of_lists)

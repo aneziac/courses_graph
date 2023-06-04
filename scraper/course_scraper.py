@@ -7,17 +7,16 @@ import logging
 
 from datatypes import Department, WebsiteCourse
 from base_scraper import Scraper, ScraperException
-from readers import build_depts_list, get_existing_jsons
+from readers import build_depts_list
 from prereq_parser import get_prereqs
 
 
 class CourseScraper(Scraper):
     def __init__(self):
-        self._EXISTING_JSONS: List[str] = get_existing_jsons()
         self._regexes: Dict[str, re.Pattern] = {}
 
         self._compile_static_regex()
-        super().__init__('course website')
+        super().__init__('course website', 'website')
 
     # We separate regex into static which is only compiled once, and regex that changes based on the dept name
 
@@ -147,9 +146,10 @@ class CourseScraper(Scraper):
 
         return url
 
+    def write_json(self, dept: Department) -> None:
+        if not self.write(dept):
+            return
 
-    def write_json(self, dept: Department, overwrite=False) -> None:
-        filename = f'data/website/{dept.file_abbrev}.json'
         url = self.dept_to_url(dept)
 
         courses = self.compile_data(url, dept)
@@ -157,9 +157,7 @@ class CourseScraper(Scraper):
             logging.warning(f'[F] Failed to retrieve data for {dept.full_name}')
             return
 
-        super().write_json(filename, courses)
-
-        logging.info(f'[S] Wrote data for {dept.full_name} department in {filename}')
+        super().write_json(dept, courses)
 
 
 if __name__ == '__main__':
@@ -170,4 +168,4 @@ if __name__ == '__main__':
             cs.write_json(dept, overwrite=True)
             continue
 
-        cs.write_json(dept, overwrite=cs.overwrite)
+        cs.write_json(dept)
