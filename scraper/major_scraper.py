@@ -39,7 +39,7 @@ class MajorScraper(Scraper):
 
         return requirements
 
-    def write_major_requirements(self):
+    def write_major_requirements(self) -> None:
         def pair_of_lists():
             return [[], []]
 

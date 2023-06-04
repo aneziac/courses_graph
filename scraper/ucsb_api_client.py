@@ -76,7 +76,6 @@ class UCSB_API_Client(Scraper):
             dept_name, number = ' '.join(split_course[:-1]), split_course[-1]
 
             if dept_name != dept:
-                # print(f'[{dept_name}] [{dept}]')
                 continue
             offered_courses[number] = list(set([x['geCode'].strip() for x in cls['generalEducation']]))
 
@@ -102,7 +101,6 @@ class UCSB_API_Client(Scraper):
                 if i == 0:
                     courses_dict[number][1] = offered_courses[quarter][number]
 
-
         for number in courses_dict:
             courses_list.append(APICourse(number, dept.abbreviation, courses_dict[number][0], courses_dict[number][1]))
 
@@ -113,8 +111,4 @@ if __name__ == '__main__':
     client = UCSB_API_Client()
 
     for dept in build_depts_list():
-        # if dept.abbreviation == 'ART CS':
         client.write_json(dept)
-
-    # use subjectArea field
-    # print(client.get_courses_json('20233', 'GERSL'))

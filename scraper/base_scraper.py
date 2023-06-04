@@ -6,7 +6,6 @@ from typing import Optional, List, Dict
 import sys
 import shutil
 import os
-import re
 
 from datatypes import Course, Department
 from readers import get_existing_jsons
@@ -33,10 +32,10 @@ class Scraper:
 
         if self.overwrite and 'c' in argv[1]:
             try:
-                shutil.rmtree('data')
+                shutil.rmtree(f'data/{self.extra_path}')
             except FileNotFoundError:
                 pass
-            os.mkdir('data')
+            os.mkdir(f'data/{self.extra_path}')
 
         self._EXSTING_JSONS = get_existing_jsons(extra_path)
 
@@ -77,6 +76,7 @@ class Scraper:
         return r
 
     # generalized inverse mapping
+
 
 class ScraperException(Exception):
     pass

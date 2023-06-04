@@ -146,8 +146,8 @@ class CourseScraper(Scraper):
 
         return url
 
-    def write_json(self, dept: Department) -> None:
-        if not self.write(dept):
+    def write_json(self, dept: Department, overwrite=False) -> None:
+        if not overwrite and not self.write(dept):
             return
 
         url = self.dept_to_url(dept)
@@ -164,7 +164,7 @@ if __name__ == '__main__':
     cs = CourseScraper()
     for dept in build_depts_list():
         # keep math up to date with latest version as it's used for testing
-        if dept.abbreviation == 'MATH':
+        if dept.abbreviation == 'CMPSC':
             cs.write_json(dept, overwrite=True)
             continue
 

@@ -66,3 +66,30 @@ def get_existing_jsons(extra_path) -> List[str]:
 
     # remove the '.json' part
     return [item[:-5] for item in ls]
+
+
+def offering_stats():
+    total_offerings, total_offered = 0, 0
+    for dept in get_existing_jsons('website'):
+        offerings = []
+        with open(f'data/website/{dept}.json', 'r') as f:
+            for line in f.readlines():
+                offerings.append(line.split(':')[0])
+
+            total_offerings += len(offerings)
+
+        with open(f'data/api/{dept}.json', 'r') as f:
+            offered = 0
+            for line in f.readlines():
+                if line.split(':')[0] in offerings:
+                    offered += 1
+
+            total_offered += offered
+
+        print(f'{dept} % Offered: ', round(100 * offered / len(offerings), 1))
+
+    print('Total % Offered: ', round(100 * total_offered / total_offerings, 1))
+
+
+if __name__ == '__main__':
+    offering_stats()
