@@ -98,8 +98,9 @@ class UCSB_API_Client(Scraper):
             for number in offered_courses[quarter]:
                 courses_dict[number][0].append(quarter)
 
-                if i == 0:
-                    courses_dict[number][1] = offered_courses[quarter][number]
+                ge_info = offered_courses[quarter][number]
+                if ge_info and not courses_dict[number][1]:
+                    courses_dict[number][1] = ge_info
 
         for number in courses_dict:
             courses_list.append(APICourse(number, dept.abbreviation, courses_dict[number][0], courses_dict[number][1]))
