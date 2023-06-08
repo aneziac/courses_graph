@@ -94,7 +94,7 @@ class UCSB_API_Client(Scraper):
         courses_dict: Dict[str, List[List[str]]] = defaultdict(pair_of_lists)
         courses_list: List[APICourse] = []
 
-        for i, quarter in enumerate(offered_courses.keys()):
+        for quarter in offered_courses.keys():
             for number in offered_courses[quarter]:
                 courses_dict[number][0].append(quarter)
 

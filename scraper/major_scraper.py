@@ -12,7 +12,7 @@ from readers import build_majors_list
 
 class MajorScraper(Scraper):
     def __init__(self):
-        super().__init__('majors')
+        super().__init__('majors', 'majors')
 
     def get_major_requirements(self, dept_name: str, major_name: str) -> List[str]:
         if 'Emphasis' in major_name:
@@ -45,7 +45,7 @@ class MajorScraper(Scraper):
 
         major_dict = defaultdict(pair_of_lists)
 
-        for major in build_majors_list()[:3]:
+        for major in build_majors_list():
             course_names = [[], []]
             requirements = self.get_major_requirements(major.dept, major.name)
 
@@ -78,3 +78,8 @@ if __name__ == '__main__':
     ms = MajorScraper()
     ms.write_major_requirements()
     # print(ms.get_major_requirements('Anth', 'Anthropology'))
+
+"""
+Notes
+Two different tracks in minors for chinese and japanese
+"""
