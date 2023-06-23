@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup as bs
 import re
-from dataclasses import asdict
 from typing import List, Dict
 import logging
 
@@ -160,7 +159,7 @@ class CourseScraper(Scraper):
         super().write_json(dept, courses)
 
 
-if __name__ == '__main__':
+def main():
     cs = CourseScraper()
     for dept in build_depts_list():
         # keep math up to date with latest version as it's used for testing
@@ -169,3 +168,7 @@ if __name__ == '__main__':
             continue
 
         cs.write_json(dept)
+
+
+if __name__ == '__main__':
+    main()

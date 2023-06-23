@@ -4,7 +4,6 @@ from io import BytesIO
 import re
 import json
 from collections import defaultdict
-from dataclasses import asdict
 import logging
 
 from base_scraper import Scraper
@@ -73,9 +72,11 @@ class MajorScraper(Scraper):
         with open('scraper/major_courses.json', 'w+') as major_courses:
             major_courses.write(json.dumps(major_dict))
 
-    # rewrite with actual polymorphism at some point
     def write_json(self, majors: List[Major]):
-        filename = f'data/{self.extra_path}/{majors[0].dept.lower()}.json'
+        department = majors[0].dept.lower()
+        filename = f'data/{self.extra_path}/{department}.json'
+        if department in self._EXSTING_JSONS:
+            return
 
         with open(filename, 'w+') as f:
             f.write('{')
@@ -98,7 +99,7 @@ class MajorScraper(Scraper):
         logging.info(f'[S] Wrote data for {major.dept} department in {filename}')
 
 
-if __name__ == '__main__':
+def main():
     ms = MajorScraper()
     dept_majors = []
     current_dept = 'Anth'
@@ -110,3 +111,7 @@ if __name__ == '__main__':
             dept_majors.clear()
 
         dept_majors.append(major)
+
+
+if __name__ == '__main__':
+    main()

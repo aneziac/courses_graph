@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List, Dict
+from typing import List
 import re
 
 
@@ -114,9 +114,3 @@ class APICourse(ProbabilityCourse):
             probabilities[i] = round(probabilities[i] / weight_sum, 3)
 
         return probabilities
-
-
-@dataclass
-class MajorCourse(Course):
-    majors_required_for: List[str]
-    majors_optional_for: List[str]

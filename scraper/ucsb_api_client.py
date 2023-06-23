@@ -108,8 +108,12 @@ class UCSB_API_Client(Scraper):
         super().write_json(dept, courses_list)
 
 
-if __name__ == '__main__':
+def main():
     client = UCSB_API_Client()
 
     for dept in build_depts_list():
         client.write_json(dept)
+
+
+if __name__ == '__main__':
+    main()

@@ -16,7 +16,7 @@ class Scraper:
         argv = sys.argv
 
         self.overwrite = (len(argv) > 1 and 'o' in argv[1])
-        print(f'Scraping {name} with overwrite={self.overwrite}')
+        print(f'\nScraping {name} with overwrite={self.overwrite}')
 
         self.extra_path = extra_path
 
