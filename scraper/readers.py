@@ -49,8 +49,10 @@ def build_majors_list() -> List[Major]:
     for line in read_csv('scraper/majors.csv'):
         majors.append(
             Major(
-                name=line[1],
-                dept=line[0]
+                dept=line[0],
+                url_abbrev=line[1],
+                name=line[2],
+                degree=line[3]
             )
         )
 

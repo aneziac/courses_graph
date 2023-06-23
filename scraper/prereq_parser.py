@@ -24,7 +24,7 @@ def get_prereqs(prereq_description: str, course_name: str = '') -> List[List[str
         else:
             suffixes[block] = ''
 
-    for term in re.split(r'(?<=\s)(\d+[A-Z\-]*)(?!u)(?!\.\d)', prereq_description):
+    for term in re.split(r'(?<=\s)(\d+[A-Z\-]*)(?!u)(?!\.\d)', prereq_description)[:-1]:
         if not term:
             return []
 

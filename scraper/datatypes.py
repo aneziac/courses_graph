@@ -27,8 +27,23 @@ class Department:
 
 @dataclass(frozen=True)
 class Major:
-    name: str
     dept: str
+    url_abbrev: str
+    name: str
+    degree: str
+
+    @property
+    def file_abbrev(self) -> str:
+        stripped = self.name.replace(' - ', ' ').replace(' BA', '').replace(' BS', '')
+        words = stripped.lower().split(' ')
+
+        if len(words) == 1:
+            base = words[0][:5]
+
+        else:
+            base = '_'.join([word[:3] for word in words])
+
+        return base + '_' + self.degree[:2].lower()
 
 
 @dataclass
@@ -99,6 +114,7 @@ class APICourse(ProbabilityCourse):
             probabilities[i] = round(probabilities[i] / weight_sum, 3)
 
         return probabilities
+
 
 @dataclass
 class MajorCourse(Course):

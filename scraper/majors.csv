@@ -42,7 +42,7 @@ EALCS, Japanese Major, Japanese, BA
 EALCS,"Japanese Major, High Proficiency Track", High Proficiency Japanese, BA
 EALCS, Chinese Minor, Chinese, Minor
 EALCS, Japanese Minor, Japanese, Minor
-EEMB, Biological Sciences BA Major, Biology  BA, BA
+EEMB, Biological Sciences BA Major, Biology BA, BA
 EEMB, Aquatic Biology Major, Aquatic Biology, BS
 EEMB, Biological Sciences BS Major, Biology BS, BS
 EEMB, Ecology and Evolution Major, Ecology and Evolution, BS
@@ -130,22 +130,22 @@ Music, Music Studies Major, Music, BA
 Music,"Music Studies Major, Ethnomusicology Emphasis", Ethnomusicology, BA
 Music,"Music Studies Major, Interdisciplinary Studies of Music Emphasis", Interdisciplinary Music, BA
 Music,"Music Studies Major, Western Art Music Emphasis", Western Music, BA
-Music,Bachelor of Music Major-Bassoon Emphasis, Bassoon, BA
-Music,Bachelor of Music Major-Cello Emphasis, Cello, BA
-Music,Bachelor of Music Major-Clarinet Emphasis, Clarinet, BA
-Music,Bachelor of Music Major-Composition Emphasis, Music Composition, BA
-Music,Bachelor of Music Major-Double Bass Emphasis, Bass, BA
-Music,Bachelor of Music Major-Flute Emphasis, Flute, BA
-Music,Bachelor of Music Major-French Horn Emphasis, French Horn, BA
-Music,Bachelor of Music Major-Oboe Emphasis, Oboe, BA
-Music,Bachelor of Music Major-Percussion Emphasis, Percussion, BA
-Music,Bachelor of Music Major-Piano Emphasis, Piano, BA
-Music,Bachelor of Music Major-Trombone Emphasis, Trombone, BA
-Music,Bachelor of Music Major-Trumpet Emphasis, Clarinet, BA
-Music,Bachelor of Music Major-Tuba Emphasis, Tuba, BA
-Music,Bachelor of Music Major-Viola Emphasis, Viola, BA
-Music,Bachelor of Music Major-Violin Emphasis, Violin, BA
-Music,Bachelor of Music Major-Voice Emphasis, Voice, BA
+Music, Bachelor of Music Major-Bassoon Emphasis, Bassoon, BM
+Music, Bachelor of Music Major-Cello Emphasis, Cello, BM
+Music, Bachelor of Music Major-Clarinet Emphasis, Clarinet, BM
+Music, Bachelor of Music Major-Composition Emphasis, Music Composition, BM
+Music, Bachelor of Music Major-Double Bass Emphasis, Bass, BM
+Music, Bachelor of Music Major-Flute Emphasis, Flute, BM
+Music, Bachelor of Music Major-French Horn Emphasis, French Horn, BM
+Music, Bachelor of Music Major-Oboe Emphasis, Oboe, BM
+Music, Bachelor of Music Major-Percussion Emphasis, Percussion, BM
+Music, Bachelor of Music Major-Piano Emphasis, Piano, BM
+Music, Bachelor of Music Major-Trombone Emphasis, Trombone, BM
+Music, Bachelor of Music Major-Trumpet Emphasis, Clarinet, BM
+Music, Bachelor of Music Major-Tuba Emphasis, Tuba, BM
+Music, Bachelor of Music Major-Viola Emphasis, Viola, BM
+Music, Bachelor of Music Major-Violin Emphasis, Violin, BM
+Music, Bachelor of Music Major-Voice Emphasis, Voice, BM
 Music, Music Minor, Music, Minor
 Phil,"Philosophy Major, Concentration I, Core Philosophy", Philosophy, BA
 Phil,"Philosophy Major, Concentration II, Ethics and Public Policy", Ethics and Public Policy, BA
@@ -185,3 +185,8 @@ TD, Theater Production-Design Minor, Theater Production and Design, Minor
 TD, Dance BA Major, Dance BA, BA
 TD, Dance BFA Major, Dance BFA, BFA
 Writ, Professional Writing Minor, Professional Writing, Minor
+ENGR, CHE, Chemical Engineering, BS
+ENGR, CE, Computer Engineering, BS
+ENGR, CS, Computer Science, BS
+ENGR, EE, Electrical Engineering, BS
+ENGR, ME, Mechanical Engineering, BS
