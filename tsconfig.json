@@ -2,7 +2,7 @@
     "compilerOptions": {
       "target": "esnext",
       "useDefineForClassFields": true,
-      "module": "esnext",
+      "module": "es6",
       "moduleResolution": "node",
       "strict": false,
       "jsx": "preserve",
@@ -13,4 +13,4 @@
     },
     "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
     "references": [{ "path": "./tsconfig.node.json" }]
-  }
+}
