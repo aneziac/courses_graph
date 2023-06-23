@@ -75,24 +75,25 @@ class MajorScraper(Scraper):
 
     # rewrite with actual polymorphism at some point
     def write_json(self, majors: List[Major]):
-        requirements = {}
-        for major in majors:
-            requirements[major.name] = list(map(get_prereqs, self.get_major_requirements(major)))
-
         filename = f'data/{self.extra_path}/{majors[0].dept.lower()}.json'
 
         with open(filename, 'w+') as f:
             f.write('{')
 
-            for i, req in enumerate(requirements):
-                f.write(f'"{req}": ')
-                f.write(json.dumps(requirements[req]))
+            for i, major in enumerate(majors):
+                f.write(f'"{major.url_abbrev}": {{')
+                f.write(f'"name": "{major.name}", "degree": "{major.degree}", "requirements": ')
+                f.write(
+                    json.dumps(
+                        list(map(get_prereqs, self.get_major_requirements(major)))
+                    )
+                )
 
-                if i != len(requirements) - 1:
-                    f.write(',')
+                if i != len(majors) - 1:
+                    f.write('},')
                 f.write('\n')
 
-            f.write('}')
+            f.write('}}')
 
         logging.info(f'[S] Wrote data for {major.dept} department in {filename}')
 
