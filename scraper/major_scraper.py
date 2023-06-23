@@ -21,8 +21,8 @@ class MajorScraper(Scraper):
         # COE
         if major.dept == 'ENGR':
             response = self.fetch(
-                f'https://my.sa.ucsb.edu/catalog/Current/Documents/2022_Majors/ENGR/22-23 {major.url_abbrev} Curriculum Sheet.pdf'
-                f'Could not find major requirements sheet for {major.name}'
+                f'https://my.sa.ucsb.edu/catalog/Current/Documents/2022_Majors/ENGR/22-23 {major.url_abbrev} Curriculum Sheet.pdf',
+                f'[F] Could not find major requirements sheet for {major.name}'
             )
 
         # L&S
@@ -31,7 +31,7 @@ class MajorScraper(Scraper):
 
             response = self.fetch(
                 f'https://my.sa.ucsb.edu/catalog/Current/Documents/2022_Majors/LS/{major.dept}/{url_major_name}-2022.pdf',
-                f'Could not find major requirements sheet for {major.name} ({major.degree})'
+                f'[F] Could not find major requirements sheet for {major.name} ({major.degree})'
             )
 
         if not response:
@@ -61,6 +61,7 @@ class MajorScraper(Scraper):
                 for and_list in get_prereqs(req.replace(' -', '-') + '.'):
                     if len(and_list) == 1:
                         course_names[0].append(and_list[0])
+
                     else:
                         for course in and_list:
                             course_names[1].append(course)
@@ -73,7 +74,7 @@ class MajorScraper(Scraper):
             major_courses.write(json.dumps(major_dict))
 
     # rewrite with actual polymorphism at some point
-    def write_json(self, majors: List[Major], overwrite=False):
+    def write_json(self, majors: List[Major]):
         requirements = {}
         for major in majors:
             requirements[major.name] = list(map(get_prereqs, self.get_major_requirements(major)))
@@ -96,15 +97,6 @@ class MajorScraper(Scraper):
         logging.info(f'[S] Wrote data for {major.dept} department in {filename}')
 
 
-# method of interaction with major data
-# def majors_required(self, course: str) -> Tuple[List[str], List[str]]:
-#     major_courses: dict = json.load(open('scraper/major_courses.json'))
-#     try:
-#         return major_courses[course]
-#     except KeyError:
-#         return ([], [])
-# required_for, optional_for = self.majors_required(f'{dept.abbreviation} {number}')
-
 if __name__ == '__main__':
     ms = MajorScraper()
     dept_majors = []
@@ -113,12 +105,7 @@ if __name__ == '__main__':
     for major in build_majors_list():
         if major.dept != current_dept:
             current_dept = major.dept
-            ms.write_json(dept_majors, overwrite=True)
+            ms.write_json(dept_majors)
             dept_majors.clear()
 
         dept_majors.append(major)
-
-"""
-Notes
-Two different tracks in minors for chinese and japanese
-"""

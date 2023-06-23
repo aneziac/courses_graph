@@ -64,7 +64,11 @@ def get_existing_jsons(extra_path) -> List[str]:
     try:
         ls = os.listdir(base_path)
     except FileNotFoundError:
-        ls = os.listdir('.' + base_path)
+        try:
+            ls = os.listdir('.' + base_path)
+        except FileNotFoundError:
+            os.mkdir(base_path)
+            ls = os.listdir(base_path)
 
     # remove the '.json' part
     return [item[:-5] for item in ls]

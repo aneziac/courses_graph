@@ -75,8 +75,6 @@ class Scraper:
 
         return r
 
-    # generalized inverse mapping
-
 
 class ScraperException(Exception):
     pass

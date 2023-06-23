@@ -61,7 +61,7 @@ EnvSt,"Hydrologic Sciences- Policy Major, Policy Emphasis", Hydrological Policy,
 EnvSt,"Hydrologic Sciences-Policy Major, Physical-Chemical Emphasis", Physical and Chemical Hydrology, BS
 FemSt, Feminist Studies Major, Feminist Studies, BA
 FemSt, Feminist Studies Minor, Feminist Studies, Minor
-FemSt, LGBTQ Minor, LGBTQ Studies, Minor
+FemSt, LGBTQ-Minor, LGBTQ Studies, Minor
 FaMSt, Pre-Film- Media Studies Major, Pre-Film and Media Studies, Pre
 FaMSt, Film-Media Studies Major, Film and Media Studies, BA
 FrIt, French Major, French, BA
@@ -83,7 +83,7 @@ Ger, Russian Minor, Russian, Minor
 Globl, Pre-Global StudiesMajor, Pre-Global Studies, Pre
 Globl, Global Studies Major, Global Studies, BA
 Hist, History Major, History, BA
-Hist, History of Public Policy-Law, History of Policy and Law, BA
+Hist, History of Public Policy-Law Major, History of Policy and Law, BA
 Hist, History Minor, History, Minor
 Hist, Labor Studies Minor, Labor Studies, Minor
 Hist,"Poverty, Inequality, and Social Justice Minor", Social Justice, Minor
@@ -91,7 +91,7 @@ HistArt, History of Art and Architecture Major, History of Art and Architecture,
 HistArt,"History of Art and Architecture Major, Architecture-Environment Emphasis", Environmental Architectural History, BA
 HistArt,"History of Art and Architecture Major, Museum Studies Emphasis", Museum Studies, BA
 HistArt, Achitecture-Urban History Minor, Architecture and Urban History, Minor
-HistArt, Game Studies Minor, Game Studies, Minor
+HistArt, Game-Studies-Minor, Game Studies, Minor
 HistArt, History of Art and Architecture Minor, History of Art and Architecture, Minor
 HistArt, Museum Studies Minor, Museum Studies, Minor
 Int, Interdisciplinary Studies Major, Interdisciplinary Studies, BA
@@ -131,21 +131,21 @@ Music,"Music Studies Major, Ethnomusicology Emphasis", Ethnomusicology, BA
 Music,"Music Studies Major, Interdisciplinary Studies of Music Emphasis", Interdisciplinary Music, BA
 Music,"Music Studies Major, Western Art Music Emphasis", Western Music, BA
 Music, Bachelor of Music Major-Bassoon Emphasis, Bassoon, BM
-Music, Bachelor of Music Major-Cello Emphasis, Cello, BM
-Music, Bachelor of Music Major-Clarinet Emphasis, Clarinet, BM
-Music, Bachelor of Music Major-Composition Emphasis, Music Composition, BM
-Music, Bachelor of Music Major-Double Bass Emphasis, Bass, BM
-Music, Bachelor of Music Major-Flute Emphasis, Flute, BM
-Music, Bachelor of Music Major-French Horn Emphasis, French Horn, BM
-Music, Bachelor of Music Major-Oboe Emphasis, Oboe, BM
-Music, Bachelor of Music Major-Percussion Emphasis, Percussion, BM
-Music, Bachelor of Music Major-Piano Emphasis, Piano, BM
-Music, Bachelor of Music Major-Trombone Emphasis, Trombone, BM
-Music, Bachelor of Music Major-Trumpet Emphasis, Clarinet, BM
-Music, Bachelor of Music Major-Tuba Emphasis, Tuba, BM
-Music, Bachelor of Music Major-Viola Emphasis, Viola, BM
-Music, Bachelor of Music Major-Violin Emphasis, Violin, BM
-Music, Bachelor of Music Major-Voice Emphasis, Voice, BM
+Music,"Bachelor of Music Major, Cello Emphasis", Cello, BM
+Music,"Bachelor of Music Major, Clarinet Emphasis", Clarinet, BM
+Music,"Bachelor of Music Major, Composition Emphasis", Music Composition, BM
+Music,"Bachelor of Music Major, Double Bass Emphasis", Bass, BM
+Music,"Bachelor of Music Major, Flute Emphasis", Flute, BM
+Music,"Bachelor of Music Major, French Horn Emphasis", French Horn, BM
+Music,"Bachelor of Music Major, Oboe Emphasis", Oboe, BM
+Music,"Bachelor of Music Major, Percussion Emphasis", Percussion, BM
+Music,"Bachelor of Music Major, Piano Emphasis", Piano, BM
+Music,"Bachelor of Music Major, Trombone Emphasis", Trombone, BM
+Music,"Bachelor of Music Major, Trumpet Emphasis", Clarinet, BM
+Music,"Bachelor of Music Major, Tuba Emphasis", Tuba, BM
+Music,"Bachelor of Music Major, Viola Emphasis", Viola, BM
+Music,"Bachelor of Music Major, Violin Emphasis", Violin, BM
+Music,"Bachelor of Music Major, Voice Emphasis", Voice, BM
 Music, Music Minor, Music, Minor
 Phil,"Philosophy Major, Concentration I, Core Philosophy", Philosophy, BA
 Phil,"Philosophy Major, Concentration II, Ethics and Public Policy", Ethics and Public Policy, BA
@@ -190,3 +190,4 @@ ENGR, CE, Computer Engineering, BS
 ENGR, CS, Computer Science, BS
 ENGR, EE, Electrical Engineering, BS
 ENGR, ME, Mechanical Engineering, BS
+end,,,
