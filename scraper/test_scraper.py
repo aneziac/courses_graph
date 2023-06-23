@@ -1,10 +1,15 @@
 from course_scraper import CourseScraper
-from readers import build_depts_list
+from ucsb_api_client import UCSB_API_Client
+from major_scraper import MajorScraper
+from readers import build_depts_list, build_majors_list
 from datatypes import Course
 from typing import List
 
 
 cs = CourseScraper()
+client = UCSB_API_Client()
+ms = MajorScraper()
+
 
 for dept in build_depts_list():
     if dept.abbreviation == 'MATH':
@@ -85,3 +90,15 @@ def test_compile_data():
 
     assert 'Principles of Data Science with R' in titles
     assert 'STOCHASTIC CALCULUS AND APPLICATIONS' in titles
+
+
+def test_api_client():
+    winter_courses = client.get_courses_json('20231')
+    assert winter_courses['classes'][0]['title'] == 'INTRO CULT ANTHRO'
+    assert client.get_offered_courses(math_dept, 2020, 2022)['Spring 2020']['3A'] == ['C', 'QNT']
+
+
+def test_major_scraper():
+    anth_major = build_majors_list()[0]
+    assert ms.get_major_requirements(anth_major)[2] == 'Anthropology 5'
+    assert ms.get_major_requirements(anth_major)[4] == 'I. Ten courses from full A nthropology curriculum'

@@ -8,6 +8,12 @@ DEPTS = build_depts_list()
 
 
 def get_prereqs(prereq_description: str, course_name: str = '') -> List[List[str]]:
+    """
+    The goal is to map a string to a list of lists such that a student must take
+    one of the courses in the innermost lists.
+
+    Possibilities to look into: instructor permission, upper division standing
+    """
     current_dept = ''
     and_together = []
     or_together = []

@@ -112,7 +112,9 @@ def main():
     client = UCSB_API_Client()
 
     for dept in build_depts_list():
-        client.write_json(dept)
+        if dept.abbreviation == 'MATH':
+            print(client.get_offered_courses(dept))
+        # client.write_json(dept)
 
 
 if __name__ == '__main__':
