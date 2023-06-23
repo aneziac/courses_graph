@@ -30,18 +30,19 @@ class CourseScraper(Scraper):
 
     def _compile_dynamic_regex(self, dept: Department):
         # abbreviation for the dept regex
-        r_abbrev = '\s+'.join(dept.abbreviation.split())
-        r_abbrev = r_abbrev.replace('&', '\&amp;')
+        r_abbrev = r'\s+'.join(dept.abbreviation.split())
+        r_abbrev = r_abbrev.replace('&', r'\&amp;')
 
         self._regexes['NUMBER'] = re.compile(rf'{r_abbrev}\s+(.*)\.')
         self._regexes['DEPT'] = re.compile(rf'(<b>|AndTitle">)\s+({r_abbrev})\s+.*\.')
 
     def compile_data(self, url: str, dept: Department, debug=False) -> List[WebsiteCourse]:
-        if not (text := self.fetch(url, f'[F] Failed to retrieve data for {dept.full_name} at {url}').text):
+        response = self.fetch(url, f'[F] Failed to retrieve data for {dept.full_name} at {url}')
+        if not response:
             return []
 
         # parse the html with a beautiful soup instance
-        soup = bs(text, features='html.parser')
+        soup = bs(response.text, features='html.parser')
 
         result: List[WebsiteCourse] = []
 
