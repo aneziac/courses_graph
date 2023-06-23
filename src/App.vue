@@ -9,12 +9,21 @@ import MajorDropdown from './components/MajorDropdown.vue';
 import QuarterDropdown from './components/QuarterDropdown.vue';
 import DeptToggle from './components/DeptToggle.vue';
 import RequiredToggle from './components/RequiredToggle.vue';
+import { forceSimulation } from 'd3-force';
+
+function changeSerialization(graphologyGraph) {
+  const graph = graphologyGraph.export()
+  return {
+    nodes: graph.nodes.map(n => ({id: n.key, ...n}) ),
+    links: graph.edges
+  }
+}
 
 const container = ref()
 
 let json = loadJSON();
-let graph = createGraph(json);
-let sigma: Sigma;
+let graph = changeSerialization(createGraph(json));
+// let sigma: Sigma;
 
 let dept: string;
 let division: string;
@@ -24,13 +33,13 @@ let showAll: boolean = true;
 let showRequired: boolean = false;
 
 nextTick(() => {
-    sigma = new Sigma(graph, container.value as HTMLElement);
+    let simulation = new forceSimulation(graph, container.value as HTMLElement);
 })
 
 function update() {
     json = loadJSON(dept);
-    graph = createGraph(json, major, division, showAll, showRequired, quarter);
-    sigma.setGraph(graph);
+    graph = changeSerialization(createGraph(json, major, division, showAll, showRequired, quarter));
+    // sigma.setGraph(changeSerialization(graph));
 }
 
 function setDept(value) {
