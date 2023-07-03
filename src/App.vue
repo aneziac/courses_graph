@@ -1,110 +1,60 @@
 <script setup lang="ts">
-import { nextTick, ref } from 'vue';
-import Sigma from 'sigma';
-import createGraph from "./creategraph";
-import loadJSON from "./load_json";
-import DeptDropdown from './components/DeptDropdown.vue'
-import DivisionDropdown from './components/DivisionDropdown.vue';
-import MajorDropdown from './components/MajorDropdown.vue';
-import QuarterDropdown from './components/QuarterDropdown.vue';
-import DeptToggle from './components/DeptToggle.vue';
-import RequiredToggle from './components/RequiredToggle.vue';
-import { forceSimulation } from 'd3-force';
+import { computed, ref } from 'vue'
+import SearchItem from './components/SearchItem.vue'
+import { csv } from 'd3-fetch'
 
-function changeSerialization(graphologyGraph) {
-  const graph = graphologyGraph.export()
-  return {
-    nodes: graph.nodes.map(n => ({id: n.key, ...n}) ),
-    links: graph.edges
-  }
-}
+const searchTerm = ref('');
+const searchItems = ref([])
 
-const container = ref()
+csv('../scraper/depts.csv', (data) => {
+    searchItems.value.push(data[" full name"]);
+});
 
-let json = loadJSON();
-let graph = changeSerialization(createGraph(json));
-// let sigma: Sigma;
-
-let dept: string;
-let division: string;
-let major: string;
-let quarter: Array<string>;
-let showAll: boolean = true;
-let showRequired: boolean = false;
-
-nextTick(() => {
-    let simulation = new forceSimulation(graph, container.value as HTMLElement);
+csv('../scraper/majors.csv', (data) => {
+    searchItems.value.push(data[" short name"])
 })
 
-function update() {
-    json = loadJSON(dept);
-    graph = changeSerialization(createGraph(json, major, division, showAll, showRequired, quarter));
-    // sigma.setGraph(changeSerialization(graph));
-}
-
-function setDept(value) {
-    dept = value;
-    update();
-}
-
-function setDivision(value) {
-    division = value;
-    update();
-}
-
-function setMajor(value) {
-    major = value;
-    update();
-}
-
-function setQuarter(value) {
-    quarter = value;
-    update();
-}
-
-function setShowAll() {
-    showAll = !showAll;
-    update();
-}
-function setShowRequired() {
-    showRequired = !showRequired;
-    update();
-}
+const searchResults = computed(() => {
+    if (searchTerm.value) {
+        return searchItems.value.filter((s) =>
+            s.toLowerCase().includes(searchTerm.value.toLowerCase())
+        );
+    }
+    return searchItems.value.slice(0, 6);
+})
 </script>
 
 <template>
   <h1>UCSB Course Prerequisite Graph</h1>
-  <div ref="container" class="container" ></div>
-  <div class="ui-bar">
-    <DeptDropdown @update="setDept" />
-    <QuarterDropdown @update="setQuarter" />
-    <MajorDropdown @update="setMajor" />
-    <DivisionDropdown @update="setDivision" />
-    <DeptToggle @update="setShowAll"/>
-    <RequiredToggle @update="setShowRequired"/>
+  <div class="main-search-bar">
+    <input v-model="searchTerm" placeholder="Enter a department or degree program...">
   </div>
+  <ul>
+    <li v-for="result in searchResults">
+        <SearchItem>
+            {{ result }}
+        </SearchItem>
+    </li>
+  </ul>
 </template>
 
 <style>
-.container {
-  position: fixed;
-  left: 3vw;
-  width: 100vw;
-  height: 100vh;
-  /* background-color: seashell; */
-}
-.ui-bar {
-    position: absolute;
-    margin: auto;
-    top: 10vh;
-    width: 20vw;
-    height: 25vh;
-    text-align: center;
-    display: block;
-}
 h1 {
     color:brown;
     font-family: Courier New;
-    padding-left:20px;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+.main-search-bar {
+    text-align: center;
+    margin-top: 15vh;
+}
+input {
+    width: 70vw;
+    height: 7vh;
+    font-size: 20px;
+}
+ul {
+    list-style-type: none;
 }
 </style>

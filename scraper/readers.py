@@ -15,7 +15,7 @@ def read_csv(filename) -> List[List[str]]:
             line = [x.strip() for x in line]
             result.append(line)
 
-    return result
+    return result[1:]
 
 
 def build_depts_list(sort=False) -> List[Department]:
