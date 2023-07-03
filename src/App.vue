@@ -7,35 +7,40 @@ const searchTerm = ref('');
 const searchItems = ref([])
 
 csv('../scraper/depts.csv', (data) => {
-    searchItems.value.push(data[" full name"]);
+    searchItems.value.push({
+        kind: 'Dept', text: data[' full name'], alt: data['abbrev']
+    });
 });
 
 csv('../scraper/majors.csv', (data) => {
-    searchItems.value.push(data[" short name"])
-})
+    searchItems.value.push({
+        kind: data[' degree type'], text: data[' short name'], alt: data[' full name']
+    });
+});
 
 const searchResults = computed(() => {
     if (searchTerm.value) {
         return searchItems.value.filter((s) =>
-            s.toLowerCase().includes(searchTerm.value.toLowerCase())
-        );
+            s.text.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
+            s.alt.toLowerCase().includes(searchTerm.value.toLowerCase())
+        ).slice(0, 6);
     }
     return searchItems.value.slice(0, 6);
 })
 </script>
 
 <template>
-  <h1>UCSB Course Prerequisite Graph</h1>
-  <div class="main-search-bar">
-    <input v-model="searchTerm" placeholder="Enter a department or degree program...">
-  </div>
-  <ul>
-    <li v-for="result in searchResults">
-        <SearchItem>
-            {{ result }}
-        </SearchItem>
-    </li>
-  </ul>
+    <h1>UCSB Course Prerequisite Graph</h1>
+    <div class="main-search-bar">
+        <input v-model="searchTerm" placeholder="Enter a department or degree program...">
+    </div>
+    <ul>
+        <li v-for="result in searchResults">
+            <SearchItem>
+                {{ result.text }}
+            </SearchItem>
+        </li>
+    </ul>
 </template>
 
 <style>
@@ -55,6 +60,7 @@ input {
     font-size: 20px;
 }
 ul {
-    list-style-type: none;
+    list-style: none;
+    padding-left: 0em !important;
 }
 </style>

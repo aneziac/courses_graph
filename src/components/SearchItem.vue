@@ -9,11 +9,17 @@
 
 <style>
 .searchItem {
-    background-color: aqua;
-    margin-top: 20px;
-    width: 60vw;
+    padding-top: 10px;
+    padding-bottom: 25px;
+    width: 70vw;
     height: 7vh;
-    margin-left: 13vw;
+    padding-left: 1vw;
+    margin: 0 auto;
     font-size: 20px;
+}
+
+.searchItem:hover {
+    background-color: #0c6dec;
+    color: rgb(255, 255, 255);
 }
 </style>
