@@ -6,7 +6,7 @@ Use node --loader ts-node/esm ./graphutils.ts
 import * as fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url'
-import createGraph from '../creategraph'
+import createGraph from './creategraph'
 
 
 function getJSON(path: string) {

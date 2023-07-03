@@ -2,7 +2,7 @@
     "compilerOptions": {
       "target": "esnext",
       "useDefineForClassFields": true,
-      "module": "es6",
+      "module": "esnext",
       "moduleResolution": "node",
       "strict": false,
       "jsx": "preserve",
@@ -12,5 +12,12 @@
       "lib": ["esnext", "dom"],
     },
     "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-    "references": [{ "path": "./tsconfig.node.json" }]
+    "references": [{ "path": "./tsconfig.node.json" }],
+    "ts-node": {
+        // these options are overrides used only by ts-node
+        // same as the --compilerOptions flag and the TS_NODE_COMPILER_OPTIONS environment variable
+        "compilerOptions": {
+          "module": "commonjs"
+        }
+    },
 }
