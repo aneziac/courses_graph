@@ -3,7 +3,10 @@
 
 <template>
     <div class="searchItem">
-        <slot>Placeholder</slot>
+        <slot name="title"></slot>
+        <span class="kind">
+            <slot name="kind"></slot>
+        </span>
     </div>
 </template>
 
@@ -11,11 +14,17 @@
 .searchItem {
     padding-top: 10px;
     padding-bottom: 25px;
-    width: 70vw;
     height: 7vh;
     padding-left: 1vw;
-    margin: 0 auto;
     font-size: 20px;
+}
+
+.kind {
+    margin-left: 10px;
+    border-radius: 25px;
+    background: #73AD21;
+    padding: 5px;
+    font-size: 15px;
 }
 
 .searchItem:hover {

@@ -14,7 +14,7 @@ csv('../scraper/depts.csv', (data) => {
 
 csv('../scraper/majors.csv', (data) => {
     searchItems.value.push({
-        kind: data[' degree type'], text: data[' short name'], alt: data[' full name']
+        kind: data[' degree type'].trim(), text: data[' short name'], alt: data[' full name']
     });
 });
 
@@ -23,9 +23,9 @@ const searchResults = computed(() => {
         return searchItems.value.filter((s) =>
             s.text.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
             s.alt.toLowerCase().includes(searchTerm.value.toLowerCase())
-        ).slice(0, 6);
+        )
     }
-    return searchItems.value.slice(0, 6);
+    return searchItems.value
 })
 </script>
 
@@ -34,13 +34,20 @@ const searchResults = computed(() => {
     <div class="main-search-bar">
         <input v-model="searchTerm" placeholder="Enter a department or degree program...">
     </div>
-    <ul>
-        <li v-for="result in searchResults">
-            <SearchItem>
-                {{ result.text }}
-            </SearchItem>
-        </li>
-    </ul>
+        <div class="interface">
+        <ul>
+            <li v-for="result in searchResults">
+                <SearchItem>
+                    <template #title>
+                        {{ result.text }}
+                    </template>
+                    <template #kind>
+                        {{ result.kind }}
+                    </template>
+                </SearchItem>
+            </li>
+        </ul>
+    </div>
 </template>
 
 <style>
@@ -50,17 +57,24 @@ h1 {
     padding-left: 20px;
     padding-top: 20px;
 }
+
 .main-search-bar {
     text-align: center;
     margin-top: 15vh;
 }
+
 input {
     width: 70vw;
     height: 7vh;
     font-size: 20px;
 }
+
 ul {
     list-style: none;
     padding-left: 0em !important;
+    height: 50vh;
+    overflow: auto;
+    width: 70vw;
+    margin: 0 auto;
 }
 </style>
