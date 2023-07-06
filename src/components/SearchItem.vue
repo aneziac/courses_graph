@@ -30,5 +30,6 @@
 .searchItem:hover {
     background-color: #0c6dec;
     color: rgb(255, 255, 255);
+    cursor: pointer;
 }
 </style>
