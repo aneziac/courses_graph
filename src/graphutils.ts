@@ -4,8 +4,6 @@ Use node --loader ts-node/esm ./graphutils.ts
 */
 
 import * as fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url'
 import createGraph from './creategraph'
 
 
@@ -16,7 +14,7 @@ function getJSON(path: string) {
 // returns map with info associated with a particular course
 function grabInfo(path: string, course: string) : Map<string, string> {
 
-    var json = JSON.parse(fs.readFileSync(path, 'utf8'));
+    var json = getJSON(path);
 
     const courseInfo: Map<string, string> = new Map();
     courseInfo.set("title", json[course].title);
@@ -35,22 +33,25 @@ function grabInfo(path: string, course: string) : Map<string, string> {
 }
 
 function generatePaths() : Array<string> {
-    var paths: Array<string> = [];
-    var files = fs.readdirSync('data/');
+    const basePath = '../data/website/';
+
+    let paths: Array<string> = [];
+    const files = fs.readdirSync(basePath);
     for (const file of files) {
         if (file.split('.')[1] == 'json') {
-            paths.push('./data/' + file);
+            paths.push(basePath + file);
         }
     }
     return paths;
 }
 
-// below is only called if we run directly with node
-
 function main() {
     var count = 0;
     for (const file of generatePaths()) {
-        console.log(file);
+        if (file != '../data/website/math.json') {
+            continue;
+        }
+        console.log('\n' + file);
         var graph = createGraph(getJSON(file));
         console.log(graph.edges());
         console.log(graph.nodes());
@@ -59,8 +60,5 @@ function main() {
     console.log(count);
 }
 
-const nodePath = path.resolve(process.argv[1]);
-const modulePath = path.resolve(fileURLToPath(import.meta.url))
-if (nodePath === modulePath) {
-    main();
-}
+
+main();
