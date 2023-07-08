@@ -12,12 +12,16 @@ or run the scraper directly with
 $ python scraper
 ```
 
+Run tests via
+```sh
+$ PYTHONPATH=scraper pytest
+```
+
 
 # List of bugs
 
 ## To do
 
-Courses
 **Chem 112B, 146** failing because online is also a possible prereq
 **AS AM 8H** not picking up missing period - representative example of larger problem of periods being included in capture
 **earth 155/155L** -- list each other as prereqs [due to requirement for concurrent enrollment]
