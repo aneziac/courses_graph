@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SearchBar from './components/SearchBar.vue'
+import SearchBar from '../components/SearchBar.vue'
 </script>
 
 <template>
@@ -17,7 +17,6 @@ h1 {
     padding-top: 20px;
     text-align: center;
 }
-
 
 .search-interface {
     padding-top: 10vh;

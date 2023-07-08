@@ -17,7 +17,7 @@ export default function createGraph(
     var currColor = 0;
 
     for (var key in json) { // add in all the nodes first, no edges
-        graph.addNode(key, { x: 0, y: 0, size: 5, label: key.substring(key.lastIndexOf(" ")), color: "blue" });
+        graph.addNode(key, { x: 0, y: 0, size: 5, label: key, color: "blue" });
     }
 
     // add in all the edges

@@ -1,13 +1,13 @@
 /*
-This is now debugging code only since the javascript has to run client-side.
-Use node --loader ts-node/esm ./graphutils.ts
+To test with node:
+node --loader ts-node/esm ./graphutils.ts
 */
 
 import * as fs from 'fs';
 import createGraph from './creategraph'
 
 
-function getJSON(path: string) {
+export function getJSON(path: string) {
     return JSON.parse(fs.readFileSync(path, 'utf8'));
 }
 
@@ -32,7 +32,7 @@ function grabInfo(path: string, course: string) : Map<string, string> {
     return courseInfo;
 }
 
-function generatePaths() : Array<string> {
+export function generatePaths() : Array<string> {
     const basePath = '../data/website/';
 
     let paths: Array<string> = [];
@@ -53,11 +53,14 @@ function main() {
         }
         console.log('\n' + file);
         var graph = createGraph(getJSON(file));
-        console.log(graph.edges());
-        console.log(graph.nodes());
+        // console.log(graph.edges());
+        // console.log(graph.nodes());
+
+        let exported = graph.export();
+        console.log(exported['nodes']);
         count += graph.edges().length;
     }
-    console.log(count);
+    // console.log(count);
 }
 
 
