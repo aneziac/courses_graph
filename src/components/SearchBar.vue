@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { computed, ref, Ref } from 'vue'
+import { useRouter } from 'vue-router'
 import SearchItem from './SearchItem.vue'
 import { csv } from 'd3-fetch'
+
+const router = useRouter();
 
 interface searchData {
     kind: string;
@@ -14,13 +17,13 @@ const searchItems: Ref<Array<searchData>> = ref([]);
 
 csv('../../scraper/depts.csv', (data: Object) => {
     searchItems.value.push({
-        kind: 'Dept', text: data[' full name'], alt: data['abbrev']
+        kind: 'Dept', text: data[' full name'], alt: data['abbrev'].toLowerCase()
     });
 });
 
 csv('../../scraper/majors.csv', (data: Object) => {
     searchItems.value.push({
-        kind: data[' degree type'].trim(), text: data[' short name'], alt: data[' full name']
+        kind: data[' degree type'].trim(), text: data[' short name'], alt: data[' full name'].trim().toLowerCase()
     });
 });
 
@@ -36,12 +39,12 @@ const searchResults = computed(() => {
 </script>
 
 <template>
-    <div class="main-search-bar">
+    <span class="main-search-bar">
         <input v-model="searchTerm" placeholder="Enter a department or degree program...">
-    </div>
+    </span>
     <ul>
         <li v-for="result in searchResults">
-            <SearchItem>
+            <SearchItem @click="router.push('/' + result.alt)">
                 <template #title>
                     {{ result.text }}
                 </template>
@@ -54,30 +57,28 @@ const searchResults = computed(() => {
 </template>
 
 <style>
-h1 {
-    color:brown;
-    font-family: Courier New;
-    padding-left: 20px;
-    padding-top: 20px;
-}
-
 .main-search-bar {
     text-align: center;
-    margin-top: 15vh;
+    height: 7vh;
+    display: block;
 }
 
 input {
+    width: 100%;
+}
+
+.search-interface {
+    padding-top: -5vh;
     width: 70vw;
-    height: 7vh;
+    height: 40vh;
+    margin: 0 auto;
     font-size: 20px;
 }
 
 ul {
     list-style: none;
     padding-left: 0em !important;
-    height: 50vh;
     overflow: auto;
-    width: 70vw;
-    margin: 0 auto;
+    height: 100%;
 }
 </style>
