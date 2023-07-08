@@ -36,6 +36,10 @@ const searchResults = computed(() => {
     }
     return searchItems.value
 })
+
+function toLocalPage(searchResult: searchData) {
+    router.push('/' + searchResult.alt);
+}
 </script>
 
 <template>
@@ -44,7 +48,7 @@ const searchResults = computed(() => {
     </span>
     <ul>
         <li v-for="result in searchResults">
-            <SearchItem @click="router.push('/' + result.alt)">
+            <SearchItem @click="toLocalPage(result)">
                 <template #title>
                     {{ result.text }}
                 </template>
@@ -65,14 +69,6 @@ const searchResults = computed(() => {
 
 input {
     width: 100%;
-}
-
-.search-interface {
-    padding-top: -5vh;
-    width: 70vw;
-    height: 40vh;
-    margin: 0 auto;
-    font-size: 20px;
 }
 
 ul {
