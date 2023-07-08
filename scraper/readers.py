@@ -60,6 +60,11 @@ def build_majors_list() -> List[Major]:
 
 
 def get_existing_jsons(extra_path) -> List[str]:
+    try:
+        os.listdir('data')
+    except FileNotFoundError:
+        os.mkdir('data')
+
     base_path = f'./data/{extra_path}/'
     try:
         ls = os.listdir(base_path)
