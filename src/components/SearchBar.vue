@@ -42,7 +42,7 @@ const searchResults = computed(() => {
 })
 
 function toLocalPage(searchResult: searchData) {
-    router.push('/' + searchResult.alt);
+    router.push('/' + searchResult.alt.replaceAll(' ', ''));
 }
 
 // onMounted(() => {
