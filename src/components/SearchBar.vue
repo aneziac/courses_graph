@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, ref, Ref } from 'vue'
-import { useRouter } from 'vue-router'
-import SearchItem from './SearchItem.vue'
-import { csv } from 'd3-fetch'
+import { computed, ref, Ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import SearchItem from './SearchItem.vue';
+import { csv } from 'd3-fetch';
 
 const router = useRouter();
 
@@ -17,13 +17,17 @@ const searchItems: Ref<Array<searchData>> = ref([]);
 
 csv('../../scraper/depts.csv', (data: Object) => {
     searchItems.value.push({
-        kind: 'Dept', text: data[' full name'], alt: data['abbrev'].toLowerCase()
+        kind: 'Dept',
+        text: data[' full name'],
+        alt: data['abbrev'].toLowerCase()
     });
 });
 
 csv('../../scraper/majors.csv', (data: Object) => {
     searchItems.value.push({
-        kind: data[' degree type'].trim(), text: data[' short name'], alt: data[' full name'].trim().toLowerCase()
+        kind: data[' degree type'].trim(),
+        text: data[' short name'],
+        alt: data[' full name'].trim().toLowerCase()
     });
 });
 
@@ -34,12 +38,16 @@ const searchResults = computed(() => {
             s.alt.toLowerCase().includes(searchTerm.value.toLowerCase())
         )
     }
-    return searchItems.value
+    return searchItems.value;
 })
 
 function toLocalPage(searchResult: searchData) {
     router.push('/' + searchResult.alt);
 }
+
+// onMounted(() => {
+//     searchTerm.value.focus();
+// });
 </script>
 
 <template>
