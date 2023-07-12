@@ -22,6 +22,8 @@ $ PYTHONPATH=scraper pytest
 
 ## To do
 
+Change major scraper to output shortened names as keys and append major name in url in the website.
+
 **Chem 112B, 146** failing because online is also a possible prereq
 **AS AM 8H** not picking up missing period - representative example of larger problem of periods being included in capture
 **earth 155/155L** -- list each other as prereqs [due to requirement for concurrent enrollment]

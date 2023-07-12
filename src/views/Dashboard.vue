@@ -7,131 +7,138 @@ let jsonFile = ref(null);
 
 function generateGraph(searchItem: string) {
     import(`../../data/website/${searchItem}.json`).then((module) => {
-        jsonFile.value = module.default // modify var1 by assigning to var1.value
+        jsonFile.value = module.default;
     });
 
     return createGraph(jsonFile.value);
 }
 
 onMounted(() => {
-  var svg = d3.select("svg");
-  var width = svg.attr("width");
-  var height = svg.attr("height");
+    const svg = d3.select("svg");
+    const width = 500;
+    const height = 300;
 
-  //intialize data
-  var graph = {
-    nodes: [
-      { name: "Alice" },
-      { name: "Bob" },
-      { name: "Chen" },
-      { name: "Dawg" },
-      { name: "Ethan" },
-      { name: "George" },
-      { name: "Frank" },
-      { name: "Hanes" }
-    ],
-    links: [
-      { source: "Alice", target: "Bob" },
-      { source: "Chen", target: "Bob" },
-      { source: "Dawg", target: "Chen" },
-      { source: "Hanes", target: "Frank" },
-      { source: "Hanes", target: "George" },
-      { source: "Dawg", target: "Ethan" }
-    ]
-  };
+    // intialize data
+    var graph = {
+        nodes: [
+            { name: "Alice" },
+            { name: "Bob" },
+            { name: "Chen" },
+            { name: "Dawg" },
+            { name: "Ethan" },
+            { name: "George" },
+            { name: "Frank" },
+            { name: "Hanes" }
+        ],
+        links: [
+            { source: "Alice", target: "Bob" },
+            { source: "Chen", target: "Bob" },
+            { source: "Dawg", target: "Chen" },
+            { source: "Hanes", target: "Frank" },
+            { source: "Hanes", target: "George" },
+            { source: "Dawg", target: "Ethan" }
+        ]
+    };
 
-  var simulation = d3
-    .forceSimulation(graph.nodes)
-    .force(
-      "link",
-      d3
-        .forceLink()
-        .id(function(d) {
-          return d.name;
-        })
-        .links(graph.links)
-    )
 
-    .force("charge", d3.forceManyBody().strength(-30))
-    .force("center", d3.forceCenter(width / 2, height / 2))
-    .on("tick", ticked);
+    d3.forceSimulation(graph.nodes)
+        .force(
+            "link",
+            d3.forceLink()
+            .id(function(d) {
+                return d.name;
+            })
+            .links(graph.links)
+        )
+        .force("charge", d3.forceManyBody().strength(-30))
+        .force("center", d3.forceCenter(width / 2, height / 2))
+        .on("tick", ticked);
 
-  var link = svg
-    .append("g")
-    .attr("class", "links")
-    .selectAll("line")
-    .data(graph.links)
-    .enter()
-    .append("line")
-    .attr("stroke-width", function(d) {
-      return 3;
-    });
+    var link = svg.append("g")
+        .attr("class", "links")
+        .selectAll("line")
+        .data(graph.links)
+        .enter()
+        .append("line")
+        .attr("stroke-width", function(d) {
+            return 3;
+        });
 
-  var node = svg
-    .append("g")
-    .attr("class", "nodes")
-    .selectAll("circle")
-    .data(graph.nodes)
-    .enter()
-    .append("circle")
-    .attr("r", 5)
-    .attr("fill", function(d) {
-      return "blue";
-    })
-    .call(
-      d3
-        .drag()
-        .on("start", dragstarted)
-        .on("drag", dragged)
-        .on("end", dragended)
-    );
+    var node = svg
+        .append("g")
+        .attr("class", "nodes")
+        .selectAll("circle")
+        .data(graph.nodes)
+        .enter()
+        .append("circle")
+        .attr("r", 5)
+        .attr("fill", "blue");
 
-  function ticked() {
-    link
-      .attr("x1", function(d) {
-        return d.source.x;
-      })
-      .attr("y1", function(d) {
-        return d.source.y;
-      })
-      .attr("x2", function(d) {
-        return d.target.x;
-      })
-      .attr("y2", function(d) {
-        return d.target.y;
-      });
+    var label = svg.append("g")
+        .attr("class", "labels")
+        .selectAll("text")
+        .data(graph.nodes)
+        .enter().append("text")
+        .text(function(d) { return d.name; })
+        .attr("class", "label");
 
-    node
-      .attr("cx", function(d) {
-        return d.x;
-      })
-      .attr("cy", function(d) {
-        return d.y;
-      });
-  }
+    function ticked() {
+        link
+            .attr("x1", function(d) {
+            return d.source.x;
+            })
+            .attr("y1", function(d) {
+                return d.source.y;
+            })
+            .attr("x2", function(d) {
+                return d.target.x;
+            })
+            .attr("y2", function(d) {
+                return d.target.y;
+            });
 
-  function dragstarted(d) {
-    if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-    d.fx = d.x;
-    d.fy = d.y;
-  }
+        node
+            .attr("cx", function(d) {
+                return d.x;
+            })
+            .attr("cy", function(d) {
+                return d.y;
+            });
 
-  function dragged(d) {
-    d.fx = d3.event.x;
-    d.fy = d3.event.y;
-  }
-
-  function dragended(d) {
-    if (!d3.event.active) simulation.alphaTarget(0);
-    d.fx = null;
-    d.fy = null;
-  }
+        label
+            .attr("x", function(d) { return d.x; })
+            .attr("y", function(d) { return d.y; });
+    }
 });
 </script>
 
 <template>
     <div>
-        <!-- <p> Test: {{ generateGraph($route.params.searchItem).export() }}</p> -->
+        <!-- <script>
+            console.log(generateGraph($route.params.searchItem).export())
+        </script> -->
         <svg></svg>
     </div>
 </template>
+
+<style>
+svg {
+    width: 50vw;
+    height: 100vh;
+    padding-left: 20px;
+}
+
+.label {
+    font-size: 10px;
+}
+
+.links line {
+    stroke: #999;
+    stroke-opacity: 0.6;
+}
+
+.nodes circle {
+    stroke: #fff;
+    stroke-width: 1.5px;
+}
+</style>
