@@ -3,7 +3,7 @@ import SearchBar from '../components/SearchBar.vue'
 </script>
 
 <template>
-    <h1>UCSB Course Prerequisite Graph</h1>
+    <h1>ucsbcourses.com</h1>
     <div class="search-interface">
         <SearchBar/>
     </div>

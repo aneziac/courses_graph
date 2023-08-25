@@ -7,6 +7,9 @@
         <span class="kind">
             <slot name="kind"></slot>
         </span>
+        <span class="kind college">
+            <slot name="college"></slot>
+        </span>
     </div>
 </template>
 
@@ -25,6 +28,10 @@
     background: #73AD21;
     padding: 5px;
     font-size: 15px;
+}
+
+.college {
+    background: #ec9a0c;
 }
 
 .searchItem:hover {

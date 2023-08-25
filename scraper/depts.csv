@@ -36,7 +36,8 @@ ED LA, ED, Education, Education: Language Arts, GGSE, EDUC
 ED M, ED, Education, Education: Mathematics, GGSE, EDUC
 ED R, ED, Education, Education: Reading, GGSE, EDUC
 ED S, ED, Education,  Education: Science, GGSE, EDUC
-ED ST, ED, Education, Education: Secondary: Science, GGSE, EDUC
+ED SPS, ED, Education, Special Education: Secondary, GGSE, EDUC
+ED ST, ED, Education, Secondary: Science, GGSE, EDUC
 ED WL, ED, Education, Education: World Language, GGSE, EDUC
 EDS, ESM, bren, Environmental Data Science, BREN, ESM
 EEMB, EEMB, eemb,"Ecology, Evolution, and Marine Biology", L&S, EEMB

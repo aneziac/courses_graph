@@ -2,21 +2,29 @@
 import { ref, onMounted } from 'vue';
 import createGraph from '../creategraph';
 import * as d3 from 'd3';
+import { useRoute } from 'vue-router';
 
 let jsonFile = ref(null);
 
-function generateGraph(searchItem: string) {
-    import(`../../data/website/${searchItem}.json`).then((module) => {
-        jsonFile.value = module.default;
-    });
+const route = useRoute();
+d3.json(`../../data/website/${route.params.searchItem}.json`).then(f => {
+    jsonFile = f;
+}).catch(error => {
+    console.error('Could not load json');
+    throw error;
+});
 
-    return createGraph(jsonFile.value);
-}
+// await createGraph(jsonFile);
 
 onMounted(() => {
-    const svg = d3.select("svg");
+    console.log(createGraph(jsonFile));
+
     const width = 500;
     const height = 300;
+
+    const svg = d3.select("#graph").append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
     // intialize data
     var graph = {
@@ -39,7 +47,6 @@ onMounted(() => {
             { source: "Dawg", target: "Ethan" }
         ]
     };
-
 
     d3.forceSimulation(graph.nodes)
         .force(
@@ -113,16 +120,12 @@ onMounted(() => {
 </script>
 
 <template>
-    <div>
-        <!-- <script>
-            console.log(generateGraph($route.params.searchItem).export())
-        </script> -->
-        <svg></svg>
+    <div id="graph">
     </div>
 </template>
 
 <style>
-svg {
+graph {
     width: 50vw;
     height: 100vh;
     padding-left: 20px;

@@ -10,6 +10,10 @@ export default function createGraph(
         quarters: Array<string> = ["All"]) : DirectedGraph {
 
     const graph = new DirectedGraph();
+    if (!json.value) {
+        console.error('Empty json file');
+        return graph;
+    }
 
     var x = 0, y = 0;
 

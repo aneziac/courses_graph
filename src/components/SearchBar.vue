@@ -10,6 +10,7 @@ interface searchData {
     kind: string;
     text: string;
     alt: string;
+    college: string
 }
 
 const searchTerm = ref('');
@@ -19,7 +20,8 @@ csv('../../scraper/depts.csv', (data: Object) => {
     searchItems.value.push({
         kind: 'Dept',
         text: data[' full name'],
-        alt: data['abbrev'].toLowerCase()
+        alt: data['abbrev'].toLowerCase(),
+        college: data[' college'].trim()
     });
 });
 
@@ -27,7 +29,8 @@ csv('../../scraper/majors.csv', (data: Object) => {
     searchItems.value.push({
         kind: data[' degree type'].trim(),
         text: data[' short name'],
-        alt: data[' full name'].trim().toLowerCase()
+        alt: data[' full name'].trim().toLowerCase(),
+        college: data['abbrev'] == 'ENGR' ? 'COE' : 'L&S'
     });
 });
 
@@ -62,6 +65,9 @@ function toLocalPage(searchResult: searchData) {
                 </template>
                 <template #kind>
                     {{ result.kind }}
+                </template>
+                <template #college>
+                    {{ result.college }}
                 </template>
             </SearchItem>
         </li>
