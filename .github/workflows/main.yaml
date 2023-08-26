@@ -2,7 +2,7 @@
 name: Deploy static content to Pages
 
 on:
-  # Runs on pushes targeting gh-pages branch
+  # Runs on pushes targeting gh-pages
   push:
     branches: ['gh-pages']
 
