@@ -1,49 +1,22 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
 import createGraph from '../creategraph';
 import * as d3 from 'd3';
 import { useRoute } from 'vue-router';
 
-let jsonFile = ref(null);
 const route = useRoute();
 let topic = route.params.searchItem;
 
 d3.json(`../../data/website/${topic}.json`).then(f => {
     console.log(`Successfully loaded ${topic}`)
-    jsonFile.value = createGraph(f);
-}).catch(() => {
-    console.error(`Could not load ${topic} json`);
-});
 
-onMounted(() => {
-    const width = 500;
-    const height = 300;
+    const width = 1000;
+    const height = 500;
 
     const svg = d3.select("#graph").append("svg")
-        .attr("width", width)
-        .attr("height", height);
+        .attr("width", "100vw")
+        .attr("height", "100vh");
 
-    // intialize data
-    var graph = {
-        nodes: [
-            { key: "Alice" },
-            { key: "Bob" },
-            { key: "Chen" },
-            { key: "Dawg" },
-            { key: "Ethan" },
-            { key: "George" },
-            { key: "Frank" },
-            { key: "Hanes" }
-        ],
-        links: [
-            { source: "Alice", target: "Bob" },
-            { source: "Chen", target: "Bob" },
-            { source: "Dawg", target: "Chen" },
-            { source: "Hanes", target: "Frank" },
-            { source: "Hanes", target: "George" },
-            { source: "Dawg", target: "Ethan" }
-        ]
-    };
+    var graph = createGraph(f).export();
 
     d3.forceSimulation(graph.nodes)
         .force(
@@ -52,16 +25,16 @@ onMounted(() => {
             .id(function(d) {
                 return d.key;
             })
-            .links(graph.links)
+            .links(graph.edges)
         )
         .force("charge", d3.forceManyBody().strength(-30))
         .force("center", d3.forceCenter(width / 2, height / 2))
         .on("tick", ticked);
 
     var link = svg.append("g")
-        .attr("class", "links")
+        .attr("class", "edges")
         .selectAll("line")
-        .data(graph.links)
+        .data(graph.edges)
         .enter()
         .append("line")
         .attr("stroke-width", function(d) {
@@ -113,13 +86,13 @@ onMounted(() => {
             .attr("x", function(d) { return d.x; })
             .attr("y", function(d) { return d.y; });
     }
-});
+
+}).catch(() => {
+    console.error(`Could not load ${topic} json`);
+})
 </script>
 
 <template>
-    <p>
-        {{ jsonFile.export() }}
-    </p>
     <div id="graph">
     </div>
 </template>
@@ -135,7 +108,7 @@ graph {
     font-size: 10px;
 }
 
-.links line {
+.edges line {
     stroke: #999;
     stroke-opacity: 0.6;
 }
