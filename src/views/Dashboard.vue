@@ -5,20 +5,17 @@ import * as d3 from 'd3';
 import { useRoute } from 'vue-router';
 
 let jsonFile = ref(null);
-
 const route = useRoute();
-d3.json(`../../data/website/${route.params.searchItem}.json`).then(f => {
-    jsonFile = f;
-}).catch(error => {
-    console.error('Could not load json');
-    throw error;
+let topic = route.params.searchItem;
+
+d3.json(`../../data/website/${topic}.json`).then(f => {
+    console.log(`Successfully loaded ${topic}`)
+    jsonFile.value = createGraph(f);
+}).catch(() => {
+    console.error(`Could not load ${topic} json`);
 });
 
-// await createGraph(jsonFile);
-
 onMounted(() => {
-    console.log(createGraph(jsonFile));
-
     const width = 500;
     const height = 300;
 
@@ -29,14 +26,14 @@ onMounted(() => {
     // intialize data
     var graph = {
         nodes: [
-            { name: "Alice" },
-            { name: "Bob" },
-            { name: "Chen" },
-            { name: "Dawg" },
-            { name: "Ethan" },
-            { name: "George" },
-            { name: "Frank" },
-            { name: "Hanes" }
+            { key: "Alice" },
+            { key: "Bob" },
+            { key: "Chen" },
+            { key: "Dawg" },
+            { key: "Ethan" },
+            { key: "George" },
+            { key: "Frank" },
+            { key: "Hanes" }
         ],
         links: [
             { source: "Alice", target: "Bob" },
@@ -53,7 +50,7 @@ onMounted(() => {
             "link",
             d3.forceLink()
             .id(function(d) {
-                return d.name;
+                return d.key;
             })
             .links(graph.links)
         )
@@ -86,7 +83,7 @@ onMounted(() => {
         .selectAll("text")
         .data(graph.nodes)
         .enter().append("text")
-        .text(function(d) { return d.name; })
+        .text(function(d) { return d.key; })
         .attr("class", "label");
 
     function ticked() {
@@ -120,6 +117,9 @@ onMounted(() => {
 </script>
 
 <template>
+    <p>
+        {{ jsonFile.export() }}
+    </p>
     <div id="graph">
     </div>
 </template>
