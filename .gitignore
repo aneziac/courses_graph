@@ -12,3 +12,4 @@ scraper/*.env
 scraper/major_courses.json
 node_modules
 dist
+.coverage
