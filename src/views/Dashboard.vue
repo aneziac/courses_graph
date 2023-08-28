@@ -32,9 +32,23 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
         .attr("height", height)
         .call(zoom);
 
+    svg
+        .append("defs")
+        .append("marker")
+        .attr("id", "arrow")
+        .attr("markerWidth", "5")
+        .attr("orient", "auto")
+        .attr("viewBox", "0 0 60 60")
+        .attr("markerUnits", "strokeWidth")
+        .attr("refY", "30")
+        .attr("refX", "50%")
+        .append("path")
+        .attr("d", "M 60 0 L 0 30 L 60 60 z")
+        .attr("fill", "#343a40");
+
     var graph = createGraph(f).export();
 
-    var simulation = d3.forceSimulation(graph.nodes)
+    d3.forceSimulation(graph.nodes)
         .force(
             "link",
             d3.forceLink()
@@ -43,20 +57,20 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
             })
             .links(graph.edges)
         )
-        .force("charge", d3.forceManyBody().strength(-200))
+        .force("charge", d3.forceManyBody().strength(-30))
         .force("center", d3.forceCenter(width / 2, height / 2))
         .force("collision", d3.forceCollide(nodeWidth))
         .on("tick", ticked);
 
-    var link = svg.append("g")
+    var link = svg
+        .append("g")
         .attr("class", "edges")
         .selectAll("line")
         .data(graph.edges)
         .enter()
         .append("line")
-        .attr("stroke-width", function(d) {
-            return 3;
-        });
+        .attr("marker-end", "url(#arrow)")
+        .attr("stroke-width", 3);
 
     var node = svg
         .append("g")
@@ -71,7 +85,8 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
         .attr('rx', '12')
         .attr("fill", "#69a3b2")
 
-    var label = svg.append("g")
+    var label = svg
+        .append("g")
         .attr("class", "labels")
         .selectAll("text")
         .data(graph.nodes)
@@ -118,9 +133,7 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
 
 <style>
 graph {
-    /* width: 50vw;
-    height: 100vh; */
-    padding-left: 20px;
+    /* padding-left: 20px; */
     background: #ddd;
 }
 
@@ -131,6 +144,7 @@ graph {
 .edges line {
     stroke: #999;
     stroke-opacity: 0.6;
+    marker-end: url(#arrow);
 }
 
 .nodes circle {
