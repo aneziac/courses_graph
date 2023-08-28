@@ -1,174 +1,100 @@
 import DirectedGraph from 'graphology';
 
 
+// see ../scraper/datatypes.py Course and WebsiteCourse
+interface Course {
+    number: string,
+    sub_dept: string
+    title: string,
+    dept: string,
+    prereqs: Array<Array<string>>,
+    prereq_description: string,
+    comments: string,
+    units: string,
+    description: string,
+    recommended_prep: string,
+    professor: string,
+    college: string
+}
+
+enum Division {
+    all,
+    lowerDivision,
+    upperDivision,
+    graduate
+}
+
 export default function createGraph(
-        json: JSON,
-        major: string = "All",
-        division: string = "Both",
+        courses: Map<string, Course>,
+        degree: string = "Department",
+        division: Division = Division.all,
         otherDepartments: boolean = true,
         requiredOnly: boolean = false,
-        quarters: Array<string> = ["All"]) : DirectedGraph {
+        recentlyOfferedOnly: boolean = true,
+        ) : DirectedGraph {
 
-    const graph = new DirectedGraph();
-    var x = 0, y = 0;
+    let graph = new DirectedGraph();
 
-    var colors = ["red", "orange", "green", "blue", "purple"];
-    var currColor = 0;
+    let colors = ["red", "orange", "green", "blue", "purple"];
+    let currColor = 0;
+    let optionalConcurrencyColor = "black";
 
-    for (var key in json) { // add in all the nodes first, no edges
-        graph.addNode(key, { x: 0, y: 0, size: 5, label: key, color: "blue" });
+    for (var key in courses) { // add in all the nodes first, no edges
+        graph.addNode(key, { label: key, color: "blue" });
     }
 
     // add in all the edges
-    for (var key in json) {
-        let prereqs: Array<Array<string>> = json[key].prereqs;
+    for (var key in courses) {
+        let course: Course = courses[key];
+        let prereqs = course.prereqs;
 
         for (var i = 0; i < prereqs.length; i++) {
-            for (var j = 0; j < prereqs.length; j++) {
-                let prereq_class = prereqs[i][j];
+            for (var j = 0; j < prereqs[i].length; j++) {
+                let prereqClass = prereqs[i][j];
+                let optionalConcurrency = prereqClass.includes("[O]");
 
-                if (prereq_class) {
-                    if (!graph.hasNode(prereq_class) && !(prereq_class.substring(0, json[key].sub_dept.length) == json[key].sub_dept)) {
-                        if (prereq_class.includes("[O]")) {
-                            graph.mergeNode(prereq_class.substr(0, prereq_class.length - 4), { x: x, y: y, size: 5, label: prereq_class.substr(0, prereq_class.length - 4), color: "blue" });
-                            // console.debug("creating " + prereq_class.substr(0, prereq_class.length - 4));
-                        }
-                        else {
-                            graph.mergeNode(prereq_class, { x: x, y: y, size: 5, label: prereq_class, color: "blue" });
-                        }
+                // removing the '[O]'
+                if (optionalConcurrency) {
+                    prereqClass = prereqClass.slice(0, prereqClass.length - 4);
+                }
 
-                        x++;
-                        if (x == 10) {
-                            x = 0;
-                            y++;
-                        }
+                if (!graph.hasNode(prereqClass)) {
+                    graph.addNode(prereqClass, { label: prereqClass });
+                }
 
-                        if (j + 1 != prereqs[i].length) {
-                            if (!prereq_class.includes("[O]")) {
-                                graph.mergeDirectedEdge(key, prereq_class, {
-                                    color: colors[currColor]
-                                });
-                            }
-                            else {
-                                graph.mergeDirectedEdge(key, prereq_class.substring(0, prereq_class.length - 4), {
-                                    color: "black"
-                                });
-                            }
-                        }
-                        else if (j + 1 == prereqs[i].length && i + 1 != prereqs.length) {
-                            if (!prereq_class.includes("[O]")) {
-                                graph.mergeDirectedEdge(key, prereq_class, {
-                                    color: colors[currColor]
-                                });
-                            }
-                            else {
-                                graph.mergeDirectedEdge(key, prereq_class.substring(0, prereq_class.length - 4), {
-                                    color: "black"
-                                });
-                            }
-                            currColor = (currColor + 1) % colors.length;
-                        }
-                        else {
-                            if (!prereq_class.includes("[O]")) {
-                                graph.mergeDirectedEdge(key, prereq_class, {
-                                    color: colors[currColor]
-                                });
-                            }
-                            else {
-                                graph.mergeDirectedEdge(key, prereq_class.substring(0, prereq_class.length - 4), {
-                                    color: "black"
-                                });
-                            }
-                            currColor = (currColor + 1) % colors.length;
-                        }
+                if (optionalConcurrency) {
+                    graph.addDirectedEdge(key, prereqClass, { color: optionalConcurrencyColor });
+                } else {
+                    graph.addDirectedEdge(key, prereqClass, { color: colors[currColor] });
+                }
 
-                    }
-                    else if (graph.hasNode(prereq_class)) {
-                        if (j + 1 != prereqs[i].length) {
-                            if (!prereq_class.includes("[O]")) {
-                                graph.mergeDirectedEdge(key, prereq_class, {
-                                    color: colors[currColor]
-                                });
-                            }
-                            else {
-                                graph.mergeDirectedEdge(key, prereq_class.substring(0, prereq_class.length - 4), {
-                                    color: "black"
-                                });
-                            }
-                        }
-                        else if (j + 1 == prereqs[i].length && i + 1 != prereqs.length) {
-                            if (!prereq_class.includes("[O]")) {
-                                graph.mergeDirectedEdge(key, prereq_class, {
-                                    color: colors[currColor]
-                                });
-                            }
-                            else {
-                                graph.mergeDirectedEdge(key, prereq_class.substring(0, prereq_class.length - 4), {
-                                    color: "black"
-                                });
-                            }
-                            currColor = (currColor + 1) % colors.length;
-                        }
-                        else {
-                            if (!prereq_class.includes("[O]")) {
-                                graph.mergeDirectedEdge(key, prereq_class, {
-                                    color: colors[currColor]
-                                });
-                            }
-                            else {
-                                graph.mergeDirectedEdge(key, prereq_class.substring(0, prereq_class.length - 4), {
-                                    color: "black"
-                                });
-                            }
-                            currColor = (currColor + 1) % colors.length;
-                        }
-
-                    }
+                if (j == prereqs[i].length - 1) {
+                    currColor = (currColor + 1) % colors.length;
                 }
             }
         }
     }
 
+    // 0-100               100-200          200+
+    // Lower division   Upper division    Graduate
+
+    // sort by division
+    if (division) {
+        for (var key in courses) {
+            if (graph.hasNode(key)) {
+                let courseNumber = parseInt(courses[key].number);
+                if (!((division - 1) * 100 <= courseNumber && courseNumber <= division * 100)) {
+                    graph.dropNode(key);
+                }
+            }
+        }
+    }
+
+    // remove based on degree, requirement, recently offered
+    // TODO
 
 
-    // removes all grad courses
-    // for (var key2 in json) {
-    //     if (graph.hasNode(key2)) {
-    //         if (parseInt(json[key2].number) > 200) {
-    //             graph.dropNode(key2);
-    //         }
-    //     }
-    // }
-
-
-    // remove based on quarters, divisions
-    // var toInclude = false;
-    // for (var key2 in json) {
-    //     toInclude = false;
-    //     if (graph.hasNode(key2)) {
-    //         if ((json[key2].offered &&
-    //             (major == "All" || json[key2].majors_required_for.includes(major) || (!requiredOnly && json[key2].majors_optional_for.includes(major)))) &&
-    //             (division == "Both" || (division == "LD" && parseInt(json[key2].number) < 100) || (division == "UD" && parseInt(json[key2].number) >= 100))) {
-    //                 if (quarters[0] == "All") {
-    //                     toInclude = true;
-    //                     continue;
-    //                 }
-
-    //                 for (var quarter in quarters) {
-    //                     for (var str2 in json[key2].offered) {
-    //                         if (str2 == quarter) {
-    //                             toInclude = true;
-    //                         }
-    //                     }
-    //                 }
-    //         }
-    //         if (!toInclude) {
-    //             graph.dropNode(key2);
-    //         }
-    //     }
-    // }
-
-
+    // r
     var count = 0;
     let map = new Map();
 
@@ -181,7 +107,6 @@ export default function createGraph(
             map.set(node, -1);
         }
     });
-
 
     var sent: boolean;
     var max = 1;
@@ -215,14 +140,7 @@ export default function createGraph(
         });
     }
 
-    // // remove nodes w/ no neighbors
-    // graph.forEachNode((node) => {
-    //     if (graph.degree(node) == 0) {
-    //         // graph.dropNode(node);
-    //         // map.delete(node);
-    //     }
-    // });
-
+    // good
     // root nodes are red
     graph.forEachNode((node) => {
         if (graph.outDegree(node) == 0) {
@@ -235,9 +153,10 @@ export default function createGraph(
         }
     });
 
+    // good
     // other departments are green and/or are removed
     graph.forEachNode((node) => {
-        if (!json[node] && otherDepartments) {
+        if (!courses[node] && otherDepartments) {
             graph.updateNode(node, attr => {
                 return {
                     ...attr,
@@ -245,18 +164,19 @@ export default function createGraph(
                 };
             });
         }
-        else if (!json[node]) {
+        else if (!courses[node]) {
             graph.dropNode(node);
         }
     });
 
-    for (var key7 in json) {
-        if (graph.hasNode(key7) && (json[key7].prereq_description.includes("Consent of instructor") || json[key7].prereq_description.includes("consent of instructor"))) {
+    // good for now - return after prereq parser rebuild
+    for (var key7 in courses) {
+        if (graph.hasNode(key7) && (courses[key7].prereq_description.includes("Consent of instructor") || courses[key7].prereq_description.includes("consent of instructor"))) {
             graph.setNodeAttribute(key7, "color", "purple");
         }
     }
 
-
+    // r v
     // calculate number of nodes at each height
     const numaty = new Map();
     for (var i = 0; i < 10; i++) {
