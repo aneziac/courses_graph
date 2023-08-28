@@ -1,6 +1,7 @@
 <script setup lang="ts">
 /*
 Ideas: size of node corresponds to average number of students
+Specifically detect patterns of being offered once every 2 years
 */
 import createGraph from '../creategraph';
 import * as d3 from 'd3';
@@ -9,8 +10,21 @@ import { useRoute } from 'vue-router';
 const route = useRoute();
 let topic = route.params.searchItem;
 
+const bootstrapColor = color => {
+    const colors = {
+        "red": "#D3656D",
+        "blue": "#5289F5",
+        "green": "#5F9D79",
+        "purple": "#8669C7"
+    }
+
+    return colors[color];
+}
+
 d3.json(`../../data/website/${topic}.json`).then(f => {
     console.log(`Successfully loaded ${topic}`)
+
+    let graph = createGraph(f).export();
 
     const width = window.innerWidth;
     const height = window.innerHeight;
@@ -46,8 +60,6 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
         .attr("d", "M 60 0 L 0 30 L 60 60 z")
         .attr("fill", "#343a40");
 
-    var graph = createGraph(f).export();
-
     d3.forceSimulation(graph.nodes)
         .force(
             "link",
@@ -69,8 +81,6 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
         .data(graph.edges)
         .enter()
         .append("line")
-        .attr("marker-end", "url(#arrow)")
-        .attr("stroke-width", 3);
 
     var node = svg
         .append("g")
@@ -81,9 +91,8 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
         .append("rect")
         .attr("width", nodeWidth)
         .attr("height", nodeHeight)
-        .attr('stroke', 'black')
         .attr('rx', '12')
-        .attr("fill", "#69a3b2")
+        .attr('fill', d => bootstrapColor(d.attributes.color))
 
     var label = svg
         .append("g")
@@ -139,16 +148,19 @@ graph {
 
 .label {
     font-size: 13px;
+    font-weight: bold;
 }
 
 .edges line {
     stroke: #999;
     stroke-opacity: 0.6;
+    stroke-width: 3;
     marker-end: url(#arrow);
 }
 
-.nodes circle {
-    stroke: #fff;
-    stroke-width: 1.5px;
+.nodes rect {
+    stroke: #000000;
+    stroke-width: 3px;
+    /* fill: #69a3b2; */
 }
 </style>
