@@ -103,7 +103,7 @@ export default function createGraph(
     // construct a mapping for nodes such that
     // no prereqs -> 0
     // >= 1 prereq -> -1
-    let degreeMapping: Map<string, number> = new Map();
+    const degreeMapping: Map<string, number> = new Map();
     graph.forEachNode((node) => {
         if (graph.outDegree(node) == 0) {
             degreeMapping.set(node, 0);
@@ -166,51 +166,56 @@ export default function createGraph(
     });
 
     // good for now - TODO return after prereq parser rebuild
-    for (var key in courses) {
+    for (let key in courses) {
         if (graph.hasNode(key) && (courses[key].prereq_description.includes("Consent of instructor")
             || courses[key].prereq_description.includes("consent of instructor"))) {
             graph.setNodeAttribute(key, "color", "purple");
         }
     }
 
+    let maxY = Math.max(...degreeMapping.values());
+
     // calculate number of nodes at each height
-    const numaty = new Map();
-    for (var i = 0; i < 10; i++) {
-        numaty.set(i, 0);
+    const nodesPerHeight: Map<number, number> = new Map();
+    for (let i = 0; i <= maxY; i++) {
+        nodesPerHeight.set(i, 0);
         graph.forEachNode((node) => {
             if (degreeMapping.get(node) == i) {
-                numaty.set(i, numaty.get(i) + 1);
+                nodesPerHeight.set(i, nodesPerHeight.get(i) + 1);
             }
         });
     }
 
+    let yCounter = 0;
     // assign x-coordinates
-    var counter;
-    for (var i = 0; i < 15; i++) {
-        var random = Math.random();
-        counter = 1;
+    for (let i = 0; i <= maxY; i++) {
+        let xCounter = 1;
+
+        if (i > 0) {
+            if (nodesPerHeight.get(i) < 3) {
+                yCounter++;
+            } else {
+                yCounter += 2;
+            }
+        }
+
         graph.forEachNode((node) => {
-            if (degreeMapping.get(node) == i && numaty.get(i) > 1) {
-                graph.updateNode(node, attr => {
-                    return {
-                        ...attr,
-                        x: (counter / (numaty.get(i) + 1)) * 50 + random,
-                        y: 3 * degreeMapping.get(node)
-                    };
-                });
-                counter++;
+            if (degreeMapping.get(node) != i) {
+                return;
             }
-            else if (degreeMapping.get(node) == i && numaty.get(i) == 1) {
-                graph.updateNode(node, attr => {
-                    return {
-                        ...attr,
-                        x: 24.5 + random,
-                        y: 3 * degreeMapping.get(node)
-                    };
-                });
-            }
+
+            graph.updateNode(node, attr => {
+                return {
+                    ...attr,
+                    x: Math.round((xCounter / (nodesPerHeight.get(i) + 1)) * 100),
+                    y: yCounter
+                };
+            });
+
+            xCounter++;
         });
     }
 
+    console.log(graph.export());
     return graph;
 }
