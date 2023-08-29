@@ -1,8 +1,4 @@
 <script setup lang="ts">
-/*
-Ideas: size of node corresponds to average number of students
-Specifically detect patterns of being offered once every 2 years
-*/
 import createGraph from '../creategraph';
 import * as d3 from 'd3';
 import { useRoute } from 'vue-router';
@@ -10,6 +6,7 @@ import { useRoute } from 'vue-router';
 const route = useRoute();
 let topic = route.params.searchItem;
 
+// TODO: find way to access level 4 colors
 const bootstrapColor = color => {
     const colors = {
         "red": "#D3656D",
@@ -130,8 +127,6 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
             .attr("x", function(d) { return d.x + nodeWidth / 2 - 35; })
             .attr("y", function(d) { return d.y + nodeHeight / 2 + 6; });
     }
-}).catch(() => {
-    console.error(`Could not load ${topic} json`);
 })
 </script>
 
