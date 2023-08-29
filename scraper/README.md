@@ -22,6 +22,7 @@ Run tests via pytest.
 ## Repeated Courses
 - Geog 13
 - Env S 15
+- ECON 5
 
 ## Probabilities
 - Courses offered every two years should have probabilities reflecting that

@@ -69,7 +69,9 @@ export default class CourseGraph {
                         if (inDept) {
                             continue;
                         }
-                        this.graph.addNode(prereqClass, { label: prereqClass, color: "green" });
+
+                        // don't color outside nodes green here because color will be overwritten
+                        this.graph.addNode(prereqClass, { label: prereqClass });
                     }
 
                     if (optionalConcurrency) {
@@ -94,6 +96,18 @@ export default class CourseGraph {
                     return {
                         ...attr,
                         color: "red"
+                    };
+                });
+            }
+        });
+
+        // other departments are green
+        this.graph.forEachNode((node) => {
+            if (!courses[node]) {
+                this.graph.updateNode(node, attr => {
+                    return {
+                        ...attr,
+                        color: "green"
                     };
                 });
             }
