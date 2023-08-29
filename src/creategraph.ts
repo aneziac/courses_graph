@@ -52,6 +52,7 @@ export default function createGraph(
             for (var j = 0; j < prereqs[i].length; j++) {
                 let prereqClass = prereqs[i][j];
                 let optionalConcurrency = prereqClass.includes("[O]");
+                let inDept = prereqClass.slice(0, course.sub_dept.length) == course.sub_dept;
 
                 // removing the '[O]'
                 if (optionalConcurrency) {
@@ -59,6 +60,9 @@ export default function createGraph(
                 }
 
                 if (!graph.hasNode(prereqClass)) {
+                    if (inDept) {
+                        continue;
+                    }
                     graph.addNode(prereqClass, { label: prereqClass });
                 }
 
@@ -80,7 +84,7 @@ export default function createGraph(
 
     // sort by division
     if (division) {
-        for (var key in courses) {
+        for (let key in courses) {
             if (graph.hasNode(key)) {
                 let courseNumber = parseInt(courses[key].number);
                 if (!((division - 1) * 100 <= courseNumber && courseNumber <= division * 100)) {
@@ -94,53 +98,49 @@ export default function createGraph(
     // TODO
 
 
-    // r
-    var count = 0;
-    let map = new Map();
+    let noPrereqNodeCount = 0;
 
+    // construct a mapping for nodes such that
+    // no prereqs -> 0
+    // >= 1 prereq -> -1
+    let degreeMapping: Map<string, number> = new Map();
     graph.forEachNode((node) => {
         if (graph.outDegree(node) == 0) {
-            map.set(node, 0);
-            count++;
-        }
-        else {
-            map.set(node, -1);
+            degreeMapping.set(node, 0);
+            noPrereqNodeCount++;
+        } else {
+            degreeMapping.set(node, -1);
         }
     });
 
-    var sent: boolean;
-    var max = 1;
-
-    // console.debug("Node count: " + graph.order);
-
-    while (count < graph.order) {
+    // deduce longest backwards path per node - O(n^2)
+    for (let i = noPrereqNodeCount; i < graph.order; i++) {
         graph.forEachNode((node) => {
-            max = 1;
-            if (map.get(node) == -1) {
-                sent = true;
+            // test for having prereqs
+            if (degreeMapping.get(node) != -1) {
+                return;
             }
-            else {
-                sent = false;
-            }
+
+            // test that prereqs don't have prereqs
             graph.outNeighbors(node).forEach(prereq => {
-                if (map.get(prereq) == -1) {
-                    sent = false;
+                if (degreeMapping.get(prereq) == -1) {
+                    return;
                 }
             });
-            if (sent) {
-                graph.outNeighbors(node).forEach(prereq => {
-                    if (map.get(prereq) + 1 > max) {
-                        max = map.get(prereq) + 1;
-                    }
-                });
 
-                map.set(node, max);
-                count++;
-            }
+            // find max degree of prereqs
+            let maxPrereqDegree = 0;
+            graph.outNeighbors(node).forEach(prereq => {
+                if (degreeMapping.get(prereq) > maxPrereqDegree) {
+                    maxPrereqDegree = degreeMapping.get(prereq);
+                }
+            });
+
+            // node has degree of maximum prereq + itself
+            degreeMapping.set(node, maxPrereqDegree + 1);
         });
     }
 
-    // good
     // root nodes are red
     graph.forEachNode((node) => {
         if (graph.outDegree(node) == 0) {
@@ -153,7 +153,6 @@ export default function createGraph(
         }
     });
 
-    // good
     // other departments are green and/or are removed
     graph.forEachNode((node) => {
         if (!courses[node] && otherDepartments) {
@@ -164,25 +163,22 @@ export default function createGraph(
                 };
             });
         }
-        else if (!courses[node]) {
-            graph.dropNode(node);
-        }
     });
 
-    // good for now - return after prereq parser rebuild
-    for (var key7 in courses) {
-        if (graph.hasNode(key7) && (courses[key7].prereq_description.includes("Consent of instructor") || courses[key7].prereq_description.includes("consent of instructor"))) {
-            graph.setNodeAttribute(key7, "color", "purple");
+    // good for now - TODO return after prereq parser rebuild
+    for (var key in courses) {
+        if (graph.hasNode(key) && (courses[key].prereq_description.includes("Consent of instructor")
+            || courses[key].prereq_description.includes("consent of instructor"))) {
+            graph.setNodeAttribute(key, "color", "purple");
         }
     }
 
-    // r v
     // calculate number of nodes at each height
     const numaty = new Map();
     for (var i = 0; i < 10; i++) {
         numaty.set(i, 0);
         graph.forEachNode((node) => {
-            if (map.get(node) == i) {
+            if (degreeMapping.get(node) == i) {
                 numaty.set(i, numaty.get(i) + 1);
             }
         });
@@ -194,22 +190,22 @@ export default function createGraph(
         var random = Math.random();
         counter = 1;
         graph.forEachNode((node) => {
-            if (map.get(node) == i && numaty.get(i) > 1) {
+            if (degreeMapping.get(node) == i && numaty.get(i) > 1) {
                 graph.updateNode(node, attr => {
                     return {
                         ...attr,
                         x: (counter / (numaty.get(i) + 1)) * 50 + random,
-                        y: 3 * map.get(node)
+                        y: 3 * degreeMapping.get(node)
                     };
                 });
                 counter++;
             }
-            else if (map.get(node) == i && numaty.get(i) == 1) {
+            else if (degreeMapping.get(node) == i && numaty.get(i) == 1) {
                 graph.updateNode(node, attr => {
                     return {
                         ...attr,
                         x: 24.5 + random,
-                        y: 3 * map.get(node)
+                        y: 3 * degreeMapping.get(node)
                     };
                 });
             }
