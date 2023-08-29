@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import createGraph from '../creategraph';
+import CourseGraph from '../CourseGraph';
 import * as d3 from 'd3';
 import { useRoute } from 'vue-router';
 
@@ -21,7 +21,8 @@ const bootstrapColor = color => {
 d3.json(`../../data/website/${topic}.json`).then(f => {
     console.log(`Successfully loaded ${topic}`)
 
-    let graph = createGraph(f).export();
+    let courseGraph = new CourseGraph(f);
+    let graphData = courseGraph.graph.export();
 
     const width = window.innerWidth;
     const height = window.innerHeight;
@@ -57,14 +58,14 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
         .attr("d", "M 60 0 L 0 30 L 60 60 z")
         .attr("fill", "#343a40");
 
-    d3.forceSimulation(graph.nodes)
+    d3.forceSimulation(graphData.nodes)
         .force(
             "link",
             d3.forceLink()
             .id(function(d) {
                 return d.key;
             })
-            .links(graph.edges)
+            .links(graphData.edges)
         )
         .force("charge", d3.forceManyBody().strength(-30))
         .force("center", d3.forceCenter(width / 2, height / 2))
@@ -75,7 +76,7 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
         .append("g")
         .attr("class", "edges")
         .selectAll("line")
-        .data(graph.edges)
+        .data(graphData.edges)
         .enter()
         .append("line")
 
@@ -83,7 +84,7 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
         .append("g")
         .attr("class", "nodes")
         .selectAll("rect")
-        .data(graph.nodes)
+        .data(graphData.nodes)
         .enter()
         .append("rect")
         .attr("width", nodeWidth)
@@ -95,7 +96,7 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
         .append("g")
         .attr("class", "labels")
         .selectAll("text")
-        .data(graph.nodes)
+        .data(graphData.nodes)
         .enter().append("text")
         .text(function(d) { return d.key; })
         .attr("class", "label");
