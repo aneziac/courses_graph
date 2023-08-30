@@ -1,4 +1,5 @@
 import DirectedGraph from 'graphology';
+import { SerializedGraph } from 'graphology-types';
 
 
 // see ../scraper/datatypes.py Course and WebsiteCourse
@@ -25,13 +26,20 @@ enum Division {
 }
 
 export default class CourseGraph {
-    graph: DirectedGraph;
-    edgeColors: Array<string>;
-    optionalConcurrencyColor: string;
+    private graph: DirectedGraph;
+    private nodeColors: Map<string, string>;
+    private edgeColors: Array<string>;
+    private optionalConcurrencyColor: string;
 
     constructor(courses: Map<string, Course>) {
         this.graph = new DirectedGraph();
-        this.edgeColors = ["red", "orange", "green", "blue", "purple"];
+        this.nodeColors = new Map([
+            ["default", "blue"],
+            ["outsideDept", "teal"],
+            ["noPrereqs", "green"],
+            ["instructorConsent", "purple"]
+        ]);
+        this.edgeColors = ["red7", "pink", "orange", "yellow", "red5"];
         this.optionalConcurrencyColor = "black";
 
         this.addNodes(courses);
@@ -41,13 +49,13 @@ export default class CourseGraph {
         this.assignPositions(degreeMapping);
     }
 
-    addNodes(courses: Map<string, Course>) {
+    addNodes(courses: Map<string, Course>): void {
         for (var key in courses) {
-            this.graph.addNode(key, { label: key, color: "blue" });
+            this.graph.addNode(key, { label: key, color: this.nodeColors.get("default") });
         }
     }
 
-    addEdges(courses: Map<string, Course>) {
+    addEdges(courses: Map<string, Course>): void {
         let currColor = 0;
 
         for (let key in courses) {
@@ -88,14 +96,14 @@ export default class CourseGraph {
         }
     }
 
-    colorNodes(courses: Map<string, Course>) {
+    colorNodes(courses: Map<string, Course>): void {
         // root nodes are red
         this.graph.forEachNode((node) => {
             if (this.graph.outDegree(node) == 0) {
                 this.graph.updateNode(node, attr => {
                     return {
                         ...attr,
-                        color: "red"
+                        color: this.nodeColors.get("noPrereqs")
                     };
                 });
             }
@@ -107,7 +115,7 @@ export default class CourseGraph {
                 this.graph.updateNode(node, attr => {
                     return {
                         ...attr,
-                        color: "green"
+                        color: this.nodeColors.get("outsideDept")
                     };
                 });
             }
@@ -117,7 +125,7 @@ export default class CourseGraph {
         for (let key in courses) {
             if (this.graph.hasNode(key) && (courses[key].prereq_description.includes("Consent of instructor")
                 || courses[key].prereq_description.includes("consent of instructor"))) {
-                this.graph.setNodeAttribute(key, "color", "purple");
+                this.graph.setNodeAttribute(key, "color", this.nodeColors.get("instructorConsent"));
             }
         }
     }
@@ -170,7 +178,7 @@ export default class CourseGraph {
         return degreeMapping;
     }
 
-    assignPositions(degreeMapping: Map<string, number>) {
+    assignPositions(degreeMapping: Map<string, number>): void {
         let maxY = Math.max(...degreeMapping.values());
 
         // calculate number of nodes at each height
@@ -216,27 +224,22 @@ export default class CourseGraph {
         }
     }
 
-    getEdges() {
-        return this.graph.export().edges;
-    }
-    getNodes() {
-        return this.graph.export().nodes;
-    }
-}
-
-function sortDivison(inGraph: DirectedGraph, division: Division): DirectedGraph {
-    // 0-100               100-200          200+
-    // Lower division   Upper division    Graduate
-
-    // sort by division
-    if (division) {
-        inGraph.forEachNode((node) => {
-            let courseNumber = parseInt(node.split(" ").pop());
-            if (!((division - 1) * 100 <= courseNumber && courseNumber <= division * 100)) {
-                inGraph.dropNode(node);
-            }
-        })
+    getGraph(): SerializedGraph {
+        return this.graph.export();
     }
 
-    return inGraph;
+    sortDivison(division: Division): void {
+        // 0-100               100-200          200+
+        // Lower division   Upper division    Graduate
+
+        // sort by division
+        if (division) {
+            this.graph.forEachNode((node) => {
+                let courseNumber = parseInt(node.split(" ").pop());
+                if (!((division - 1) * 100 <= courseNumber && courseNumber <= division * 100)) {
+                    this.graph.dropNode(node);
+                }
+            })
+        }
+    }
 }

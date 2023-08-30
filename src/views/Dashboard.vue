@@ -6,13 +6,19 @@ import { useRoute } from 'vue-router';
 const route = useRoute();
 let topic = route.params.searchItem;
 
-// TODO: find way to access level 4 colors
-const bootstrapColor = color => {
+// TODO: find better way to do this
+const themeColor = color => {
     const colors = {
-        "red": "#D3656D",
+        "red7": "#7A282C",
+        "red5": "#CA444B",
+        "pink": "#CE649B",
+        "orange": "#EF9D55",
+        "yellow": "#F6C344",
         "blue": "#5289F5",
+        "teal": "#60C69B",
         "green": "#5F9D79",
-        "purple": "#8669C7"
+        "purple": "#8669C7",
+        "black": "#000000"
     }
 
     return colors[color];
@@ -22,7 +28,7 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
     console.log(`Successfully loaded ${topic}`)
 
     let courseGraph = new CourseGraph(f);
-    let graphData = courseGraph.graph.export();
+    let graphData = courseGraph.getGraph();
 
     const width = window.innerWidth;
     const height = window.innerHeight;
@@ -79,6 +85,7 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
         .data(graphData.edges)
         .enter()
         .append("line")
+        .attr('stroke', d => themeColor(d.attributes.color))
 
     var node = svg
         .append("g")
@@ -90,7 +97,7 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
         .attr("width", nodeWidth)
         .attr("height", nodeHeight)
         .attr('rx', '12')
-        .attr('fill', d => bootstrapColor(d.attributes.color))
+        .attr('fill', d => themeColor(d.attributes.color))
 
     var label = svg
         .append("g")
@@ -148,9 +155,9 @@ graph {
 }
 
 .edges line {
-    stroke: #999;
-    stroke-opacity: 0.6;
-    stroke-width: 3;
+    /* stroke: #999; */
+    stroke-opacity: 0.8;
+    stroke-width: 5;
     marker-end: url(#arrow);
 }
 
