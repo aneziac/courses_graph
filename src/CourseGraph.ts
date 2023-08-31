@@ -18,6 +18,11 @@ interface Course {
     college: string
 }
 
+// this type isn't actually a map - it's actually Object<string, Object>
+// but we cast it as one with no validation to show types correctly
+// low priority - figure out idiomatic way of doing this
+export type CourseJSON = Map<string, Course>
+
 enum Division {
     all,
     lowerDivision,
@@ -25,13 +30,13 @@ enum Division {
     graduate
 }
 
-export default class CourseGraph {
+export class CourseGraph {
     private graph: DirectedGraph;
     private nodeColors: Map<string, string>;
     private edgeColors: Array<string>;
     private optionalConcurrencyColor: string;
 
-    constructor(courses: Map<string, Course>) {
+    constructor(courses: CourseJSON) {
         this.graph = new DirectedGraph();
         this.nodeColors = new Map([
             ["default", "blue"],
@@ -49,13 +54,13 @@ export default class CourseGraph {
         this.assignPositions(degreeMapping);
     }
 
-    addNodes(courses: Map<string, Course>): void {
+    addNodes(courses: CourseJSON): void {
         for (var key in courses) {
             this.graph.addNode(key, { label: key, color: this.nodeColors.get("default") });
         }
     }
 
-    addEdges(courses: Map<string, Course>): void {
+    addEdges(courses: CourseJSON): void {
         let currColor = 0;
 
         for (let key in courses) {
@@ -96,7 +101,7 @@ export default class CourseGraph {
         }
     }
 
-    colorNodes(courses: Map<string, Course>): void {
+    colorNodes(courses: CourseJSON): void {
         // root nodes are red
         this.graph.forEachNode((node) => {
             if (this.graph.outDegree(node) == 0) {
