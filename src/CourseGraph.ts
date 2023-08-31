@@ -32,7 +32,7 @@ enum Division {
 
 export class CourseGraph {
     private graph: DirectedGraph;
-    private nodeColors: Map<string, string>;
+    nodeColors: Map<string, string>;
     private edgeColors: Array<string>;
     private optionalConcurrencyColor: string;
 
@@ -41,10 +41,10 @@ export class CourseGraph {
         this.nodeColors = new Map([
             ["default", "blue"],
             ["outsideDept", "teal"],
-            ["noPrereqs", "green"],
+            ["noPrereqs", "orange"],
             ["instructorConsent", "purple"]
         ]);
-        this.edgeColors = ["red7", "pink", "orange", "yellow", "red5"];
+        this.edgeColors = ["red7", "purple", "orange", "blue", "pink", "green"];
         this.optionalConcurrencyColor = "black";
 
         this.addNodes(courses);
@@ -54,13 +54,13 @@ export class CourseGraph {
         this.assignPositions(degreeMapping);
     }
 
-    addNodes(courses: CourseJSON): void {
+    private addNodes(courses: CourseJSON): void {
         for (var key in courses) {
             this.graph.addNode(key, { label: key, color: this.nodeColors.get("default") });
         }
     }
 
-    addEdges(courses: CourseJSON): void {
+    private addEdges(courses: CourseJSON): void {
         let currColor = 0;
 
         for (let key in courses) {
@@ -101,7 +101,7 @@ export class CourseGraph {
         }
     }
 
-    colorNodes(courses: CourseJSON): void {
+    private colorNodes(courses: CourseJSON): void {
         // root nodes are red
         this.graph.forEachNode((node) => {
             if (this.graph.outDegree(node) == 0) {
@@ -183,7 +183,7 @@ export class CourseGraph {
         return degreeMapping;
     }
 
-    assignPositions(degreeMapping: Map<string, number>): void {
+    private assignPositions(degreeMapping: Map<string, number>): void {
         let maxY = Math.max(...degreeMapping.values());
 
         // calculate number of nodes at each height
