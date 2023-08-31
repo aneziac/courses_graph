@@ -37,6 +37,14 @@ export class CourseGraph {
     private optionalConcurrencyColor: string;
 
     constructor(courses: CourseJSON) {
+        if (Object.keys(courses).length === 0) {
+            throw new Error("Empty JSON file");
+        }
+        let firstEntry = courses[Object.keys(courses)[0]];
+        if (!this.verifyData(firstEntry)) {
+            throw new Error("Data fails minimum requirements");
+        }
+
         this.graph = new DirectedGraph();
         this.nodeColors = new Map([
             ["default", "blue"],
@@ -52,6 +60,17 @@ export class CourseGraph {
         this.colorNodes(courses);
         let degreeMapping = this.computeDegreeMapping();
         this.assignPositions(degreeMapping);
+    }
+
+    private verifyData(data: unknown): boolean {
+        if (!data || typeof data !== 'object') {
+            return false;
+        }
+        const course = data as Course;
+
+        return typeof course.sub_dept === 'string' &&
+               Array.isArray(course.prereqs) &&
+               typeof course.prereq_description === 'string';
     }
 
     private addNodes(courses: CourseJSON): void {
@@ -247,4 +266,6 @@ export class CourseGraph {
             })
         }
     }
+
+    // degree, otherDepartments, requiredOnly, recentlyOfferedOnly
 }

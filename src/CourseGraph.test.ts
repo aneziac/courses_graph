@@ -9,6 +9,16 @@ const exampleData = `{
 
 let graph = new CourseGraph(JSON.parse(exampleData));
 
+test('blank data fails', () => {
+    expect(() => {
+        new CourseGraph(JSON.parse('{}'));
+    }).toThrow();
+
+    expect(() => {
+        new CourseGraph(JSON.parse('{ "GREEK 1": {"sub_dept": "GREEK", "prereq_description": ""} }'));
+    }).toThrow();
+})
+
 test('nodes constructed', () => {
     expect(0).toBe(0);
 });
