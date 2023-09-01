@@ -16,7 +16,7 @@ interface searchData {
 const searchTerm = ref('');
 const searchItems: Ref<Array<searchData>> = ref([]);
 
-csv('../../scraper/depts.csv', (data: Object) => {
+csv('./scraper/depts.csv', (data: Object) => {
     searchItems.value.push({
         kind: 'Dept',
         text: data[' full name'],
@@ -25,7 +25,7 @@ csv('../../scraper/depts.csv', (data: Object) => {
     });
 });
 
-csv('../../scraper/majors.csv', (data: Object) => {
+csv('./scraper/majors.csv', (data: Object) => {
     searchItems.value.push({
         kind: data[' degree type'].trim(),
         text: data[' short name'],
