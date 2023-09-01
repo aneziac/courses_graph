@@ -25,7 +25,6 @@ if ! (which npm); then
     exit 3
 fi
 
-cd CoursesApp
 if ls | grep package-lock; then
     npm ci
 else

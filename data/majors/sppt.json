@@ -1,0 +1,5 @@
+{"Spanish Major": {"name": "Spanish", "degree": "BA", "requirements": [[["SPAN 1"], ["SPAN 2"], ["SPAN 3"], ["SPAN 4"], ["SPAN 5"], ["SPAN 6"], ["SPAN 25"]], [["SPAN 16A"], ["SPAN 16B"]], [["SPAN 30"]], [["SPAN 100"]], [], [], [], [], []]},
+"Portuguese Major": {"name": "Portuguese", "degree": "BA", "requirements": [[["PORT 1"], ["PORT 2"], ["PORT 3"], ["PORT 4"], ["PORT 5"], ["PORT 6"]], [["PORT 102A"]], [["PORT 105"]], [["PORT 106"]], [], [], [], []]},
+"Spanish Minor": {"name": "Spanish", "degree": "Minor", "requirements": [[["SPAN 16A"], ["SPAN 16B"]], [["SPAN 30"]], [], [], [], [], []]},
+"Portuguese Minor": {"name": "Portuguese", "degree": "Minor", "requirements": [[["PORT 1"], ["PORT 2"], ["PORT 3"], ["PORT 4"], ["PORT 5"], ["PORT 6"]], [["PORT 102A", "PORT 102B"]], [["PORT 105"]], [["PORT 106"]], []]
+}}

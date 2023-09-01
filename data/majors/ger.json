@@ -1,0 +1,5 @@
+{"German Major": {"name": "German", "degree": "BA", "requirements": [[], [["GER 101A"]], [["GER 106"]], [["GER 107A"]], [["GER 108"]], [["GER 113", "GER 117", "GER 177A"]], [["GER 190"]], []]},
+"Russian-East European Studies Major": {"name": "Russian", "degree": "BA", "requirements": [[["RUSS 1"], ["RUSS 2"], ["RUSS 3"], ["RUSS 4"], ["RUSS 5"], ["RUSS 6"]], [], [["SLAV 145"], ["SLAV 152B"]], [["RUSS 121"], ["RUSS 122"], ["RUSS 124"]], [["SLAV 130A"]], [], []]},
+"German Studies Minor": {"name": "German", "degree": "Minor", "requirements": [[["GER 1"], ["GER 2"], ["GER 3"], ["GER 4"], ["GER 5"], ["GER 6"]], [["GER 101A"]], []]},
+"Russian Minor": {"name": "Russian", "degree": "Minor", "requirements": [[["RUSS 1"], ["RUSS 2"], ["RUSS 3"], ["RUSS 4"], ["RUSS 5"], ["RUSS 6"]], [["RUSS 101A"]]]
+}}

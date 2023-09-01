@@ -1,0 +1,6 @@
+{"Anthropology Major": {"name": "Anthropology", "degree": "BA", "requirements": [[["ANTH 2"]], [["ANTH 3", "ANTH 3SS"]], [["ANTH 5"]], [["ANTH 9", "ANTH 129", "ANTH 182", "EACS 152", "PSTAT 5A", "PSTAT 5LS"]], []]},
+"Anthropology Major-Archaeology Emphasis": {"name": "Archaeology", "degree": "BA", "requirements": [[["ANTH 2"]], [["ANTH 3", "ANTH 3SS"]], [["ANTH 5"]], [["ANTH 9", "ANTH 182", "PSTAT 5A", "PSTAT 5LS"]], [], []]},
+"Anthropology Major-Biological Emphasis": {"name": "Biological Anthropology", "degree": "BA", "requirements": [[["ANTH 2"]], [["ANTH 3", "ANTH 3SS"]], [["ANTH 5"]], [["ANTH 9", "PSTAT 5A", "PSTAT 5LS"]], [], []]},
+"Anthropology Major-Cultural Emphasis": {"name": "Cultural Anthropology", "degree": "BA", "requirements": [[["ANTH 2"]], [["ANTH 3", "ANTH 3SS"]], [["ANTH 5"]], [["ANTH 9", "ANTH 129", "EACS 152"]], [], []]},
+"Anthropology Minor": {"name": "Anthropology", "degree": "Minor", "requirements": [[["ANTH 2"]], [["ANTH 3", "ANTH 3SS"]], [["ANTH 5"]], []]
+}}

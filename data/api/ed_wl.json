@@ -1,0 +1,5 @@
+{"ED WL 321": {"number": "321", "sub_dept": "ED WL", "offered_probabilities": [0.0, 0.0, 0.0, 0.864], "offered": ["Fall 2021", "Fall 2022", "Fall 2023"], "general_education_fields": []},
+"ED WL 321M": {"number": "321M", "sub_dept": "ED WL", "offered_probabilities": [0.0, 0.0, 0.864, 0.0], "offered": ["Summer 2021", "Summer 2022", "Summer 2023"], "general_education_fields": []},
+"ED WL 341": {"number": "341", "sub_dept": "ED WL", "offered_probabilities": [0.694, 0.694, 0.0, 0.864], "offered": ["Fall 2021", "Winter 2022", "Spring 2022", "Fall 2022", "Winter 2023", "Spring 2023", "Fall 2023"], "general_education_fields": []},
+"ED WL 371": {"number": "371", "sub_dept": "ED WL", "offered_probabilities": [0.694, 0.694, 0.864, 0.864], "offered": ["Summer 2021", "Fall 2021", "Winter 2022", "Spring 2022", "Summer 2022", "Fall 2022", "Winter 2023", "Spring 2023", "Summer 2023", "Fall 2023"], "general_education_fields": []}
+}

@@ -1,0 +1,16 @@
+{"RUSS 1": {"number": "1", "sub_dept": "RUSS", "offered_probabilities": [0.0, 0.0, 0.0, 0.992], "offered": ["Fall 2019", "Fall 2020", "Fall 2021", "Fall 2022", "Fall 2023"], "general_education_fields": []},
+"RUSS 2": {"number": "2", "sub_dept": "RUSS", "offered_probabilities": [0.955, 0.0, 0.0, 0.0], "offered": ["Winter 2020", "Winter 2021", "Winter 2022", "Winter 2023"], "general_education_fields": ["H"]},
+"RUSS 3": {"number": "3", "sub_dept": "RUSS", "offered_probabilities": [0.0, 0.955, 0.0, 0.0], "offered": ["Spring 2020", "Spring 2021", "Spring 2022", "Spring 2023"], "general_education_fields": ["B", "H"]},
+"RUSS 4": {"number": "4", "sub_dept": "RUSS", "offered_probabilities": [0.0, 0.0, 0.0, 0.992], "offered": ["Fall 2019", "Fall 2020", "Fall 2021", "Fall 2022", "Fall 2023"], "general_education_fields": ["B", "H"]},
+"RUSS 5": {"number": "5", "sub_dept": "RUSS", "offered_probabilities": [0.955, 0.0, 0.0, 0.0], "offered": ["Winter 2020", "Winter 2021", "Winter 2022", "Winter 2023"], "general_education_fields": ["B", "H"]},
+"RUSS 6": {"number": "6", "sub_dept": "RUSS", "offered_probabilities": [0.0, 0.955, 0.0, 0.0], "offered": ["Spring 2020", "Spring 2021", "Spring 2022", "Spring 2023"], "general_education_fields": ["B", "H"]},
+"RUSS 101A": {"number": "101A", "sub_dept": "RUSS", "offered_probabilities": [0.0, 0.0, 0.0, 0.623], "offered": ["Fall 2019", "Fall 2021", "Fall 2023"], "general_education_fields": []},
+"RUSS 101B": {"number": "101B", "sub_dept": "RUSS", "offered_probabilities": [0.369, 0.0, 0.0, 0.0], "offered": ["Winter 2020", "Winter 2022"], "general_education_fields": []},
+"RUSS 101C": {"number": "101C", "sub_dept": "RUSS", "offered_probabilities": [0.0, 0.369, 0.0, 0.0], "offered": ["Spring 2020", "Spring 2022"], "general_education_fields": []},
+"RUSS 101D": {"number": "101D", "sub_dept": "RUSS", "offered_probabilities": [0.0, 0.0, 0.0, 0.369], "offered": ["Fall 2020", "Fall 2022"], "general_education_fields": []},
+"RUSS 101E": {"number": "101E", "sub_dept": "RUSS", "offered_probabilities": [0.586, 0.0, 0.0, 0.0], "offered": ["Winter 2021", "Winter 2023"], "general_education_fields": []},
+"RUSS 101F": {"number": "101F", "sub_dept": "RUSS", "offered_probabilities": [0.0, 0.586, 0.0, 0.0], "offered": ["Spring 2021", "Spring 2023"], "general_education_fields": []},
+"RUSS 121": {"number": "121", "sub_dept": "RUSS", "offered_probabilities": [0.0, 0.278, 0.0, 0.0], "offered": ["Spring 2022"], "general_education_fields": []},
+"RUSS 122": {"number": "122", "sub_dept": "RUSS", "offered_probabilities": [0.0, 0.506, 0.0, 0.0], "offered": ["Spring 2020", "Spring 2023"], "general_education_fields": []},
+"RUSS 124": {"number": "124", "sub_dept": "RUSS", "offered_probabilities": [0.0, 0.17, 0.0, 0.0], "offered": ["Spring 2021"], "general_education_fields": []}
+}

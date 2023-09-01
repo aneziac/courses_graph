@@ -2,14 +2,13 @@ scraper/raw.txt
 venv/*
 scraper/__pycache__/*
 .pytest_cache/*
-.expo
 .vscode/*
 scraper/.env
 *.log
 scraper/*.log
-server.cjs
 .DS_Store
 scraper/*.env
 scraper/major_courses.json
 node_modules
 dist
+.coverage

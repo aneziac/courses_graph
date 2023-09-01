@@ -1,0 +1,5 @@
+{"Economics Major": {"name": "Economics", "degree": "BA", "requirements": [[["ECON 1"], ["ECON 2"]], [["ECON 10A"]], [["ECON 5", "PSTAT 120A"]], [["MATH 2A", "MATH 3A", "MATH 34A"]], [["ECON 100B"]], [["ECON 101"]], [["ECON 140A"]], [], [["ECON 118"], ["ECON 136A"], ["ECON 137A"], ["ECON 138A"]]]},
+"Pre-Economics Major": {"name": "Pre-Economics", "degree": "Pre", "requirements": [[["ECON 1"], ["ECON 2"]], [["ECON 10A"]], [["ECON 5", "PSTAT 120A"]], [["MATH 2A", "MATH 3A", "MATH 34A"]]]},
+"Economics-AccountingBA": {"name": "Accounting", "degree": "BA", "requirements": [[["ECON 1"], ["ECON 2"]], [["ECON 3A"]], [["ECON 10A"]], [["ECON 5", "PSTAT 120A"]], [["MATH 2A", "MATH 3A", "MATH 34A"]], [["ECON 100B"]], [["ECON 101"]], [["ECON 134A"]], [["ECON 140A"]], [], [["ECON 118"]], [["ECON 136A"]], [["ECON 137A"]], [["ECON 132A"], ["ECON 137B"], ["ECON 138A"], ["ECON 139"], ["ECON 182"], ["ECON 189"]]]},
+"Pre-Economics-Accounting-BA": {"name": "Pre-Accounting", "degree": "Pre", "requirements": [[["ECON 1"], ["ECON 2"]], [["ECON 3A"]], [["ECON 10A"]], [["ECON 5", "PSTAT 120A"]], [["MATH 2A", "MATH 3A", "MATH 34A"]]]
+}}

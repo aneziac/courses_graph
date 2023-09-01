@@ -1,0 +1,4 @@
+{"Philosophy Major, Concentration I, Core Philosophy": {"name": "Philosophy", "degree": "BA", "requirements": [[["PHIL 3", "PHIL 183"]], [["PHIL 100A"], ["PHIL 116"]], [], []]},
+"Philosophy Major, Concentration II, Ethics and Public Policy": {"name": "Ethics and Public Policy", "degree": "BA", "requirements": [[["PHIL 3", "PHIL 183"]], [["PHIL 100A"]], [["PHIL 100B"], ["PHIL 116"]], [], []]},
+"Philosophy Minor": {"name": "Philosophy", "degree": "Minor", "requirements": [[["PHIL 3", "PHIL 183"]], [], [["PHIL 20"]]]
+}}

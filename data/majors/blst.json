@@ -1,0 +1,3 @@
+{"Black-Studies-BA": {"name": "Black Studies", "degree": "BA", "requirements": [[["BL ST 1"], ["BL ST 2"], ["BL ST 3"], ["BL ST 7"]], [["BL ST 4"], ["BL ST 5"], ["BL ST 6"], ["BL ST 14"], ["BL ST 15"], ["BL ST 33"], ["BL ST 38A"], ["BL ST 45"], ["BL ST 49A"], ["BL ST 50"]], [], [], [["BL ST 106"], ["BL ST 125"], ["BL ST 127"], ["BL ST 133"], ["BL ST 136"], ["BL ST 145"], ["BL ST 151"], ["BL ST 153"]], [], []]},
+"Black Studies Minor": {"name": "Black Studies", "degree": "Minor", "requirements": [[["BL ST 1"], ["BL ST 2"], ["BL ST 3"], ["BL ST 7"]], [], [], [["BL ST 106"], ["BL ST 125"], ["BL ST 127"], ["BL ST 133"], ["BL ST 136"], ["BL ST 145"], ["BL ST 151"], ["BL ST 153"]], [["BL ST 180"]], []]
+}}

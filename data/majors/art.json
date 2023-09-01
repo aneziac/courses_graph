@@ -1,0 +1,5 @@
+{"Art Major": {"name": "Art", "degree": "BA", "requirements": [[["ART 1A"], ["ART 1C"]], [], [], [], [], [["ART 125", "ART 126", "ART 130"]]]},
+"Art Minor": {"name": "Art", "degree": "Minor", "requirements": [[["ART 1A"]], [["ART 7A"]], [], [["ART 10"], ["ART 12"], ["ART 14"], ["ART 18"], ["ART 19"], ["ART 22"], ["ART 32"]], []]},
+"Art Minor, Art-TechnologyTrack": {"name": "Art Technology", "degree": "Minor", "requirements": [[["ART 1A"]], [], [["ART 7D"]], [], [["ART 22"]], []]},
+"Art Minor, PublicPracticeTrack": {"name": "Public Art", "degree": "Minor", "requirements": [[["ART 1A"]], [["ART 7A", "ART 7C"]], [["ART 12"]], []]
+}}

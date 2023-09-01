@@ -1,0 +1,6 @@
+{"French Major": {"name": "French", "degree": "BA", "requirements": [[["FR 1"], ["FR 2"], ["FR 3"], ["FR 4"], ["FR 5"], ["FR 6"]], [], [["FR 100"]], [["FR 101A"]], [], [], [["FR 197", "FR 198"]]]},
+"Italian Studies Major": {"name": "Italian", "degree": "BA", "requirements": [[["ITAL 1"], ["ITAL 2"], ["ITAL 3"], ["ITAL 4"], ["ITAL 5"], ["ITAL 6"]], [], [["ITAL 20X"]], [], [["ITAL 101", "ITAL 102", "ITAL 103"]], [["ITAL 119A", "ITAL 119B"]], [], [["ITAL 109"]], []]},
+"Italian Studies Major-Transnational Emphasis": {"name": "Transnational Italian Studies", "degree": "BA", "requirements": [[["ITAL 1"], ["ITAL 2"], ["ITAL 3"]], [], [["HIST 2C"], ["HIST 4C"]], [], [["ITAL 120X"]], [], [], [], []]},
+"French Minor": {"name": "French", "degree": "Minor", "requirements": [[["FR 1"], ["FR 2"], ["FR 3"], ["FR 4"], ["FR 5"], ["FR 6"]], [["FR 100"]], [["FR 104A"]], [["FR 101A"]], []]},
+"Italian Minor": {"name": "Italian", "degree": "Minor", "requirements": [[["ITAL 1"], ["ITAL 2"], ["ITAL 3"], ["ITAL 4"], ["ITAL 5"], ["ITAL 6"]], [], [], [["ITAL 20X"]], [["ITAL 101", "ITAL 102", "ITAL 103"]], [["ITAL 119A", "ITAL 119B"]], [], [], [], []]
+}}

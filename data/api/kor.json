@@ -1,0 +1,18 @@
+{"KOR 1": {"number": "1", "sub_dept": "KOR", "offered_probabilities": [0.0, 0.0, 1.0, 1.0], "offered": ["Summer 2018", "Fall 2018", "Summer 2019", "Fall 2019", "Summer 2020", "Fall 2020", "Summer 2021", "Fall 2021", "Summer 2022", "Fall 2022", "Summer 2023", "Fall 2023"], "general_education_fields": []},
+"KOR 2": {"number": "2", "sub_dept": "KOR", "offered_probabilities": [1.0, 0.0, 1.0, 0.0], "offered": ["Winter 2018", "Summer 2018", "Winter 2019", "Summer 2019", "Winter 2020", "Summer 2020", "Winter 2021", "Summer 2021", "Winter 2022", "Summer 2022", "Winter 2023", "Summer 2023"], "general_education_fields": ["H"]},
+"KOR 3": {"number": "3", "sub_dept": "KOR", "offered_probabilities": [0.0, 1.0, 1.0, 0.0], "offered": ["Spring 2018", "Summer 2018", "Spring 2019", "Summer 2019", "Spring 2020", "Summer 2020", "Spring 2021", "Summer 2021", "Spring 2022", "Summer 2022", "Spring 2023", "Summer 2023"], "general_education_fields": ["B", "H"]},
+"KOR 4": {"number": "4", "sub_dept": "KOR", "offered_probabilities": [0.0, 0.0, 0.0, 1.0], "offered": ["Fall 2018", "Fall 2019", "Fall 2020", "Fall 2021", "Fall 2022", "Fall 2023"], "general_education_fields": ["B", "H"]},
+"KOR 5": {"number": "5", "sub_dept": "KOR", "offered_probabilities": [0.992, 0.0, 0.0, 0.0], "offered": ["Winter 2019", "Winter 2020", "Winter 2021", "Winter 2022", "Winter 2023"], "general_education_fields": ["B", "H"]},
+"KOR 6": {"number": "6", "sub_dept": "KOR", "offered_probabilities": [0.0, 0.992, 0.0, 0.0], "offered": ["Spring 2019", "Spring 2020", "Spring 2021", "Spring 2022", "Spring 2023"], "general_education_fields": ["B", "H"]},
+"KOR 20": {"number": "20", "sub_dept": "KOR", "offered_probabilities": [0.128, 0.0, 0.0, 0.09], "offered": ["Winter 2019", "Winter 2020", "Fall 2020"], "general_education_fields": []},
+"KOR 113": {"number": "113", "sub_dept": "KOR", "offered_probabilities": [0.0, 0.416, 0.0, 0.424], "offered": ["Fall 2018", "Spring 2023", "Fall 2023"], "general_education_fields": ["NWC", "G"]},
+"KOR 120": {"number": "120", "sub_dept": "KOR", "offered_probabilities": [0.17, 0.128, 0.0, 0.0], "offered": ["Spring 2019", "Spring 2020", "Winter 2021"], "general_education_fields": []},
+"KOR 139": {"number": "139", "sub_dept": "KOR", "offered_probabilities": [0.207, 0.0, 0.0, 0.037], "offered": ["Winter 2019", "Fall 2019", "Winter 2021"], "general_education_fields": []},
+"KOR 142": {"number": "142", "sub_dept": "KOR", "offered_probabilities": [0.09, 0.037, 0.0, 0.09], "offered": ["Spring 2019", "Winter 2020", "Fall 2020"], "general_education_fields": []},
+"KOR 152": {"number": "152", "sub_dept": "KOR", "offered_probabilities": [0.0, 0.416, 0.0, 0.0], "offered": ["Spring 2023"], "general_education_fields": []},
+"KOR 175": {"number": "175", "sub_dept": "KOR", "offered_probabilities": [0.0, 0.17, 0.0, 0.045], "offered": ["Fall 2018", "Fall 2019", "Spring 2021"], "general_education_fields": []},
+"KOR 181": {"number": "181", "sub_dept": "KOR", "offered_probabilities": [0.037, 0.0, 0.0, 0.0], "offered": ["Winter 2019"], "general_education_fields": []},
+"KOR 181KL": {"number": "181KL", "sub_dept": "KOR", "offered_probabilities": [0.0, 0.008, 0.0, 0.0], "offered": ["Spring 2018"], "general_education_fields": []},
+"KOR 182B": {"number": "182B", "sub_dept": "KOR", "offered_probabilities": [0.008, 0.0, 0.0, 0.0], "offered": ["Winter 2018"], "general_education_fields": ["E", "NWC", "WRT"]},
+"KOR 199": {"number": "199", "sub_dept": "KOR", "offered_probabilities": [0.0, 0.306, 0.0, 1.0], "offered": ["Spring 2018", "Fall 2018", "Spring 2019", "Fall 2019", "Spring 2020", "Fall 2020", "Spring 2021", "Fall 2021", "Fall 2022", "Fall 2023"], "general_education_fields": []}
+}

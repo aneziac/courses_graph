@@ -1,0 +1,6 @@
+{"Biochemistry-BS": {"name": "Biochemistry", "degree": "BS", "requirements": [[], [], [], [], [["MATH 2A", "MATH 3A"], ["MATH 2B", "MATH 3B"], ["MATH 4A"]], [["PHYS 6A"]], [["MATH 6A"]], [["PHYS 3L", "PHYS 6AL"]], [["MCDB 1A"], ["EEMB 2"], ["MCDB 1LL"]], [], [], [], [["MCDB 101B"], ["MCDB 103"], ["MCDB 126B"], ["MCDB 126C"], ["MCDB 134"], ["MCDB 135"]]]},
+"Chemistry BS Major": {"name": "Chemistry BS", "degree": "BS", "requirements": [[], [], [], [], [["MATH 2A", "MATH 3A"], ["MATH 2B", "MATH 3B"], ["MATH 4A"]], [["PHYS 1"]], [], [["MATH 4B"], ["MATH 6A"]], [["PHYS 3L"]], [], [], []]},
+"Chemistry BA Major": {"name": "Chemistry BA", "degree": "BA", "requirements": [[], [], [], [], [["MATH 2A", "MATH 3A"], ["MATH 2B", "MATH 3B"], ["MATH 4A"]], [["PHYS 1", "PHYS 6A"]], [["MATH 6A"]], [["PHYS 3L", "PHYS 6AL"]], [], [], []]},
+"Pre-Chemistry Major": {"name": "Pre-Chemistry", "degree": "Pre", "requirements": [[], [], [], [], [["MATH 2A", "MATH 3A"], ["MATH 2B", "MATH 3B"], ["MATH 4A"]], [["PHYS 1", "PHYS 6A"]]]},
+"Chemistry Minor": {"name": "Chemistry", "degree": "Minor", "requirements": [[], [], []]
+}}

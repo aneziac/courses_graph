@@ -1,0 +1,3 @@
+{"Sociology Major": {"name": "Sociology", "degree": "BA", "requirements": [[["SOC 1"], ["CMPSC 5A"], ["CMPSC 87"], ["PSTAT 5A"]], [], [], [], [["SOC 108"], ["SOC 108A"], ["SOC 136B"], ["SOC 136V"], ["SOC 148MA"]], [["SOC 185A"]], [], [], [], []]},
+"Pre-Sociology Major": {"name": "Pre-Sociology", "degree": "Pre", "requirements": [[["SOC 1"]], [["CMPSC 5A"], ["CMPSC 87"], ["PSTAT 5A"]], [["HIST 2C"], ["HIST 4C"], ["HIST 8"], ["HIST 17B"], ["HIST 17C"]], [], []]
+}}
