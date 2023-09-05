@@ -31,7 +31,7 @@ enum Division {
 }
 
 export class CourseGraph {
-    private graph: DirectedGraph;
+    graph: DirectedGraph;
     nodeColors: Map<string, string>;
     private edgeColors: Array<string>;
     private optionalConcurrencyColor: string;
@@ -62,6 +62,7 @@ export class CourseGraph {
         this.assignPositions(degreeMapping);
     }
 
+    // should soon be subdept and prereqs only
     private verifyData(data: unknown): boolean {
         if (!data || typeof data !== 'object') {
             return false;
@@ -74,7 +75,7 @@ export class CourseGraph {
     }
 
     private addNodes(courses: CourseJSON): void {
-        for (var key in courses) {
+        for (let key in courses) {
             this.graph.addNode(key, { label: key, color: this.nodeColors.get("default") });
         }
     }
@@ -86,8 +87,8 @@ export class CourseGraph {
             let course: Course = courses[key];
             let prereqs = course.prereqs;
 
-            for (var i = 0; i < prereqs.length; i++) {
-                for (var j = 0; j < prereqs[i].length; j++) {
+            for (let i = 0; i < prereqs.length; i++) {
+                for (let j = 0; j < prereqs[i].length; j++) {
                     let prereqClass = prereqs[i][j];
                     let optionalConcurrency = prereqClass.includes("[O]");
                     let inDept = prereqClass.slice(0, course.sub_dept.length) == course.sub_dept;
@@ -252,17 +253,15 @@ export class CourseGraph {
         return this.graph.export();
     }
 
-    sortDivison(division: Division): void {
+    sortDivison(division: Division): string[] {
         // 0-100               100-200          200+
         // Lower division   Upper division    Graduate
 
-        // sort by division
+        // sort by division - all is falsey
         if (division) {
-            this.graph.forEachNode((node) => {
+            return this.graph.filterNodes((node) => {
                 let courseNumber = parseInt(node.split(" ").pop());
-                if (!((division - 1) * 100 <= courseNumber && courseNumber <= division * 100)) {
-                    this.graph.dropNode(node);
-                }
+                return (division - 1) * 100 <= courseNumber && courseNumber <= division * 100
             })
         }
     }

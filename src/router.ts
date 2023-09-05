@@ -1,6 +1,6 @@
 import Home from './views/Home.vue';
 import Dashboard from './views/Dashboard.vue';
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
     { path: '/', component: Home },
@@ -8,6 +8,6 @@ const routes = [
 ]
 
 export const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes: routes
 })

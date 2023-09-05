@@ -156,8 +156,8 @@ graph {
 
 .edges line {
     /* stroke: #999; */
-    stroke-opacity: 0.8;
-    stroke-width: 5;
+    stroke-opacity: 0.7;
+    stroke-width: 3;
     marker-end: url(#arrow);
 }
 
