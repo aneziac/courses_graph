@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, Ref, onMounted } from 'vue';
+import { computed, ref, Ref, onMounted, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
 import SearchItem from './SearchItem.vue';
 import { csv } from 'd3-fetch';
@@ -48,14 +48,16 @@ function toLocalPage(searchResult: searchData) {
     router.push('/' + searchResult.alt.replaceAll(' ', ''));
 }
 
-// onMounted(() => {
-//     searchTerm.value.focus();
-// });
+onMounted(() => {
+    nextTick(() => {
+        document.getElementById('search').focus();
+    })
+});
 </script>
 
 <template>
     <span class="main-search-bar">
-        <input v-model="searchTerm" placeholder="Enter a department or degree program...">
+        <input v-model="searchTerm" placeholder="Enter a department or degree program..." id="search">
     </span>
     <ul>
         <li v-for="result in searchResults">
