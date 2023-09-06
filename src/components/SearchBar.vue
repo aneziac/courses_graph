@@ -7,10 +7,11 @@ import { csv } from 'd3-fetch';
 const router = useRouter();
 
 interface searchData {
-    kind: string;
-    text: string;
-    alt: string;
-    college: string
+    degree: string;  // type of degree, or dept
+    dept: string;
+    text: string;  // regular name
+    alt: string;  // alternate name
+    college: string;
 }
 
 const searchTerm = ref('');
@@ -18,17 +19,23 @@ const searchItems: Ref<Array<searchData>> = ref([]);
 
 csv('../../scraper/depts.csv', (data: Object) => {
     searchItems.value.push({
-        kind: 'Dept',
-        text: data[' full name'],
-        alt: data['abbrev'].toLowerCase(),
+        degree: 'Dept',
+        dept: '',  // redundant
+        text: data[' full name'].trim(),
+        alt: data['abbrev'].toLowerCase().trim(),
         college: data[' college'].trim()
     });
 });
 
 csv('../../scraper/majors.csv', (data: Object) => {
+    if (!data[' degree type']) {
+        return;
+    }
+
     searchItems.value.push({
-        kind: data[' degree type'].trim(),
-        text: data[' short name'],
+        degree: data[' degree type'].trim(),
+        dept: data[' dept'].trim(),
+        text: data[' short name'].trim(),
         alt: data[' full name'].trim().toLowerCase(),
         college: data['abbrev'] == 'ENGR' ? 'COE' : 'L&S'
     });
@@ -45,7 +52,23 @@ const searchResults = computed(() => {
 })
 
 function toLocalPage(searchResult: searchData) {
-    router.push('/' + searchResult.alt.replaceAll(' ', ''));
+    if (searchResult.degree === 'Dept') {
+        router.push('/' + searchResult.alt.replaceAll(' ', ''));
+
+    // subpage if we have a degree
+    } else {
+        let strippedText = searchResult.text.replace(' - ', '-')
+                                            .replace(' BA', '')
+                                            .replace(' BS', '')
+                                            .replace(' BFA', '');
+
+        if (!searchResult.text.includes('Pre-')) {
+            strippedText += ' ' + searchResult.degree
+        }
+
+        let degreeName = strippedText.toLowerCase().replaceAll(' ', '-');
+        router.push('/' + searchResult.dept + '/' + degreeName);
+    }
 }
 
 onMounted(() => {
@@ -66,7 +89,7 @@ onMounted(() => {
                     {{ result.text }}
                 </template>
                 <template #kind>
-                    {{ result.kind }}
+                    {{ result.degree }}
                 </template>
                 <template #college>
                     {{ result.college }}
