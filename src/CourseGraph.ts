@@ -228,6 +228,14 @@ export default class CourseGraph {
         return this.graph.export();
     }
 
+    nodeCount(): number {
+        return this.graph.order;
+    }
+
+    edgeCount(): number {
+        return this.graph.size;
+    }
+
     sortDivison(division: Division): void {
         // 0-100               100-200          200+
         // Lower division   Upper division    Graduate

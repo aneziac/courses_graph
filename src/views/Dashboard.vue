@@ -7,6 +7,21 @@ import { useRoute } from 'vue-router';
 const route = useRoute();
 let topic = route.params.searchItem;
 
+// these classes are necessarily because webCola requires numeric keys
+interface courseNode {
+    id: number;
+    name: string;
+    color: string;
+    x: number;
+    y: number;
+}
+
+interface prereqEdge {
+    source: number,
+    target: number,
+    color: string
+}
+
 // TODO: find better way to do this
 const themeColor = color => {
     const colors = {
@@ -31,6 +46,29 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
     let courseGraph = new CourseGraph(f);
     let graphData = courseGraph.getGraph();
 
+    let nodeMap: Map<string, courseNode> = new Map();
+    let edges: Array<prereqEdge> = new Array(courseGraph.edgeCount());
+
+    graphData.nodes.forEach((node, i) => {
+        nodeMap.set(node.key, <courseNode>{
+            id: i,
+            name: node.key,
+            color: node.attributes.color,
+            x: node.attributes.x,
+            y: node.attributes.y
+        });
+    });
+    graphData.edges.forEach((edge, i) => {
+        edges[i] = <prereqEdge>{
+            source: nodeMap.get(edge.source).id,
+            target: nodeMap.get(edge.target).id,
+            color: edge.attributes.color
+        }
+    });
+    let nodes = Array.from(nodeMap.values());
+    console.log(edges);
+    console.log(nodes);
+
     const width = window.innerWidth;
     const height = window.innerHeight;
 
@@ -44,6 +82,11 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
             d3.selectAll('g')
                 .attr('transform', e.transform);
         });
+
+    const d3Cola = cola
+        .d3adaptor(d3)
+        .avoidOverlaps(true)
+        .size([width, height]);
 
     const svg = d3.select("#graph")
         .append("svg")
@@ -65,50 +108,46 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
         .attr("d", "M 60 0 L 0 30 L 60 60 z")
         .attr("fill", "#343a40");
 
-    const simulation = d3
-        .forceSimulation()
-        .force(
-            "link",
-            d3.forceLink()
-            .id(function(d) {
-                return d.key;
-            })
-        )
-        .force("charge", d3.forceManyBody().strength(-30))
-        .force("center", d3.forceCenter(width / 2, height / 2))
-        .force("collision", d3.forceCollide(nodeWidth))
+    d3Cola
+        .nodes(nodes)
+        .links(edges)
+        .flowLayout("y", 150)
+        .linkDistance(50)
+        .symmetricDiffLinkLengths(40)
+        .avoidOverlaps(true)
+        .start();
 
     var link = svg
         .append("g")
         .attr("class", "edges")
         .selectAll("line")
-        .data(graphData.edges)
+        .data(edges)
         .enter()
         .append("line")
-        .attr('stroke', d => themeColor(d.attributes.color))
+        .attr('stroke', d => themeColor(d.color))
 
     var node = svg
         .append("g")
         .attr("class", "nodes")
         .selectAll("rect")
-        .data(graphData.nodes)
+        .data(nodes)
         .enter()
         .append("rect")
         .attr("width", nodeWidth)
         .attr("height", nodeHeight)
         .attr('rx', '12')
-        .attr('fill', d => themeColor(d.attributes.color))
+        .attr('fill', d => themeColor(d.color))
 
     var label = svg
         .append("g")
         .attr("class", "labels")
         .selectAll("text")
-        .data(graphData.nodes)
+        .data(nodes)
         .enter().append("text")
-        .text(function(d) { return d.key; })
+        .text(function(d) { return d.name; })
         .attr("class", "label");
 
-    function ticked() {
+    d3Cola.on("tick", () => {
         link
             .attr("x1", function(d) {
                 return d.source.x + nodeWidth / 2;
@@ -134,10 +173,7 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
         label
             .attr("x", function(d) { return d.x + nodeWidth / 2 - 35; })
             .attr("y", function(d) { return d.y + nodeHeight / 2 + 6; });
-    }
-
-    simulation.nodes(graphData.nodes).on("tick", ticked)
-    simulation.force("link").links(graphData.edges)
+    });
 })
 </script>
 
@@ -158,7 +194,6 @@ graph {
 }
 
 .edges line {
-    /* stroke: #999; */
     stroke-opacity: 0.8;
     stroke-width: 5;
     marker-end: url(#arrow);
@@ -167,6 +202,5 @@ graph {
 .nodes rect {
     stroke: #000000;
     stroke-width: 3px;
-    /* fill: #69a3b2; */
 }
 </style>
