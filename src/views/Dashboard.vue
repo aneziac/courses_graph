@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import CourseGraph from '../CourseGraph';
 import * as d3 from 'd3';
+import * as cola from 'webcola';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
@@ -64,19 +65,18 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
         .attr("d", "M 60 0 L 0 30 L 60 60 z")
         .attr("fill", "#343a40");
 
-    d3.forceSimulation(graphData.nodes)
+    const simulation = d3
+        .forceSimulation()
         .force(
             "link",
             d3.forceLink()
             .id(function(d) {
                 return d.key;
             })
-            .links(graphData.edges)
         )
         .force("charge", d3.forceManyBody().strength(-30))
         .force("center", d3.forceCenter(width / 2, height / 2))
         .force("collision", d3.forceCollide(nodeWidth))
-        .on("tick", ticked);
 
     var link = svg
         .append("g")
@@ -135,6 +135,9 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
             .attr("x", function(d) { return d.x + nodeWidth / 2 - 35; })
             .attr("y", function(d) { return d.y + nodeHeight / 2 + 6; });
     }
+
+    simulation.nodes(graphData.nodes).on("tick", ticked)
+    simulation.force("link").links(graphData.edges)
 })
 </script>
 
