@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CourseGraph from '../CourseGraph';
+import { CourseJSON, CourseGraph } from '../CourseGraph';
 import * as d3 from 'd3';
 import * as cola from 'webcola';
 import { useRoute } from 'vue-router';
@@ -40,7 +40,7 @@ const themeColor = color => {
     return colors[color];
 }
 
-d3.json(`../../data/website/${topic}.json`).then(f => {
+d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
     console.log(`Successfully loaded ${topic}`)
 
     let courseGraph = new CourseGraph(f);
@@ -194,8 +194,8 @@ graph {
 }
 
 .edges line {
-    stroke-opacity: 0.8;
-    stroke-width: 5;
+    stroke-opacity: 0.7;
+    stroke-width: 3;
     marker-end: url(#arrow);
 }
 

@@ -18,6 +18,11 @@ interface Course {
     college: string
 }
 
+// this type isn't actually a map - it's actually Object<string, Object>
+// but we cast it as one with no validation to show types correctly
+// low priority - figure out idiomatic way of doing this
+export type CourseJSON = Map<string, Course>
+
 enum Division {
     all,
     lowerDivision,
@@ -25,21 +30,29 @@ enum Division {
     graduate
 }
 
-export default class CourseGraph {
-    private graph: DirectedGraph;
-    private nodeColors: Map<string, string>;
+export class CourseGraph {
+    graph: DirectedGraph;
+    nodeColors: Map<string, string>;
     private edgeColors: Array<string>;
     private optionalConcurrencyColor: string;
 
-    constructor(courses: Map<string, Course>) {
+    constructor(courses: CourseJSON) {
+        if (Object.keys(courses).length === 0) {
+            throw new Error("Empty JSON file");
+        }
+        let firstEntry = courses[Object.keys(courses)[0]];
+        if (!this.verifyData(firstEntry)) {
+            throw new Error("Data fails minimum requirements");
+        }
+
         this.graph = new DirectedGraph();
         this.nodeColors = new Map([
             ["default", "blue"],
             ["outsideDept", "teal"],
-            ["noPrereqs", "green"],
+            ["noPrereqs", "orange"],
             ["instructorConsent", "purple"]
         ]);
-        this.edgeColors = ["red7", "pink", "orange", "yellow", "red5"];
+        this.edgeColors = ["red7", "purple", "orange", "blue", "pink", "green"];
         this.optionalConcurrencyColor = "black";
 
         this.addNodes(courses);
@@ -49,21 +62,33 @@ export default class CourseGraph {
         this.assignPositions(degreeMapping);
     }
 
-    addNodes(courses: Map<string, Course>): void {
-        for (var key in courses) {
+    // should soon be subdept and prereqs only
+    private verifyData(data: unknown): boolean {
+        if (!data || typeof data !== 'object') {
+            return false;
+        }
+        const course = data as Course;
+
+        return typeof course.sub_dept === 'string' &&
+               Array.isArray(course.prereqs) &&
+               typeof course.prereq_description === 'string';
+    }
+
+    private addNodes(courses: CourseJSON): void {
+        for (let key in courses) {
             this.graph.addNode(key, { label: key, color: this.nodeColors.get("default") });
         }
     }
 
-    addEdges(courses: Map<string, Course>): void {
+    private addEdges(courses: CourseJSON): void {
         let currColor = 0;
 
         for (let key in courses) {
             let course: Course = courses[key];
             let prereqs = course.prereqs;
 
-            for (var i = 0; i < prereqs.length; i++) {
-                for (var j = 0; j < prereqs[i].length; j++) {
+            for (let i = 0; i < prereqs.length; i++) {
+                for (let j = 0; j < prereqs[i].length; j++) {
                     let prereqClass = prereqs[i][j];
                     let optionalConcurrency = prereqClass.includes("[O]");
                     let inDept = prereqClass.slice(0, course.sub_dept.length) == course.sub_dept;
@@ -96,7 +121,7 @@ export default class CourseGraph {
         }
     }
 
-    colorNodes(courses: Map<string, Course>): void {
+    private colorNodes(courses: CourseJSON): void {
         // root nodes are red
         this.graph.forEachNode((node) => {
             if (this.graph.outDegree(node) == 0) {
@@ -178,7 +203,7 @@ export default class CourseGraph {
         return degreeMapping;
     }
 
-    assignPositions(degreeMapping: Map<string, number>): void {
+    private assignPositions(degreeMapping: Map<string, number>): void {
         let maxY = Math.max(...degreeMapping.values());
 
         // calculate number of nodes at each height
@@ -236,18 +261,26 @@ export default class CourseGraph {
         return this.graph.size;
     }
 
-    sortDivison(division: Division): void {
+    nodeCount(): number {
+        return this.graph.order;
+    }
+
+    edgeCount(): number {
+        return this.graph.size;
+    }
+
+    sortDivison(division: Division): string[] {
         // 0-100               100-200          200+
         // Lower division   Upper division    Graduate
 
-        // sort by division
+        // sort by division - all is falsey
         if (division) {
-            this.graph.forEachNode((node) => {
+            return this.graph.filterNodes((node) => {
                 let courseNumber = parseInt(node.split(" ").pop());
-                if (!((division - 1) * 100 <= courseNumber && courseNumber <= division * 100)) {
-                    this.graph.dropNode(node);
-                }
+                return (division - 1) * 100 <= courseNumber && courseNumber <= division * 100
             })
         }
     }
+
+    // degree, otherDepartments, requiredOnly, recentlyOfferedOnly
 }

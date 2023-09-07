@@ -52,7 +52,8 @@ def build_majors_list() -> List[Major]:
                 dept=line[0],
                 url_abbrev=line[1],
                 name=line[2],
-                degree=line[3]
+                degree=line[3],
+                dept=line[4]
             )
         )
 
