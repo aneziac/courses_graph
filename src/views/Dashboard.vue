@@ -4,23 +4,9 @@ import * as d3 from 'd3';
 import * as cola from 'webcola';
 import { useRoute } from 'vue-router';
 
+
 const route = useRoute();
 let topic = route.params.searchItem;
-
-// these classes are necessarily because webCola requires numeric keys
-interface courseNode {
-    id: number;
-    name: string;
-    color: string;
-    x: number;
-    y: number;
-}
-
-interface prereqEdge {
-    source: number,
-    target: number,
-    color: string
-}
 
 // TODO: find better way to do this
 const themeColor = color => {
@@ -44,30 +30,7 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
     console.log(`Successfully loaded ${topic}`)
 
     let courseGraph = new CourseGraph(f);
-    let graphData = courseGraph.getGraph();
-
-    let nodeMap: Map<string, courseNode> = new Map();
-    let edges: Array<prereqEdge> = new Array(courseGraph.edgeCount());
-
-    graphData.nodes.forEach((node, i) => {
-        nodeMap.set(node.key, <courseNode>{
-            id: i,
-            name: node.key,
-            color: node.attributes.color,
-            x: node.attributes.x,
-            y: node.attributes.y
-        });
-    });
-    graphData.edges.forEach((edge, i) => {
-        edges[i] = <prereqEdge>{
-            source: nodeMap.get(edge.source).id,
-            target: nodeMap.get(edge.target).id,
-            color: edge.attributes.color
-        }
-    });
-    let nodes = Array.from(nodeMap.values());
-    console.log(edges);
-    console.log(nodes);
+    let graph = courseGraph.getGraphNumericId();
 
     const width = window.innerWidth;
     const height = window.innerHeight;
@@ -109,8 +72,8 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
         .attr("fill", "#343a40");
 
     d3Cola
-        .nodes(nodes)
-        .links(edges)
+        .nodes(graph.nodes)
+        .links(graph.edges)
         .flowLayout("y", 150)
         .linkDistance(50)
         .symmetricDiffLinkLengths(40)
@@ -121,7 +84,7 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
         .append("g")
         .attr("class", "edges")
         .selectAll("line")
-        .data(edges)
+        .data(graph.edges)
         .enter()
         .append("line")
         .attr('stroke', d => themeColor(d.color))
@@ -130,7 +93,7 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
         .append("g")
         .attr("class", "nodes")
         .selectAll("rect")
-        .data(nodes)
+        .data(graph.nodes)
         .enter()
         .append("rect")
         .attr("width", nodeWidth)
@@ -142,7 +105,7 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
         .append("g")
         .attr("class", "labels")
         .selectAll("text")
-        .data(nodes)
+        .data(graph.nodes)
         .enter().append("text")
         .text(function(d) { return d.name; })
         .attr("class", "label");

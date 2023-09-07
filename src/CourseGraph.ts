@@ -30,6 +30,22 @@ enum Division {
     graduate
 }
 
+// for numeric serialization
+interface CourseNode {
+    id: number;
+    name: string;
+    color: string;
+    x: number;
+    y: number;
+}
+
+interface PrereqEdge {
+    source: number,
+    target: number,
+    color: string
+}
+
+
 export class CourseGraph {
     graph: DirectedGraph;
     nodeColors: Map<string, string>;
@@ -261,12 +277,31 @@ export class CourseGraph {
         return this.graph.size;
     }
 
-    nodeCount(): number {
-        return this.graph.order;
-    }
+    getGraphNumericId(): { nodes: CourseNode[], edges: PrereqEdge[] } {
+        let nodeMap: Map<string, CourseNode> = new Map();
+        let edges: Array<PrereqEdge> = new Array(this.edgeCount());
+        let graphData = this.getGraph();
 
-    edgeCount(): number {
-        return this.graph.size;
+        graphData.nodes.forEach((node, i) => {
+            nodeMap.set(node.key, <CourseNode>{
+                id: i,
+                name: node.key,
+                color: node.attributes.color,
+                x: node.attributes.x,
+                y: node.attributes.y
+            });
+        });
+
+        graphData.edges.forEach((edge, i) => {
+            edges[i] = <PrereqEdge>{
+                source: nodeMap.get(edge.source).id,
+                target: nodeMap.get(edge.target).id,
+                color: edge.attributes.color
+            }
+        });
+        let nodes = Array.from(nodeMap.values());
+
+        return { nodes, edges };
     }
 
     sortDivison(division: Division): string[] {

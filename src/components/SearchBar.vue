@@ -8,7 +8,7 @@ const router = useRouter();
 
 interface searchData {
     degree: string;  // type of degree, or dept
-    dept: string;
+    dept?: string;
     text: string;  // regular name
     alt: string;  // alternate name
     college: string;
@@ -20,7 +20,6 @@ const searchItems: Ref<Array<searchData>> = ref([]);
 csv('../../scraper/depts.csv', (data: Object) => {
     searchItems.value.push({
         degree: 'Dept',
-        dept: '',  // redundant
         text: data[' full name'].trim(),
         alt: data['abbrev'].toLowerCase().trim(),
         college: data[' college'].trim()
