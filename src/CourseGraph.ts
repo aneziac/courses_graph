@@ -39,10 +39,28 @@ interface CourseNode {
     y: number;
 }
 
-interface PrereqEdge {
+export interface PrereqEdge {
     source: number,
     target: number,
     color: string
+}
+
+// TODO: find better way to do this
+const themeColor = color => {
+    const colors = {
+        "red7": "#7A282C",
+        "red5": "#CA444B",
+        "pink": "#CE649B",
+        "orange": "#EF9D55",
+        "yellow": "#F6C344",
+        "blue": "#5289F5",
+        "teal": "#60C69B",
+        "green": "#5F9D79",
+        "purple": "#8669C7",
+        "black": "#000000"
+    }
+
+    return colors[color];
 }
 
 
@@ -286,7 +304,7 @@ export class CourseGraph {
             nodeMap.set(node.key, <CourseNode>{
                 id: i,
                 name: node.key,
-                color: node.attributes.color,
+                color: themeColor(node.attributes.color),
                 x: node.attributes.x,
                 y: node.attributes.y
             });
@@ -296,7 +314,7 @@ export class CourseGraph {
             edges[i] = <PrereqEdge>{
                 source: nodeMap.get(edge.source).id,
                 target: nodeMap.get(edge.target).id,
-                color: edge.attributes.color
+                color: themeColor(edge.attributes.color)
             }
         });
         let nodes = Array.from(nodeMap.values());

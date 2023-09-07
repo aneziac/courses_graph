@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CourseJSON, CourseGraph } from '../CourseGraph';
+import { CourseJSON, CourseGraph, PrereqEdge } from '../CourseGraph';
 import * as d3 from 'd3';
 import * as cola from 'webcola';
 import { useRoute } from 'vue-router';
@@ -8,23 +8,7 @@ import { useRoute } from 'vue-router';
 const route = useRoute();
 let topic = route.params.searchItem;
 
-// TODO: find better way to do this
-const themeColor = color => {
-    const colors = {
-        "red7": "#7A282C",
-        "red5": "#CA444B",
-        "pink": "#CE649B",
-        "orange": "#EF9D55",
-        "yellow": "#F6C344",
-        "blue": "#5289F5",
-        "teal": "#60C69B",
-        "green": "#5F9D79",
-        "purple": "#8669C7",
-        "black": "#000000"
-    }
-
-    return colors[color];
-}
+let gray = '#b8b8b8';
 
 d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
     console.log(`Successfully loaded ${topic}`)
@@ -48,7 +32,6 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
 
     const d3Cola = cola
         .d3adaptor(d3)
-        .avoidOverlaps(true)
         .size([width, height]);
 
     const svg = d3.select("#graph")
@@ -56,6 +39,24 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
         .attr("width", width)
         .attr("height", height)
         .call(zoom);
+
+    d3Cola
+        .nodes(graph.nodes)
+        .links(graph.edges)
+        .flowLayout("y", 150)
+        .linkDistance(200)
+        .symmetricDiffLinkLengths(50)
+        .avoidOverlaps(true)
+        .start();
+
+    var link = svg
+        .append("g")
+        .attr("class", "edges")
+        .selectAll("line")
+        .data(graph.edges)
+        .enter()
+        .append("line")
+        .attr('stroke', d => d.color);
 
     svg
         .append("defs")
@@ -71,24 +72,6 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
         .attr("d", "M 60 0 L 0 30 L 60 60 z")
         .attr("fill", "#343a40");
 
-    d3Cola
-        .nodes(graph.nodes)
-        .links(graph.edges)
-        .flowLayout("y", 150)
-        .linkDistance(50)
-        .symmetricDiffLinkLengths(40)
-        .avoidOverlaps(true)
-        .start();
-
-    var link = svg
-        .append("g")
-        .attr("class", "edges")
-        .selectAll("line")
-        .data(graph.edges)
-        .enter()
-        .append("line")
-        .attr('stroke', d => themeColor(d.color))
-
     var node = svg
         .append("g")
         .attr("class", "nodes")
@@ -99,7 +82,36 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
         .attr("width", nodeWidth)
         .attr("height", nodeHeight)
         .attr('rx', '12')
-        .attr('fill', d => themeColor(d.color))
+        .attr('fill', d => d.color)
+        .on("mouseenter", (_, hoveredNodeId: number) => {
+            link.style('stroke-width', (edge: PrereqEdge) => {
+                if   (hoveredNodeId === edge.source
+                   || hoveredNodeId === edge.target) {
+                    return 7;
+                } else {
+                    return 4;
+                }
+            });
+            link.style('stroke', (edge: PrereqEdge) => {
+                return edge.source === hoveredNodeId ||
+                       edge.target === hoveredNodeId ? edge.color : gray;
+            });
+
+            node.style('fill', (adjacentNodeId: number) => {
+                if (adjacentNodeId != hoveredNodeId) {
+                    return gray;
+                }
+            });
+        })
+        .on("mouseout", () => {
+            link.style('stroke-width', 4);
+            link.style('stroke', edge => {
+                return edge.color;
+            });
+            node.style('fill', node => {
+                return node.color;
+            });
+        });
 
     var label = svg
         .append("g")
@@ -158,7 +170,7 @@ graph {
 
 .edges line {
     stroke-opacity: 0.7;
-    stroke-width: 3;
+    stroke-width: 4;
     marker-end: url(#arrow);
 }
 
