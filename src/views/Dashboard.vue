@@ -1,9 +1,16 @@
 <script setup lang="ts">
-import { CourseJSON, CourseGraph, PrereqEdge } from '../CourseGraph';
+import { CourseJSON, CourseGraph, CourseNode } from '../CourseGraph';
 import * as d3 from 'd3';
 import * as cola from 'webcola';
 import { useRoute } from 'vue-router';
 
+
+// webcola overwrites source and target during processing which confuses typescript
+interface OverwrittenPrereqEdge {
+    source: CourseNode,
+    target: CourseNode,
+    color: string
+}
 
 const route = useRoute();
 let topic = route.params.searchItem;
@@ -83,22 +90,25 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
         .attr("height", nodeHeight)
         .attr('rx', '12')
         .attr('fill', d => d.color)
-        .on("mouseenter", (_, hoveredNodeId: number) => {
-            link.style('stroke-width', (edge: PrereqEdge) => {
-                if   (hoveredNodeId === edge.source
-                   || hoveredNodeId === edge.target) {
+        .on("mouseenter", (_, hoveredNode: CourseNode) => {
+            link.style('stroke-width', (edge: OverwrittenPrereqEdge) => {
+                if   (hoveredNode === edge.source
+                   || hoveredNode === edge.target) {
                     return 7;
                 } else {
                     return 4;
                 }
             });
-            link.style('stroke', (edge: PrereqEdge) => {
-                return edge.source === hoveredNodeId ||
-                       edge.target === hoveredNodeId ? edge.color : gray;
+            link.style('stroke', (edge: OverwrittenPrereqEdge) => {
+                return edge.source === hoveredNode ||
+                       edge.target === hoveredNode ? edge.color : gray;
             });
 
-            node.style('fill', (adjacentNodeId: number) => {
-                if (adjacentNodeId != hoveredNodeId) {
+            node.style('fill', (otherNode: CourseNode) => {
+                let sameNode = hoveredNode === otherNode;
+                let adjacentNode = graph.nodes[hoveredNode.id].adjacent.includes(otherNode.id)
+
+                if (!sameNode && !adjacentNode) {
                     return gray;
                 }
             });

@@ -31,22 +31,23 @@ enum Division {
 }
 
 // for numeric serialization
-interface CourseNode {
+export interface CourseNode {
     id: number;
     name: string;
     color: string;
     x: number;
     y: number;
+    adjacent: Array<number>;
 }
 
-export interface PrereqEdge {
+interface PrereqEdge {
     source: number,
     target: number,
     color: string
 }
 
 // TODO: find better way to do this
-const themeColor = color => {
+const themeColor = (color: string): string => {
     const colors = {
         "red7": "#7A282C",
         "red5": "#CA444B",
@@ -306,17 +307,26 @@ export class CourseGraph {
                 name: node.key,
                 color: themeColor(node.attributes.color),
                 x: node.attributes.x,
-                y: node.attributes.y
+                y: node.attributes.y,
+                adjacent: []
             });
         });
+
 
         graphData.edges.forEach((edge, i) => {
             edges[i] = <PrereqEdge>{
                 source: nodeMap.get(edge.source).id,
                 target: nodeMap.get(edge.target).id,
-                color: themeColor(edge.attributes.color)
+                color: themeColor(edge.attributes.color),
             }
+
+            let sourceNode = nodeMap.get(edge.source);
+            let targetNode = nodeMap.get(edge.target);
+
+            sourceNode.adjacent.push(targetNode.id);
+            targetNode.adjacent.push(sourceNode.id);
         });
+
         let nodes = Array.from(nodeMap.values());
 
         return { nodes, edges };
