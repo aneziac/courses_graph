@@ -35,7 +35,6 @@ export interface CourseNode {
     id: number;
     name: string;
     color: string;
-    x: number;
     y: number;
     adjacent: Array<number>;
     width: number;
@@ -258,9 +257,8 @@ export class CourseGraph {
 
         let yCounter = 0;
 
-        // assign x-coordinates
+        // assign y-coordinates
         for (let i = 0; i <= maxY; i++) {
-            let xCounter = 1;
 
             if (i > 0) {
                 if (nodesPerHeight.get(i) < 3) {
@@ -278,12 +276,9 @@ export class CourseGraph {
                 this.graph.updateNode(node, attr => {
                     return {
                         ...attr,
-                        x: Math.round((xCounter / (nodesPerHeight.get(i) + 1)) * 100),
                         y: yCounter
                     };
                 });
-
-                xCounter++;
             });
         }
     }
@@ -310,7 +305,6 @@ export class CourseGraph {
                 id: i,
                 name: node.key,
                 color: themeColor(node.attributes.color),
-                x: node.attributes.x,
                 y: node.attributes.y,
                 adjacent: [],
                 width:  2 * courseNodeSize[0],

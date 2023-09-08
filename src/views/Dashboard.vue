@@ -36,7 +36,7 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
 
     const d3Cola = cola
         .d3adaptor(d3)
-        .symmetricDiffLinkLengths(50)
+        // .symmetricDiffLinkLengths(50)
         .avoidOverlaps(true)
         .size([width, height]);
 
@@ -61,9 +61,8 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
     d3Cola
         .nodes(graph.nodes)
         .links(graph.edges)
-        .flowLayout("y", 150)
         .constraints(constraints)
-        .start(10, 20, 20);
+        .start(10, 100, 200);
 
     var link = svg
         .append("g")
