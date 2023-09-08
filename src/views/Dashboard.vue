@@ -46,7 +46,17 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
         .attr("height", height)
         .call(zoom);
 
-    let constraints = [];
+    let constraints = [{ "type": "alignment", "axis": "y", "offsets": [] }];
+
+    graph.nodes.forEach(node => {
+        if (node.adjacent.length === 0) {
+            return;
+        }
+        constraints[0].offsets.push({
+            "node": node.id,
+            "offset": node.y * 150
+        })
+    });
 
     d3Cola
         .nodes(graph.nodes)
@@ -73,7 +83,7 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
         .attr("viewBox", "0 0 60 60")
         .attr("markerUnits", "strokeWidth")
         .attr("refY", "30")
-        .attr("refX", "50%")
+        .attr("refX", "-300")
         .append("path")
         .attr("d", "M 60 0 L 0 30 L 60 60 z")
         .attr("fill", "#343a40");
@@ -185,7 +195,7 @@ graph {
 .edges line {
     stroke-opacity: 0.7;
     stroke-width: 4;
-    marker-end: url(#arrow);
+    marker-start: url(#arrow);
 }
 
 .nodes rect {
