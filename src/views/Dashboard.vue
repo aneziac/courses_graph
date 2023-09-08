@@ -47,14 +47,16 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
         .attr("height", height)
         .call(zoom);
 
+    let constraints = [];
+
     d3Cola
         .nodes(graph.nodes)
         .links(graph.edges)
         .flowLayout("y", 150)
-        .linkDistance(200)
         .symmetricDiffLinkLengths(50)
+        .constraints(constraints)
         .avoidOverlaps(true)
-        .start();
+        .start(10, 20, 20);
 
     var link = svg
         .append("g")
@@ -129,35 +131,40 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
         .selectAll("text")
         .data(graph.nodes)
         .enter().append("text")
-        .text(function(d) { return d.name; })
+        .text(d => d.name)
+        .attr("text-anchor", "middle")
         .attr("class", "label");
 
     d3Cola.on("tick", () => {
         link
-            .attr("x1", function(d) {
-                return d.source.x + nodeWidth / 2;
+            .attr("x1", (d: OverwrittenPrereqEdge) => {
+                return d.source.x;
             })
-            .attr("y1", function(d) {
-                return d.source.y + nodeHeight / 2;
+            .attr("y1", (d: OverwrittenPrereqEdge) => {
+                return d.source.y;
             })
-            .attr("x2", function(d) {
-                return d.target.x + nodeWidth / 2;
+            .attr("x2", (d: OverwrittenPrereqEdge) => {
+                return d.target.x;
             })
-            .attr("y2", function(d) {
-                return d.target.y + nodeHeight / 2;
+            .attr("y2", (d: OverwrittenPrereqEdge) => {
+                return d.target.y;
             });
 
         node
-            .attr("x", function(d) {
-                return d.x;
+            .attr("x", (d: CourseNode) => {
+                return d.x - nodeWidth / 2;
             })
-            .attr("y", function(d) {
-                return d.y;
+            .attr("y", (d: CourseNode) => {
+                return d.y - nodeHeight / 2;
             });
 
         label
-            .attr("x", function(d) { return d.x + nodeWidth / 2 - 35; })
-            .attr("y", function(d) { return d.y + nodeHeight / 2 + 6; });
+            .attr("x", d => {
+                return d.x;
+            })
+            .attr("y", d => {
+                return d.y + 5;
+            });
     });
 })
 </script>
