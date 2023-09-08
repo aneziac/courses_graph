@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CourseJSON, CourseGraph, CourseNode } from '../CourseGraph';
+import { CourseJSON, CourseGraph, CourseNode, courseNodeSize } from '../CourseGraph';
 import * as d3 from 'd3';
 import * as cola from 'webcola';
 import { useRoute } from 'vue-router';
@@ -26,9 +26,6 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
     const width = window.innerWidth;
     const height = window.innerHeight;
 
-    const nodeWidth = 100;
-    const nodeHeight = 50;
-
     let zoom = d3.zoom()
         .scaleExtent([0.2, 2])
         // .translateExtent([[0, 0], [width * 5, height * 5]])
@@ -39,6 +36,8 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
 
     const d3Cola = cola
         .d3adaptor(d3)
+        .symmetricDiffLinkLengths(50)
+        .avoidOverlaps(true)
         .size([width, height]);
 
     const svg = d3.select("#graph")
@@ -53,9 +52,7 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
         .nodes(graph.nodes)
         .links(graph.edges)
         .flowLayout("y", 150)
-        .symmetricDiffLinkLengths(50)
         .constraints(constraints)
-        .avoidOverlaps(true)
         .start(10, 20, 20);
 
     var link = svg
@@ -88,8 +85,8 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
         .data(graph.nodes)
         .enter()
         .append("rect")
-        .attr("width", nodeWidth)
-        .attr("height", nodeHeight)
+        .attr("width", courseNodeSize[0])
+        .attr("height", courseNodeSize[1])
         .attr('rx', '12')
         .attr('fill', d => d.color)
         .on("mouseenter", (_, hoveredNode: CourseNode) => {
@@ -152,10 +149,10 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
 
         node
             .attr("x", (d: CourseNode) => {
-                return d.x - nodeWidth / 2;
+                return d.x - courseNodeSize[0] / 2;
             })
             .attr("y", (d: CourseNode) => {
-                return d.y - nodeHeight / 2;
+                return d.y - courseNodeSize[1] / 2;
             });
 
         label

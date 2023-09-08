@@ -38,7 +38,11 @@ export interface CourseNode {
     x: number;
     y: number;
     adjacent: Array<number>;
+    width: number;
+    height: number;
 }
+
+export let courseNodeSize = [100, 50];
 
 interface PrereqEdge {
     source: number,
@@ -308,7 +312,9 @@ export class CourseGraph {
                 color: themeColor(node.attributes.color),
                 x: node.attributes.x,
                 y: node.attributes.y,
-                adjacent: []
+                adjacent: [],
+                width:  2 * courseNodeSize[0],
+                height: 2 * courseNodeSize[1]
             });
         });
 
