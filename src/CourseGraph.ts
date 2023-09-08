@@ -1,4 +1,5 @@
 import DirectedGraph from 'graphology';
+import { SerializedGraph } from 'graphology-types';
 
 
 // see ../scraper/datatypes.py Course and WebsiteCourse
@@ -17,6 +18,11 @@ interface Course {
     college: string
 }
 
+// this type isn't actually a map - it's actually Object<string, Object>
+// but we cast it as one with no validation to show types correctly
+// low priority - figure out idiomatic way of doing this
+export type CourseJSON = Map<string, Course>
+
 enum Division {
     all,
     lowerDivision,
@@ -24,14 +30,29 @@ enum Division {
     graduate
 }
 
-export default class CourseGraph {
+export class CourseGraph {
     graph: DirectedGraph;
-    edgeColors: Array<string>;
-    optionalConcurrencyColor: string;
+    nodeColors: Map<string, string>;
+    private edgeColors: Array<string>;
+    private optionalConcurrencyColor: string;
 
-    constructor(courses: Map<string, Course>) {
+    constructor(courses: CourseJSON) {
+        if (Object.keys(courses).length === 0) {
+            throw new Error("Empty JSON file");
+        }
+        let firstEntry = courses[Object.keys(courses)[0]];
+        if (!this.verifyData(firstEntry)) {
+            throw new Error("Data fails minimum requirements");
+        }
+
         this.graph = new DirectedGraph();
-        this.edgeColors = ["red", "orange", "green", "blue", "purple"];
+        this.nodeColors = new Map([
+            ["default", "blue"],
+            ["outsideDept", "teal"],
+            ["noPrereqs", "orange"],
+            ["instructorConsent", "purple"]
+        ]);
+        this.edgeColors = ["red7", "purple", "orange", "blue", "pink", "green"];
         this.optionalConcurrencyColor = "black";
 
         this.addNodes(courses);
@@ -41,21 +62,33 @@ export default class CourseGraph {
         this.assignPositions(degreeMapping);
     }
 
-    addNodes(courses: Map<string, Course>) {
-        for (var key in courses) {
-            this.graph.addNode(key, { label: key, color: "blue" });
+    // should soon be subdept and prereqs only
+    private verifyData(data: unknown): boolean {
+        if (!data || typeof data !== 'object') {
+            return false;
+        }
+        const course = data as Course;
+
+        return typeof course.sub_dept === 'string' &&
+               Array.isArray(course.prereqs) &&
+               typeof course.prereq_description === 'string';
+    }
+
+    private addNodes(courses: CourseJSON): void {
+        for (let key in courses) {
+            this.graph.addNode(key, { label: key, color: this.nodeColors.get("default") });
         }
     }
 
-    addEdges(courses: Map<string, Course>) {
+    private addEdges(courses: CourseJSON): void {
         let currColor = 0;
 
         for (let key in courses) {
             let course: Course = courses[key];
             let prereqs = course.prereqs;
 
-            for (var i = 0; i < prereqs.length; i++) {
-                for (var j = 0; j < prereqs[i].length; j++) {
+            for (let i = 0; i < prereqs.length; i++) {
+                for (let j = 0; j < prereqs[i].length; j++) {
                     let prereqClass = prereqs[i][j];
                     let optionalConcurrency = prereqClass.includes("[O]");
                     let inDept = prereqClass.slice(0, course.sub_dept.length) == course.sub_dept;
@@ -88,14 +121,14 @@ export default class CourseGraph {
         }
     }
 
-    colorNodes(courses: Map<string, Course>) {
+    private colorNodes(courses: CourseJSON): void {
         // root nodes are red
         this.graph.forEachNode((node) => {
             if (this.graph.outDegree(node) == 0) {
                 this.graph.updateNode(node, attr => {
                     return {
                         ...attr,
-                        color: "red"
+                        color: this.nodeColors.get("noPrereqs")
                     };
                 });
             }
@@ -107,7 +140,7 @@ export default class CourseGraph {
                 this.graph.updateNode(node, attr => {
                     return {
                         ...attr,
-                        color: "green"
+                        color: this.nodeColors.get("outsideDept")
                     };
                 });
             }
@@ -117,7 +150,7 @@ export default class CourseGraph {
         for (let key in courses) {
             if (this.graph.hasNode(key) && (courses[key].prereq_description.includes("Consent of instructor")
                 || courses[key].prereq_description.includes("consent of instructor"))) {
-                this.graph.setNodeAttribute(key, "color", "purple");
+                this.graph.setNodeAttribute(key, "color", this.nodeColors.get("instructorConsent"));
             }
         }
     }
@@ -170,7 +203,7 @@ export default class CourseGraph {
         return degreeMapping;
     }
 
-    assignPositions(degreeMapping: Map<string, number>) {
+    private assignPositions(degreeMapping: Map<string, number>): void {
         let maxY = Math.max(...degreeMapping.values());
 
         // calculate number of nodes at each height
@@ -216,27 +249,22 @@ export default class CourseGraph {
         }
     }
 
-    getEdges() {
-        return this.graph.export().edges;
-    }
-    getNodes() {
-        return this.graph.export().nodes;
-    }
-}
-
-function sortDivison(inGraph: DirectedGraph, division: Division): DirectedGraph {
-    // 0-100               100-200          200+
-    // Lower division   Upper division    Graduate
-
-    // sort by division
-    if (division) {
-        inGraph.forEachNode((node) => {
-            let courseNumber = parseInt(node.split(" ").pop());
-            if (!((division - 1) * 100 <= courseNumber && courseNumber <= division * 100)) {
-                inGraph.dropNode(node);
-            }
-        })
+    getGraph(): SerializedGraph {
+        return this.graph.export();
     }
 
-    return inGraph;
+    sortDivison(division: Division): string[] {
+        // 0-100               100-200          200+
+        // Lower division   Upper division    Graduate
+
+        // sort by division - all is falsey
+        if (division) {
+            return this.graph.filterNodes((node) => {
+                let courseNumber = parseInt(node.split(" ").pop());
+                return (division - 1) * 100 <= courseNumber && courseNumber <= division * 100
+            })
+        }
+    }
+
+    // degree, otherDepartments, requiredOnly, recentlyOfferedOnly
 }
