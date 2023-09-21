@@ -18,10 +18,7 @@ interface Course {
     college: string
 }
 
-// this type isn't actually a map - it's actually Object<string, Object>
-// but we cast it as one with no validation to show types correctly
-// low priority - figure out idiomatic way of doing this
-export type CourseJSON = Map<string, Course>
+export type CourseJSON = {[key: string]: Course}
 
 enum Division {
     all,
@@ -35,6 +32,7 @@ export interface CourseNode {
     id: number;
     name: string;
     color: string;
+    x: number;
     y: number;
     adjacent: Array<number>;
     width: number;
@@ -122,7 +120,7 @@ export class CourseGraph {
         let currColor = 0;
 
         for (let key in courses) {
-            let course: Course = courses[key];
+            let course = courses[key];
             let prereqs = course.prereqs;
 
             for (let i = 0; i < prereqs.length; i++) {
@@ -241,46 +239,59 @@ export class CourseGraph {
         return degreeMapping;
     }
 
+    // phys 22, art 22, phys 1 weird behavior
     private assignPositions(degreeMapping: Map<string, number>): void {
-        let maxY = Math.max(...degreeMapping.values());
+        const maxY = Math.max(...degreeMapping.values()) + 3;
 
         // calculate number of nodes at each height
-        const nodesPerHeight: Map<number, number> = new Map();
+        let nodesPerHeight: Map<number, number> = new Map();
         for (let i = 0; i <= maxY; i++) {
-            nodesPerHeight.set(i, 0);
-            this.graph.forEachNode((node) => {
-                if (degreeMapping.get(node) == i) {
-                    nodesPerHeight.set(i, nodesPerHeight.get(i) + 1);
-                }
-            });
-        }
+            nodesPerHeight.set(i, 0)
+        };
 
-        let yCounter = 0;
+        this.graph.forEachNode((node) => {
+            const height = degreeMapping.get(node);
+            nodesPerHeight.set(height, nodesPerHeight.get(height) + 1);
+        });
 
-        // assign y-coordinates
+        const maxRowWidth = Math.max(...nodesPerHeight.values());
+
+        // determines fitness for a row for nodes with no prereqs
+        let fitByRow: number[] = [];
         for (let i = 0; i <= maxY; i++) {
+            fitByRow.push(20 * (0.7 - (nodesPerHeight.get(i) / maxRowWidth)));
+        };
 
-            if (i > 0) {
-                if (nodesPerHeight.get(i) < 3) {
-                    yCounter++;
-                } else {
-                    yCounter += 2;
+        this.graph.forEachNode(node => {
+            let height = degreeMapping.get(node);
+            if (height === 0) {
+                let currentNodeFitByRow = structuredClone(fitByRow);
+                let courseNumber = parseInt(node.replace(/[A-Z]+ /, '').replace(/[A-Z]/, ''));
+                let idealRow = Math.ceil((courseNumber / 300) * maxY);
+
+                for (let i = idealRow - 2, j = 0; i < Math.min(idealRow + 2, maxY); i++, j++) {
+                    if (j <= 2) {
+                        currentNodeFitByRow[i] += (j + 1) * 20;
+                    } else {
+                        currentNodeFitByRow[i] += (5 - j)* 20;
+                    }
                 }
+                if (node === 'PHYS 221A') {
+                    console.log(currentNodeFitByRow);
+                }
+
+                let bestFitRow = currentNodeFitByRow.indexOf(Math.max(...currentNodeFitByRow));
+                fitByRow[bestFitRow] -= 20 / maxRowWidth;
+                height = bestFitRow;
             }
 
-            this.graph.forEachNode((node) => {
-                if (degreeMapping.get(node) != i) {
-                    return;
-                }
-
-                this.graph.updateNode(node, attr => {
-                    return {
-                        ...attr,
-                        y: yCounter
-                    };
-                });
-            });
-        }
+            this.graph.updateNode(node, attr => {
+                return {
+                    ...attr,
+                    y: height
+                };
+            })
+        });
     }
 
     getGraph(): SerializedGraph {
@@ -311,7 +322,6 @@ export class CourseGraph {
                 height: 2 * courseNodeSize[1]
             });
         });
-
 
         graphData.edges.forEach((edge, i) => {
             edges[i] = <PrereqEdge>{

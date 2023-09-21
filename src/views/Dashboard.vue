@@ -36,7 +36,6 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
 
     const d3Cola = cola
         .d3adaptor(d3)
-        // .symmetricDiffLinkLengths(50)
         .avoidOverlaps(true)
         .size([width, height]);
 
@@ -49,12 +48,12 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
     let constraints = [{ "type": "alignment", "axis": "y", "offsets": [] }];
 
     graph.nodes.forEach(node => {
-        if (node.adjacent.length === 0) {
-            return;
-        }
+        // if (node.adjacent.length === 0) {
+        //     node.y = Math.random() * 10;
+        // }
         constraints[0].offsets.push({
             "node": node.id,
-            "offset": node.y * 150
+            "offset": node.y * 300
         })
     });
 
