@@ -46,17 +46,28 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
         .attr("height", height)
         .call(zoom);
 
-    let constraints = [{ "type": "alignment", "axis": "y", "offsets": [] }];
+    let heightMap: Map<number, Array<number>> = new Map();
+    let constraints = [];
 
     graph.nodes.forEach(node => {
         if (node.adjacent.length === 0) {
             return;
         }
-        constraints[0].offsets.push({
-            "node": node.id,
-            "offset": node.y * 150
-        })
+
+        if (!heightMap.has(node.y)) {
+            heightMap.set(node.y, [node.id]);
+        } else {
+            heightMap.get(node.y).push(node.id);
+        }
     });
+
+    heightMap.forEach(ids => {
+        let offsets = [];
+        ids.forEach(id => {
+            offsets.push({"node": id, "offset": "0" })
+        });
+        constraints.push({ "type": "alignment", "axis": "y", "offsets": offsets });
+    })
 
     d3Cola
         .nodes(graph.nodes)
