@@ -6,6 +6,7 @@ import { useRoute } from 'vue-router';
 
 
 // webcola overwrites source and target during processing which confuses typescript
+// this seems like a bad practice on the library's part
 interface OverwrittenPrereqEdge {
     source: CourseNode,
     target: CourseNode,
@@ -17,16 +18,16 @@ let topic = route.params.searchItem;
 
 let gray = '#b8b8b8';
 
-d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
+d3.json(`../../data/website/${topic}.json`).then(f => {
     console.log(`Successfully loaded ${topic}`)
 
-    let courseGraph = new CourseGraph(f);
+    let courseGraph = new CourseGraph(f as CourseJSON);
     let graph = courseGraph.getGraphNumericId();
 
     const width = window.innerWidth;
     const height = window.innerHeight;
 
-    let zoom = d3.zoom()
+    const zoom = d3.zoom()
         .scaleExtent([0.2, 2])
         // .translateExtent([[0, 0], [width * 5, height * 5]])
         .on('zoom', e => {
@@ -52,7 +53,7 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
         if (!heightMap.has(node.y)) {
             heightMap.set(node.y, [node.id]);
         } else {
-            heightMap.get(node.y).push(node.id);
+            heightMap.get(node.y)!.push(node.id);
         }
     });
 
@@ -62,7 +63,9 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
             offsets.push({"node": id, "offset": "0" })
         });
         constraints.push({ "type": "alignment", "axis": "y", "offsets": offsets });
-    })
+    });
+
+    console.log(constraints);
 
     d3Cola
         .nodes(graph.nodes)
@@ -105,6 +108,7 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
         .attr('rx', '12')
         .attr('fill', d => d.color)
         .on("mouseenter", (_, hoveredNode: CourseNode) => {
+            // @ts-ignore
             link.style('stroke-width', (edge: OverwrittenPrereqEdge) => {
                 if   (hoveredNode === edge.source
                    || hoveredNode === edge.target) {
@@ -113,11 +117,14 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
                     return 4;
                 }
             });
+
+            // @ts-ignore
             link.style('stroke', (edge: OverwrittenPrereqEdge) => {
                 return edge.source === hoveredNode ||
                        edge.target === hoveredNode ? edge.color : gray;
             });
 
+            // @ts-ignore
             node.style('fill', (otherNode: CourseNode) => {
                 let sameNode = hoveredNode === otherNode;
                 let adjacentNode = graph.nodes[hoveredNode.id].adjacent.includes(otherNode.id)
@@ -149,15 +156,19 @@ d3.json(`../../data/website/${topic}.json`).then((f: CourseJSON) => {
 
     d3Cola.on("tick", () => {
         link
+            // @ts-ignore
             .attr("x1", (d: OverwrittenPrereqEdge) => {
                 return d.source.x;
             })
+            // @ts-ignore
             .attr("y1", (d: OverwrittenPrereqEdge) => {
                 return d.source.y;
             })
+            // @ts-ignore
             .attr("x2", (d: OverwrittenPrereqEdge) => {
                 return d.target.x;
             })
+            // @ts-ignore
             .attr("y2", (d: OverwrittenPrereqEdge) => {
                 return d.target.y;
             });

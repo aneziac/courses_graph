@@ -34,7 +34,7 @@ export interface CourseNode {
     color: string;
     x: number;
     y: number;
-    adjacent: Array<number>;
+    adjacent: number[];
     width: number;
     height: number;
 }
@@ -47,22 +47,20 @@ interface PrereqEdge {
     color: string
 }
 
-// TODO: find better way to do this
-const themeColor = (color: string): string => {
-    const colors = {
-        "red7": "#7A282C",
-        "red5": "#CA444B",
-        "pink": "#CE649B",
-        "orange": "#EF9D55",
-        "yellow": "#F6C344",
-        "blue": "#5289F5",
-        "teal": "#60C69B",
-        "green": "#5F9D79",
-        "purple": "#8669C7",
-        "black": "#000000"
-    }
+type Color = {[color: string]: string} // return to
 
-    return colors[color];
+// TODO: find better way to do this
+const colors: Color = {
+    "red7": "#7A282C",
+    "red5": "#CA444B",
+    "pink": "#CE649B",
+    "orange": "#EF9D55",
+    "yellow": "#F6C344",
+    "blue": "#5289F5",
+    "teal": "#60C69B",
+    "green": "#5F9D79",
+    "purple": "#8669C7",
+    "black": "#000000"
 }
 
 
@@ -226,8 +224,8 @@ export class CourseGraph {
                 // find max degree of prereqs
                 let maxPrereqDegree = 0;
                 this.graph.outNeighbors(node).forEach(prereq => {
-                    if (degreeMapping.get(prereq) > maxPrereqDegree) {
-                        maxPrereqDegree = degreeMapping.get(prereq);
+                    if (degreeMapping.get(prereq)! > maxPrereqDegree) {
+                        maxPrereqDegree = degreeMapping.get(prereq)!;
                     }
                 });
 
@@ -315,8 +313,9 @@ export class CourseGraph {
             nodeMap.set(node.key, <CourseNode>{
                 id: i,
                 name: node.key,
-                color: themeColor(node.attributes.color),
-                y: node.attributes.y,
+                color: colors[node.attributes!.color],
+                x: 0,
+                y: node.attributes!.y,
                 adjacent: [],
                 width:  2 * courseNodeSize[0],
                 height: 2 * courseNodeSize[1]
@@ -325,13 +324,13 @@ export class CourseGraph {
 
         graphData.edges.forEach((edge, i) => {
             edges[i] = <PrereqEdge>{
-                source: nodeMap.get(edge.source).id,
-                target: nodeMap.get(edge.target).id,
-                color: themeColor(edge.attributes.color),
+                source: nodeMap.get(edge.source)!.id,
+                target: nodeMap.get(edge.target)!.id,
+                color: colors[edge.attributes!.color],
             }
 
-            let sourceNode = nodeMap.get(edge.source);
-            let targetNode = nodeMap.get(edge.target);
+            let sourceNode = nodeMap.get(edge.source)!;
+            let targetNode = nodeMap.get(edge.target)!;
 
             sourceNode.adjacent.push(targetNode.id);
             targetNode.adjacent.push(sourceNode.id);
@@ -342,18 +341,18 @@ export class CourseGraph {
         return { nodes, edges };
     }
 
-    sortDivison(division: Division): string[] {
-        // 0-100               100-200          200+
-        // Lower division   Upper division    Graduate
+    // sortDivison(division: Division): string[] {
+    //     // 0-100               100-200          200+
+    //     // Lower division   Upper division    Graduate
 
-        // sort by division - all is falsey
-        if (division) {
-            return this.graph.filterNodes((node) => {
-                let courseNumber = parseInt(node.split(" ").pop());
-                return (division - 1) * 100 <= courseNumber && courseNumber <= division * 100
-            })
-        }
-    }
+    //     // sort by division - all is falsey
+    //     if (division) {
+    //         return this.graph.filterNodes((node) => {
+    //             let courseNumber = parseInt(node.split(" ").pop()!);
+    //             return (division - 1) * 100 <= courseNumber && courseNumber <= division * 100
+    //         })
+    //     }
+    // }
 
     // degree, otherDepartments, requiredOnly, recentlyOfferedOnly
 }
