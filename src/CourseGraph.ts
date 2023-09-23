@@ -193,30 +193,39 @@ export class CourseGraph {
         let noPrereqNodeCount = 0;
 
         // construct a mapping for nodes such that
+        // >= 1 prereq -> -2
+        // degree 0 nodes -> -1
         // no prereqs -> 0
-        // >= 1 prereq -> -1
         const degreeMapping: Map<string, number> = new Map();
 
         this.graph.forEachNode((node) => {
-            if (this.graph.outDegree(node) == 0) {
-                degreeMapping.set(node, 0);
+            // no prereqs
+            if (this.graph.outDegree(node) === 0) {
+                if (this.graph.inDegree(node) === 0) {
+                    // no prereqs or postreqs, thus degree 0
+                    degreeMapping.set(node, -1);
+                } else {
+                    // no prereqs
+                    degreeMapping.set(node, 0);
+                }
                 noPrereqNodeCount++;
+
             } else {
-                degreeMapping.set(node, -1);
+                degreeMapping.set(node, -2);
             }
         });
 
         // deduce longest backwards path per node - O(n^2)
         for (let i = noPrereqNodeCount; i < this.graph.order; i++) {
             this.graph.forEachNode((node) => {
-                // test for having prereqs
-                if (degreeMapping.get(node) != -1) {
+                // get rid of nodes with no prereqs
+                if (degreeMapping.get(node) != -2) {
                     return;
                 }
 
-                // test that prereqs don't have prereqs
+                // get rid of nodes with prereqs that haven't been evaluated or have no prereqs
                 this.graph.outNeighbors(node).forEach(prereq => {
-                    if (degreeMapping.get(prereq) == -1) {
+                    if (degreeMapping.get(prereq) === -2) {
                         return;
                     }
                 });
@@ -237,19 +246,28 @@ export class CourseGraph {
         return degreeMapping;
     }
 
+    /* TODO
+    X constraint on nodes that are part of long continuous chain with high degree
+    Cap number of courses appearing in a single row
+    Constraint forcing nodes toward the center
+    */
+
     // phys 22, art 22, phys 1 weird behavior
     private assignPositions(degreeMapping: Map<string, number>): void {
         const maxY = Math.max(...degreeMapping.values()) + 3;
+        const idealRowSpread = 5;
+        const halfRowSpread = Math.floor(idealRowSpread / 2);
+        const maxCourseNumber = 300;
 
         // calculate number of nodes at each height
         let nodesPerHeight: Map<number, number> = new Map();
-        for (let i = 0; i <= maxY; i++) {
-            nodesPerHeight.set(i, 0)
+        for (let i = -1; i <= maxY; i++) {
+            nodesPerHeight.set(i, 0);
         };
 
         this.graph.forEachNode((node) => {
-            const height = degreeMapping.get(node);
-            nodesPerHeight.set(height, nodesPerHeight.get(height) + 1);
+            const height = degreeMapping.get(node)!;
+            nodesPerHeight.set(height, nodesPerHeight.get(height)! + 1);
         });
 
         const maxRowWidth = Math.max(...nodesPerHeight.values());
@@ -257,29 +275,41 @@ export class CourseGraph {
         // determines fitness for a row for nodes with no prereqs
         let fitByRow: number[] = [];
         for (let i = 0; i <= maxY; i++) {
-            fitByRow.push(20 * (0.7 - (nodesPerHeight.get(i) / maxRowWidth)));
+            fitByRow.push(-50 * (nodesPerHeight.get(i)! / maxRowWidth));
         };
 
         this.graph.forEachNode(node => {
-            let height = degreeMapping.get(node);
-            if (height === 0) {
-                let currentNodeFitByRow = structuredClone(fitByRow);
-                let courseNumber = parseInt(node.replace(/[A-Z]+ /, '').replace(/[A-Z]/, ''));
-                let idealRow = Math.ceil((courseNumber / 300) * maxY);
+            let height = degreeMapping.get(node)!;
 
-                for (let i = idealRow - 2, j = 0; i < Math.min(idealRow + 2, maxY); i++, j++) {
-                    if (j <= 2) {
-                        currentNodeFitByRow[i] += (j + 1) * 20;
+            if (height === 0) {
+                // remapped to min postreq height - 1
+
+                let minY = maxY;
+
+                this.graph.inNeighbors(node).forEach(postreq => {
+                    minY = Math.min(minY, degreeMapping.get(postreq)!);
+                })
+
+                height = minY - 1;
+
+            } else if (height === -1) {
+                // remapped to fill in space and according to number
+
+                let currentNodeFitByRow = structuredClone(fitByRow);
+                const courseNumber = parseInt(node.replace(/[A-Z]+ /, '').replace(/[A-Z]/, ''));
+                const idealRow = Math.ceil((courseNumber / maxCourseNumber) * maxY);
+                const maxRow = Math.min(idealRow + halfRowSpread, maxY)
+
+                for (let i = idealRow - halfRowSpread, j = 0; i < maxRow; i++, j++) {
+                    if (j <= halfRowSpread) {
+                        currentNodeFitByRow[i] += (j + 1) * 8;
                     } else {
-                        currentNodeFitByRow[i] += (5 - j)* 20;
+                        currentNodeFitByRow[i] += (idealRowSpread - j) * 8;
                     }
-                }
-                if (node === 'PHYS 221A') {
-                    console.log(currentNodeFitByRow);
                 }
 
                 let bestFitRow = currentNodeFitByRow.indexOf(Math.max(...currentNodeFitByRow));
-                fitByRow[bestFitRow] -= 20 / maxRowWidth;
+                fitByRow[bestFitRow] -= 40 / maxRowWidth;
                 height = bestFitRow;
             }
 
@@ -288,7 +318,7 @@ export class CourseGraph {
                     ...attr,
                     y: height
                 };
-            })
+            });
         });
     }
 
@@ -321,6 +351,7 @@ export class CourseGraph {
                 height: 2 * courseNodeSize[1]
             });
         });
+        // console.log(structuredClone(nodeMap));
 
         graphData.edges.forEach((edge, i) => {
             edges[i] = <PrereqEdge>{

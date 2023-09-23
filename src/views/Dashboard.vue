@@ -13,6 +13,32 @@ interface OverwrittenPrereqEdge {
     color: string
 }
 
+interface Offset {
+    node: number,
+    offset: number
+}
+
+interface AlignmentConstraint {
+    type: string,
+    axis: 'x' | 'y',
+    offsets: Offset[]
+}
+
+interface EqualityConstraint {
+    axis: 'x' | 'y',
+    left: number,
+    right: number,
+    gap: number,
+    equality: boolean
+}
+
+type Constraint = AlignmentConstraint | EqualityConstraint;
+
+interface HeightInfo {
+    idsAtHeight: number[]
+    idOfMaxDegreeAtHeight: number
+}
+
 const route = useRoute();
 let topic = route.params.searchItem;
 
@@ -37,6 +63,7 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
 
     const d3Cola = cola
         .d3adaptor(d3)
+        .linkDistance(300)
         .avoidOverlaps(true)
         .size([width, height]);
 
@@ -46,26 +73,52 @@ d3.json(`../../data/website/${topic}.json`).then(f => {
         .attr("height", height)
         .call(zoom);
 
-    let heightMap: Map<number, Array<number>> = new Map();
-    let constraints = [];
+    let heightMap: Map<number, HeightInfo> = new Map();
+    let constraints: Constraint[] = [];
 
     graph.nodes.forEach(node => {
+        let currentMaxDegree = 0;
+
         if (!heightMap.has(node.y)) {
-            heightMap.set(node.y, [node.id]);
+            heightMap.set(node.y, <HeightInfo>{
+                idsAtHeight: [node.id],
+                idOfMaxDegreeAtHeight: node.id
+            });
+            currentMaxDegree = node.adjacent.length;
+
         } else {
-            heightMap.get(node.y)!.push(node.id);
+            let heightInfo = heightMap.get(node.y)!;
+
+            heightInfo.idsAtHeight.push(node.id);
+            if (node.adjacent.length > currentMaxDegree) {
+                heightInfo.idOfMaxDegreeAtHeight = node.id;
+                currentMaxDegree = node.adjacent.length;
+            }
         }
     });
 
-    heightMap.forEach(ids => {
-        let offsets = [];
-        ids.forEach(id => {
-            offsets.push({"node": id, "offset": "0" })
+    let maxY = 0;
+
+    // alignment constraints
+    heightMap.forEach(heightInfo => {
+        let offsetsY: Offset[] = [];
+        heightInfo.idsAtHeight.forEach(id => {
+            offsetsY.push({ "node": id, "offset": 0 })
         });
-        constraints.push({ "type": "alignment", "axis": "y", "offsets": offsets });
+
+        constraints.push({ "type": "alignment", "axis": "y", "offsets": offsetsY });
+        maxY++;
     });
 
-    console.log(constraints);
+    for (let i = 0; i < maxY - 1; i++) {
+        constraints.push({
+            "axis": "y",
+            "left": heightMap.get(i)!.idOfMaxDegreeAtHeight,
+            "right": heightMap.get(i + 1)!.idOfMaxDegreeAtHeight,
+            "gap": 300,
+            "equality": true
+        });
+    }
 
     d3Cola
         .nodes(graph.nodes)
