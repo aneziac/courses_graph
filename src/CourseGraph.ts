@@ -383,6 +383,7 @@ export class CourseGraph {
                 return (division - 1) * 100 <= courseNumber && courseNumber <= division * 100
             })
         }
+        return this.graph.nodes();
     }
 
     // degree, otherDepartments, requiredOnly, recentlyOfferedOnly

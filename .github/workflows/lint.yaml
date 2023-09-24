@@ -35,5 +35,8 @@ jobs:
         with:
           node-version: 20.6.0
 
+      - name: Install linter
+        run: npm install @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint typescript
+
       - name: Run linters
         run: npx eslint src
