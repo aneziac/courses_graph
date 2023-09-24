@@ -39,7 +39,7 @@ export interface CourseNode {
     height: number;
 }
 
-export let courseNodeSize = [100, 50];
+export const courseNodeSize = [100, 50];
 
 interface PrereqEdge {
     source: number,
@@ -74,7 +74,7 @@ export class CourseGraph {
         if (Object.keys(courses).length === 0) {
             throw new Error("Empty JSON file");
         }
-        let firstEntry = courses[Object.keys(courses)[0]];
+        const firstEntry = courses[Object.keys(courses)[0]];
         if (!this.verifyData(firstEntry)) {
             throw new Error("Data fails minimum requirements");
         }
@@ -92,7 +92,7 @@ export class CourseGraph {
         this.addNodes(courses);
         this.addEdges(courses);
         this.colorNodes(courses);
-        let degreeMapping = this.computeDegreeMapping();
+        const degreeMapping = this.computeDegreeMapping();
         this.assignPositions(degreeMapping);
     }
 
@@ -109,7 +109,7 @@ export class CourseGraph {
     }
 
     private addNodes(courses: CourseJSON): void {
-        for (let key in courses) {
+        for (const key in courses) {
             this.graph.addNode(key, { label: key, color: this.nodeColors.get("default") });
         }
     }
@@ -117,15 +117,15 @@ export class CourseGraph {
     private addEdges(courses: CourseJSON): void {
         let currColor = 0;
 
-        for (let key in courses) {
-            let course = courses[key];
-            let prereqs = course.prereqs;
+        for (const key in courses) {
+            const course = courses[key];
+            const prereqs = course.prereqs;
 
             for (let i = 0; i < prereqs.length; i++) {
                 for (let j = 0; j < prereqs[i].length; j++) {
                     let prereqClass = prereqs[i][j];
-                    let optionalConcurrency = prereqClass.includes("[O]");
-                    let inDept = prereqClass.slice(0, course.sub_dept.length) == course.sub_dept;
+                    const optionalConcurrency = prereqClass.includes("[O]");
+                    const inDept = prereqClass.slice(0, course.sub_dept.length) == course.sub_dept;
 
                     // removing the '[O]'
                     if (optionalConcurrency) {
@@ -181,7 +181,7 @@ export class CourseGraph {
         });
 
         // good for now - TODO return after prereq parser rebuild
-        for (let key in courses) {
+        for (const key in courses) {
             if (this.graph.hasNode(key) && (courses[key].prereq_description.includes("Consent of instructor")
                 || courses[key].prereq_description.includes("consent of instructor"))) {
                 this.graph.setNodeAttribute(key, "color", this.nodeColors.get("instructorConsent"));
@@ -260,10 +260,10 @@ export class CourseGraph {
         const maxCourseNumber = 300;
 
         // calculate number of nodes at each height
-        let nodesPerHeight: Map<number, number> = new Map();
+        const nodesPerHeight: Map<number, number> = new Map();
         for (let i = -1; i <= maxY; i++) {
             nodesPerHeight.set(i, 0);
-        };
+        }
 
         this.graph.forEachNode((node) => {
             const height = degreeMapping.get(node)!;
@@ -273,10 +273,10 @@ export class CourseGraph {
         const maxRowWidth = Math.max(...nodesPerHeight.values());
 
         // determines fitness for a row for nodes with no prereqs
-        let fitByRow: number[] = [];
+        const fitByRow: number[] = [];
         for (let i = 0; i <= maxY; i++) {
             fitByRow.push(-50 * (nodesPerHeight.get(i)! / maxRowWidth));
-        };
+        }
 
         this.graph.forEachNode(node => {
             let height = degreeMapping.get(node)!;
@@ -295,7 +295,7 @@ export class CourseGraph {
             } else if (height === -1) {
                 // remapped to fill in space and according to number
 
-                let currentNodeFitByRow = structuredClone(fitByRow);
+                const currentNodeFitByRow = structuredClone(fitByRow);
                 const courseNumber = parseInt(node.replace(/[A-Z]+ /, '').replace(/[A-Z]/, ''));
                 const idealRow = Math.ceil((courseNumber / maxCourseNumber) * maxY);
                 const maxRow = Math.min(idealRow + halfRowSpread, maxY)
@@ -308,7 +308,7 @@ export class CourseGraph {
                     }
                 }
 
-                let bestFitRow = currentNodeFitByRow.indexOf(Math.max(...currentNodeFitByRow));
+                const bestFitRow = currentNodeFitByRow.indexOf(Math.max(...currentNodeFitByRow));
                 fitByRow[bestFitRow] -= 40 / maxRowWidth;
                 height = bestFitRow;
             }
@@ -335,9 +335,9 @@ export class CourseGraph {
     }
 
     getGraphNumericId(): { nodes: CourseNode[], edges: PrereqEdge[] } {
-        let nodeMap: Map<string, CourseNode> = new Map();
-        let edges: Array<PrereqEdge> = new Array(this.edgeCount());
-        let graphData = this.getGraph();
+        const nodeMap: Map<string, CourseNode> = new Map();
+        const edges: Array<PrereqEdge> = new Array(this.edgeCount());
+        const graphData = this.getGraph();
 
         graphData.nodes.forEach((node, i) => {
             nodeMap.set(node.key, <CourseNode>{
@@ -360,30 +360,30 @@ export class CourseGraph {
                 color: colors[edge.attributes!.color],
             }
 
-            let sourceNode = nodeMap.get(edge.source)!;
-            let targetNode = nodeMap.get(edge.target)!;
+            const sourceNode = nodeMap.get(edge.source)!;
+            const targetNode = nodeMap.get(edge.target)!;
 
             sourceNode.adjacent.push(targetNode.id);
             targetNode.adjacent.push(sourceNode.id);
         });
 
-        let nodes = Array.from(nodeMap.values());
+        const nodes = Array.from(nodeMap.values());
 
         return { nodes, edges };
     }
 
-    // sortDivison(division: Division): string[] {
-    //     // 0-100               100-200          200+
-    //     // Lower division   Upper division    Graduate
+    sortDivison(division: Division): string[] {
+        // 0-100               100-200          200+
+        // Lower division   Upper division    Graduate
 
-    //     // sort by division - all is falsey
-    //     if (division) {
-    //         return this.graph.filterNodes((node) => {
-    //             let courseNumber = parseInt(node.split(" ").pop()!);
-    //             return (division - 1) * 100 <= courseNumber && courseNumber <= division * 100
-    //         })
-    //     }
-    // }
+        // sort by division - all is falsey
+        if (division) {
+            return this.graph.filterNodes((node) => {
+                const courseNumber = parseInt(node.split(" ").pop()!);
+                return (division - 1) * 100 <= courseNumber && courseNumber <= division * 100
+            })
+        }
+    }
 
     // degree, otherDepartments, requiredOnly, recentlyOfferedOnly
 }

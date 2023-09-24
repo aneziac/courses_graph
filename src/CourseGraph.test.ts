@@ -9,7 +9,7 @@ const exampleData = `{
     "GREEK 200": {"sub_dept": "GREEK", "prereqs": [], "prereq_description": ""}
 }`
 
-let courseGraph = new CourseGraph(JSON.parse(exampleData));
+const courseGraph = new CourseGraph(JSON.parse(exampleData));
 
 test('blank data fails', () => {
     expect(() => {
@@ -46,10 +46,10 @@ test('edges constructed', () => {
 });
 
 test('nodes colors correct', () => {
-    let defaultColor = courseGraph.nodeColors.get("default")!;
-    let outsideDept = courseGraph.nodeColors.get("outsideDept")!;
-    let noPrereqs = courseGraph.nodeColors.get("noPrereqs")!;
-    let instructorConsent = courseGraph.nodeColors.get("instructorConsent")!;
+    const defaultColor = courseGraph.nodeColors.get("default")!;
+    const outsideDept = courseGraph.nodeColors.get("outsideDept")!;
+    const noPrereqs = courseGraph.nodeColors.get("noPrereqs")!;
+    const instructorConsent = courseGraph.nodeColors.get("instructorConsent")!;
 
     expect(
         courseGraph.graph.getNodeAttribute("GREEK 1", "color")
@@ -100,7 +100,7 @@ test('edge colors correct', () => {
 })
 
 test('degree mapping correct', () => {
-    let degreeMapping = courseGraph.computeDegreeMapping();
+    const degreeMapping = courseGraph.computeDegreeMapping();
 
     expect(degreeMapping.get("GREEK 1")).toBe(0);
     expect(degreeMapping.get("GREEK 2")).toBe(1);
