@@ -55,8 +55,8 @@ class Course:
     # define a logical well-ordering on this set
     @property
     def order(self) -> int:
-        digits = re.sub('\D', '', self.number)
-        letters = re.sub('\d', '', self.number)
+        digits = re.sub(r'\D', '', self.number)
+        letters = re.sub(r'\d', '', self.number)
 
         letter_contribution = 0
         if letters:
@@ -97,8 +97,8 @@ class APICourse(ProbabilityCourse):
         def weight_function(x):
             return x ** 1.2
 
-        start_year = 2018 # int(self.offered[0].split()[1])
-        end_year = 2023 # int(self.offered[-1].split()[-1])
+        start_year = 2018  # int(self.offered[0].split()[1])
+        end_year = 2023  # int(self.offered[-1].split()[-1])
         probabilities = [0.0] * 4
 
         weight_sum = 0

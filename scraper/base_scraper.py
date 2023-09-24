@@ -65,7 +65,7 @@ class Scraper:
     def fetch(self,
               url: str,
               fail_message: str,
-              params: Dict[str, str]={},
+              params: Dict[str, str] = {},
               headers: Dict[str, str] = {}) -> Optional[requests.Response]:
         r = requests.get(url, params=params, headers=headers)
 

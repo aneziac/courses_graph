@@ -20,7 +20,9 @@ class MajorScraper(Scraper):
         # COE
         if major.dept == 'ENGR':
             response = self.fetch(
-                f'https://my.sa.ucsb.edu/catalog/Current/Documents/2022_Majors/ENGR/22-23 {major.url_abbrev} Curriculum Sheet.pdf',
+                'https://my.sa.ucsb.edu/catalog/Current/Documents/2022_Majors/ENGR/22-23 '
+                f'{major.url_abbrev} Curriculum Sheet.pdf',
+
                 f'[F] Could not find major requirements sheet for {major.name}'
             )
 
@@ -38,7 +40,7 @@ class MajorScraper(Scraper):
 
         reader = PdfReader(BytesIO(response.content))
         text = reader.pages[0].extract_text()
-        r_requirements = re.compile('(.*?)\s*\.{2,}')
+        r_requirements = re.compile(r'(.*?)\s*\.{2,}')
 
         without_footer = text.split('MAJOR REGULATIONS')[0]
         requirements = re.findall(r_requirements, without_footer)
