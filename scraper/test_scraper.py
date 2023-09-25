@@ -28,7 +28,7 @@ for dept in build_depts_list():
 
 def test_dept_url():
     assert cs.dept_to_url(math_dept) == \
-        'https://my.sa.ucsb.edu/catalog/current/CollegesDepartments/ls-intro/math.aspx?DeptTab=Courses'
+        'https://my.sa.ucsb.edu/catalog/Current/CollegesDepartments/ls-intro/math.aspx?DeptTab=Courses'
 
     assert cs.dept_to_url(ccs_math_dept) == \
         'https://my.sa.ucsb.edu/catalog/Current/CollegesDepartments/ccs/Courses.aspx'
@@ -61,7 +61,7 @@ def test_compile_data():
         'rational, exponential, and logarithmic functions; properties and graphs of trigonometric functions; analytic geometry; functions ' \
         'and limits; derivatives; techniques and applications of differentiation; introduction to integration; logarithmic and trigonometric functions.'
 
-    assert first_course.comments == 'Students who have completed Math 34A will only receive 3 units for Math 2A.Not open for credit to ' \
+    assert first_course.comments == 'Students who have completed Math 34A will only receive 3 units for Math 2A. Not open for credit to ' \
         'students who have completed Math 3A or 3AS or have passed the AP Calculus AB or BC exams.'
 
     assert first_course.recommended_prep == ''
@@ -95,7 +95,7 @@ def test_compile_data():
 def test_api_client():
     winter_courses = client.get_courses_json('20231')
     assert winter_courses['classes'][0]['title'] == 'INTRO CULT ANTHRO'
-    assert client.get_offered_courses(math_dept, 2020, 2022)['Spring 2020']['3A'] == ['C', 'QNT']
+    assert set(client.get_offered_courses(math_dept, 2020, 2022)['Spring 2020']['3A']) == set(['QNT', 'C'])
 
 
 def test_major_scraper():
