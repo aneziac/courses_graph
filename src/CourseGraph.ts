@@ -1,5 +1,6 @@
 import DirectedGraph from 'graphology';
 import { SerializedGraph } from 'graphology-types';
+import { colors } from './style';
 
 
 // see ../scraper/datatypes.py Course and WebsiteCourse
@@ -50,22 +51,6 @@ export interface SerializedCourseGraph {
     edges: PrereqEdge[]
 }
 
-type Color = {[color: string]: string} // return to
-
-// TODO: find better way to do this
-const colors: Color = {
-    "red7": "#7A282C",
-    "red5": "#CA444B",
-    "pink": "#CE649B",
-    "orange": "#EF9D55",
-    "yellow": "#F6C344",
-    "blue": "#5289F5",
-    "teal": "#60C69B",
-    "green": "#5F9D79",
-    "purple": "#8669C7",
-    "black": "#000000"
-}
-
 
 export class CourseGraph {
     static courseNodeSize = [100, 50];
@@ -85,13 +70,14 @@ export class CourseGraph {
 
         this.graph = new DirectedGraph();
         this.nodeColors = new Map([
-            ["default", "blue"],
-            ["outsideDept", "teal"],
-            ["noPrereqs", "orange"],
-            ["instructorConsent", "purple"]
+            ["default", colors.blue],
+            ["outsideDept", colors.teal],
+            ["noPrereqs", colors.orange],
+            ["instructorConsent", colors.purple]
         ]);
-        this.edgeColors = ["red7", "purple", "orange", "blue", "pink", "green"];
-        this.optionalConcurrencyColor = "black";
+        this.edgeColors = [colors.red7, colors.purple, colors.orange,
+                           colors.blue, colors.pink, colors.green];
+        this.optionalConcurrencyColor = colors.black;
 
         this.addNodes(courses);
         this.addEdges(courses);
@@ -347,7 +333,7 @@ export class CourseGraph {
             nodeMap.set(node.key, <CourseNode>{
                 id: i,
                 name: node.key,
-                color: colors[node.attributes!.color],
+                color: node.attributes!.color,
                 x: 0,
                 y: node.attributes!.y,
                 adjacent: [],
@@ -361,7 +347,7 @@ export class CourseGraph {
             edges[i] = <PrereqEdge>{
                 source: nodeMap.get(edge.source)!.id,
                 target: nodeMap.get(edge.target)!.id,
-                color: colors[edge.attributes!.color],
+                color: edge.attributes!.color,
             }
 
             const sourceNode = nodeMap.get(edge.source)!;

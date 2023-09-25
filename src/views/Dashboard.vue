@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { CourseJSON, CourseGraph, CourseNode } from '../CourseGraph';
-import { createConstraints } from '../Constraints';
+import createConstraints from '../Constraints';
 import * as d3 from 'd3';
 import * as cola from 'webcola';
 import { useRoute } from 'vue-router';
+import { colors } from '../style';
 
 
 // webcola overwrites source and target during processing which confuses typescript
@@ -17,7 +18,6 @@ interface OverwrittenPrereqEdge {
 const route = useRoute();
 let topic = route.params.searchItem;
 
-let gray = '#b8b8b8';
 
 d3.json(`./data/website/${topic}.json`).then(f => {
     console.log(`Successfully loaded ${topic}`)
@@ -75,7 +75,7 @@ d3.json(`./data/website/${topic}.json`).then(f => {
         .attr("refX", "-300")
         .append("path")
         .attr("d", "M 60 0 L 0 30 L 60 60 z")
-        .attr("fill", "#343a40");
+        .attr("fill", colors.darkgray);
 
     var node = svg
         .append("g")
@@ -102,7 +102,7 @@ d3.json(`./data/website/${topic}.json`).then(f => {
             // @ts-ignore
             link.style('stroke', (edge: OverwrittenPrereqEdge) => {
                 return edge.source === hoveredNode ||
-                       edge.target === hoveredNode ? edge.color : gray;
+                       edge.target === hoveredNode ? edge.color : colors.gray;
             });
 
             // @ts-ignore
@@ -111,7 +111,7 @@ d3.json(`./data/website/${topic}.json`).then(f => {
                 let adjacentNode = graph.nodes[hoveredNode.id].adjacent.includes(otherNode.id)
 
                 if (!sameNode && !adjacentNode) {
-                    return gray;
+                    return colors.gray;
                 }
             });
         })

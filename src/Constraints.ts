@@ -27,7 +27,7 @@ interface HeightInfo {
     idOfMaxDegreeAtHeight: number
 }
 
-export function createConstraints(graph: SerializedCourseGraph): Constraint[] {
+export default function createConstraints(graph: SerializedCourseGraph): Constraint[] {
     let heightMap: Map<number, HeightInfo> = new Map();
     let constraints: Constraint[] = [];
 
