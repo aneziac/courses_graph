@@ -44,7 +44,7 @@ let topic = route.params.searchItem;
 
 let gray = '#b8b8b8';
 
-d3.json(`../../data/website/${topic}.json`).then(f => {
+d3.json(`./data/website/${topic}.json`).then(f => {
     console.log(`Successfully loaded ${topic}`)
 
     let courseGraph = new CourseGraph(f as CourseJSON);

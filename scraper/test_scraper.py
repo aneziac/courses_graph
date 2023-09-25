@@ -28,7 +28,7 @@ for dept in build_depts_list():
 
 def test_dept_url():
     assert cs.dept_to_url(math_dept) == \
-        'https://my.sa.ucsb.edu/catalog/Current/CollegesDepartments/ls-intro/math.aspx?DeptTab=Courses'
+        'https://my.sa.ucsb.edu/catalog/current/CollegesDepartments/ls-intro/math.aspx?DeptTab=Courses'
 
     assert cs.dept_to_url(ccs_math_dept) == \
         'https://my.sa.ucsb.edu/catalog/Current/CollegesDepartments/ccs/Courses.aspx'

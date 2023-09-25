@@ -76,7 +76,7 @@ class MajorScraper(Scraper):
 
     def write_json(self, majors: List[Major]):
         department = majors[0].dept.lower()
-        filename = f'data/{self.extra_path}/{department}.json'
+        filename = f'public/data/{self.extra_path}/{department}.json'
         if department in self._EXSTING_JSONS:
             return
 

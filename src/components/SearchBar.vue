@@ -18,7 +18,7 @@ const searchTerm = ref('');
 const searchItems: Ref<Array<SearchData>> = ref([]);
 
 
-csv('../../scraper/depts.csv').then(data => {
+csv('./depts.csv').then(data => {
     data.forEach(d => {
         searchItems.value.push({
             degree: 'Dept',
@@ -29,7 +29,7 @@ csv('../../scraper/depts.csv').then(data => {
     })
 });
 
-csv('../../scraper/majors.csv').then(data => {
+csv('./majors.csv').then(data => {
     data.forEach(d => {
         if (!d[' degree type']!) {
             return;

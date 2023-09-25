@@ -31,7 +31,7 @@ class Major:
     url_abbrev: str
     name: str
     degree: str
-    dept: str
+    sub_dept: str
 
     @property
     def file_abbrev(self) -> str:
