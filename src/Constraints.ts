@@ -28,8 +28,8 @@ interface HeightInfo {
 }
 
 export default function createConstraints(graph: SerializedCourseGraph): Constraint[] {
-    let heightMap: Map<number, HeightInfo> = new Map();
-    let constraints: Constraint[] = [];
+    const heightMap: Map<number, HeightInfo> = new Map();
+    const constraints: Constraint[] = [];
 
     graph.nodes.forEach(node => {
         let currentMaxDegree = 0;
@@ -42,7 +42,7 @@ export default function createConstraints(graph: SerializedCourseGraph): Constra
             currentMaxDegree = node.adjacent.length;
 
         } else {
-            let heightInfo = heightMap.get(node.y)!;
+            const heightInfo = heightMap.get(node.y)!;
 
             heightInfo.idsAtHeight.push(node.id);
             if (node.adjacent.length > currentMaxDegree) {
@@ -56,7 +56,7 @@ export default function createConstraints(graph: SerializedCourseGraph): Constra
 
     // alignment constraints
     heightMap.forEach(heightInfo => {
-        let offsetsY: Offset[] = [];
+        const offsetsY: Offset[] = [];
         heightInfo.idsAtHeight.forEach(id => {
             offsetsY.push({ "node": id, "offset": 0 })
         });

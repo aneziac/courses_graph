@@ -28,7 +28,7 @@ d3.json(`./data/website/${topic}.json`).then(f => {
     const width = window.innerWidth;
     const height = window.innerHeight;
 
-    const zoom = d3.zoom()
+    const zoom = d3.zoom<SVGSVGElement, unknown>()
         .scaleExtent([0.2, 2])
         // .translateExtent([[0, 0], [width * 5, height * 5]])
         .on('zoom', e => {
