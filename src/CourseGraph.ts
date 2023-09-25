@@ -39,12 +39,15 @@ export interface CourseNode {
     height: number;
 }
 
-export const courseNodeSize = [100, 50];
-
 interface PrereqEdge {
     source: number,
     target: number,
     color: string
+}
+
+export interface SerializedCourseGraph {
+    nodes: CourseNode[],
+    edges: PrereqEdge[]
 }
 
 type Color = {[color: string]: string} // return to
@@ -65,6 +68,7 @@ const colors: Color = {
 
 
 export class CourseGraph {
+    static courseNodeSize = [100, 50];
     graph: DirectedGraph;
     nodeColors: Map<string, string>;
     private edgeColors: Array<string>;
@@ -334,7 +338,7 @@ export class CourseGraph {
         return this.graph.size;
     }
 
-    getGraphNumericId(): { nodes: CourseNode[], edges: PrereqEdge[] } {
+    getGraphNumericId(): SerializedCourseGraph {
         const nodeMap: Map<string, CourseNode> = new Map();
         const edges: Array<PrereqEdge> = new Array(this.edgeCount());
         const graphData = this.getGraph();
@@ -347,8 +351,8 @@ export class CourseGraph {
                 x: 0,
                 y: node.attributes!.y,
                 adjacent: [],
-                width:  2 * courseNodeSize[0],
-                height: 2 * courseNodeSize[1]
+                width:  2 * CourseGraph.courseNodeSize[0],
+                height: 2 * CourseGraph.courseNodeSize[1]
             });
         });
         // console.log(structuredClone(nodeMap));

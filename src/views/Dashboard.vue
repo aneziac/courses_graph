@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { CourseJSON, CourseGraph, CourseNode, courseNodeSize } from '../CourseGraph';
+import { CourseJSON, CourseGraph, CourseNode } from '../CourseGraph';
+import { createConstraints } from '../Constraints';
 import * as d3 from 'd3';
 import * as cola from 'webcola';
 import { useRoute } from 'vue-router';
@@ -11,32 +12,6 @@ interface OverwrittenPrereqEdge {
     source: CourseNode,
     target: CourseNode,
     color: string
-}
-
-interface Offset {
-    node: number,
-    offset: number
-}
-
-interface AlignmentConstraint {
-    type: string,
-    axis: 'x' | 'y',
-    offsets: Offset[]
-}
-
-interface EqualityConstraint {
-    axis: 'x' | 'y',
-    left: number,
-    right: number,
-    gap: number,
-    equality: boolean
-}
-
-type Constraint = AlignmentConstraint | EqualityConstraint;
-
-interface HeightInfo {
-    idsAtHeight: number[]
-    idOfMaxDegreeAtHeight: number
 }
 
 const route = useRoute();
@@ -73,57 +48,10 @@ d3.json(`./data/website/${topic}.json`).then(f => {
         .attr("height", height)
         .call(zoom);
 
-    let heightMap: Map<number, HeightInfo> = new Map();
-    let constraints: Constraint[] = [];
-
-    graph.nodes.forEach(node => {
-        let currentMaxDegree = 0;
-
-        if (!heightMap.has(node.y)) {
-            heightMap.set(node.y, <HeightInfo>{
-                idsAtHeight: [node.id],
-                idOfMaxDegreeAtHeight: node.id
-            });
-            currentMaxDegree = node.adjacent.length;
-
-        } else {
-            let heightInfo = heightMap.get(node.y)!;
-
-            heightInfo.idsAtHeight.push(node.id);
-            if (node.adjacent.length > currentMaxDegree) {
-                heightInfo.idOfMaxDegreeAtHeight = node.id;
-                currentMaxDegree = node.adjacent.length;
-            }
-        }
-    });
-
-    let maxY = 0;
-
-    // alignment constraints
-    heightMap.forEach(heightInfo => {
-        let offsetsY: Offset[] = [];
-        heightInfo.idsAtHeight.forEach(id => {
-            offsetsY.push({ "node": id, "offset": 0 })
-        });
-
-        constraints.push({ "type": "alignment", "axis": "y", "offsets": offsetsY });
-        maxY++;
-    });
-
-    for (let i = 0; i < maxY - 1; i++) {
-        constraints.push({
-            "axis": "y",
-            "left": heightMap.get(i)!.idOfMaxDegreeAtHeight,
-            "right": heightMap.get(i + 1)!.idOfMaxDegreeAtHeight,
-            "gap": 300,
-            "equality": true
-        });
-    }
-
     d3Cola
         .nodes(graph.nodes)
         .links(graph.edges)
-        .constraints(constraints)
+        .constraints(createConstraints(graph))
         .start(10, 100, 200);
 
     var link = svg
@@ -156,8 +84,8 @@ d3.json(`./data/website/${topic}.json`).then(f => {
         .data(graph.nodes)
         .enter()
         .append("rect")
-        .attr("width", courseNodeSize[0])
-        .attr("height", courseNodeSize[1])
+        .attr("width", CourseGraph.courseNodeSize[0])
+        .attr("height", CourseGraph.courseNodeSize[1])
         .attr('rx', '12')
         .attr('fill', d => d.color)
         .on("mouseenter", (_, hoveredNode: CourseNode) => {
@@ -228,10 +156,10 @@ d3.json(`./data/website/${topic}.json`).then(f => {
 
         node
             .attr("x", (d: CourseNode) => {
-                return d.x - courseNodeSize[0] / 2;
+                return d.x - CourseGraph.courseNodeSize[0] / 2;
             })
             .attr("y", (d: CourseNode) => {
-                return d.y - courseNodeSize[1] / 2;
+                return d.y - CourseGraph.courseNodeSize[1] / 2;
             });
 
         label
