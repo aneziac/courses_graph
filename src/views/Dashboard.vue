@@ -259,6 +259,7 @@ graph {
 .label {
     font-size: 13px;
     font-weight: bold;
+    pointer-events: none;
 }
 
 .edges line {
