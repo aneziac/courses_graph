@@ -4,6 +4,7 @@ from major_scraper import MajorScraper
 from readers import build_depts_list, build_majors_list
 from datatypes import Course
 from typing import List
+import pytest
 
 
 cs = CourseScraper()
@@ -92,6 +93,7 @@ def test_compile_data():
     assert 'STOCHASTIC CALCULUS AND APPLICATIONS' in titles
 
 
+@pytest.mark.noapi
 def test_api_client():
     winter_courses = client.get_courses_json('20231')
     assert winter_courses['classes'][0]['title'] == 'INTRO CULT ANTHRO'
