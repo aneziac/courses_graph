@@ -21,7 +21,7 @@ class UCSB_API_Client(Scraper):
 
         for year in range(start_year, end_year + 1):
             for quarter_i in range(4):
-                if year >= 2024: # and quarter_i >= 3:  # can't see into the future
+                if year >= 2024:  # and quarter_i >= 3:  # can't see into the future
                     break
 
                 quarter = f'{self._quarters[quarter_i]} {year}'
@@ -72,7 +72,7 @@ class UCSB_API_Client(Scraper):
 
         classes = courses['classes']
         for cls in classes:
-            split_course =  cls['courseId'].rstrip().split()
+            split_course = cls['courseId'].rstrip().split()
             dept_name, number = ' '.join(split_course[:-1]), split_course[-1]
 
             if dept_name != dept:

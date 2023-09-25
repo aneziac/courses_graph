@@ -32,10 +32,10 @@ class Scraper:
 
         if self.overwrite and 'c' in argv[1]:
             try:
-                shutil.rmtree(f'data/{self.extra_path}')
+                shutil.rmtree(f'public/data/{self.extra_path}')
             except FileNotFoundError:
                 pass
-            os.mkdir(f'data/{self.extra_path}')
+            os.mkdir(f'public/data/{self.extra_path}')
 
         self._EXSTING_JSONS = get_existing_jsons(extra_path)
 
@@ -43,7 +43,7 @@ class Scraper:
         return (self.overwrite or dept.file_abbrev not in self._EXSTING_JSONS)
 
     def write_json(self, dept: Department, courses: List[Course]) -> None:
-        filename = f'data/{self.extra_path}/{dept.file_abbrev}.json'
+        filename = f'public/data/{self.extra_path}/{dept.file_abbrev}.json'
 
         sorted_courses = sorted(courses, key=lambda course: course.order)
 
@@ -65,7 +65,7 @@ class Scraper:
     def fetch(self,
               url: str,
               fail_message: str,
-              params: Dict[str, str]={},
+              params: Dict[str, str] = {},
               headers: Dict[str, str] = {}) -> Optional[requests.Response]:
         r = requests.get(url, params=params, headers=headers)
 

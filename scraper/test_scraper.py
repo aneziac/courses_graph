@@ -4,6 +4,7 @@ from major_scraper import MajorScraper
 from readers import build_depts_list, build_majors_list
 from datatypes import Course
 from typing import List
+import pytest
 
 
 cs = CourseScraper()
@@ -61,7 +62,7 @@ def test_compile_data():
         'rational, exponential, and logarithmic functions; properties and graphs of trigonometric functions; analytic geometry; functions ' \
         'and limits; derivatives; techniques and applications of differentiation; introduction to integration; logarithmic and trigonometric functions.'
 
-    assert first_course.comments == 'Students who have completed Math 34A will only receive 3 units for Math 2A.Not open for credit to ' \
+    assert first_course.comments == 'Students who have completed Math 34A will only receive 3 units for Math 2A. Not open for credit to ' \
         'students who have completed Math 3A or 3AS or have passed the AP Calculus AB or BC exams.'
 
     assert first_course.recommended_prep == ''
@@ -92,10 +93,11 @@ def test_compile_data():
     assert 'STOCHASTIC CALCULUS AND APPLICATIONS' in titles
 
 
+@pytest.mark.noapi
 def test_api_client():
     winter_courses = client.get_courses_json('20231')
     assert winter_courses['classes'][0]['title'] == 'INTRO CULT ANTHRO'
-    assert client.get_offered_courses(math_dept, 2020, 2022)['Spring 2020']['3A'] == ['C', 'QNT']
+    assert set(client.get_offered_courses(math_dept, 2020, 2022)['Spring 2020']['3A']) == set(['QNT', 'C'])
 
 
 def test_major_scraper():

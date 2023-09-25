@@ -1,17 +1,15 @@
 {
     "compilerOptions": {
-      "target": "esnext",
-      "useDefineForClassFields": true,
-      "module": "esnext",
+      "target": "ES2022",
+      "module": "ES2022",
       "moduleResolution": "node",
-      "strict": false,
-      "jsx": "preserve",
+      "strict": true,
       "sourceMap": true,
       "resolveJsonModule": true,
       "esModuleInterop": true,
-      "lib": ["esnext", "dom"],
+      "lib": ["ES2022", "DOM"],
     },
-    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],
     "references": [{ "path": "./tsconfig.node.json" }],
     "ts-node": {
         // these options are overrides used only by ts-node

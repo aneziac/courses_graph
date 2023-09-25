@@ -6,39 +6,43 @@ import { csv } from 'd3-fetch';
 
 const router = useRouter();
 
-interface searchData {
+interface SearchData {
     degree: string;  // type of degree, or dept
-    dept: string;
+    dept?: string;
     text: string;  // regular name
     alt: string;  // alternate name
     college: string;
 }
 
 const searchTerm = ref('');
-const searchItems: Ref<Array<searchData>> = ref([]);
+const searchItems: Ref<Array<SearchData>> = ref([]);
 
-csv('./scraper/depts.csv', (data: Object) => {
-    searchItems.value.push({
-        degree: 'Dept',
-        dept: '',  // redundant
-        text: data[' full name'].trim(),
-        alt: data['abbrev'].toLowerCase().trim(),
-        college: data[' college'].trim()
-    });
+
+csv('./depts.csv').then(data => {
+    data.forEach(d => {
+        searchItems.value.push({
+            degree: 'Dept',
+            text: d[' full name']!.trim(),
+            alt: d['abbrev']!.toLowerCase().trim(),
+            college: d[' college']!.trim()
+        })
+    })
 });
 
-csv('./scraper/majors.csv', (data: Object) => {
-    if (!data[' degree type']) {
-        return;
-    }
+csv('./majors.csv').then(data => {
+    data.forEach(d => {
+        if (!d[' degree type']!) {
+            return;
+        }
 
-    searchItems.value.push({
-        degree: data[' degree type'].trim(),
-        dept: data[' dept'].trim(),
-        text: data[' short name'].trim(),
-        alt: data[' full name'].trim().toLowerCase(),
-        college: data['abbrev'] == 'ENGR' ? 'COE' : 'L&S'
-    });
+        searchItems.value.push({
+            degree: d[' degree type'].trim(),
+            dept: d[' dept']!.trim(),
+            text: d[' short name']!.trim(),
+            alt: d[' full name']!.trim().toLowerCase(),
+            college: d['abbrev'] === 'ENGR' ? 'COE' : 'L&S'
+        })
+    })
 });
 
 const searchResults = computed(() => {
@@ -51,15 +55,15 @@ const searchResults = computed(() => {
     return searchItems.value;
 })
 
-function toLocalPage(searchResult: searchData) {
+function toLocalPage(searchResult: SearchData) {
     if (searchResult.degree === 'Dept') {
         router.push('/' + searchResult.alt.replaceAll(' ', ''));
 
     // subpage if we have a degree
     } else {
         let strippedText = searchResult.text.replace(' - ', '-')
-                                            .replace(' BA', '')
-                                            .replace(' BS', '')
+                                            .replace(' BA',  '')
+                                            .replace(' BS',  '')
                                             .replace(' BFA', '');
 
         if (!searchResult.text.includes('Pre-')) {
@@ -73,7 +77,7 @@ function toLocalPage(searchResult: searchData) {
 
 onMounted(() => {
     nextTick(() => {
-        document.getElementById('search').focus();
+        document.getElementById('search')!.focus();
     })
 });
 </script>

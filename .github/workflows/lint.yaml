@@ -1,0 +1,42 @@
+name: Lint
+
+on:
+  push:
+    branches: master
+  pull_request:
+    branches: master
+
+jobs:
+  run-linters:
+    name: Run linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
+      # Python
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11.2
+
+      - name: Install Python dependencies
+        run: pip install flake8
+
+      - name: Run linters
+        run: flake8
+
+      # Typescript
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 20.6.0
+
+      - name: Install linter
+        run: npm install @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint typescript
+
+      - name: Run linters
+        run: npx eslint src

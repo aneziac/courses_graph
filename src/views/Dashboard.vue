@@ -1,42 +1,34 @@
 <script setup lang="ts">
-import { CourseJSON, CourseGraph } from '../CourseGraph';
+import { CourseJSON, CourseGraph, CourseNode } from '../CourseGraph';
+import createConstraints from '../Constraints';
 import * as d3 from 'd3';
+import * as cola from 'webcola';
 import { useRoute } from 'vue-router';
+import { colors } from '../style';
+
+
+// webcola overwrites source and target during processing which confuses typescript
+// this seems like a bad practice on the library's part
+interface OverwrittenPrereqEdge {
+    source: CourseNode,
+    target: CourseNode,
+    color: string
+}
 
 const route = useRoute();
 let topic = route.params.searchItem;
 
-// TODO: find better way to do this
-const themeColor = color => {
-    const colors = {
-        "red7": "#7A282C",
-        "red5": "#CA444B",
-        "pink": "#CE649B",
-        "orange": "#EF9D55",
-        "yellow": "#F6C344",
-        "blue": "#5289F5",
-        "teal": "#60C69B",
-        "green": "#5F9D79",
-        "purple": "#8669C7",
-        "black": "#000000"
-    }
 
-    return colors[color];
-}
-
-d3.json(`./data/website/${topic}.json`).then((f: CourseJSON) => {
+d3.json(`./data/website/${topic}.json`).then(f => {
     console.log(`Successfully loaded ${topic}`)
 
-    let courseGraph = new CourseGraph(f);
-    let graphData = courseGraph.getGraph();
+    let courseGraph = new CourseGraph(f as CourseJSON);
+    let graph = courseGraph.getGraphNumericId();
 
     const width = window.innerWidth;
     const height = window.innerHeight;
 
-    const nodeWidth = 100;
-    const nodeHeight = 50;
-
-    let zoom = d3.zoom()
+    const zoom = d3.zoom<SVGSVGElement, unknown>()
         .scaleExtent([0.2, 2])
         // .translateExtent([[0, 0], [width * 5, height * 5]])
         .on('zoom', e => {
@@ -44,11 +36,32 @@ d3.json(`./data/website/${topic}.json`).then((f: CourseJSON) => {
                 .attr('transform', e.transform);
         });
 
+    const d3Cola = cola
+        .d3adaptor(d3)
+        .linkDistance(300)
+        .avoidOverlaps(true)
+        .size([width, height]);
+
     const svg = d3.select("#graph")
         .append("svg")
         .attr("width", width)
         .attr("height", height)
         .call(zoom);
+
+    d3Cola
+        .nodes(graph.nodes)
+        .links(graph.edges)
+        .constraints(createConstraints(graph))
+        .start(10, 100, 200);
+
+    var link = svg
+        .append("g")
+        .attr("class", "edges")
+        .selectAll("line")
+        .data(graph.edges)
+        .enter()
+        .append("line")
+        .attr('stroke', d => d.color);
 
     svg
         .append("defs")
@@ -59,82 +72,104 @@ d3.json(`./data/website/${topic}.json`).then((f: CourseJSON) => {
         .attr("viewBox", "0 0 60 60")
         .attr("markerUnits", "strokeWidth")
         .attr("refY", "30")
-        .attr("refX", "50%")
+        .attr("refX", "-300")
         .append("path")
         .attr("d", "M 60 0 L 0 30 L 60 60 z")
-        .attr("fill", "#343a40");
-
-    d3.forceSimulation(graphData.nodes)
-        .force(
-            "link",
-            d3.forceLink()
-            .id(function(d) {
-                return d.key;
-            })
-            .links(graphData.edges)
-        )
-        .force("charge", d3.forceManyBody().strength(-30))
-        .force("center", d3.forceCenter(width / 2, height / 2))
-        .force("collision", d3.forceCollide(nodeWidth))
-        .on("tick", ticked);
-
-    var link = svg
-        .append("g")
-        .attr("class", "edges")
-        .selectAll("line")
-        .data(graphData.edges)
-        .enter()
-        .append("line")
-        .attr('stroke', d => themeColor(d.attributes.color))
+        .attr("fill", colors.darkgray);
 
     var node = svg
         .append("g")
         .attr("class", "nodes")
         .selectAll("rect")
-        .data(graphData.nodes)
+        .data(graph.nodes)
         .enter()
         .append("rect")
-        .attr("width", nodeWidth)
-        .attr("height", nodeHeight)
+        .attr("width", CourseGraph.courseNodeSize[0])
+        .attr("height", CourseGraph.courseNodeSize[1])
         .attr('rx', '12')
-        .attr('fill', d => themeColor(d.attributes.color))
+        .attr('fill', d => d.color)
+        .on("mouseenter", (_, hoveredNode: CourseNode) => {
+            // @ts-ignore
+            link.style('stroke-width', (edge: OverwrittenPrereqEdge) => {
+                if   (hoveredNode === edge.source
+                   || hoveredNode === edge.target) {
+                    return 7;
+                } else {
+                    return 4;
+                }
+            });
+
+            // @ts-ignore
+            link.style('stroke', (edge: OverwrittenPrereqEdge) => {
+                return edge.source === hoveredNode ||
+                       edge.target === hoveredNode ? edge.color : colors.gray;
+            });
+
+            // @ts-ignore
+            node.style('fill', (otherNode: CourseNode) => {
+                let sameNode = hoveredNode === otherNode;
+                let adjacentNode = graph.nodes[hoveredNode.id].adjacent.includes(otherNode.id)
+
+                if (!sameNode && !adjacentNode) {
+                    return colors.gray;
+                }
+            });
+        })
+        .on("mouseout", () => {
+            link.style('stroke-width', 4);
+            link.style('stroke', edge => {
+                return edge.color;
+            });
+            node.style('fill', node => {
+                return node.color;
+            });
+        });
 
     var label = svg
         .append("g")
         .attr("class", "labels")
         .selectAll("text")
-        .data(graphData.nodes)
+        .data(graph.nodes)
         .enter().append("text")
-        .text(function(d) { return d.key; })
+        .text(d => d.name)
+        .attr("text-anchor", "middle")
         .attr("class", "label");
 
-    function ticked() {
+    d3Cola.on("tick", () => {
         link
-            .attr("x1", function(d) {
-                return d.source.x + nodeWidth / 2;
+            // @ts-ignore
+            .attr("x1", (d: OverwrittenPrereqEdge) => {
+                return d.source.x;
             })
-            .attr("y1", function(d) {
-                return d.source.y + nodeHeight / 2;
+            // @ts-ignore
+            .attr("y1", (d: OverwrittenPrereqEdge) => {
+                return d.source.y;
             })
-            .attr("x2", function(d) {
-                return d.target.x + nodeWidth / 2;
+            // @ts-ignore
+            .attr("x2", (d: OverwrittenPrereqEdge) => {
+                return d.target.x;
             })
-            .attr("y2", function(d) {
-                return d.target.y + nodeHeight / 2;
+            // @ts-ignore
+            .attr("y2", (d: OverwrittenPrereqEdge) => {
+                return d.target.y;
             });
 
         node
-            .attr("x", function(d) {
-                return d.x;
+            .attr("x", (d: CourseNode) => {
+                return d.x - CourseGraph.courseNodeSize[0] / 2;
             })
-            .attr("y", function(d) {
-                return d.y;
+            .attr("y", (d: CourseNode) => {
+                return d.y - CourseGraph.courseNodeSize[1] / 2;
             });
 
         label
-            .attr("x", function(d) { return d.x + nodeWidth / 2 - 35; })
-            .attr("y", function(d) { return d.y + nodeHeight / 2 + 6; });
-    }
+            .attr("x", d => {
+                return d.x;
+            })
+            .attr("y", d => {
+                return d.y + 5;
+            });
+    });
 })
 </script>
 
@@ -152,18 +187,17 @@ graph {
 .label {
     font-size: 13px;
     font-weight: bold;
+    pointer-events: none;
 }
 
 .edges line {
-    /* stroke: #999; */
     stroke-opacity: 0.7;
-    stroke-width: 3;
-    marker-end: url(#arrow);
+    stroke-width: 4;
+    marker-start: url(#arrow);
 }
 
 .nodes rect {
     stroke: #000000;
     stroke-width: 3px;
-    /* fill: #69a3b2; */
 }
 </style>

@@ -12,3 +12,4 @@ scraper/major_courses.json
 node_modules
 dist
 .coverage
+__pycache__/
