@@ -2,7 +2,7 @@
 import { CourseJSON, CourseGraph, CourseNode } from '../CourseGraph';
 import createConstraints from '../Constraints';
 import * as d3 from 'd3';
-import * as cola from 'webcola';
+import { d3adaptor } from 'webcola';
 import { useRoute } from 'vue-router';
 import { colors } from '../style';
 
@@ -36,8 +36,7 @@ d3.json(`./data/website/${topic}.json`).then(f => {
                 .attr('transform', e.transform);
         });
 
-    const d3Cola = cola
-        .d3adaptor(d3)
+    const d3Cola = d3adaptor(d3)
         .linkDistance(300)
         .avoidOverlaps(true)
         .size([width, height]);
