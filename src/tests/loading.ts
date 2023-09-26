@@ -1,5 +1,5 @@
 // node file used to test which depts load correctly
-import { CourseGraph, CourseJSON } from './CourseGraph';
+import { CourseGraph, CourseJSON } from '../CourseGraph';
 import { readdirSync, readFileSync } from 'fs';
 
 

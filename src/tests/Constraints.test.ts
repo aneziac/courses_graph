@@ -1,6 +1,6 @@
-import createConstraints from "./Constraints";
+import createConstraints from "../Constraints";
 import exampleData from './exampleData.json';
-import { CourseGraph } from './CourseGraph';
+import { CourseGraph } from '../CourseGraph';
 
 
 const courseGraph = new CourseGraph(exampleData);

@@ -1,4 +1,4 @@
-import { CourseGraph } from './CourseGraph';
+import { CourseGraph } from '../CourseGraph';
 import exampleData from './exampleData.json';
 
 
