@@ -5,18 +5,18 @@ import { colors } from './style';
 
 // see ../scraper/datatypes.py Course and WebsiteCourse
 export interface Course {
-    number: string,
+    number?: string,
     sub_dept: string
-    title: string,
-    dept: string,
+    title?: string,
+    dept?: string,
     prereqs: Array<Array<string>>,
     prereq_description: string,
-    comments: string,
-    units: string,
-    description: string,
-    recommended_prep: string,
-    professor: string,
-    college: string
+    comments?: string,
+    units?: string,
+    description?: string,
+    recommended_prep?: string,
+    professor?: string,
+    college?: string
 }
 
 export type CourseJSON = {[key: string]: Course}

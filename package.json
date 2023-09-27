@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "scripts": {
         "dev": "vite",
-        "lint": "vue-tsc --noEmit",
+        "lint": "tsc --noEmit",
         "build": "vite build",
         "preview": "vite preview",
         "test": "jest"
@@ -19,7 +19,6 @@
         "@typescript-eslint/eslint-plugin": "^6.7.2",
         "@typescript-eslint/parser": "^6.7.2",
         "@vitejs/plugin-vue": "^2.2.0",
-        "css-loader": "^6.7.3",
         "d3": "^7.8.4",
         "d3-fetch": "^3.0.1",
         "eslint": "^8.50.0",
