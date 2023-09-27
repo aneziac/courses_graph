@@ -6,7 +6,7 @@ import SearchBar from '../components/SearchBar.vue'
     <div id="main">
         <h3>ucsbcourses.com</h3>
         <div class="search-interface">
-            <SearchBar/>
+            <SearchBar :searchResultCount="999"/>
         </div>
     </div>
 </template>

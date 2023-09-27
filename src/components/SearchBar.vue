@@ -16,6 +16,8 @@ interface SearchData {
 
 const searchTerm = ref('');
 const searchItems: Ref<Array<SearchData>> = ref([]);
+const focus = ref(false);
+const props = defineProps(['searchResultCount']);
 
 
 csv('./depts.csv').then(data => {
@@ -73,21 +75,32 @@ function toLocalPage(searchResult: SearchData) {
         let degreeName = strippedText.toLowerCase().replaceAll(' ', '-');
         router.push('/' + searchResult.dept + '/' + degreeName);
     }
+
+    searchTerm.value = '';
 }
 
-onMounted(() => {
-    nextTick(() => {
-        document.getElementById('search')!.focus();
-    })
-});
+if (props.searchResultCount > 10) {
+    onMounted(() => {
+        nextTick(() => {
+            document.getElementById('search')!.focus();
+        })
+    });
+}
+
+function stopfocus(): void {
+    setTimeout(() => {
+        focus.value = false;
+    }, 150)
+}
 </script>
 
 <template>
     <span class="main-search-bar">
-        <input v-model="searchTerm" placeholder="Enter a department or degree program..." id="search">
+        <input v-model="searchTerm" placeholder="Enter a department or degree program..."
+               id="search" @focusin="focus=true" @focusout="stopfocus()">
     </span>
     <ul>
-        <li v-for="result in searchResults">
+        <li v-for="result in searchResults.slice(0, focus || searchResultCount > 10 ? searchResultCount : 0)">
             <SearchItem @click="toLocalPage(result)">
                 <template #title>
                     {{ result.text }}

@@ -7,7 +7,8 @@ import { d3adaptor } from 'webcola';
 import { useRoute } from 'vue-router';
 import { colors } from '../style';
 import CourseInfoPane from '../components/CourseInfoPane.vue';
-import { ref, Ref } from 'vue';
+import { ref, Ref, watch } from 'vue';
+import SearchBar from '../components/SearchBar.vue';
 
 
 // webcola overwrites source and target during processing which confuses typescript
@@ -24,20 +25,27 @@ interface CourseInfo {
 }
 
 const route = useRoute();
-let topic = route.params.searchItem as string;
+loadData(route.params.searchItem as string);
 let activeNode: Ref<CourseInfo | null> = ref(null);
 
 
-d3.json(`./data/website/${topic}.json`).then(f => {
-    d3.json(`./data/api/${topic}.json`).then(g => {
-        loadGraph(f as WebsiteCourseJSON, g as APICourseJSON);
+function loadData(dept: string): void {
+    d3.json(`./data/website/${dept}.json`).then(f => {
+        d3.json(`./data/api/${dept}.json`).then(g => {
+            loadGraph(dept, f as WebsiteCourseJSON, g as APICourseJSON);
+        });
     });
+}
+
+watch(() => route.params, (newDept, _) => {
+    d3.select("svg").remove();
+    loadData(newDept.searchItem as string);
 });
 
-function loadGraph(websiteData: WebsiteCourseJSON, apiData: APICourseJSON) {
-    console.log(`Successfully loaded ${topic}`)
+function loadGraph(dept: string, websiteData: WebsiteCourseJSON, apiData: APICourseJSON): void {
+    console.log(`Successfully loaded ${dept}`)
 
-    let courseGraph = new CourseGraph(topic, websiteData, apiData);
+    let courseGraph = new CourseGraph(dept, websiteData, apiData);
     let graph = courseGraph.getGraphNumericId();
 
     const width = window.innerWidth;
@@ -129,7 +137,7 @@ function loadGraph(websiteData: WebsiteCourseJSON, apiData: APICourseJSON) {
                 }
             });
 
-            if (hoveredNode.name.includes(topic.toUpperCase())) {
+            if (hoveredNode.name.includes(dept.toUpperCase())) {
                 activeNode.value = { web: websiteData[hoveredNode.name], api: apiData[hoveredNode.name] };
             }
         })
@@ -217,6 +225,7 @@ function quantizeProbabilities(probabilities: number[]): string {
 </script>
 
 <template>
+    <SearchBar :searchResultCount="5"/>
     <div id="dashboard">
         <div id="info-panel">
             <CourseInfoPane v-if="activeNode">
@@ -255,7 +264,6 @@ function quantizeProbabilities(probabilities: number[]): string {
     width: 100%;
     height: 100%;
     position: relative;
-    background: #ffffff;
 }
 
 #info-panel {
