@@ -106,8 +106,9 @@ onMounted(() => {
 <style>
 .main-search-bar {
     text-align: center;
-    height: 7vh;
+    height: 40px;
     display: block;
+    margin: none;
 }
 
 input {

@@ -10,6 +10,3 @@ To develop, use
 ```
 $ npm run dev
 ```
-
-Development note: Remove `/*# sourceMappingURL=bootstrap.css.map */` from `bootstrap.css` to avoid warnings
-(see https://stackoverflow.com/questions/21773376/bootstrap-trying-to-load-map-file-how-to-disable-it-do-i-need-to-do-it)

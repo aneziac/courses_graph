@@ -14,7 +14,7 @@
 .searchItem {
     padding-top: 10px;
     padding-bottom: 25px;
-    height: 7vh;
+    height: 50px;
     padding-left: 1vw;
     font-size: 20px;
 }
