@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router';
 import SearchItem from './SearchItem.vue';
 import { csv } from 'd3-fetch';
 
+
 const router = useRouter();
 
 interface SearchData {
@@ -16,7 +17,7 @@ interface SearchData {
 
 const searchTerm = ref('');
 const searchItems: Ref<Array<SearchData>> = ref([]);
-const focus = ref(false);
+const emit = defineEmits(['focus']);
 const props = defineProps(['searchResultCount']);
 
 
@@ -55,7 +56,7 @@ const searchResults = computed(() => {
         )
     }
     return searchItems.value;
-})
+});
 
 function toLocalPage(searchResult: SearchData) {
     if (searchResult.degree === 'Dept') {
@@ -87,20 +88,24 @@ if (props.searchResultCount > 10) {
     });
 }
 
+function startfocus(): void {
+    emit("focus", true);
+}
+
 function stopfocus(): void {
     setTimeout(() => {
-        focus.value = false;
-    }, 150)
+        emit("focus", false)
+    }, 150);
 }
 </script>
 
 <template>
     <span class="main-search-bar">
         <input v-model="searchTerm" placeholder="Enter a department or degree program..."
-               id="search" @focusin="focus=true" @focusout="stopfocus()">
+               id="search" @focusin="startfocus()" @focusout="stopfocus()">
     </span>
     <ul>
-        <li v-for="result in searchResults.slice(0, focus || searchResultCount > 10 ? searchResultCount : 0)">
+        <li v-for="result in searchResults.slice(0, searchResultCount)">
             <SearchItem @click="toLocalPage(result)">
                 <template #title>
                     {{ result.text }}
@@ -118,20 +123,20 @@ function stopfocus(): void {
 
 <style>
 .main-search-bar {
-    text-align: center;
-    height: 40px;
-    display: block;
-    margin: none;
+    display: inline;
+    height: 100%;
 }
 
 input {
     width: 100%;
+    min-height: 40px;
+    font-size: 15px;
 }
 
 ul {
     list-style: none;
     padding-left: 0em !important;
-    overflow: auto;
-    height: 100%;
+    overflow: scroll;
+    height: 80%;
 }
 </style>

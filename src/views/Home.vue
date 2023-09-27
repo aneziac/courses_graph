@@ -5,7 +5,7 @@ import SearchBar from '../components/SearchBar.vue'
 <template>
     <div id="main">
         <h3>ucsbcourses.com</h3>
-        <div class="search-interface">
+        <div id="search-interface">
             <SearchBar :searchResultCount="999"/>
         </div>
     </div>
@@ -21,9 +21,9 @@ h3 {
     text-align: center;
 }
 
-.search-interface {
+#search-interface {
     width: 70vw;
-    height: 65vh;
+    height: 75vh;
     margin: 0 auto;
     font-size: 25px;
 }

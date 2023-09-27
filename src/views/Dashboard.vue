@@ -27,6 +27,7 @@ interface CourseInfo {
 const route = useRoute();
 loadData(route.params.searchItem as string);
 let activeNode: Ref<CourseInfo | null> = ref(null);
+let searchBarFocused = ref(false);
 
 
 function loadData(dept: string): void {
@@ -225,8 +226,10 @@ function quantizeProbabilities(probabilities: number[]): string {
 </script>
 
 <template>
-    <SearchBar :searchResultCount="5"/>
     <div id="dashboard">
+        <div id="search-bar" :class=" { selected: searchBarFocused } ">
+            <SearchBar @focus="(focus) => searchBarFocused = focus" :searchResultCount="searchBarFocused ? 8 : 0"/>
+        </div>
         <div id="info-panel">
             <CourseInfoPane v-if="activeNode">
                 <template #title>
@@ -266,9 +269,30 @@ function quantizeProbabilities(probabilities: number[]): string {
     position: relative;
 }
 
+#search-bar {
+    position: absolute;
+    background: #ffffff;
+    height: 0;
+    width: 70vw;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+#search-bar.selected {
+    height: 50vh;
+}
+
 #info-panel {
     position: absolute;
     background: #ffffff;
+    margin-top: 10%;
+    margin-left: 10px;
 }
 
 .label {
