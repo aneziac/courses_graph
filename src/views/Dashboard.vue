@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { CourseJSON, CourseGraph, CourseNode, Course } from '../CourseGraph';
+import { CourseGraph, CourseNode } from '../CourseGraph';
+import { WebsiteCourse, WebsiteCourseJSON, APICourse, APICourseJSON } from '../jsontypes';
 import createConstraints from '../Constraints';
 import * as d3 from 'd3';
 import { d3adaptor } from 'webcola';
@@ -17,16 +18,26 @@ interface OverwrittenPrereqEdge {
     color: string
 }
 
+interface CourseInfo {
+    web: WebsiteCourse,
+    api: APICourse
+}
+
 const route = useRoute();
 let topic = route.params.searchItem;
-let activeNode: Ref<Course | null> = ref(null);
+let activeNode: Ref<CourseInfo | null> = ref(null);
 
 
 d3.json(`./data/website/${topic}.json`).then(f => {
+    d3.json(`./data/api/${topic}.json`).then(g => {
+        loadGraph(f as WebsiteCourseJSON, g as APICourseJSON);
+    });
+});
+
+function loadGraph(websiteData: WebsiteCourseJSON, apiData: APICourseJSON) {
     console.log(`Successfully loaded ${topic}`)
 
-    let courseData = f as CourseJSON;
-    let courseGraph = new CourseGraph(courseData);
+    let courseGraph = new CourseGraph(websiteData);
     let graph = courseGraph.getGraphNumericId();
 
     const width = window.innerWidth;
@@ -118,7 +129,7 @@ d3.json(`./data/website/${topic}.json`).then(f => {
                 }
             });
 
-            activeNode.value = courseData[hoveredNode.name];
+            activeNode.value = { web: websiteData[hoveredNode.name], api: apiData[hoveredNode.name] };
         })
         .on("mouseout", () => {
             link.style('stroke-width', 4);
@@ -177,7 +188,30 @@ d3.json(`./data/website/${topic}.json`).then(f => {
                 return d.y + 5;
             });
     });
-})
+}
+
+function quantizeProbabilities(probabilities: number[]): string {
+    let output = '';
+    const quarterNames = ["Winter", "Spring", "Summer", "Fall"];
+    for (let i = 0; i < probabilities.length; i++) {
+        output += quarterNames[i] + ': ';
+        const probability = probabilities[i];
+
+        if (probability > 0.9) {
+            output += "Very likely";
+        } else if (probability > 0.7) {
+            output += "Likely";
+        } else if (probability > 0.3) {
+            output += "Even chance";
+        } else if (probability > 0.1) {
+            output += "Unlikely";
+        } else {
+            output += "Very unlikely";
+        }
+        output += ' ';
+    }
+    return output;
+}
 </script>
 
 <template>
@@ -185,16 +219,27 @@ d3.json(`./data/website/${topic}.json`).then(f => {
         <div id="info-panel">
             <CourseInfoPane v-if="activeNode">
                 <template #title>
-                    {{ `${activeNode.sub_dept} ${activeNode.number} - ${activeNode.title}` }}
+                    {{ `${activeNode.web.sub_dept} ${activeNode.web.number} - ${activeNode.web.title}` }}
                 </template>
                 <template #description>
-                    {{ activeNode.description }}
+                    {{ activeNode.web.description }}
                 </template>
                 <template #prereqs>
-                    {{ activeNode.prereq_description }}
+                    {{ activeNode.web.prereq_description ?
+                       activeNode.web.prereq_description : "None" }}
                 </template>
                 <template #units>
-                    {{ activeNode.units }}
+                    {{ activeNode.web.units }}
+                </template>
+                <template #gefields>
+                    {{ activeNode.api.general_education_fields.length ?
+                       activeNode.api.general_education_fields.join(', ') : "None" }}
+                </template>
+                <template #lastoffered>
+                    {{ activeNode.api.offered[activeNode.api.offered.length - 1] }}
+                </template>
+                <template #offeringchances>
+                    {{ quantizeProbabilities(activeNode.api.offered_probabilities) }}
                 </template>
             </CourseInfoPane>
         </div>

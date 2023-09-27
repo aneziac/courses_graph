@@ -39,6 +39,33 @@
           </q-item-label>
         </q-item-section>
       </q-item>
+
+      <q-item>
+        <q-item-section>
+          <q-item-label overline>GE FIELDS</q-item-label>
+          <q-item-label>
+            <slot name="gefields"></slot>
+          </q-item-label>
+        </q-item-section>
+      </q-item>
+
+      <q-item>
+        <q-item-section>
+          <q-item-label overline>LAST OFFERED</q-item-label>
+          <q-item-label>
+            <slot name="lastoffered"></slot>
+          </q-item-label>
+        </q-item-section>
+      </q-item>
+
+      <q-item>
+        <q-item-section>
+          <q-item-label overline>OFFERING CHANCES</q-item-label>
+          <q-item-label>
+            <slot name="offeringchances"></slot>
+          </q-item-label>
+        </q-item-section>
+      </q-item>
     </q-list>
   </div>
 </template>

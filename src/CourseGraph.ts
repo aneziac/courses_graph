@@ -1,25 +1,8 @@
 import DirectedGraph from 'graphology';
 import { SerializedGraph } from 'graphology-types';
 import { colors } from './style';
+import { WebsiteCourse, WebsiteCourseJSON } from './jsontypes';
 
-
-// see ../scraper/datatypes.py Course and WebsiteCourse
-export interface Course {
-    number?: string,
-    sub_dept: string
-    title?: string,
-    dept?: string,
-    prereqs: Array<Array<string>>,
-    prereq_description: string,
-    comments?: string,
-    units?: string,
-    description?: string,
-    recommended_prep?: string,
-    professor?: string,
-    college?: string
-}
-
-export type CourseJSON = {[key: string]: Course}
 
 enum Division {
     all,
@@ -59,7 +42,7 @@ export class CourseGraph {
     private edgeColors: Array<string>;
     private optionalConcurrencyColor: string;
 
-    constructor(courses: CourseJSON) {
+    constructor(courses: WebsiteCourseJSON) {
         if (Object.keys(courses).length === 0) {
             throw new Error("Empty JSON file");
         }
@@ -91,20 +74,20 @@ export class CourseGraph {
         if (!data || typeof data !== 'object') {
             return false;
         }
-        const course = data as Course;
+        const course = data as WebsiteCourse;
 
         return typeof course.sub_dept === 'string' &&
                Array.isArray(course.prereqs) &&
                typeof course.prereq_description === 'string';
     }
 
-    private addNodes(courses: CourseJSON): void {
+    private addNodes(courses: WebsiteCourseJSON): void {
         for (const key in courses) {
             this.graph.addNode(key, { label: key, color: this.nodeColors.get("default") });
         }
     }
 
-    private addEdges(courses: CourseJSON): void {
+    private addEdges(courses: WebsiteCourseJSON): void {
         let currColor = 0;
 
         for (const key in courses) {
@@ -145,7 +128,7 @@ export class CourseGraph {
         }
     }
 
-    private colorNodes(courses: CourseJSON): void {
+    private colorNodes(courses: WebsiteCourseJSON): void {
         // root nodes are red
         this.graph.forEachNode((node) => {
             if (this.graph.outDegree(node) == 0) {
