@@ -2,19 +2,19 @@ import { CourseGraph } from '../CourseGraph';
 import exampleData from './exampleData.json';
 
 
-const courseGraph = new CourseGraph(exampleData);
+const courseGraph = new CourseGraph('greek', exampleData);
 
 test('blank data fails', () => {
     expect(() => {
-        new CourseGraph(JSON.parse('{}'));
+        new CourseGraph('greek', JSON.parse('{}'));
     }).toThrowError();
 
     expect(() => {
-        new CourseGraph(JSON.parse('{ "GREEK 1": {"sub_dept": "GREEK", "prereq_description": ""} }'));
+        new CourseGraph('greek', JSON.parse('{ "GREEK 1": {"sub_dept": "GREEK", "prereq_description": ""} }'));
     }).toThrowError();
 
     expect(() => {
-        new CourseGraph(JSON.parse('{ "GREEK 1": {"sub_dept": "GREEK", "prereq_description": "", "prereqs": []} }'));
+        new CourseGraph('greek', JSON.parse('{ "GREEK 1": {"sub_dept": "GREEK", "prereq_description": "", "prereqs": []} }'));
     }).not.toThrowError();
 });
 

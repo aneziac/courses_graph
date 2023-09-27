@@ -1,7 +1,7 @@
 import DirectedGraph from 'graphology';
 import { SerializedGraph } from 'graphology-types';
 import { colors } from './style';
-import { APICourse, APICourseJSON, WebsiteCourse, WebsiteCourseJSON } from './jsontypes';
+import { APICourseJSON, WebsiteCourse, WebsiteCourseJSON } from './jsontypes';
 
 
 enum Division {
@@ -42,7 +42,7 @@ export class CourseGraph {
     private edgeColors: Array<string>;
     private optionalConcurrencyColor: string;
 
-    constructor(dept: string, websiteCourses: WebsiteCourseJSON, apiCourses: APICourseJSON) {
+    constructor(dept: string, websiteCourses: WebsiteCourseJSON, apiCourses?: APICourseJSON) {
         if (Object.keys(websiteCourses).length === 0) {
             throw new Error("Empty JSON file");
         }
@@ -64,7 +64,9 @@ export class CourseGraph {
 
         this.addNodes(websiteCourses);
         this.addEdges(websiteCourses);
-        this.dropOldCourses(dept, apiCourses);
+        if (apiCourses) {
+            this.dropOldCourses(dept, apiCourses);
+        }
 
         this.colorNodes(websiteCourses);
         const degreeMapping = this.computeDegreeMapping();
@@ -299,7 +301,7 @@ export class CourseGraph {
 
     // drop courses that haven't been offered in the past five years
     private dropOldCourses(dept: string, apiCourses: APICourseJSON): void {
-        let offeredCourses: string[] = [];
+        const offeredCourses: string[] = [];
         for (const course in apiCourses) {
             offeredCourses.push(course);
         }
