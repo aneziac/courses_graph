@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router';
 import SearchItem from './SearchItem.vue';
 import { csv } from 'd3-fetch';
 
+
 const router = useRouter();
 
 interface SearchData {
@@ -16,6 +17,8 @@ interface SearchData {
 
 const searchTerm = ref('');
 const searchItems: Ref<Array<SearchData>> = ref([]);
+const emit = defineEmits(['focus']);
+const props = defineProps(['searchResultCount']);
 
 
 csv('./depts.csv').then(data => {
@@ -53,7 +56,7 @@ const searchResults = computed(() => {
         )
     }
     return searchItems.value;
-})
+});
 
 function toLocalPage(searchResult: SearchData) {
     if (searchResult.degree === 'Dept') {
@@ -73,21 +76,36 @@ function toLocalPage(searchResult: SearchData) {
         let degreeName = strippedText.toLowerCase().replaceAll(' ', '-');
         router.push('/' + searchResult.dept + '/' + degreeName);
     }
+
+    searchTerm.value = '';
 }
 
-onMounted(() => {
-    nextTick(() => {
-        document.getElementById('search')!.focus();
-    })
-});
+if (props.searchResultCount > 10) {
+    onMounted(() => {
+        nextTick(() => {
+            document.getElementById('search')!.focus();
+        })
+    });
+}
+
+function startfocus(): void {
+    emit("focus", true);
+}
+
+function stopfocus(): void {
+    setTimeout(() => {
+        emit("focus", false)
+    }, 150);
+}
 </script>
 
 <template>
     <span class="main-search-bar">
-        <input v-model="searchTerm" placeholder="Enter a department or degree program..." id="search">
+        <input v-model="searchTerm" placeholder="Enter a department or degree program..."
+               id="search" @focusin="startfocus()" @focusout="stopfocus()">
     </span>
     <ul>
-        <li v-for="result in searchResults">
+        <li v-for="result in searchResults.slice(0, searchResultCount)">
             <SearchItem @click="toLocalPage(result)">
                 <template #title>
                     {{ result.text }}
@@ -105,19 +123,20 @@ onMounted(() => {
 
 <style>
 .main-search-bar {
-    text-align: center;
-    height: 7vh;
-    display: block;
+    display: inline;
+    height: 100%;
 }
 
 input {
     width: 100%;
+    min-height: 40px;
+    font-size: 15px;
 }
 
 ul {
     list-style: none;
     padding-left: 0em !important;
-    overflow: auto;
-    height: 100%;
+    overflow: scroll;
+    height: 80%;
 }
 </style>

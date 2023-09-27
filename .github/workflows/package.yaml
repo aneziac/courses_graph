@@ -11,6 +11,7 @@ on:
 
 jobs:
   build:
+    name: Test scraper
     runs-on: ubuntu-latest
 
     steps:

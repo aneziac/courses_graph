@@ -1,0 +1,52 @@
+{
+    "GREEK 1": {
+        "number": "1",
+        "sub_dept": "GREEK",
+        "title": "Elementary Greek",
+        "dept": "CLASS",
+        "prereqs": [],
+        "prereq_description": ""
+    },
+    "GREEK 2": {
+        "number": "2",
+        "sub_dept": "GREEK",
+        "title": "Elementary Greek",
+        "dept": "CLASS",
+        "prereqs": [
+            [
+                "GREEK 1"
+            ]
+        ],
+        "prereq_description": "Greek 1 with a grade of C or better."
+    },
+    "GREEK 3": {
+        "number": "3",
+        "sub_dept": "GREEK",
+        "title": "Intermediate Greek",
+        "dept": "CLASS",
+        "prereqs": [
+            [
+                "GREEK 2"
+            ]
+        ],
+        "prereq_description": "Greek 2 with a grade of C or better."
+    },
+    "GREEK 69": {
+        "sub_dept": "GREEK",
+        "prereqs": [
+            [
+                "GREEK 2"
+            ],
+            [
+                "GREEK 3",
+                "CLASS 8"
+            ]
+        ],
+        "prereq_description": "Consent of instructor"
+    },
+    "GREEK 200": {
+        "sub_dept": "GREEK",
+        "prereqs": [],
+        "prereq_description": ""
+    }
+}
