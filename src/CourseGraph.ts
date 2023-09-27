@@ -4,7 +4,7 @@ import { colors } from './style';
 
 
 // see ../scraper/datatypes.py Course and WebsiteCourse
-interface Course {
+export interface Course {
     number: string,
     sub_dept: string
     title: string,

@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { CourseJSON, CourseGraph, CourseNode } from '../CourseGraph';
+import { CourseJSON, CourseGraph, CourseNode, Course } from '../CourseGraph';
 import createConstraints from '../Constraints';
 import * as d3 from 'd3';
 import * as cola from 'webcola';
 import { useRoute } from 'vue-router';
 import { colors } from '../style';
+import CourseInfoPane from '../components/CourseInfoPane.vue';
+import { ref, Ref } from 'vue';
 
 
 // webcola overwrites source and target during processing which confuses typescript
@@ -17,12 +19,14 @@ interface OverwrittenPrereqEdge {
 
 const route = useRoute();
 let topic = route.params.searchItem;
+let activeNode: Ref<Course | null> = ref(null);
 
 
 d3.json(`./data/website/${topic}.json`).then(f => {
     console.log(`Successfully loaded ${topic}`)
 
-    let courseGraph = new CourseGraph(f as CourseJSON);
+    let courseData = f as CourseJSON;
+    let courseGraph = new CourseGraph(courseData);
     let graph = courseGraph.getGraphNumericId();
 
     const width = window.innerWidth;
@@ -114,6 +118,8 @@ d3.json(`./data/website/${topic}.json`).then(f => {
                     return colors.gray;
                 }
             });
+
+            activeNode.value = courseData[hoveredNode.name];
         })
         .on("mouseout", () => {
             link.style('stroke-width', 4);
@@ -123,6 +129,8 @@ d3.json(`./data/website/${topic}.json`).then(f => {
             node.style('fill', node => {
                 return node.color;
             });
+
+            activeNode.value = null;
         });
 
     var label = svg
@@ -174,14 +182,39 @@ d3.json(`./data/website/${topic}.json`).then(f => {
 </script>
 
 <template>
-    <div id="graph">
+    <div id="dashboard">
+        <div id="info-panel">
+            <CourseInfoPane v-if="activeNode">
+                <template #title>
+                    {{ `${activeNode.sub_dept} ${activeNode.number} - ${activeNode.title}` }}
+                </template>
+                <template #description>
+                    {{ activeNode.description }}
+                </template>
+                <template #prereqs>
+                    {{ activeNode.prereq_description }}
+                </template>
+                <template #units>
+                    {{ activeNode.units }}
+                </template>
+            </CourseInfoPane>
+        </div>
+        <div id="graph">
+        </div>
     </div>
 </template>
 
 <style>
-graph {
-    /* padding-left: 20px; */
-    background: #ddd;
+#dashboard {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #ffffff;
+}
+
+#info-panel {
+    position: absolute;
+    background: #ffffff;
 }
 
 .label {
