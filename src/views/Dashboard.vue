@@ -24,7 +24,7 @@ interface CourseInfo {
 }
 
 const route = useRoute();
-let topic = route.params.searchItem;
+let topic = route.params.searchItem as string;
 let activeNode: Ref<CourseInfo | null> = ref(null);
 
 
@@ -37,7 +37,7 @@ d3.json(`./data/website/${topic}.json`).then(f => {
 function loadGraph(websiteData: WebsiteCourseJSON, apiData: APICourseJSON) {
     console.log(`Successfully loaded ${topic}`)
 
-    let courseGraph = new CourseGraph(websiteData);
+    let courseGraph = new CourseGraph(topic, websiteData, apiData);
     let graph = courseGraph.getGraphNumericId();
 
     const width = window.innerWidth;
@@ -129,7 +129,9 @@ function loadGraph(websiteData: WebsiteCourseJSON, apiData: APICourseJSON) {
                 }
             });
 
-            activeNode.value = { web: websiteData[hoveredNode.name], api: apiData[hoveredNode.name] };
+            if (hoveredNode.name.includes(topic.toUpperCase())) {
+                activeNode.value = { web: websiteData[hoveredNode.name], api: apiData[hoveredNode.name] };
+            }
         })
         .on("mouseout", () => {
             link.style('stroke-width', 4);

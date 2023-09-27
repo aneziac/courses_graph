@@ -1,7 +1,7 @@
 import DirectedGraph from 'graphology';
 import { SerializedGraph } from 'graphology-types';
 import { colors } from './style';
-import { WebsiteCourse, WebsiteCourseJSON } from './jsontypes';
+import { APICourse, APICourseJSON, WebsiteCourse, WebsiteCourseJSON } from './jsontypes';
 
 
 enum Division {
@@ -42,11 +42,11 @@ export class CourseGraph {
     private edgeColors: Array<string>;
     private optionalConcurrencyColor: string;
 
-    constructor(courses: WebsiteCourseJSON) {
-        if (Object.keys(courses).length === 0) {
+    constructor(dept: string, websiteCourses: WebsiteCourseJSON, apiCourses: APICourseJSON) {
+        if (Object.keys(websiteCourses).length === 0) {
             throw new Error("Empty JSON file");
         }
-        const firstEntry = courses[Object.keys(courses)[0]];
+        const firstEntry = websiteCourses[Object.keys(websiteCourses)[0]];
         if (!this.verifyData(firstEntry)) {
             throw new Error("Data fails minimum requirements");
         }
@@ -62,9 +62,11 @@ export class CourseGraph {
                            colors.blue, colors.pink, colors.green];
         this.optionalConcurrencyColor = colors.black;
 
-        this.addNodes(courses);
-        this.addEdges(courses);
-        this.colorNodes(courses);
+        this.addNodes(websiteCourses);
+        this.addEdges(websiteCourses);
+        this.dropOldCourses(dept, apiCourses);
+
+        this.colorNodes(websiteCourses);
         const degreeMapping = this.computeDegreeMapping();
         this.assignPositions(degreeMapping);
     }
@@ -293,6 +295,20 @@ export class CourseGraph {
                 };
             });
         });
+    }
+
+    // drop courses that haven't been offered in the past five years
+    private dropOldCourses(dept: string, apiCourses: APICourseJSON): void {
+        let offeredCourses: string[] = [];
+        for (const course in apiCourses) {
+            offeredCourses.push(course);
+        }
+
+        this.graph.forEachNode(node => {
+            if (node.includes(dept.toUpperCase()) && !offeredCourses.includes(node)) {
+                this.graph.dropNode(node);
+            }
+        })
     }
 
     getGraph(): SerializedGraph {
