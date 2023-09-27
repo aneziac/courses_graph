@@ -1,10 +1,14 @@
 <script setup lang="ts">
-import { CourseJSON, CourseGraph, CourseNode } from '../CourseGraph';
+import { CourseGraph, CourseNode } from '../CourseGraph';
+import { WebsiteCourse, WebsiteCourseJSON, APICourse, APICourseJSON } from '../jsontypes';
 import createConstraints from '../Constraints';
 import * as d3 from 'd3';
-import * as cola from 'webcola';
+import { d3adaptor } from 'webcola';
 import { useRoute } from 'vue-router';
 import { colors } from '../style';
+import CourseInfoPane from '../components/CourseInfoPane.vue';
+import { ref, Ref, watch } from 'vue';
+import SearchBar from '../components/SearchBar.vue';
 
 
 // webcola overwrites source and target during processing which confuses typescript
@@ -15,14 +19,34 @@ interface OverwrittenPrereqEdge {
     color: string
 }
 
+interface CourseInfo {
+    web: WebsiteCourse,
+    api: APICourse
+}
+
 const route = useRoute();
-let topic = route.params.searchItem;
+loadData(route.params.searchItem as string);
+let activeNode: Ref<CourseInfo | null> = ref(null);
+let searchBarFocused = ref(false);
 
 
-d3.json(`./data/website/${topic}.json`).then(f => {
-    console.log(`Successfully loaded ${topic}`)
+function loadData(dept: string): void {
+    d3.json(`./data/website/${dept}.json`).then(f => {
+        d3.json(`./data/api/${dept}.json`).then(g => {
+            loadGraph(dept, f as WebsiteCourseJSON, g as APICourseJSON);
+        });
+    });
+}
 
-    let courseGraph = new CourseGraph(f as CourseJSON);
+watch(() => route.params, (newDept, _) => {
+    d3.select("svg").remove();
+    loadData(newDept.searchItem as string);
+});
+
+function loadGraph(dept: string, websiteData: WebsiteCourseJSON, apiData: APICourseJSON): void {
+    console.log(`Successfully loaded ${dept}`)
+
+    let courseGraph = new CourseGraph(dept, websiteData, apiData);
     let graph = courseGraph.getGraphNumericId();
 
     const width = window.innerWidth;
@@ -36,8 +60,7 @@ d3.json(`./data/website/${topic}.json`).then(f => {
                 .attr('transform', e.transform);
         });
 
-    const d3Cola = cola
-        .d3adaptor(d3)
+    const d3Cola = d3adaptor(d3)
         .linkDistance(300)
         .avoidOverlaps(true)
         .size([width, height]);
@@ -114,6 +137,10 @@ d3.json(`./data/website/${topic}.json`).then(f => {
                     return colors.gray;
                 }
             });
+
+            if (hoveredNode.name.includes(dept.toUpperCase())) {
+                activeNode.value = { web: websiteData[hoveredNode.name], api: apiData[hoveredNode.name] };
+            }
         })
         .on("mouseout", () => {
             link.style('stroke-width', 4);
@@ -123,6 +150,8 @@ d3.json(`./data/website/${topic}.json`).then(f => {
             node.style('fill', node => {
                 return node.color;
             });
+
+            activeNode.value = null;
         });
 
     var label = svg
@@ -170,18 +199,100 @@ d3.json(`./data/website/${topic}.json`).then(f => {
                 return d.y + 5;
             });
     });
-})
+}
+
+function quantizeProbabilities(probabilities: number[]): string {
+    let output = '';
+    const quarterNames = ["Winter", "Spring", "Summer", "Fall"];
+    for (let i = 0; i < probabilities.length; i++) {
+        output += quarterNames[i] + ': ';
+        const probability = probabilities[i];
+
+        if (probability > 0.9) {
+            output += "Very likely";
+        } else if (probability > 0.7) {
+            output += "Likely";
+        } else if (probability > 0.3) {
+            output += "Even chance";
+        } else if (probability > 0.1) {
+            output += "Unlikely";
+        } else {
+            output += "Very unlikely";
+        }
+        output += ' ';
+    }
+    return output;
+}
 </script>
 
 <template>
-    <div id="graph">
+    <div id="dashboard">
+        <div id="search-bar" :class=" { selected: searchBarFocused } ">
+            <SearchBar @focus="(focus) => searchBarFocused = focus" :searchResultCount="searchBarFocused ? 8 : 0"/>
+        </div>
+        <div id="info-panel">
+            <CourseInfoPane v-if="activeNode">
+                <template #title>
+                    {{ `${activeNode.web.sub_dept} ${activeNode.web.number} - ${activeNode.web.title}` }}
+                </template>
+                <template #description>
+                    {{ activeNode.web.description }}
+                </template>
+                <template #prereqs>
+                    {{ activeNode.web.prereq_description ?
+                       activeNode.web.prereq_description : "None" }}
+                </template>
+                <template #units>
+                    {{ activeNode.web.units }}
+                </template>
+                <template #gefields>
+                    {{ activeNode.api.general_education_fields.length ?
+                       activeNode.api.general_education_fields.join(', ') : "None" }}
+                </template>
+                <template #lastoffered>
+                    {{ activeNode.api.offered[activeNode.api.offered.length - 1] }}
+                </template>
+                <template #offeringchances>
+                    {{ quantizeProbabilities(activeNode.api.offered_probabilities) }}
+                </template>
+            </CourseInfoPane>
+        </div>
+        <div id="graph">
+        </div>
     </div>
 </template>
 
 <style>
-graph {
-    /* padding-left: 20px; */
-    background: #ddd;
+#dashboard {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#search-bar {
+    position: absolute;
+    background: #ffffff;
+    height: 0;
+    width: 70vw;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+#search-bar.selected {
+    height: 50vh;
+}
+
+#info-panel {
+    position: absolute;
+    background: #ffffff;
+    margin-top: 10%;
+    margin-left: 10px;
 }
 
 .label {

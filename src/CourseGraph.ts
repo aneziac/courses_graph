@@ -1,25 +1,8 @@
 import DirectedGraph from 'graphology';
 import { SerializedGraph } from 'graphology-types';
 import { colors } from './style';
+import { APICourseJSON, WebsiteCourse, WebsiteCourseJSON } from './jsontypes';
 
-
-// see ../scraper/datatypes.py Course and WebsiteCourse
-interface Course {
-    number: string,
-    sub_dept: string
-    title: string,
-    dept: string,
-    prereqs: Array<Array<string>>,
-    prereq_description: string,
-    comments: string,
-    units: string,
-    description: string,
-    recommended_prep: string,
-    professor: string,
-    college: string
-}
-
-export type CourseJSON = {[key: string]: Course}
 
 enum Division {
     all,
@@ -59,11 +42,11 @@ export class CourseGraph {
     private edgeColors: Array<string>;
     private optionalConcurrencyColor: string;
 
-    constructor(courses: CourseJSON) {
-        if (Object.keys(courses).length === 0) {
+    constructor(dept: string, websiteCourses: WebsiteCourseJSON, apiCourses?: APICourseJSON) {
+        if (Object.keys(websiteCourses).length === 0) {
             throw new Error("Empty JSON file");
         }
-        const firstEntry = courses[Object.keys(courses)[0]];
+        const firstEntry = websiteCourses[Object.keys(websiteCourses)[0]];
         if (!this.verifyData(firstEntry)) {
             throw new Error("Data fails minimum requirements");
         }
@@ -79,9 +62,13 @@ export class CourseGraph {
                            colors.blue, colors.pink, colors.green];
         this.optionalConcurrencyColor = colors.black;
 
-        this.addNodes(courses);
-        this.addEdges(courses);
-        this.colorNodes(courses);
+        this.addNodes(websiteCourses);
+        this.addEdges(websiteCourses);
+        if (apiCourses) {
+            this.dropOldCourses(dept, apiCourses);
+        }
+
+        this.colorNodes(websiteCourses);
         const degreeMapping = this.computeDegreeMapping();
         this.assignPositions(degreeMapping);
     }
@@ -91,20 +78,20 @@ export class CourseGraph {
         if (!data || typeof data !== 'object') {
             return false;
         }
-        const course = data as Course;
+        const course = data as WebsiteCourse;
 
         return typeof course.sub_dept === 'string' &&
                Array.isArray(course.prereqs) &&
                typeof course.prereq_description === 'string';
     }
 
-    private addNodes(courses: CourseJSON): void {
+    private addNodes(courses: WebsiteCourseJSON): void {
         for (const key in courses) {
             this.graph.addNode(key, { label: key, color: this.nodeColors.get("default") });
         }
     }
 
-    private addEdges(courses: CourseJSON): void {
+    private addEdges(courses: WebsiteCourseJSON): void {
         let currColor = 0;
 
         for (const key in courses) {
@@ -145,7 +132,7 @@ export class CourseGraph {
         }
     }
 
-    private colorNodes(courses: CourseJSON): void {
+    private colorNodes(courses: WebsiteCourseJSON): void {
         // root nodes are red
         this.graph.forEachNode((node) => {
             if (this.graph.outDegree(node) == 0) {
@@ -310,6 +297,20 @@ export class CourseGraph {
                 };
             });
         });
+    }
+
+    // drop courses that haven't been offered in the past five years
+    private dropOldCourses(dept: string, apiCourses: APICourseJSON): void {
+        const offeredCourses: string[] = [];
+        for (const course in apiCourses) {
+            offeredCourses.push(course);
+        }
+
+        this.graph.forEachNode(node => {
+            if (node.includes(dept.toUpperCase()) && !offeredCourses.includes(node)) {
+                this.graph.dropNode(node);
+            }
+        })
     }
 
     getGraph(): SerializedGraph {

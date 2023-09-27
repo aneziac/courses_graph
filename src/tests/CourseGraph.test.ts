@@ -1,27 +1,20 @@
-import { CourseGraph } from './CourseGraph';
+import { CourseGraph } from '../CourseGraph';
+import exampleData from './exampleData.json';
 
 
-const exampleData = `{
-    "GREEK 1": {"number": "1", "sub_dept": "GREEK", "title": "Elementary Greek", "dept": "CLASS", "prereqs": [], "prereq_description": ""},
-    "GREEK 2": {"number": "2", "sub_dept": "GREEK", "title": "Elementary Greek", "dept": "CLASS", "prereqs": [["GREEK 1"]], "prereq_description": "Greek 1 with a grade of C or better."},
-    "GREEK 3": {"number": "3", "sub_dept": "GREEK", "title": "Intermediate Greek", "dept": "CLASS", "prereqs": [["GREEK 2"]], "prereq_description": "Greek 2 with a grade of C or better."},
-    "GREEK 69": {"sub_dept": "GREEK", "prereqs": [["GREEK 2"], ["GREEK 3", "CLASS 8"]], "prereq_description": "Consent of instructor"},
-    "GREEK 200": {"sub_dept": "GREEK", "prereqs": [], "prereq_description": ""}
-}`
-
-const courseGraph = new CourseGraph(JSON.parse(exampleData));
+const courseGraph = new CourseGraph('greek', exampleData);
 
 test('blank data fails', () => {
     expect(() => {
-        new CourseGraph(JSON.parse('{}'));
+        new CourseGraph('greek', JSON.parse('{}'));
     }).toThrowError();
 
     expect(() => {
-        new CourseGraph(JSON.parse('{ "GREEK 1": {"sub_dept": "GREEK", "prereq_description": ""} }'));
+        new CourseGraph('greek', JSON.parse('{ "GREEK 1": {"sub_dept": "GREEK", "prereq_description": ""} }'));
     }).toThrowError();
 
     expect(() => {
-        new CourseGraph(JSON.parse('{ "GREEK 1": {"sub_dept": "GREEK", "prereq_description": "", "prereqs": []} }'));
+        new CourseGraph('greek', JSON.parse('{ "GREEK 1": {"sub_dept": "GREEK", "prereq_description": "", "prereqs": []} }'));
     }).not.toThrowError();
 });
 

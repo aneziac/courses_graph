@@ -3,25 +3,27 @@ import SearchBar from '../components/SearchBar.vue'
 </script>
 
 <template>
-    <h1>ucsbcourses.com</h1>
-    <div class="search-interface">
-        <SearchBar/>
+    <div id="main">
+        <h3>ucsbcourses.com</h3>
+        <div id="search-interface">
+            <SearchBar :searchResultCount="999"/>
+        </div>
     </div>
 </template>
 
 <style>
-h1 {
-    color:brown;
+h3 {
+    margin-top: 0px;
+    color: brown;
     font-family: Courier New;
     padding-left: 20px;
     padding-top: 20px;
     text-align: center;
 }
 
-.search-interface {
-    padding-top: 10vh;
+#search-interface {
     width: 70vw;
-    height: 70vh;
+    height: 75vh;
     margin: 0 auto;
     font-size: 25px;
 }
