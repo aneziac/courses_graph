@@ -21,7 +21,7 @@ const emit = defineEmits(['focus']);
 const props = defineProps(['searchResultCount']);
 
 
-csv('./depts.csv').then(data => {
+csv('/depts.csv').then(data => {
     data.forEach(d => {
         searchItems.value.push({
             degree: 'Dept',
@@ -32,7 +32,7 @@ csv('./depts.csv').then(data => {
     })
 });
 
-csv('./majors.csv').then(data => {
+csv('/majors.csv').then(data => {
     data.forEach(d => {
         if (!d[' degree type']!) {
             return;
@@ -105,7 +105,7 @@ function stopfocus(): void {
                id="search" @focusin="startfocus()" @focusout="stopfocus()">
     </span>
     <ul>
-        <li v-for="result in searchResults.slice(0, searchResultCount)">
+        <li v-for="result in searchResults">
             <SearchItem @click="toLocalPage(result)">
                 <template #title>
                     {{ result.text }}

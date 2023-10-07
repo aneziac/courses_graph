@@ -25,15 +25,25 @@ interface CourseInfo {
 }
 
 const route = useRoute();
-loadData(route.params.searchItem as string);
+
+if (Object.keys(route.params).length === 1) {
+    loadData(route.params.searchItem as string);
+} else {
+    loadData(route.params.searchItem as string, route.params.major as string)
+}
+
 let activeNode: Ref<CourseInfo | null> = ref(null);
 let searchBarFocused = ref(false);
 
 
-function loadData(dept: string): void {
-    d3.json(`./data/website/${dept}.json`).then(f => {
-        d3.json(`./data/api/${dept}.json`).then(g => {
-            loadGraph(dept, f as WebsiteCourseJSON, g as APICourseJSON);
+function loadData(dept: string, major?: string): void {
+    d3.json(`/data/website/${dept}.json`).then(f => {
+        d3.json(`/data/api/${dept}.json`).then(g => {
+            if (major) {
+                loadGraph(dept, f as WebsiteCourseJSON, g as APICourseJSON, major)
+            } else {
+                loadGraph(dept, f as WebsiteCourseJSON, g as APICourseJSON);
+            }
         });
     });
 }
@@ -43,7 +53,7 @@ watch(() => route.params, (newDept, _) => {
     loadData(newDept.searchItem as string);
 });
 
-function loadGraph(dept: string, websiteData: WebsiteCourseJSON, apiData: APICourseJSON): void {
+function loadGraph(dept: string, websiteData: WebsiteCourseJSON, apiData: APICourseJSON, major?: string): void {
     console.log(`Successfully loaded ${dept}`)
 
     let courseGraph = new CourseGraph(dept, websiteData, apiData);
