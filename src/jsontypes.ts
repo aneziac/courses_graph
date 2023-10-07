@@ -8,7 +8,7 @@ interface Course {
 export interface WebsiteCourse extends Course {
     title?: string,
     dept?: string,
-    prereqs: Array<Array<string>>,
+    prereqs: string[][],
     prereq_description: string,
     comments?: string,
     units?: string,
@@ -25,12 +25,11 @@ export interface APICourse extends Course {
 }
 
 export interface Major {
-    dept: string,
-    url_abbrev: string,
     name: string,
     degree: string,
-    sub_dept: string
+    requirements: string[][]
 }
 
 export type WebsiteCourseJSON = {[key: string]: WebsiteCourse}
 export type APICourseJSON = {[key: string]: APICourse}
+export type MajorJSON = {[key: string]: Major}

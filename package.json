@@ -15,7 +15,6 @@
         "@types/d3": "^7.4.0",
         "@types/jest": "^29.5.4",
         "@types/node": "^20.7.0",
-        "@types/vue": "^2.0.0",
         "@typescript-eslint/eslint-plugin": "^6.7.2",
         "@typescript-eslint/parser": "^6.7.2",
         "@vitejs/plugin-vue": "^2.2.0",
@@ -33,7 +32,6 @@
         "vite": "^2.8.0",
         "vue": "^3.2.30",
         "vue-router": "^4.2.4",
-        "vue-tsc": "^0.31.2",
         "webcola": "^3.4.0"
     }
 }
