@@ -42,7 +42,7 @@ export class CourseGraph {
     private edgeColors: Array<string>;
     private optionalConcurrencyColor: string;
 
-    constructor(dept: string, websiteCourses: WebsiteCourseJSON, apiCourses?: APICourseJSON) {
+    constructor(dept: string, websiteCourses: WebsiteCourseJSON, apiCourses?: APICourseJSON, majorReqs?: string[][]) {
         if (Object.keys(websiteCourses).length === 0) {
             throw new Error("Empty JSON file");
         }
@@ -66,6 +66,9 @@ export class CourseGraph {
         this.addEdges(websiteCourses);
         if (apiCourses) {
             this.dropOldCourses(dept, apiCourses);
+        }
+        if (majorReqs) {
+            this.dropNonMajorCourses(majorReqs)
         }
 
         this.colorNodes(websiteCourses);
@@ -311,6 +314,34 @@ export class CourseGraph {
                 this.graph.dropNode(node);
             }
         })
+    }
+
+    private dropNonMajorCourses(requirements: string[][]): void {
+        const toDrop = this.graph.nodes();
+
+        requirements.forEach(group => {
+            group.forEach(course => {
+                // temp code to fix bug where major sheets have a 3rd inner loop
+
+                if (Array.isArray(course)) {
+                    course.forEach(c => {
+                        if (toDrop.includes(c)) {
+                            toDrop.splice(toDrop.indexOf(c), 1);
+                        }
+                    });
+                } else {
+                    if (toDrop.includes(course)) {
+                        toDrop.splice(toDrop.indexOf(course), 1);
+                    }
+                }
+            });
+        });
+
+        this.graph.forEachNode(node => {
+            if (toDrop.includes(node)) {
+                this.graph.dropNode(node);
+            }
+        });
     }
 
     getGraph(): SerializedGraph {

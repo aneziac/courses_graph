@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { CourseGraph, CourseNode } from '../CourseGraph';
-import { WebsiteCourse, WebsiteCourseJSON, APICourse, APICourseJSON } from '../jsontypes';
+import { WebsiteCourse, WebsiteCourseJSON, APICourse, APICourseJSON, Major, MajorJSON } from '../jsontypes';
 import createConstraints from '../Constraints';
 import * as d3 from 'd3';
 import { d3adaptor } from 'webcola';
-import { useRoute } from 'vue-router';
+import { RouteParams, useRoute } from 'vue-router';
 import { colors } from '../style';
 import CourseInfoPane from '../components/CourseInfoPane.vue';
 import { ref, Ref, watch } from 'vue';
@@ -25,28 +25,56 @@ interface CourseInfo {
 }
 
 const route = useRoute();
-loadData(route.params.searchItem as string);
+loadData(route.params)
 let activeNode: Ref<CourseInfo | null> = ref(null);
 let searchBarFocused = ref(false);
 
 
-function loadData(dept: string): void {
-    d3.json(`./data/website/${dept}.json`).then(f => {
-        d3.json(`./data/api/${dept}.json`).then(g => {
-            loadGraph(dept, f as WebsiteCourseJSON, g as APICourseJSON);
+function loadData(url: RouteParams): void {
+    let major: string | undefined = undefined;
+    if (Object.keys(url).length === 2) {
+        major = url.major as string;
+    }
+    const dept = url.dept as string;
+
+    d3.json(`/data/website/${dept}.json`).then(f => {
+        d3.json(`/data/api/${dept}.json`).then(g => {
+            if (major) {
+                d3.json(`/data/majors/${dept}.json`).then(h => {
+                    const majorCourses = getMajorCourses(h as MajorJSON, major!);
+                    loadGraph(dept, f as WebsiteCourseJSON, g as APICourseJSON, majorCourses);
+                });
+            } else {
+                loadGraph(dept, f as WebsiteCourseJSON, g as APICourseJSON);
+            }
         });
     });
 }
 
+function getMajorCourses(majorData: MajorJSON, major: string): Major | undefined {
+    for (let key in majorData) {
+        if (major === key.toLowerCase().replaceAll(' ', '-')) {
+            return majorData[key];
+        }
+    }
+
+    return undefined;
+}
+
 watch(() => route.params, (newDept, _) => {
     d3.select("svg").remove();
-    loadData(newDept.searchItem as string);
+    loadData(newDept);
 });
 
-function loadGraph(dept: string, websiteData: WebsiteCourseJSON, apiData: APICourseJSON): void {
-    console.log(`Successfully loaded ${dept}`)
+function loadGraph(dept: string, websiteData: WebsiteCourseJSON, apiData: APICourseJSON, major?: Major): void {
+    console.log(`Successfully loaded ${dept}`);
 
-    let courseGraph = new CourseGraph(dept, websiteData, apiData);
+    let courseGraph: CourseGraph;
+    if (major) {
+        courseGraph = new CourseGraph(dept, websiteData, apiData, major.requirements);
+    } else {
+        courseGraph = new CourseGraph(dept, websiteData, apiData);
+    }
     let graph = courseGraph.getGraphNumericId();
 
     const width = window.innerWidth;
