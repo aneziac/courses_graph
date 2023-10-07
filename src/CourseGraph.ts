@@ -317,7 +317,7 @@ export class CourseGraph {
     }
 
     private dropNonMajorCourses(requirements: string[][]): void {
-        let toDrop = this.graph.nodes();
+        const toDrop = this.graph.nodes();
 
         requirements.forEach(group => {
             group.forEach(course => {
