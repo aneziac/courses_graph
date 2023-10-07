@@ -1,3 +1,3 @@
-{"Asian American Studies Major": {"name": "Asian American Studies", "degree": "BA", "requirements": [[], [], [["RG ST 71", "RG ST 79"]], [], [], [], [], [], [], [["WRIT 109HU", "WRIT 109"]], [], [["AS AM 109HU", "AS AM 109SS"]], [], [], [], [], []]},
+{"Asian American Studies BA": {"name": "Asian American Studies", "degree": "BA", "requirements": [[], [], [["RG ST 71", "RG ST 79"]], [], [], [], [], [], [], [["WRIT 109HU", "WRIT 109"]], [], [["AS AM 109HU", "AS AM 109SS"]], [], [], [], [], []]},
 "Asian American Studies Minor": {"name": "Asian American Studies", "degree": "Minor", "requirements": [[["RG ST 71", "RG ST 79"]], [], [], []]
 }}

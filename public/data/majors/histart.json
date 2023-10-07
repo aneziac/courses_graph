@@ -1,8 +1,8 @@
-{"History of Art and Architecture Major": {"name": "History of Art and Architecture", "degree": "BA", "requirements": [[["ART 6A"], ["ART 6"]], [["ART 6"]], [], [["ART 186"]]]},
-"History of Art and Architecture Major, Architecture-Environment Emphasis": {"name": "Environmental Architectural History", "degree": "BA", "requirements": [[["ART 5A"], ["ART 6F", "ART 6J"]], [["ART 1A", "ENV S 1"], ["ENV S 3", "GEOG 5", "SOC 1"]], [], [["RG ST 131H"], ["RG ST 193", "SOC 118C"], ["SOC 126"], ["SOC 185C"]]]},
-"History of Art and Architecture Major, Museum Studies Emphasis": {"name": "Museum Studies", "degree": "BA", "requirements": [[["ART 5B"]], [["ART 5A"], ["ART 6A"], ["ART 6R"]], [["ART 192A"], ["ART 192B"], ["ART 192D"], ["ART 192E", "ART 192ES", "ANTH 178"]], [["RG ST 116C"], ["RG ST 158A"], ["RG ST 179", "SOC 118C"], ["SOC 118GC"]], [], []]},
-"Achitecture-Urban History Minor": {"name": "Architecture and Urban History", "degree": "Minor", "requirements": [[["ART 5A"], ["ART 6F"], ["ART 6J"]], [["ART 5A"], ["ART 6A"], ["ART 6R"]], []]},
-"Game-Studies-Minor": {"name": "Game Studies", "degree": "Minor", "requirements": [[], [], []]},
+{"History of Art and Architecture BA": {"name": "History of Art and Architecture", "degree": "BA", "requirements": [[["ART 6A"], ["ART 6"]], [["ART 6"]], [], [["ART 186"]]]},
+"Environmental Architectural History BA": {"name": "Environmental Architectural History", "degree": "BA", "requirements": [[["ART 5A"], ["ART 6F", "ART 6J"]], [["ART 1A", "ENV S 1"], ["ENV S 3", "GEOG 5", "SOC 1"]], [], [["RG ST 131H"], ["RG ST 193", "SOC 118C"], ["SOC 126"], ["SOC 185C"]]]},
+"Museum Studies BA": {"name": "Museum Studies", "degree": "BA", "requirements": [[["ART 5B"]], [["ART 5A"], ["ART 6A"], ["ART 6R"]], [["ART 192A"], ["ART 192B"], ["ART 192D"], ["ART 192E", "ART 192ES", "ANTH 178"]], [["RG ST 116C"], ["RG ST 158A"], ["RG ST 179", "SOC 118C"], ["SOC 118GC"]], [], []]},
+"Architecture and Urban History Minor": {"name": "Architecture and Urban History", "degree": "Minor", "requirements": [[["ART 5A"], ["ART 6F"], ["ART 6J"]], [["ART 5A"], ["ART 6A"], ["ART 6R"]], []]},
+"Game Studies Minor": {"name": "Game Studies", "degree": "Minor", "requirements": [[], [], []]},
 "History of Art and Architecture Minor": {"name": "History of Art and Architecture", "degree": "Minor", "requirements": [[["ART 6DL"]], [], []]},
 "Museum Studies Minor": {"name": "Museum Studies", "degree": "Minor", "requirements": [[["ART 5B"]], [["ART 5A"], ["ART 6A"], ["ART 6R"]], [["ART 192A"], ["ART 192B"], ["ART 192D"], ["ART 192E", "ART 192ES", "ANTH 178"]], [["EACS 130"], ["EACS 179"], ["EACS 180", "HIST 192"], ["HIST 192R", "PHIL 137", "RG ST 116C"], ["RG ST 158A"], ["RG ST 179"]]]
 }}

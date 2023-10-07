@@ -1,4 +1,4 @@
-{"Feminist Studies Major": {"name": "Feminist Studies", "degree": "BA", "requirements": [[["FEMST 20"]], [["FEMST 60"], ["FEMST 80"]], [["FEMST 30", "FEMST 40", "FEMST 50"]], [["FEMST 180"], ["FEMST 181"], ["FEMST 182", "FEMST 183"]], [], []]},
+{"Feminist Studies BA": {"name": "Feminist Studies", "degree": "BA", "requirements": [[["FEMST 20"]], [["FEMST 60"], ["FEMST 80"]], [["FEMST 30", "FEMST 40", "FEMST 50"]], [["FEMST 180"], ["FEMST 181"], ["FEMST 182", "FEMST 183"]], [], []]},
 "Feminist Studies Minor": {"name": "Feminist Studies", "degree": "Minor", "requirements": [[], [["FEMST 60"], ["FEMST 80"]], [["FEMST 30", "FEMST 40", "FEMST 50"]], [["FEMST 180"], ["FEMST 181"]], [], []]},
-"LGBTQ-Minor": {"name": "LGBTQ Studies", "degree": "Minor", "requirements": [[["FEMST 80"]], [["FEMST 162"]], [], []]
+"LGBTQ Studies Minor": {"name": "LGBTQ Studies", "degree": "Minor", "requirements": [[["FEMST 80"]], [["FEMST 162"]], [], []]
 }}

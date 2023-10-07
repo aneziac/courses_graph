@@ -1,6 +1,6 @@
-{"History Major": {"name": "History", "degree": "BA", "requirements": [[["HIST 2A", "HIST 4A", "HIST 2B", "HIST 2C", "HIST 4A", "HIST 2A", "HIST 4B", "HIST 4C", "HIST 17A", "HIST 17B", "HIST 17"]], [["HIST 9"]], [], [], []]},
-"History of Public Policy-Law Major": {"name": "History of Policy and Law", "degree": "BA", "requirements": [[["HIST 5", "HIST 7"]], [["HIST 9"]], [["HIST 2A", "HIST 4A", "HIST 2B", "HIST 2C", "HIST 4A", "HIST 2A", "HIST 4B", "HIST 4C", "HIST 17A", "HIST 17B", "HIST 17C"]], [], [], [], [], [], [], [["HIST 195IA", "HIST 8"]], [], [], [], [], []]},
+{"History BA": {"name": "History", "degree": "BA", "requirements": [[["HIST 2A", "HIST 4A", "HIST 2B", "HIST 2C", "HIST 4A", "HIST 2A", "HIST 4B", "HIST 4C", "HIST 17A", "HIST 17B", "HIST 17"]], [["HIST 9"]], [], [], []]},
+"History of Policy and Law BA": {"name": "History of Policy and Law", "degree": "BA", "requirements": [[["HIST 5", "HIST 7"]], [["HIST 9"]], [["HIST 2A", "HIST 4A", "HIST 2B", "HIST 2C", "HIST 4A", "HIST 2A", "HIST 4B", "HIST 4C", "HIST 17A", "HIST 17B", "HIST 17C"]], [], [], [], [], [], [], [["HIST 195IA", "HIST 8"]], [], [], [], [], []]},
 "History Minor": {"name": "History", "degree": "Minor", "requirements": [[], []]},
 "Labor Studies Minor": {"name": "Labor Studies", "degree": "Minor", "requirements": [[["HIST 2C"], ["HIST 4C"], ["HIST 17C"]], [["FEMST 20"], ["FEMST 40", "GLOBL 1", "SOC 1"]], [["HIST 167CA", "HIST 167CB", "HIST 174B", "HIST 174C"]], [["HIST 167Q"]], []]},
-"Poverty, Inequality, and Social Justice Minor": {"name": "Social Justice", "degree": "Minor", "requirements": [[["HIST 74"]], [["HIST 1", "HIST 96SJ", "GLOBL 196SJ"]], [], [["HIST 174Q"]]]
+"Social Justice Minor": {"name": "Social Justice", "degree": "Minor", "requirements": [[["HIST 74"]], [["HIST 1", "HIST 96SJ", "GLOBL 196SJ"]], [], [["HIST 174Q"]]]
 }}

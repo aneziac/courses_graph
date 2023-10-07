@@ -1,6 +1,6 @@
-{"Middle East Studies Major": {"name": "Middle East Studies", "degree": "BA", "requirements": [[["MES 45"]], [["HIST 46A", "RG ST 2"], ["RG ST 81"], ["RG ST 82", "ART 6K", "ART 32"]], [], []]},
-"Religious Studies Major": {"name": "Religious Studies", "degree": "BA", "requirements": [[], [], [], [], [], []]},
-"American Indian- Indigenous Studies Minor": {"name": "American Indian Studies", "degree": "Minor", "requirements": [[], [["ENGL 34NA", "ENGL 134NA"]]]},
+{"Middle East Studies BA": {"name": "Middle East Studies", "degree": "BA", "requirements": [[["MES 45"]], [["HIST 46A", "RG ST 2"], ["RG ST 81"], ["RG ST 82", "ART 6K", "ART 32"]], [], []]},
+"Religious Studies BA": {"name": "Religious Studies", "degree": "BA", "requirements": [[], [], [], [], [], []]},
+"American Indian Studies Minor": {"name": "American Indian Studies", "degree": "Minor", "requirements": [[], [["ENGL 34NA", "ENGL 134NA"]]]},
 "Iranian Studies Minor": {"name": "Iranian Studies", "degree": "Minor", "requirements": [[], [["HIST 46A"]], [], [], [], [], [["HIST 46"]], [], []]},
 "Jewish Studies Minor": {"name": "Jewish Studies", "degree": "Minor", "requirements": [[["RG ST 17A", "HEB 1", "HEB 2", "HEB 3"]], [["HEB 115A"], ["HEB 132B", "ENGL 116A"]], [], [], []]},
 "Religious Studies Minor": {"name": "Religious Studies", "degree": "Minor", "requirements": [[], [], [], [], []]

@@ -1,3 +1,3 @@
-{"Pre-Global StudiesMajor": {"name": "Pre-Global Studies", "degree": "Pre", "requirements": [[["GLOBL 1"], ["GLOBL 2"]], [], [["FEMST 20"], ["FEMST 30", "GEOG 5", "POL S 6"], ["POL S 7", "RG ST 1", "SOC 1"]], [], []]},
-"Global Studies Major": {"name": "Global Studies", "degree": "BA", "requirements": [[["GLOBL 1"], ["GLOBL 2"]], [], [["GEOG 5", "POL S 6"], ["POL S 7", "RG ST 1", "SOC 1"]], [], [], [["GLOBL 110"], ["GLOBL 120"], ["GLOBL 130"], ["GLOBL 140"]], [], [], [], [], [], [], []]
+{"Pre-Global Studies": {"name": "Pre-Global Studies", "degree": "Pre", "requirements": [[["GLOBL 1"], ["GLOBL 2"]], [], [["FEMST 20"], ["FEMST 30", "GEOG 5", "POL S 6"], ["POL S 7", "RG ST 1", "SOC 1"]], [], []]},
+"Global Studies BA": {"name": "Global Studies", "degree": "BA", "requirements": [[["GLOBL 1"], ["GLOBL 2"]], [], [["GEOG 5", "POL S 6"], ["POL S 7", "RG ST 1", "SOC 1"]], [], [], [["GLOBL 110"], ["GLOBL 120"], ["GLOBL 130"], ["GLOBL 140"]], [], [], [], [], [], [], []]
 }}

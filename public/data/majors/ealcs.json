@@ -1,8 +1,8 @@
-{"Asian-Studies-BA": {"name": "Asian Studies", "degree": "BA", "requirements": [[], [], [], [], [], []]},
-"Chinese Major": {"name": "Chinese", "degree": "BA", "requirements": [[["CHIN 1", "CHIN 2", "CHIN 3", "CHIN 4", "CHIN 5", "CHIN 6", "CHIN 1NH", "CHIN 2NH", "CHIN 3NH", "CHIN 4NH", "CHIN 5NH"]], [], [], [], []]},
-"Chinese Major, High Proficiency Track": {"name": "High Proficiency Chinese", "degree": "BA", "requirements": [[], [], [], [], [], []]},
-"Japanese Major": {"name": "Japanese", "degree": "BA", "requirements": [[["JAPAN 1"], ["JAPAN 2"], ["JAPAN 3"], ["JAPAN 4"], ["JAPAN 5"], ["JAPAN 6"]], [], [], [], []]},
-"Japanese Major, High Proficiency Track": {"name": "High Proficiency Japanese", "degree": "BA", "requirements": [[], [["JAPAN 144"], ["JAPAN 145"], ["JAPAN 146"]], [["JAPAN 181"], ["JAPAN 183"]], []]},
+{"Asian Studies BA": {"name": "Asian Studies", "degree": "BA", "requirements": [[], [], [], [], [], []]},
+"Chinese BA": {"name": "Chinese", "degree": "BA", "requirements": [[["CHIN 1", "CHIN 2", "CHIN 3", "CHIN 4", "CHIN 5", "CHIN 6", "CHIN 1NH", "CHIN 2NH", "CHIN 3NH", "CHIN 4NH", "CHIN 5NH"]], [], [], [], []]},
+"High Proficiency Chinese BA": {"name": "High Proficiency Chinese", "degree": "BA", "requirements": [[], [], [], [], [], []]},
+"Japanese BA": {"name": "Japanese", "degree": "BA", "requirements": [[["JAPAN 1"], ["JAPAN 2"], ["JAPAN 3"], ["JAPAN 4"], ["JAPAN 5"], ["JAPAN 6"]], [], [], [], []]},
+"High Proficiency Japanese BA": {"name": "High Proficiency Japanese", "degree": "BA", "requirements": [[], [["JAPAN 144"], ["JAPAN 145"], ["JAPAN 146"]], [["JAPAN 181"], ["JAPAN 183"]], []]},
 "Chinese Minor": {"name": "Chinese", "degree": "Minor", "requirements": [[], [], [["CHIN 101A", "CHIN 122A"]], [], [], [["CHIN 101A"], ["CHIN 101B"]]]},
 "Japanese Minor": {"name": "Japanese", "degree": "Minor", "requirements": [[], [], [["JAPAN 120A"]], [], [], [["JAPAN 181"], ["JAPAN 183"]], []]
 }}
