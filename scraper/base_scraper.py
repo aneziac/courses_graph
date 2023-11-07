@@ -32,10 +32,10 @@ class Scraper:
 
         if self.overwrite and 'c' in argv[1]:
             try:
-                shutil.rmtree(f'data/{self.extra_path}')
+                shutil.rmtree(f'public/data/{self.extra_path}')
             except FileNotFoundError:
                 pass
-            os.mkdir(f'data/{self.extra_path}')
+            os.mkdir(f'public/data/{self.extra_path}')
 
         self._EXSTING_JSONS = get_existing_jsons(extra_path)
 

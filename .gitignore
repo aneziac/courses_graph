@@ -1,5 +1,5 @@
 scraper/raw.txt
-data/
+public/data
 venv/*
 scraper/__pycache__/*
 .pytest_cache/*
@@ -12,3 +12,5 @@ scraper/*.env
 scraper/major_courses.json
 node_modules
 dist
+.coverage
+__pycache__/

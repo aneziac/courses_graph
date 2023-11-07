@@ -14,12 +14,12 @@ def read_csv(filename) -> list[list[str]]:
             line = [x.strip() for x in line]
             result.append(line)
 
-    return result
+    return result[1:]
 
 
 def build_depts_list(sort=False) -> list[Department]:
     depts = []
-    for line in read_csv('scraper/depts.csv'):
+    for line in read_csv('public/depts.csv'):
         depts.append(
                 Department(
                     abbreviation=line[0],
@@ -34,7 +34,7 @@ def build_depts_list(sort=False) -> list[Department]:
     # sort departments when new ones are added (no longer needed)
     # but may come in handy at some point
     if sort:
-        with open('scraper/sorted_depts.csv', 'w+') as g:
+        with open('public/sorted_depts.csv', 'w+') as g:
             for line in sorted(depts, key=lambda x: x.abbreviation):
                 vals = asdict(line).values()
                 g.write(', '.join(vals) + '\n')
@@ -45,13 +45,14 @@ def build_depts_list(sort=False) -> list[Department]:
 def build_majors_list() -> list[Major]:
     majors = []
 
-    for line in read_csv('scraper/majors.csv'):
+    for line in read_csv('public/majors.csv'):
         majors.append(
             Major(
                 dept=line[0],
                 url_abbrev=line[1],
                 name=line[2],
-                degree=line[3]
+                degree=line[3],
+                sub_dept=line[4]
             )
         )
 
@@ -82,13 +83,13 @@ def offering_stats():
     total_offerings, total_offered = 0, 0
     for dept in get_existing_jsons('website'):
         offerings = []
-        with open(f'data/website/{dept}.json', 'r') as f:
+        with open(f'public/data/website/{dept}.json', 'r') as f:
             for line in f.readlines():
                 offerings.append(line.split(':')[0])
 
             total_offerings += len(offerings)
 
-        with open(f'data/api/{dept}.json', 'r') as f:
+        with open(f'public/data/api/{dept}.json', 'r') as f:
             offered = 0
             for line in f.readlines():
                 if line.split(':')[0] in offerings:

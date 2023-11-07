@@ -53,7 +53,7 @@ def get_prereqs(prereq_description: str, course_name: str = '') -> list[list[str
             if not current_dept:
                 continue
 
-            if '-' in term and not 'AA-ZZ' in term:
+            if '-' in term and 'AA-ZZ' not in term:
                 end_of_number_i = term.index('-') - 1
                 first_req_letter = ord(term[end_of_number_i])
                 last_req_letter = ord(term[-1])
@@ -67,7 +67,7 @@ def get_prereqs(prereq_description: str, course_name: str = '') -> list[list[str
             elif (name := f'{current_dept} {term}') != course_name:
                 or_together.append(name + suffix)
 
-        if (',' in term and ', or' not in term) or 'and' in term and not '-' in term:
+        if (',' in term and ', or' not in term) or 'and' in term and '-' not in term:
             if or_together:
                 and_together.append(or_together.copy())
             or_together.clear()

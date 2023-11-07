@@ -19,7 +19,9 @@ class MajorScraper(Scraper):
         # COE
         if major.dept == 'ENGR':
             response = self.fetch(
-                f'https://my.sa.ucsb.edu/catalog/Current/Documents/2022_Majors/ENGR/22-23 {major.url_abbrev} Curriculum Sheet.pdf',
+                'https://my.sa.ucsb.edu/catalog/Current/Documents/2022_Majors/ENGR/22-23 '
+                f'{major.url_abbrev} Curriculum Sheet.pdf',
+
                 f'[F] Could not find major requirements sheet for {major.name}'
             )
 
@@ -37,7 +39,7 @@ class MajorScraper(Scraper):
 
         reader = PdfReader(BytesIO(response.content))
         text = reader.pages[0].extract_text()
-        r_requirements = re.compile('(.*?)\s*\.{2,}')
+        r_requirements = re.compile(r'(.*?)\s*\.{2,}')
 
         without_footer = text.split('MAJOR REGULATIONS')[0]
         requirements = re.findall(r_requirements, without_footer)
@@ -73,15 +75,21 @@ class MajorScraper(Scraper):
 
     def write_json(self, majors: list[Major]):
         department = majors[0].dept.lower()
-        filename = f'data/{self.extra_path}/{department}.json'
-        if department in self._EXSTING_JSONS:
+        filename = f'public/data/{self.extra_path}/{department}.json'
+        if department in self._EXSTING_JSONS and not self.overwrite:
             return
 
         with open(filename, 'w+') as f:
             f.write('{')
 
             for i, major in enumerate(majors):
-                f.write(f'"{major.url_abbrev}": {{')
+                stripped_name = major.name.replace(' BS', '').replace(' BA', '')
+
+                if major.degree == 'Pre':
+                    f.write(f'"{stripped_name}": {{')
+                else:
+                    f.write(f'"{stripped_name} {major.degree}": {{')
+
                 f.write(f'"name": "{major.name}", "degree": "{major.degree}", "requirements": ')
                 f.write(
                     json.dumps(
@@ -95,12 +103,12 @@ class MajorScraper(Scraper):
 
             f.write('}}')
 
-        logging.info(f'[S] Wrote data for {major.dept} department in {filename}')
+        logging.info(f'[S] Wrote data for {department} department in {filename}')
 
 
 def main():
     ms = MajorScraper()
-    dept_majors = []
+    dept_majors: list[Major] = []
     current_dept = 'Anth'
 
     for major in build_majors_list():
