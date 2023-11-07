@@ -9,12 +9,12 @@ from readers import build_depts_list
 from prereq_parser import get_prereqs
 
 
-class CourseScraper(Scraper):
+class CourseScraper:
     def __init__(self):
         self._regexes: dict[str, re.Pattern] = {}
 
         self._compile_static_regex()
-        super().__init__('course website', 'website')
+        self._scraper = Scraper('course website', 'website')
 
     # We separate regex into static which is only compiled once, and regex that changes based on the dept name
 
@@ -36,7 +36,7 @@ class CourseScraper(Scraper):
         self._regexes['DEPT'] = re.compile(rf'(<b>|AndTitle">)\s+({r_abbrev})\s+.*\.')
 
     def compile_data(self, url: str, dept: Department, debug=False) -> list[WebsiteCourse]:
-        response = self.fetch(url, f'[F] Failed to retrieve data for {dept.full_name} at {url}')
+        response = self._scraper.fetch(url, f'[F] Failed to retrieve data for {dept.full_name} at {url}')
         if not response:
             return []
 
@@ -147,7 +147,7 @@ class CourseScraper(Scraper):
         return url
 
     def write_json(self, dept: Department, overwrite=False) -> None:
-        if not overwrite and not self.write(dept):
+        if not overwrite and not self._scraper.write(dept):
             return
 
         url = self.dept_to_url(dept)
@@ -157,7 +157,7 @@ class CourseScraper(Scraper):
             logging.warning(f'[F] Failed to retrieve data for {dept.full_name}')
             return
 
-        super().write_json(dept, courses)
+        self._scraper.write_json(dept, courses)
 
 
 def main():

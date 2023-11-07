@@ -8,9 +8,9 @@ from readers import build_depts_list
 from datatypes import Department, APICourse
 
 
-class UCSB_API_Client(Scraper):
+class UCSB_API_Client:
     def __init__(self):
-        super().__init__('UCSB API', 'api')
+        self._scraper = Scraper('UCSB API', 'api')
         self._quarters = ['Winter', 'Spring', 'Summer', 'Fall']
 
     def get_offered_courses(self, dept: Department, start_year=2018, end_year=2023) -> dict[str, dict[str, list[str]]]:
@@ -55,7 +55,7 @@ class UCSB_API_Client(Scraper):
         if dept:
             params['deptCode'] = dept
 
-        response = self.fetch(
+        response = self._scraper.fetch(
             'https://api.ucsb.edu/academics/curriculums/v3/classes/search',
             f'Could not access UCSB API data for {quarter} {dept}',
             params=params,
@@ -84,7 +84,7 @@ class UCSB_API_Client(Scraper):
         def pair_of_lists():
             return [[], []]
 
-        if not self.write(dept):
+        if not self._scraper.write(dept):
             return
 
         offered_courses = self.get_offered_courses(dept)
@@ -104,7 +104,7 @@ class UCSB_API_Client(Scraper):
         for number in courses_dict:
             courses_list.append(APICourse(number, dept.abbreviation, courses_dict[number][0], courses_dict[number][1]))
 
-        super().write_json(dept, courses_list)
+        self._scraper.write_json(dept, courses_list)
 
 
 def main():

@@ -37,10 +37,10 @@ class Scraper:
                 pass
             os.mkdir(f'public/data/{self.extra_path}')
 
-        self._EXSTING_JSONS = get_existing_jsons(extra_path)
+        self._EXISTING_JSONS = get_existing_jsons(extra_path)
 
     def write(self, dept: Department) -> bool:
-        return (self.overwrite or dept.file_abbrev not in self._EXSTING_JSONS)
+        return (self.overwrite or dept.file_abbrev not in self._EXISTING_JSONS)
 
     def write_json(self, dept: Department, courses: list[Course]) -> None:
         filename = f'public/data/{self.extra_path}/{dept.file_abbrev}.json'

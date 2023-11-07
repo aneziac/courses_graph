@@ -11,14 +11,14 @@ from readers import build_majors_list
 from datatypes import Major
 
 
-class MajorScraper(Scraper):
+class MajorScraper:
     def __init__(self):
-        super().__init__('majors', 'majors')
+        self._scraper = Scraper('majors', 'majors')
 
     def get_major_requirements(self, major: Major) -> list[str]:
         # COE
         if major.dept == 'ENGR':
-            response = self.fetch(
+            response = self._scraper.fetch(
                 'https://my.sa.ucsb.edu/catalog/Current/Documents/2022_Majors/ENGR/22-23 '
                 f'{major.url_abbrev} Curriculum Sheet.pdf',
 
@@ -29,7 +29,7 @@ class MajorScraper(Scraper):
         else:
             url_major_name = '%20'.join(major.url_abbrev.split())
 
-            response = self.fetch(
+            response = self._scraper.fetch(
                 f'https://my.sa.ucsb.edu/catalog/Current/Documents/2022_Majors/LS/{major.dept}/{url_major_name}-2022.pdf',
                 f'[F] Could not find major requirements sheet for {major.name} ({major.degree})'
             )
@@ -75,8 +75,8 @@ class MajorScraper(Scraper):
 
     def write_json(self, majors: list[Major]):
         department = majors[0].dept.lower()
-        filename = f'public/data/{self.extra_path}/{department}.json'
-        if department in self._EXSTING_JSONS and not self.overwrite:
+        filename = f'public/data/{self._scraper.extra_path}/{department}.json'
+        if department in self._scraper._EXISTING_JSONS and not self._scraper.overwrite:
             return
 
         with open(filename, 'w+') as f:
