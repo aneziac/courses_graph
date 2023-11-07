@@ -3,7 +3,7 @@ from ucsb_api_client import UCSB_API_Client
 from major_scraper import MajorScraper
 from readers import build_depts_list, build_majors_list
 from datatypes import Course
-from typing import List
+import pytest
 
 
 cs = CourseScraper()
@@ -83,7 +83,7 @@ def test_compile_data():
     assert ind_studies.description == 'Coursework consists of academic research supervised by a faculty member on a topic not available ' \
         'in established course offerings.'
 
-    pstat_dept_courses: List[Course] = cs.compile_data(
+    pstat_dept_courses: list[Course] = cs.compile_data(
         cs.dept_to_url(pstat_dept), pstat_dept
     )
     titles = [course.title for course in pstat_dept_courses]

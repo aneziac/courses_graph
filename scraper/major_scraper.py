@@ -1,4 +1,3 @@
-from typing import List
 from pypdf import PdfReader
 from io import BytesIO
 import re
@@ -16,7 +15,7 @@ class MajorScraper(Scraper):
     def __init__(self):
         super().__init__('majors', 'majors')
 
-    def get_major_requirements(self, major: Major) -> List[str]:
+    def get_major_requirements(self, major: Major) -> list[str]:
         # COE
         if major.dept == 'ENGR':
             response = self.fetch(
@@ -72,7 +71,7 @@ class MajorScraper(Scraper):
         with open('scraper/major_courses.json', 'w+') as major_courses:
             major_courses.write(json.dumps(major_dict))
 
-    def write_json(self, majors: List[Major]):
+    def write_json(self, majors: list[Major]):
         department = majors[0].dept.lower()
         filename = f'data/{self.extra_path}/{department}.json'
         if department in self._EXSTING_JSONS:

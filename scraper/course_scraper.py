@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup as bs
 import re
-from typing import List, Dict
 import logging
 
 
@@ -12,7 +11,7 @@ from prereq_parser import get_prereqs
 
 class CourseScraper(Scraper):
     def __init__(self):
-        self._regexes: Dict[str, re.Pattern] = {}
+        self._regexes: dict[str, re.Pattern] = {}
 
         self._compile_static_regex()
         super().__init__('course website', 'website')
@@ -36,7 +35,7 @@ class CourseScraper(Scraper):
         self._regexes['NUMBER'] = re.compile(rf'{r_abbrev}\s+(.*)\.')
         self._regexes['DEPT'] = re.compile(rf'(<b>|AndTitle">)\s+({r_abbrev})\s+.*\.')
 
-    def compile_data(self, url: str, dept: Department, debug=False) -> List[WebsiteCourse]:
+    def compile_data(self, url: str, dept: Department, debug=False) -> list[WebsiteCourse]:
         response = self.fetch(url, f'[F] Failed to retrieve data for {dept.full_name} at {url}')
         if not response:
             return []
@@ -44,15 +43,16 @@ class CourseScraper(Scraper):
         # parse the html with a beautiful soup instance
         soup = bs(response.text, features='html.parser')
 
-        result: List[WebsiteCourse] = []
+        result: list[WebsiteCourse] = []
 
-        if debug:
-            # Open a file used for debugging
-            raw = open('scraper/raw.txt', 'w+')
+        # Open a file used for debugging
+        raw = open('scraper/raw.txt', 'w+' if debug else 'a')
+        if not debug:
+            raw.close()
 
         self._compile_dynamic_regex(dept)
 
-        # offered_courses: Dict[str, Dict[str, List[str]]] = get_offered_courses(dept.abbreviation)
+        # offered_courses: dict[str, dict[str, list[str]]] = get_offered_courses(dept.abbreviation)
 
         # find our courses using the CSS class found by manually inspecting the ucsb webpage
         for all_course_info in soup.find_all('div', class_='CourseDisplay'):
@@ -65,7 +65,7 @@ class CourseScraper(Scraper):
             if not course_dept or len(course_dept[0]) < 2:
                 continue
 
-            relevant_strings: Dict[str, str] = {}
+            relevant_strings: dict[str, str] = {}
 
             for regex in self._regexes:
                 results = re.findall(self._regexes[regex], all_course_info)

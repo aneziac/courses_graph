@@ -2,7 +2,7 @@ import json
 import requests
 from dataclasses import asdict
 import logging
-from typing import Optional, List, Dict
+from typing import Optional
 import sys
 import shutil
 import os
@@ -42,8 +42,8 @@ class Scraper:
     def write(self, dept: Department) -> bool:
         return (self.overwrite or dept.file_abbrev not in self._EXSTING_JSONS)
 
-    def write_json(self, dept: Department, courses: List[Course]) -> None:
-        filename = f'data/{self.extra_path}/{dept.file_abbrev}.json'
+    def write_json(self, dept: Department, courses: list[Course]) -> None:
+        filename = f'public/data/{self.extra_path}/{dept.file_abbrev}.json'
 
         sorted_courses = sorted(courses, key=lambda course: course.order)
 
@@ -65,8 +65,8 @@ class Scraper:
     def fetch(self,
               url: str,
               fail_message: str,
-              params: Dict[str, str]={},
-              headers: Dict[str, str] = {}) -> Optional[requests.Response]:
+              params: dict[str, str] = {},
+              headers: dict[str, str] = {}) -> Optional[requests.Response]:
         r = requests.get(url, params=params, headers=headers)
 
         if 200 != r.status_code:

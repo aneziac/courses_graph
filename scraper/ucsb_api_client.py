@@ -1,5 +1,4 @@
 from dotenv import load_dotenv
-from typing import Dict, List
 import logging
 import os
 from collections import defaultdict
@@ -14,8 +13,8 @@ class UCSB_API_Client(Scraper):
         super().__init__('UCSB API', 'api')
         self._quarters = ['Winter', 'Spring', 'Summer', 'Fall']
 
-    def get_offered_courses(self, dept: Department, start_year=2018, end_year=2023) -> Dict[str, Dict[str, List[str]]]:
-        offered_courses: Dict[str, Dict[str, List[str]]] = {}
+    def get_offered_courses(self, dept: Department, start_year=2018, end_year=2023) -> dict[str, dict[str, list[str]]]:
+        offered_courses: dict[str, dict[str, list[str]]] = {}
 
         # Look up when courses are offered
 
@@ -33,7 +32,7 @@ class UCSB_API_Client(Scraper):
 
         return offered_courses
 
-    def get_courses_json(self, quarter: str, dept: str = '', page_number: int = 1) -> Dict:
+    def get_courses_json(self, quarter: str, dept: str = '', page_number: int = 1) -> dict:
         load_dotenv()
 
         try:
@@ -67,7 +66,7 @@ class UCSB_API_Client(Scraper):
 
         return response.json()
 
-    def parse_courses_json(self, courses: dict, dept: str) -> Dict[str, List[str]]:
+    def parse_courses_json(self, courses: dict, dept: str) -> dict[str, list[str]]:
         offered_courses = {}
 
         classes = courses['classes']
@@ -91,8 +90,8 @@ class UCSB_API_Client(Scraper):
         offered_courses = self.get_offered_courses(dept)
 
         # store courses in a dict first to take advantage of defaultdict
-        courses_dict: Dict[str, List[List[str]]] = defaultdict(pair_of_lists)
-        courses_list: List[APICourse] = []
+        courses_dict: dict[str, list[list[str]]] = defaultdict(pair_of_lists)
+        courses_list: list[APICourse] = []
 
         for quarter in offered_courses.keys():
             for number in offered_courses[quarter]:

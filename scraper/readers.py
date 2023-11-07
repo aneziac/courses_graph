@@ -1,4 +1,3 @@
-from typing import List
 import os
 import csv
 from dataclasses import asdict
@@ -6,7 +5,7 @@ from dataclasses import asdict
 from datatypes import Department, Major
 
 
-def read_csv(filename) -> List[List[str]]:
+def read_csv(filename) -> list[list[str]]:
     result = []
 
     with open(filename, 'r') as f:
@@ -18,7 +17,7 @@ def read_csv(filename) -> List[List[str]]:
     return result
 
 
-def build_depts_list(sort=False) -> List[Department]:
+def build_depts_list(sort=False) -> list[Department]:
     depts = []
     for line in read_csv('scraper/depts.csv'):
         depts.append(
@@ -43,7 +42,7 @@ def build_depts_list(sort=False) -> List[Department]:
     return depts
 
 
-def build_majors_list() -> List[Major]:
+def build_majors_list() -> list[Major]:
     majors = []
 
     for line in read_csv('scraper/majors.csv'):
@@ -59,8 +58,13 @@ def build_majors_list() -> List[Major]:
     return majors
 
 
-def get_existing_jsons(extra_path) -> List[str]:
-    base_path = f'./data/{extra_path}/'
+def get_existing_jsons(extra_path) -> list[str]:
+    try:
+        os.listdir('public/data')
+    except FileNotFoundError:
+        os.mkdir('public/data')
+
+    base_path = f'public/data/{extra_path}/'
     try:
         ls = os.listdir(base_path)
     except FileNotFoundError:

@@ -1,5 +1,4 @@
 from dataclasses import dataclass, field
-from typing import List
 import re
 
 
@@ -71,7 +70,7 @@ class Course:
 class WebsiteCourse(Course):
     title: str
     dept: str
-    prereqs: List[List[str]]
+    prereqs: list[list[str]]
     prereq_description: str
     comments: str
     units: str
@@ -83,16 +82,16 @@ class WebsiteCourse(Course):
 
 @dataclass  # hacky way to get property serialization working
 class ProbabilityCourse(Course):
-    offered_probabilities: List[float] = field(init=False)
+    offered_probabilities: list[float] = field(init=False)
 
 
 @dataclass
 class APICourse(ProbabilityCourse):
-    offered: List[str]
-    general_education_fields: List[str]
+    offered: list[str]
+    general_education_fields: list[str]
 
     @property
-    def offered_probabilities(self) -> List[float]:
+    def offered_probabilities(self) -> list[float]:
         def weight_function(x):
             return x ** 1.2
 
