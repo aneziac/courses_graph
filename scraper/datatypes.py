@@ -6,7 +6,8 @@ import re
 class Department:
     abbreviation: str
     super_dept: str
-    url_abbreviation: str
+    url1: str
+    url2: str
     full_name: str
     college: str
     api_name: str
@@ -26,15 +27,14 @@ class Department:
 
 @dataclass(frozen=True)
 class Major:
-    dept: str
-    url_abbrev: str
-    name: str
+    dept: Department
+    full_name: str
+    short_name: str
     degree: str
-    sub_dept: str
 
     @property
     def file_abbrev(self) -> str:
-        stripped = self.name.replace(' - ', ' ').replace(' BA', '').replace(' BS', '')
+        stripped = self.short_name.replace(' - ', ' ').replace(' BA', '').replace(' BS', '')
         words = stripped.lower().split(' ')
 
         if len(words) == 1:
@@ -49,7 +49,7 @@ class Major:
 @dataclass
 class Course:
     number: str
-    sub_dept: str
+    dept: Department
 
     # define a logical well-ordering on this set
     @property
@@ -70,7 +70,6 @@ class Course:
 @dataclass
 class WebsiteCourse(Course):
     title: str
-    dept: str
     prereqs: list[list[str]]
     prereq_description: str
     comments: str
@@ -78,7 +77,6 @@ class WebsiteCourse(Course):
     description: str
     recommended_prep: str
     professor: str
-    college: str
 
 
 @dataclass  # hacky way to get property serialization working

@@ -1,96 +1,96 @@
-abbrev, super dept, url abbrev, full name, college, api name
-ANTH, ANTH, anth, Anthropology, L&S, ANTH
-ART, ART, art, Art, L&S, ART
-ART CS, ART, ccs, Art (Creative Studies), CCS, CRSTU
-ARTHI, ARTHI, arthi, Art History, L&S, ARTHI
-AS AM, AS AM, asam, Asian American Studies, L&S, ASAM
-ASTRO, PHYS, phys, Astronomy, L&S, PHYS
-BIOE, BIOE, bioe, Biological Engineering, COE, BIOE
-BIOL CS, BIOL, ccs, Biology (Creative Studies), CCS, CRSTU
-BL ST, BL ST, blst, Black Studies, L&S, BLKST
-BMSE, BMSE, bmse, Biomolecular Science and Engineering, L&S, BMSE
-C LIT, C LIT, complit, Comparative Literature, L&S, CLIT
-CH E, CH E, chemengr, Chemical Engineering, COE, CNENG
-CH ST, CH ST, chst, Chicana and Chicano Studies, L&S, CHST
-CHEM, CHEM, chem, Chemistry and Biochemistry, L&S, CHEM
-CHEM CS, CHEM, ccs, Chemistry (Creative Studies), CCS, CRSTU
-CHIN, EACS, ealcs, Chinese, L&S, EALCS
-CLASS, CLASS, class, Classics, L&S, CLASS
-CMPSC, CMPSC, compsci-engr, Computer Science, COE, CMPSC
-CMPTGCS, CMPSC, ccs, Computing (Creative Studies), CCS, CRSTU
-CNCSP, CNCSP, CCSP,"Counseling, Clinical, School Psychology", GGSE, CNCSP
-COMM, COMM, comm, Communications, L&S, COMM
-DANCE, THTDA, thtda, Dance, L&S, THTDA
-DYNS, DYNS, dyns, Dynamical Neuroscience, L&S, PSY
-EACS, EACS, ealcs, East Asian Cultural Studies, L&S, EALCS
-EARTH, EARTH, earthsci, Earth Science, L&S, ERTSC
-ECE, ECE, compengr, Electrical Computer Engineering, COE, ECE
-ECON, ECON, econ, Economics, L&S, ECON
-ED, ED, Education, Education, GGSE, EDUC
-ED A, ED, Education, Education: Visual Art, GGSE, EDUC
-ED E, ED, Education, Education: English, GGSE, EDUC
-ED HSS, ED, Education, Education: History & Social Science, GGSE, EDUC
-ED IA, ED, Education, Education: Industrial Technology Arts, GGSE, EDUC
-ED L, ED, Education, Education: Literacy, GGSE, EDUC
-ED LA, ED, Education, Education: Language Arts, GGSE, EDUC
-ED M, ED, Education, Education: Mathematics, GGSE, EDUC
-ED R, ED, Education, Education: Reading, GGSE, EDUC
-ED S, ED, Education,  Education: Science, GGSE, EDUC
-ED SPS, ED, Education, Special Education: Secondary, GGSE, EDUC
-ED ST, ED, Education, Secondary: Science, GGSE, EDUC
-ED WL, ED, Education, Education: World Language, GGSE, EDUC
-EDS, ESM, bren, Environmental Data Science, BREN, ESM
-EEMB, EEMB, eemb,"Ecology, Evolution, and Marine Biology", L&S, EEMB
-ENGL, ENGL, engl, English, L&S, ENGL
-ENGR, ENGR, engrsci, Engineering, COE, ENGSC
-ENV S, ENV S, envst, Environmental Studies, L&S, ENVST
-ES, ESS, ess, Exercise Sport, L&S, ESS
-ESM, ESM, bren, Environmental Science & Management, BREN, ESM
-ESS, ESS, ess, Exercise & Sport Studies, L&S, ESS
-FAMST, FAMST, flmst, Film and Media Studies, L&S, FLMST
-FEMST, FEMST, femst, Feminist Studies, L&S, FEMST
-FR, FRIT, frit, French, L&S, FR&IT
-GEOG, GEOG, geog, Geography, L&S, GEOG
-GER, GSS, gersl, German, L&S, GERSL
-GLOBL, GIS, gis, Global Studies, L&S, GLOBL
-GPS, GIS, gis, Global Peace and Security, L&S, NONE
-GREEK, CLASS, class, Greek, L&S, CLASS
-HEB, RG ST, relst, Hebrew, L&S, RELST
-HIST, HIST, hist, History, L&S, HIST
-INT, INT, intdisc, Interdisciplinary, L&S, INT
-INT CS, INT, ccs, Interdisciplinary (Creative Studies), CCS, CRSTU
-ITAL, FRIT, frit, Italian, L&S, FR&IT
-JAPAN, EACS, ealcs, Japanese, L&S, EALCS
-KOR, EACS, ealcs, Korean, L&S, EALCS
-LAIS, LAIS, lais, Latin American and Iberian Studies, L&S, LAIS
-LATIN, CLASS, class, Latin, L&S, CLASS
-LING, LING, ling, Linguistics, L&S, LING
-MARINCS, MARSC, ccs, Marine Science (Creative Studies), CCS, CRSTU
-MARSC, MARSC, marsc, Marine Science, L&S, MARSC
-MAT, MAT, MAT, Media Arts and Technology, L&S, MAT
-MATH, MATH, math, Mathematics, L&S, MATH
-MATH CS, MATH, ccs, Mathematics (Creative Studies), CCS, CRSTU
-MATRL, MATRL, matrl, Materials, COE, MATRL
-MCDB, MCDB, mcdb,"Molecular, Cellular, and Developmental Biology", L&S, MCDB
-ME, ME, mechengr, Mechanical Engineering, COE, ME
-ME ST, ME ST, mest, Medieval Studies, L&S, MDVST
-MES, MES, mideast, Middle East Studies, L&S, NONE
-MS, MS, milsci, Military Science (Army ROTC), L&S, MILSC
-MUS, MUS, music, Music, L&S, MUSIC
-PHIL, PHIL, phil, Philosophy, L&S, PHIL
-PHYS, PHYS, phys, Physics, L&S, PHYS
-PHYS CS, PHYS, ccs, Physics (Creative Studies), CCS, CRSTU
-POL S, POL S, polsci, Political Science, L&S, POLS
-PORT, SPANPORT, spanport, Portuguese, L&S, SP&PT
-PSTAT, PSTAT, stats, Statistics & Applied Probability, L&S, STATS
-PSY, PSY, psych, Psychological & Brain Sciences, L&S, PSY
-RG ST, RG ST, relst, Religious Studies, L&S, RELST
-RUSS, GSS, gersl, Russian, L&S, GERSL
-SHS, SHS, shs, Speech & Hearing Sciences, L&S, SPCH
-SLAV, GSS, gersl, Slavic, L&S, GERSL
-SOC, SOC, soc, Sociology, L&S, SOC
-SPAN, SPANPORT, spanport, Spanish, L&S, SP&PT
-THTR, THTDA, thtda, Theater, L&S, THTDA
-TMP, TMP, tmp, Technology Management, COE, TMP
-W&L CS, ENGL, ccs, Writing & Literature (Creative Studies), CCS, CRSTU
-WRIT, WRIT, writ, Writing, L&S, WRIT
+abbrev,super dept,url1,url2,full name,college,api name
+ANTH,ANTH,anth,Anth,Anthropology,L&S,ANTH
+ART,ART,art,Art,Art,L&S,ART
+ART CS,ART,ccs,,Art (Creative Studies),CCS,CRSTU
+ARTHI,ARTHI,arthi,HistArt,Art History,L&S,ARTHI
+AS AM,AS AM,asam,AsAm,Asian American Studies,L&S,ASAM
+ASTRO,PHYS,phys,,Astronomy,L&S,PHYS
+BIOE,BIOE,bioe,,Biological Engineering,COE,BIOE
+BIOL CS,BIOL,ccs,,Biology (Creative Studies),CCS,CRSTU
+BL ST,BL ST,blst,BlSt,Black Studies,L&S,BLKST
+BMSE,BMSE,bmse,,Biomolecular Science and Engineering,L&S,BMSE
+C LIT,C LIT,complit,CLit,Comparative Literature,L&S,CLIT
+CH E,CH E,chemengr,ENGR,Chemical Engineering,COE,CNENG
+CH ST,CH ST,chst,ChSt,Chicana and Chicano Studies,L&S,CHST
+CHEM,CHEM,chem,Chem,Chemistry and Biochemistry,L&S,CHEM
+CHEM CS,CHEM,ccs,,Chemistry (Creative Studies),CCS,CRSTU
+CHIN,EACS,ealcs,EALCS,Chinese,L&S,EALCS
+CLASS,CLASS,class,Class,Classics,L&S,CLASS
+CMPSC,CMPSC,compsci-engr,ENGR,Computer Science,COE,CMPSC
+CMPTGCS,CMPSC,ccs,,Computing (Creative Studies),CCS,CRSTU
+CNCSP,CNCSP,CCSP,,"Counseling, Clinical, School Psychology",GGSE,CNCSP
+COMM,COMM,comm,Comm,Communications,L&S,COMM
+DANCE,THTDA,thtda,,Dance,L&S,THTDA
+DYNS,DYNS,dyns,,Dynamical Neuroscience,L&S,PSY
+EACS,EACS,ealcs,EALCS,East Asian Cultural Studies,L&S,EALCS
+EARTH,EARTH,earthsci,Earth,Earth Science,L&S,ERTSC
+ECE,ECE,compengr,ENGR,Electrical Computer Engineering,COE,ECE
+ECON,ECON,econ,Econ,Economics,L&S,ECON
+ED,ED,Education,,Education,GGSE,EDUC
+ED A,ED,Education,,Education: Visual Art,GGSE,EDUC
+ED E,ED,Education,,Education: English,GGSE,EDUC
+ED HSS,ED,Education,,Education: History & Social Science,GGSE,EDUC
+ED IA,ED,Education,,Education: Industrial Technology Arts,GGSE,EDUC
+ED L,ED,Education,,Education: Literacy,GGSE,EDUC
+ED LA,ED,Education,,Education: Language Arts,GGSE,EDUC
+ED M,ED,Education,,Education: Mathematics,GGSE,EDUC
+ED R,ED,Education,,Education: Reading,GGSE,EDUC
+ED S,ED,Education,,Education: Science,GGSE,EDUC
+ED SPS,ED,Education,,Special Education: Secondary,GGSE,EDUC
+ED ST,ED,Education,,Secondary: Science,GGSE,EDUC
+ED WL,ED,Education,,Education: World Language,GGSE,EDUC
+EDS,ESM,bren,,Environmental Data Science,BREN,ESM
+EEMB,EEMB,eemb,EEMB,"Ecology, Evolution, and Marine Biology",L&S,EEMB
+ENGL,ENGL,engl,Engl,English,L&S,ENGL
+ENGR,ENGR,engrsci,,Engineering,COE,ENGSC
+ENV S,ENV S,envst,EnvSt,Environmental Studies,L&S,ENVST
+ES,ESS,ess,,Exercise Sport,L&S,ESS
+ESM,ESM,bren,,Environmental Science & Management,BREN,ESM
+ESS,ESS,ess,,Exercise & Sport Studies,L&S,ESS
+FAMST,FAMST,flmst,FaMSt,Film and Media Studies,L&S,FLMST
+FEMST,FEMST,femst,FemSt,Feminist Studies,L&S,FEMST
+FR,FRIT,frit,FrIt,French,L&S,FR&IT
+GEOG,GEOG,geog,Geog,Geography,L&S,GEOG
+GER,GSS,gersl,Ger,German,L&S,GERSL
+GLOBL,GIS,gis,Globl,Global Studies,L&S,GLOBL
+GPS,GIS,gis,,Global Peace and Security,L&S,
+GREEK,CLASS,class,,Greek,L&S,CLASS
+HEB,RG ST,relst,,Hebrew,L&S,RELST
+HIST,HIST,hist,,History,L&S,HIST
+INT,INT,intdisc,,Interdisciplinary,L&S,INT
+INT CS,INT,ccs,,Interdisciplinary (Creative Studies),CCS,CRSTU
+ITAL,FRIT,frit,,Italian,L&S,FR&IT
+JAPAN,EACS,ealcs,,Japanese,L&S,EALCS
+KOR,EACS,ealcs,,Korean,L&S,EALCS
+LAIS,LAIS,lais,LAIS,Latin American and Iberian Studies,L&S,LAIS
+LATIN,CLASS,class,,Latin,L&S,CLASS
+LING,LING,ling,Ling,Linguistics,L&S,LING
+MARINCS,MARSC,ccs,,Marine Science (Creative Studies),CCS,CRSTU
+MARSC,MARSC,marsc,,Marine Science,L&S,MARSC
+MAT,MAT,MAT,,Media Arts and Technology,L&S,MAT
+MATH,MATH,math,Math,Mathematics,L&S,MATH
+MATH CS,MATH,ccs,,Mathematics (Creative Studies),CCS,CRSTU
+MATRL,MATRL,matrl,,Materials,COE,MATRL
+MCDB,MCDB,mcdb,MCDB,"Molecular, Cellular, and Developmental Biology",L&S,MCDB
+ME,ME,mechengr,ENGR,Mechanical Engineering,COE,ME
+ME ST,ME ST,mest,MedSt,Medieval Studies,L&S,MDVST
+MES,MES,mideast,,Middle East Studies,L&S,
+MS,MS,milsci,,Military Science (Army ROTC),L&S,MILSC
+MUS,MUS,music,Music,Music,L&S,MUSIC
+PHIL,PHIL,phil,Phil,Philosophy,L&S,PHIL
+PHYS,PHYS,phys,Phys,Physics,L&S,PHYS
+PHYS CS,PHYS,ccs,,Physics (Creative Studies),CCS,CRSTU
+POL S,POL S,polsci,PolS,Political Science,L&S,POLS
+PORT,SPANPORT,spanport,,Portuguese,L&S,SP&PT
+PSTAT,PSTAT,stats,PStat,Statistics & Applied Probability,L&S,STATS
+PSY,PSY,psych,Psy,Psychological & Brain Sciences,L&S,PSY
+RG ST,RG ST,relst,RgSt,Religious Studies,L&S,RELST
+RUSS,GSS,gersl,,Russian,L&S,GERSL
+SHS,SHS,shs,PolS,Speech & Hearing Sciences,L&S,SPCH
+SLAV,GSS,gersl,,Slavic,L&S,GERSL
+SOC,SOC,soc,Soc,Sociology,L&S,SOC
+SPAN,SPANPORT,spanport,SpPt,Spanish,L&S,SP&PT
+THTR,THTDA,thtda,TD,Theater,L&S,THTDA
+TMP,TMP,tmp,,Technology Management,COE,TMP
+W&L CS,ENGL,ccs,,Writing & Literature (Creative Studies),CCS,CRSTU
+WRIT,WRIT,writ,Writ,Writing,L&S,WRIT

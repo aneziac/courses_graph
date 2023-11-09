@@ -24,10 +24,11 @@ def build_depts_list(sort=False) -> list[Department]:
                 Department(
                     abbreviation=line[0],
                     super_dept=line[1],
-                    url_abbreviation=line[2],
-                    full_name=line[3],
-                    college=line[4],
-                    api_name=line[5]
+                    url1=line[2],
+                    url2=line[3],
+                    full_name=line[4],
+                    college=line[5],
+                    api_name=line[6]
                 )
             )
 
@@ -44,15 +45,16 @@ def build_depts_list(sort=False) -> list[Department]:
 
 def build_majors_list() -> list[Major]:
     majors = []
+    depts = build_depts_list()
+    dept_dict = dict(zip([dept.abbreviation for dept in depts], depts))
 
-    for line in read_csv('public/majors.csv'):
+    for line in read_csv('public/majors.csv')[:-1]:
         majors.append(
             Major(
-                dept=line[0],
-                url_abbrev=line[1],
-                name=line[2],
-                degree=line[3],
-                sub_dept=line[4]
+                dept=dept_dict[line[0]],
+                full_name=line[1],
+                short_name=line[2],
+                degree=line[3]
             )
         )
 
@@ -103,4 +105,6 @@ def offering_stats():
 
 
 if __name__ == '__main__':
-    offering_stats()
+    for major in build_majors_list():
+        print(major)
+    # offering_stats()
