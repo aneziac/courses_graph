@@ -19,7 +19,7 @@ def read_csv(filename) -> list[list[str]]:
 
 def build_depts_list(sort=False) -> list[Department]:
     depts = []
-    for line in read_csv('public/depts.csv'):
+    for line in read_csv('public/ucsb/depts.csv'):
         depts.append(
                 Department(
                     abbreviation=line[0],
@@ -35,7 +35,7 @@ def build_depts_list(sort=False) -> list[Department]:
     # sort departments when new ones are added (no longer needed)
     # but may come in handy at some point
     if sort:
-        with open('public/sorted_depts.csv', 'w+') as g:
+        with open('public/ucsb/sorted_depts.csv', 'w+') as g:
             for line in sorted(depts, key=lambda x: x.abbreviation):
                 vals = asdict(line).values()
                 g.write(', '.join(vals) + '\n')
@@ -48,7 +48,7 @@ def build_majors_list() -> list[Major]:
     depts = build_depts_list()
     dept_dict = dict(zip([dept.abbreviation for dept in depts], depts))
 
-    for line in read_csv('public/majors.csv')[:-1]:
+    for line in read_csv('public/ucsb/majors.csv')[:-1]:
         majors.append(
             Major(
                 dept=dept_dict[line[0]],

@@ -3,13 +3,14 @@ import re
 import logging
 
 
-from datatypes import Department, WebsiteCourse
+from ..datatypes import Department
+from .datatypes import UCSBWebsiteCourse
 from base_scraper import Scraper, ScraperException
 from readers import build_depts_list
 from prereq_parser import get_prereqs
 
 
-class CourseScraper:
+class UCSBCourseScraper:
     def __init__(self):
         self._regexes: dict[str, re.Pattern] = {}
 
@@ -35,7 +36,7 @@ class CourseScraper:
         self._regexes['NUMBER'] = re.compile(rf'{r_abbrev}\s+(.*)\.')
         self._regexes['DEPT'] = re.compile(rf'(<b>|AndTitle">)\s+({r_abbrev})\s+.*\.')
 
-    def compile_data(self, url: str, dept: Department, debug=False) -> list[WebsiteCourse]:
+    def compile_data(self, url: str, dept: Department, debug=False) -> list[UCSBWebsiteCourse]:
         response = self._scraper.fetch(url, f'[F] Failed to retrieve data for {dept.full_name} at {url}')
         if not response:
             return []
@@ -43,7 +44,7 @@ class CourseScraper:
         # parse the html with a beautiful soup instance
         soup = bs(response.text, features='html.parser')
 
-        result: list[WebsiteCourse] = []
+        result: list[UCSBWebsiteCourse] = []
 
         # Open a file used for debugging
         raw = open('scraper/raw.txt', 'w+' if debug else 'a')
@@ -51,8 +52,6 @@ class CourseScraper:
             raw.close()
 
         self._compile_dynamic_regex(dept)
-
-        # offered_courses: dict[str, dict[str, list[str]]] = get_offered_courses(dept.abbreviation)
 
         # find our courses using the CSS class found by manually inspecting the ucsb webpage
         for all_course_info in soup.find_all('div', class_='CourseDisplay'):
@@ -93,9 +92,8 @@ class CourseScraper:
 
             # add the course to our list with all relevant metadata
             result.append(
-                WebsiteCourse(
-                    dept=dept.super_dept,
-                    sub_dept=dept.abbreviation,
+                UCSBWebsiteCourse(
+                    dept=dept,
                     number=number,
                     prereqs=prereqs,
                     prereq_description=relevant_strings['PREREQS'],
@@ -105,7 +103,6 @@ class CourseScraper:
                     title=relevant_strings['TITLE'],
                     professor=relevant_strings['PROFESSOR'],
                     recommended_prep=relevant_strings['RECOMMENDED PREP'],
-                    college=dept.college
                 )
             )
 
@@ -123,23 +120,23 @@ class CourseScraper:
 
         if dept.college == 'L&S':
             if dept.abbreviation == 'DYNS':
-                url = f'{base_url}/{dept.url_abbreviation}.{base_suffix}'
+                url = f'{base_url}/{dept.url1}.{base_suffix}'
             else:
-                url = f'{base_url}/ls-intro/{dept.url_abbreviation}.{base_suffix}'
+                url = f'{base_url}/ls-intro/{dept.url1}.{base_suffix}'
 
         elif dept.college == 'COE':
             if dept.abbreviation == 'BIOE':
-                url = f'{base_url}/{dept.url_abbreviation}.{base_suffix}'
+                url = f'{base_url}/{dept.url1}.{base_suffix}'
             else:
-                url = f'{base_url}/coe/{dept.url_abbreviation}.{base_suffix}'
+                url = f'{base_url}/coe/{dept.url1}.{base_suffix}'
 
         # the other colleges have their own patterns
         elif dept.college == 'CCS':
-            url = f'{base_url}/{dept.url_abbreviation}/Courses.aspx'
+            url = f'{base_url}/{dept.url1}/Courses.aspx'
         elif dept.college == 'GGSE':
-            url = f'{base_url}/ggse/{dept.url_abbreviation}.{base_suffix}'
+            url = f'{base_url}/ggse/{dept.url1}.{base_suffix}'
         elif dept.college == 'BREN':
-            url = f'{base_url}/{dept.url_abbreviation}/?DeptTab=Courses'
+            url = f'{base_url}/{dept.url1}/?DeptTab=Courses'
 
         if not url:
             raise ScraperException(f'Could not get url for {dept.full_name}')
@@ -147,7 +144,7 @@ class CourseScraper:
         return url
 
     def write_json(self, dept: Department, overwrite=False) -> None:
-        if not overwrite and not self._scraper.write(dept):
+        if not overwrite and not self._scraper.should_write(dept):
             return
 
         url = self.dept_to_url(dept)
@@ -161,7 +158,7 @@ class CourseScraper:
 
 
 def main():
-    cs = CourseScraper()
+    cs = UCSBCourseScraper()
     for dept in build_depts_list():
         # keep math up to date with latest version as it's used for testing
         if dept.abbreviation == 'CMPSC':

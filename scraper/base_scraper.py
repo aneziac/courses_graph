@@ -2,7 +2,7 @@ import json
 import requests
 from dataclasses import asdict
 import logging
-from typing import Optional
+from typing import Optional, Sequence
 import sys
 import shutil
 import os
@@ -39,10 +39,10 @@ class Scraper:
 
         self._EXISTING_JSONS = get_existing_jsons(extra_path)
 
-    def write(self, dept: Department) -> bool:
+    def should_write(self, dept: Department) -> bool:
         return (self.overwrite or dept.file_abbrev not in self._EXISTING_JSONS)
 
-    def write_json(self, dept: Department, courses: list[Course]) -> None:
+    def write_json(self, dept: Department, courses: Sequence[Course]) -> None:
         filename = f'public/data/{self.extra_path}/{dept.file_abbrev}.json'
 
         sorted_courses = sorted(courses, key=lambda course: course.order)
@@ -51,7 +51,7 @@ class Scraper:
             f.write('{')
 
             for i, course in enumerate(sorted_courses):
-                f.write(f'"{course.sub_dept} {course.number}": ')
+                f.write(f'"{course.dept.abbreviation} {course.number}": ')
                 f.write(json.dumps(asdict(course)))
 
                 if i != len(courses) - 1:
