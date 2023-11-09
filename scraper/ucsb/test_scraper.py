@@ -1,6 +1,6 @@
-from course_scraper import CourseScraper
-from ucsb_api_client import UCSB_API_Client
-from major_scraper import MajorScraper
+from scraper.ucsb.course_scraper import CourseScraper
+from scraper.ucsb.ucsb_api_client import UCSB_API_Client
+from scraper.ucsb.major_scraper import MajorScraper
 from readers import build_depts_list, build_majors_list
 from datatypes import Course
 import pytest

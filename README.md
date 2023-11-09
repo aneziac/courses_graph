@@ -1,7 +1,7 @@
 # courses_graph
 
-Prerequisite visualization of courses at the University of California, Santa Barbara.
-This project was originally begun by Nate Annau and Ashwin Rajan as part of Coders SB, but it's now open source.
+Prerequisite visualization of courses at various campuses at the University of California.
+This project was originally begun by UCSB students Nate Annau and Ashwin Rajan as part of Coders SB, but it's now open source.
 
 ## Design
 
@@ -18,7 +18,6 @@ I'm using `pytest` and `jest` to unittest.
 # Contributing
 
 I am happy to consider PRs on this project.
-If you would like to contact me, either email me or DM `robert_gamer` on Discord.
 
 ## Developing
 
