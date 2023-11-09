@@ -1,5 +1,5 @@
 scraper/raw.txt
-public/data
+public/*/data
 venv/*
 scraper/__pycache__/*
 .pytest_cache/*

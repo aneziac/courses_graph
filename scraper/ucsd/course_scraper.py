@@ -2,15 +2,15 @@ from bs4 import BeautifulSoup as bs
 import re
 
 from ..datatypes import Department
-from .datatypes import UCSBWebsiteCourse
-from base_scraper import CourseScraper, ScraperException
+from .datatypes import UCSDWebsiteCourse
+from base_scraper import CourseScraper
 from readers import build_depts_list
 from prereq_parser import get_prereqs
 
 
-class UCSBCourseScraper(CourseScraper):
+class UCSDCourseScraper(CourseScraper):
     def __init__(self):
-        super().__init__('ucsb')
+        super().__init__('ucsd')
 
     def _compile_static_regex(self):
         self._regexes['PREREQS'] = re.compile(r'Prerequisite:<\/strong> (.*?)\s{3}')
@@ -29,7 +29,7 @@ class UCSBCourseScraper(CourseScraper):
         self._regexes['NUMBER'] = re.compile(rf'{r_abbrev}\s+(.*)\.')
         self._regexes['DEPT'] = re.compile(rf'(<b>|AndTitle">)\s+({r_abbrev})\s+.*\.')
 
-    def compile_data(self, url: str, dept: Department, debug=False) -> list[UCSBWebsiteCourse]:
+    def compile_data(self, url: str, dept: Department, debug=False) -> list[UCSDWebsiteCourse]:
         response = self._scraper.fetch(url, f'[F] Failed to retrieve data for {dept.full_name} at {url}')
         if not response:
             return []
@@ -37,14 +37,14 @@ class UCSBCourseScraper(CourseScraper):
         # parse the html with a beautiful soup instance
         soup = bs(response.text, features='html.parser')
 
-        result: list[UCSBWebsiteCourse] = []
+        result: list[UCSDWebsiteCourse] = []
 
         # Open a file used for debugging
         raw = open('scraper/raw.txt', 'w+' if debug else 'a')
         if not debug:
             raw.close()
 
-        self._compile_dynamic_regex(dept)
+        # self._compile_dynamic_regex(dept)
 
         # find our courses using the CSS class found by manually inspecting the ucsb webpage
         for all_course_info in soup.find_all('div', class_='CourseDisplay'):
@@ -85,7 +85,7 @@ class UCSBCourseScraper(CourseScraper):
 
             # add the course to our list with all relevant metadata
             result.append(
-                UCSBWebsiteCourse(
+                UCSDWebsiteCourse(
                     dept=dept,
                     number=number,
                     prereqs=prereqs,
@@ -94,8 +94,6 @@ class UCSBCourseScraper(CourseScraper):
                     units=relevant_strings['UNITS'],
                     description=relevant_strings['DESCRIPTION'],
                     title=relevant_strings['TITLE'],
-                    professor=relevant_strings['PROFESSOR'],
-                    recommended_prep=relevant_strings['RECOMMENDED PREP'],
                 )
             )
 
@@ -105,40 +103,11 @@ class UCSBCourseScraper(CourseScraper):
         return result
 
     def dept_to_url(self, dept: Department) -> str:
-        base_url = 'https://my.sa.ucsb.edu/catalog/Current/CollegesDepartments'
-        base_suffix = 'aspx?DeptTab=Courses'
-        url = ''
-
-        # weirdly the dynamical neuroscience and biological engineering depts have special urls
-
-        if dept.college == 'L&S':
-            if dept.abbreviation == 'DYNS':
-                url = f'{base_url}/{dept.url1}.{base_suffix}'
-            else:
-                url = f'{base_url}/ls-intro/{dept.url1}.{base_suffix}'
-
-        elif dept.college == 'COE':
-            if dept.abbreviation == 'BIOE':
-                url = f'{base_url}/{dept.url1}.{base_suffix}'
-            else:
-                url = f'{base_url}/coe/{dept.url1}.{base_suffix}'
-
-        # the other colleges have their own patterns
-        elif dept.college == 'CCS':
-            url = f'{base_url}/{dept.url1}/Courses.aspx'
-        elif dept.college == 'GGSE':
-            url = f'{base_url}/ggse/{dept.url1}.{base_suffix}'
-        elif dept.college == 'BREN':
-            url = f'{base_url}/{dept.url1}/?DeptTab=Courses'
-
-        if not url:
-            raise ScraperException(f'Could not get url for {dept.full_name}')
-
-        return url
+        return f'https://catalog.ucsd.edu/courses/{dept.abbreviation}.html'
 
 
 def main():
-    cs = UCSBCourseScraper()
+    cs = UCSDCourseScraper()
     for dept in build_depts_list():
         # keep math up to date with latest version as it's used for testing
         if dept.abbreviation == 'MATH':

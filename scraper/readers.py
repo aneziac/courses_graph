@@ -61,13 +61,12 @@ def build_majors_list() -> list[Major]:
     return majors
 
 
-def get_existing_jsons(extra_path) -> list[str]:
+def get_existing_jsons(school: str, base_path: str) -> list[str]:
     try:
-        os.listdir('public/data')
+        os.listdir(f'public/data/{school}')
     except FileNotFoundError:
-        os.mkdir('public/data')
+        os.mkdir(f'public/data/{school}')
 
-    base_path = f'public/data/{extra_path}/'
     try:
         ls = os.listdir(base_path)
     except FileNotFoundError:
